@@ -1,0 +1,21 @@
+{
+  "name": "voting-app",
+  "version": "0.0.0",
+  "authors": [
+    "David Furnes <dfurnes@dosomething.org>"
+  ],
+  "description": "Voting app for DoSomething.org campaigns.",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "neue": "DoSomething/neue#~5.0.0"
+  }
+}
