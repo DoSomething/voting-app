@@ -1,4 +1,7 @@
+public/dist
 bower_components
+node_modules
+
 /bootstrap/compiled.php
 /vendor
 composer.phar
