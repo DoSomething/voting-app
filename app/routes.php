@@ -11,7 +11,23 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', 'CandidatesController@index');
+
+/**
+ * Candidates
+ */
+Route::bind('candidates', function($slug) {
+  return Candidate::whereSlug($slug)->first();
 });
+
+Route::resource('candidates', 'CandidatesController');
+
+
+/**
+ * Categories
+ */
+Route::bind('categories', function($slug) {
+  return Category::whereSlug($slug)->first();
+});
+
+Route::resource('categories', 'CategoriesController');
