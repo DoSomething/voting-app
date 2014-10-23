@@ -8,7 +8,7 @@
   <p>{{{ $candidate->description }}}</p>
   @endif
 
-  @if($candidate->description)
+  @if($candidate->category)
 	<h4>Category</h4>
   <p>{{ link_to_route('categories.show', $candidate->category->name, [$candidate->category->slug]) }}</p>
   @endif

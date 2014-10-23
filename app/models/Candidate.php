@@ -1,7 +1,6 @@
 <?php
 
-class Candidate extends BaseModel {
-
+class Candidate extends BaseModel  {
 	/**
 	 * The database table used by the model.
 	 *
@@ -10,12 +9,16 @@ class Candidate extends BaseModel {
 	protected $table = 'candidates';
 
 	protected $fillable = [
-		'name', 'slug', 'description', 'category_id'
+		'name', 'description', 'category_id'
 	];
 
 	public static $rules = [
-		'name' => 'required',
-		'slug' => 'required'
+		'name' => 'required'
+	];
+
+	protected $sluggable = [
+		'build_from' => 'name',
+		'save_to' => 'slug'
 	];
 
 	public function category()

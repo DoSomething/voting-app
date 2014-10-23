@@ -10,12 +10,16 @@ class Category extends BaseModel {
 	protected $table = 'categories';
 
 	protected $fillable = [
-		'name', 'slug'
+		'name'
 	];
 
 	public static $rules = [
 		'name' => 'required',
-		'slug' => 'required'
+	];
+
+	protected $sluggable = [
+		'build_from' => 'name',
+		'save_to' => 'slug'
 	];
 
 	public function candidates()

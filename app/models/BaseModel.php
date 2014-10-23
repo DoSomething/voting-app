@@ -1,6 +1,11 @@
 <?php
 
-class BaseModel extends Eloquent {
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
+
+class BaseModel extends Eloquent implements SluggableInterface {
+	use SluggableTrait;
+
 	protected $errors;
 
 	public static function boot()
@@ -9,6 +14,7 @@ class BaseModel extends Eloquent {
 
 		// Validate model on save
 		static::saving(function($model) {
+			$model->sluggify();
 			return $model->validate();
 		});
 	}
