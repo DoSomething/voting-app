@@ -123,7 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		/* additional service providers: */
-		'Cviebrock\EloquentSluggable\SluggableServiceProvider'
+		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider'
 	),
 
 	/*

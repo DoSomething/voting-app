@@ -7,6 +7,9 @@
 		"laravel/framework": "4.2.*",
 		"cviebrock/eloquent-sluggable": "2.*"
 	},
+	"require-dev": {
+		"way/generators": "~2.0"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
