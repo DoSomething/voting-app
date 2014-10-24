@@ -3,7 +3,7 @@
 {{ $errors->first('name', '<span class="message error">:message</span>') }}
 
 {{ Form::label('category_id', 'Category') }}
-{{ Form::select('category_id', Category::lists('name', 'id'), ( isset($candidate) ? $candidate->category : null )); }}
+{{ Form::select('category_id', Category::lists('name', 'id'), ( isset($candidate->category) ? $candidate->category : null )); }}
 {{ $errors->first('category_id', '<span class="message error">:message</span>') }}
 
 {{ Form::label('description', 'Photo (optional)') }}
