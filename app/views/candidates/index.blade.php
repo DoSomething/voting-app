@@ -2,13 +2,13 @@
 
 @section('content')
   <h3>All Candidates</h3>
-  <ul>
+  <ul class="gallery -mosaic">
   @forelse($candidates as $candidate)
-    <li>{{ link_to_route('candidates.show', $candidate->name, [$candidate->slug]) }}</li>
+		@include('candidates.tile', ['candidate' => $candidate])
   @empty
     <li>No candidates.</li>
-  </ul>
   @endforelse
+  </ul>
 
     <h4>Actions</h4>
     <p>{{ link_to_route('candidates.create', 'New Candidate') }}</p>

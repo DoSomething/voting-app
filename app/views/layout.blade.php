@@ -16,8 +16,11 @@
 			<a class="hamburger js-toggle-mobile-menu" href="#">&#xe606;</a>
 			<div class="menu">
 				<ul class="primary-nav">
-					<li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
-					<li>{{ link_to_route('categories.index', 'Categories') }}</li>
+					@forelse(Category::all() as $category)
+					<li>{{ link_to_route('categories.show', $category->name, [$category->slug]) }}</li>
+					@empty
+					<li>No categories.</li>
+					@endforelse
 				</ul>
 			</div>
 		</nav>
@@ -27,6 +30,21 @@
         @yield('content')
       </div>
     </div>
+
+		<footer class="chrome--footer">
+		<div class="col js-footer-col">
+			<h4>Models</h4>
+			<ul>
+					<li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
+					<li>{{ link_to_route('categories.index', 'Categories') }}</li>
+			</ul>
+		</div>
+
+		<div class="subfooter">
+		  &copy; 2014 DoSomething.org.
+
+		</div>
+		</footer>
   </div>
   </div>
 

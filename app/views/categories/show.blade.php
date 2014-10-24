@@ -4,9 +4,9 @@
   <h3>{{{ $category->name }}}</h3>
 
 	<h4>Candidates</h4>
-	<ul>
+	<ul class="gallery -mosaic">
 	@forelse($category->candidates as $candidate)
-	<li>{{ link_to_route('candidates.show', $candidate->name, [$candidate->slug]) }}</li>
+		@include('candidates.tile', ['candidate' => $candidate])
 	@empty
 	<li>No candidates</li>
 	@endforelse
