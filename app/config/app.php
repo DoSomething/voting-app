@@ -124,7 +124,8 @@ return array(
 
 		/* additional service providers: */
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider'
+		'Intervention\Image\ImageServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
 	),
 
 	/*
@@ -191,6 +192,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+
+		/* additional aliases */
+		'Image' => 'Intervention\Image\Facades\Image',
 
 	),
 

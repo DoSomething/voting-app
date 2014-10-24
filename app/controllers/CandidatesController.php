@@ -44,8 +44,12 @@ class CandidatesController extends \BaseController {
 		$file = Input::file('photo');
 
 		if($file) {
+			$image = Image::make($file->getRealPath());
 			$filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
-			$file->move(public_path('images'), $filename);
+
+			$image->save(public_path('images') . '/' . $filename)
+				->fit(400)
+				->save(public_path('images') . '/' . 'thumb-' . $filename);
 
 			$candidate->photo = $filename;
 		}
@@ -94,8 +98,12 @@ class CandidatesController extends \BaseController {
 		$file = Input::file('photo');
 
 		if($file) {
+			$image = Image::make($file->getRealPath());
 			$filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
-			$file->move(public_path('images'), $filename);
+
+			$image->save(public_path('images') . '/' . $filename)
+				->fit(400)
+				->save(public_path('images') . '/' . 'thumb-' . $filename);
 
 			$candidate->photo = $filename;
 		}

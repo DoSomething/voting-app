@@ -10,7 +10,7 @@
 
 	@if($candidate->photo)
 	<h4>Photo</h4>
-	<img src="/images/{{ $candidate->photo }}" alt="{{ $candidate->name }}">
+	<img src="/images/thumb-{{ $candidate->photo }}" alt="{{ $candidate->name }}">
 	@endif
 
   @if($candidate->category)
