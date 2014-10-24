@@ -25,4 +25,13 @@ class Candidate extends BaseModel  {
 	{
 		return $this->belongsTo('Category');
 	}
+
+	public function thumbnail()
+	{
+		if($this->photo) {
+			return "/images/thumb-" . $this->photo;
+		} else {
+			return "/placeholder.png";
+		}
+	}
 }
