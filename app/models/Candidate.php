@@ -1,6 +1,18 @@
 <?php
 
+use Laracasts\Presenter\PresentableTrait;
+
 class Candidate extends BaseModel  {
+
+	use PresentableTrait;
+
+	/**
+	 * The presenter class for view logic.
+	 *
+	 * @var string
+	 */
+	protected $presenter = 'CandidatePresenter';
+
 	/**
 	 * The database table used by the model.
 	 *

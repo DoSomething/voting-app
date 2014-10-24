@@ -5,6 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
+		"laracasts/presenter": "0.1.*",
 		"cviebrock/eloquent-sluggable": "2.*",
 		"intervention/image": "~2.0"
 	},
@@ -15,9 +16,10 @@
 		"classmap": [
 			"app/commands",
 			"app/controllers",
-			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
+			"app/models",
+			"app/presenters",
 			"app/tests/TestCase.php"
 		]
 	},

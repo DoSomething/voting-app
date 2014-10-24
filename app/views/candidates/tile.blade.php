@@ -4,7 +4,7 @@
 			<div class="tile--meta">
 				<h1 class="__title">{{{ $candidate->name }}}</h1>
 			</div>
-			<img alt="{{{ $candidate->name }}}" src="{{{ $candidate->thumbnail() }}}" src="" />
+			<img alt="{{{ $candidate->name }}}" src="{{{ $candidate->present()->thumbnail }}}" src="" />
 		</a>
 	</article>
 </li>
