@@ -8,6 +8,11 @@
   <p>{{{ $candidate->description }}}</p>
   @endif
 
+	@if($candidate->photo)
+	<h4>Photo</h4>
+	<img src="/images/{{ $candidate->photo }}" alt="{{ $candidate->name }}">
+	@endif
+
   @if($candidate->category)
 	<h4>Category</h4>
   <p>{{ link_to_route('categories.show', $candidate->category->name, [$candidate->category->slug]) }}</p>

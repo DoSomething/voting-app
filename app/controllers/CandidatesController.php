@@ -41,6 +41,14 @@ class CandidatesController extends \BaseController {
 	public function store()
 	{
 		$candidate = new Candidate(Input::all());
+		$file = Input::file('photo');
+
+		if($file) {
+			$filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
+			$file->move(public_path('images'), $filename);
+
+			$candidate->photo = $filename;
+		}
 
 		if(!$candidate->save()) {
 			return Redirect::back()->withInput()->withErrors($candidate->getErrors());
@@ -83,6 +91,14 @@ class CandidatesController extends \BaseController {
   public function update(Candidate $candidate)
 	{
     $candidate->fill(Input::all());
+		$file = Input::file('photo');
+
+		if($file) {
+			$filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
+			$file->move(public_path('images'), $filename);
+
+			$candidate->photo = $filename;
+		}
 
 		if(!$candidate->save()) {
 			return Redirect::back()->withInput()->withErrors($candidate->getErrors());
