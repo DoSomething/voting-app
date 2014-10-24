@@ -24,3 +24,11 @@ $asset-path: "";
 
 // Add app styles:
 // ...
+
+.chrome--nav {
+	.primary-nav li {
+		@include media($desktop) {
+			padding: 22px 0;
+		}
+	}
+}
