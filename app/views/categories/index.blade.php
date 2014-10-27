@@ -10,7 +10,7 @@
   @endforelse
   </ul>
 
-	<h4>Actions</h4>
-	<p>{{ link_to_route('categories.create', 'New Category') }}</p>
+  <h4>Actions</h4>
+  <p>{{ link_to_route('categories.create', 'New Category') }}</p>
 
 @stop
