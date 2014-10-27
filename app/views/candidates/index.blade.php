@@ -4,7 +4,7 @@
   <h3>All Candidates</h3>
   <ul class="gallery -mosaic">
   @forelse($candidates as $candidate)
-		@include('candidates.tile', ['candidate' => $candidate])
+    @include('candidates.tile', ['candidate' => $candidate])
   @empty
     <li>No candidates.</li>
   @endforelse

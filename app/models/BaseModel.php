@@ -4,34 +4,34 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class BaseModel extends Eloquent implements SluggableInterface {
-	use SluggableTrait;
+  use SluggableTrait;
 
-	protected $errors;
+  protected $errors;
 
-	public static function boot()
-	{
-		parent::boot();
+  public static function boot()
+  {
+    parent::boot();
 
-		// Validate model on save
-		static::saving(function($model) {
-			$model->sluggify();
-			return $model->validate();
-		});
-	}
+    // Validate model on save
+    static::saving(function($model) {
+      $model->sluggify();
+      return $model->validate();
+    });
+  }
 
-	public function validate()
-	{
-		$validation = Validator::make($this->attributes, static::$rules);
+  public function validate()
+  {
+    $validation = Validator::make($this->attributes, static::$rules);
 
-		if($validation->passes())
-			return true;
+    if($validation->passes())
+      return true;
 
-		$this->errors = $validation->messages();
-		return false;
-	}
+    $this->errors = $validation->messages();
+    return false;
+  }
 
-	public function getErrors()
-	{
-		return $this->errors;
-	}
+  public function getErrors()
+  {
+    return $this->errors;
+  }
 }
