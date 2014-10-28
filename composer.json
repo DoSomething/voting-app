@@ -23,7 +23,8 @@
       "app/models",
       "app/presenters",
       "app/validators"
-    ]
+    ],
+    "files": ["app/helpers.php"]
   },
   "scripts": {
     "post-install-cmd": [
