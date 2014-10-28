@@ -47,6 +47,11 @@ class Candidate extends Eloquent implements SluggableInterface {
     return $this->belongsTo('Category');
   }
 
+  public function voters()
+  {
+    return $this->belongsToMany('User', 'votes');
+  }
+
   public function savePhoto($photo)
   {
       $filename = $this->sluggify()->slug . '.jpg';
