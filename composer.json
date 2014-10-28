@@ -8,6 +8,7 @@
     "cviebrock/eloquent-sluggable": "2.*",
     "intervention/image": "~2.0",
     "laracasts/presenter": "0.1.*",
+    "laracasts/validation": "~1.0"
   },
   "require-dev": {
     "codeception/codeception": "~2.0",
