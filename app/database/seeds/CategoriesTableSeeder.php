@@ -6,20 +6,9 @@ class CategoriesTableSeeder extends Seeder {
   {
     Category::truncate();
 
-    Category::create([
-      'name' => 'Top 20',
-      'slug' => 'top-20'
-    ]);
-
-    Category::create([
-      'name' => 'On the Rise',
-      'slug' => 'on-the-rise'
-    ]);
-
-    Category::create([
-      'name' => 'Internet Celebs',
-      'slug' => 'internet-celebs'
-    ]);
+    Category::create(['name' => 'Top 20']);
+    Category::create(['name' => 'On the Rise']);
+    Category::create(['name' => 'Internet Celebs']);
 
   }
 }
