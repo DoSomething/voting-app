@@ -44,18 +44,13 @@ class CandidatesController extends \BaseController {
     $input = Input::all();
     $this->candidateValidator->validate($input);
 
+    $candidate = new Candidate($input);
+
     if($file = Input::file('photo')) {
       $image = Image::make($file->getRealPath());
-      $filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
-
-      $image->save(public_path('images') . '/' . $filename)
-        ->fit(400)
-        ->save(public_path('images') . '/' . 'thumb-' . $filename);
-
-      $candidate->photo = $filename;
+      $candidate->savePhoto($image);
     }
 
-    $candidate = new Candidate($input);
     $candidate->save();
 
     return Redirect::route('candidates.index');
@@ -99,13 +94,7 @@ class CandidatesController extends \BaseController {
 
     if($file = Input::file('photo')) {
       $image = Image::make($file->getRealPath());
-      $filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
-
-      $image->save(public_path('images') . '/' . $filename)
-        ->fit(400)
-        ->save(public_path('images') . '/' . 'thumb-' . $filename);
-
-      $candidate->photo = $filename;
+      $candidate->savePhoto($image);
     }
 
     $this->candidateValidator->validate($input);
