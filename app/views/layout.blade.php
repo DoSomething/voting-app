@@ -40,9 +40,15 @@
       </ul>
     </div>
 
+    <div class="col js-footer-col">
+      <h4>User</h4>
+      <ul>
+          <li>{{ link_to_route('users.create', 'Create Account') }}</li>
+      </ul>
+    </div>
+
     <div class="subfooter">
       &copy; 2014 DoSomething.org.
-
     </div>
     </footer>
   </div>

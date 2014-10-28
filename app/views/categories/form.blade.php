@@ -1,4 +1,4 @@
 {{ Form::label('name', 'Category Name') }}
+{{ $errors->first('name', '<span class="validation error">:message</span>') }}
 {{ Form::text('name') }}
-{{ $errors->first('name', '<span class="message error">:message</span>') }}
 

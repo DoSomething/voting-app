@@ -1,16 +1,16 @@
 {{ Form::label('name', 'Candidate Name') }}
+{{ $errors->first('name', '<span class="validation error">:message</span>') }}
 {{ Form::text('name') }}
-{{ $errors->first('name', '<span class="message error">:message</span>') }}
 
 {{ Form::label('category_id', 'Category') }}
+{{ $errors->first('category_id', '<span class="validation error">:message</span>') }}
 {{ Form::select('category_id', Category::lists('name', 'id'), ( isset($candidate->category) ? $candidate->category : null )); }}
-{{ $errors->first('category_id', '<span class="message error">:message</span>') }}
 
 {{ Form::label('description', 'Photo (optional)') }}
+{{ $errors->first('photo', '<span class="validation error">:message</span>') }}
 {{ Form::file('photo') }}
-{{ $errors->first('photo', '<span class="message error">:message</span>') }}
 
 {{ Form::label('description', 'Description (optional)') }}
+{{ $errors->first('description', '<span class="validation error">:message</span>') }}
 {{ Form::textarea('description') }}
-{{ $errors->first('description', '<span class="message error">:message</span>') }}
 
