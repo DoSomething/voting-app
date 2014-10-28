@@ -12,6 +12,7 @@
   },
   "require-dev": {
     "codeception/codeception": "~2.0",
+    "fzaninotto/faker": "~1.4",
     "way/generators": "~2.0"
   },
   "autoload": {

@@ -4,28 +4,49 @@ class CandidatesTableSeeder extends Seeder {
 
   public function run()
   {
+    $faker = Faker\Factory::create();
+
     Candidate::truncate();
 
-    Candidate::create([
-      'name' => 'Taylor Ottwell',
-      'slug' => 'taylor-ottwell',
-      'description' => 'Taylor made it all happen.',
-      'category_id' => 1,
-    ]);
+    // Top 20
+    foreach(range(1,8) as $index) {
+      $candidate = Candidate::create([
+        'name' => $faker->name(),
+        'description' => $faker->paragraph(2),
+        'category_id' => 1,
+      ]);
 
-    Candidate::create([
-      'name' => 'Jeffrey Way',
-      'slug' => 'jeffrey-way',
-      'description' => 'Tuts, tuts, tuts.',
-      'category_id' => 1,
-    ]);
+      $image = Image::make($faker->imageUrl(640, 480, 'cats'));
+      $candidate->savePhoto($image);
+      $candidate->save();
+    }
 
-    Candidate::create([
-      'name' => 'Jenn Schiffer',
-      'slug' => 'jenn-schiffer',
-      'description' => 'California Style Sheets.',
-      'category_id' => 3,
-    ]);
+
+    // On the Rise
+    foreach(range(1,6) as $index) {
+      $candidate = Candidate::create([
+        'name' => $faker->name(),
+        'description' => $faker->paragraph(2),
+        'category_id' => 2,
+      ]);
+
+      $image = Image::make($faker->imageUrl(640, 480, 'people'));
+      $candidate->savePhoto($image);
+      $candidate->save();
+    }
+
+    // Internet Celebs
+    foreach(range(1,4) as $index) {
+      $candidate = Candidate::create([
+        'name' => $faker->name(),
+        'description' => $faker->paragraph(2),
+        'category_id' => 3,
+      ]);
+
+      $image = Image::make($faker->imageUrl(640, 480, 'cats'));
+      $candidate->savePhoto($image);
+      $candidate->save();
+    }
 
   }
 }
