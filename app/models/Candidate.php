@@ -47,6 +47,20 @@ class Candidate extends Eloquent implements SluggableInterface {
     return $this->belongsTo('Category');
   }
 
+  public function savePhoto($photo)
+  {
+      $filename = $this->sluggify()->slug . '.jpg';
+
+      // Save full-size image
+      $photo->encode('jpg', 75)->save(public_path('images') . '/' . $filename);
+
+      // Save thumbnail
+      $photo->encode('jpg', 75)->fit(400)
+        ->save(public_path('images') . '/' . 'thumb-' . $filename);
+
+      $this->attributes['photo'] = $filename;
+  }
+
   public function thumbnail()
   {
     if($this->photo) {
