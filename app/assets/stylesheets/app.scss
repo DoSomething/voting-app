@@ -36,3 +36,10 @@ $asset-path: "";
 .gallery.-mosaic {
 	background-color: #fff;
 }
+
+
+.validation.error {
+  color: $error;
+  font-size: $font-small;
+  font-weight: $weight-sbold;
+}
