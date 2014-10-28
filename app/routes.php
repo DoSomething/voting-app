@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'CandidatesController@index');
+Route::get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
 /**
  * Candidates
