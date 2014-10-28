@@ -1,13 +1,14 @@
 <?php
 
-
 class CandidatesController extends \BaseController {
 
   protected $candidate;
+  protected $candidateValidator;
 
-  public function __construct(Candidate $candidate)
+  public function __construct(Candidate $candidate, CandidateValidator $candidateValidator)
   {
     $this->candidate = $candidate;
+    $this->candidateValidator = $candidateValidator;
   }
 
   /**
@@ -40,10 +41,10 @@ class CandidatesController extends \BaseController {
    */
   public function store()
   {
-    $candidate = new Candidate(Input::all());
-    $file = Input::file('photo');
+    $input = Input::all();
+    $this->candidateValidator->validate($input);
 
-    if($file) {
+    if($file = Input::file('photo')) {
       $image = Image::make($file->getRealPath());
       $filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
 
@@ -54,9 +55,8 @@ class CandidatesController extends \BaseController {
       $candidate->photo = $filename;
     }
 
-    if(!$candidate->save()) {
-      return Redirect::back()->withInput()->withErrors($candidate->getErrors());
-    }
+    $candidate = new Candidate($input);
+    $candidate->save();
 
     return Redirect::route('candidates.index');
   }
@@ -94,10 +94,10 @@ class CandidatesController extends \BaseController {
    */
   public function update(Candidate $candidate)
   {
-    $candidate->fill(Input::all());
-    $file = Input::file('photo');
+    $input = Input::all();
+    $candidate->fill($input);
 
-    if($file) {
+    if($file = Input::file('photo')) {
       $image = Image::make($file->getRealPath());
       $filename = $candidate->sluggify()->slug . '.' . $file->getClientOriginalExtension();
 
@@ -108,9 +108,8 @@ class CandidatesController extends \BaseController {
       $candidate->photo = $filename;
     }
 
-    if(!$candidate->save()) {
-      return Redirect::back()->withInput()->withErrors($candidate->getErrors());
-    }
+    $this->candidateValidator->validate($input);
+    $candidate->save();
 
     return Redirect::route('candidates.index');
   }

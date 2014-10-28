@@ -1,10 +1,13 @@
 <?php
 
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 use Laracasts\Presenter\PresentableTrait;
 
-class Candidate extends BaseModel  {
+class Candidate extends Eloquent implements SluggableInterface {
 
   use PresentableTrait;
+  use SluggableTrait;
 
   /**
    * The presenter class for view logic.
@@ -20,14 +23,20 @@ class Candidate extends BaseModel  {
    */
   protected $table = 'candidates';
 
+  /**
+   * The attributes which may be mass-assigned.
+   *
+   * @var array
+   */
   protected $fillable = [
     'name', 'description', 'category_id'
   ];
 
-  public static $rules = [
-    'name' => 'required'
-  ];
-
+  /**
+   * Configuration for generating slug with Eloquent-Sluggable.
+   *
+   * @var array
+   */
   protected $sluggable = [
     'build_from' => 'name',
     'save_to' => 'slug'
