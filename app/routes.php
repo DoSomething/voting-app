@@ -31,3 +31,9 @@ Route::bind('categories', function($slug) {
 });
 
 Route::resource('categories', 'CategoriesController');
+
+/**
+ * Users
+ */
+Route::resource('users', 'UsersController');
+
