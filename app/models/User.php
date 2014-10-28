@@ -17,10 +17,27 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   protected $table = 'users';
 
   /**
+   * The attributes which may be mass-assigned.
+   *
+   * @var array
+   */
+  protected $fillable = ['email', 'password'];
+
+  /**
    * The attributes excluded from the model's JSON form.
    *
    * @var array
    */
   protected $hidden = array('password', 'remember_token');
+
+  /**
+   * Mutator to hash the password for safe storage.
+   *
+   * @var string
+   */
+  public function setPasswordAttribute($password)
+  {
+    $this->attributes['password'] = Hash::make($password);
+  }
 
 }

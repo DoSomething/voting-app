@@ -11,6 +11,11 @@
 <body>
   <div class="chrome">
   <div class="chrome--wrapper">
+    @if(Session::has('flash_message'))
+    <div class="messages">
+      {{ Session:: get('flash_message') }}
+    </div>
+    @endif
     <nav class="chrome--nav">
       <a class="logo" href="http://www.dosomething.org"><img src="/logo.png" alt="Celebs Gone Good"></a>
       <a class="hamburger js-toggle-mobile-menu" href="#">&#xe606;</a>
@@ -40,9 +45,20 @@
       </ul>
     </div>
 
+    <div class="col js-footer-col">
+      <h4>User</h4>
+      <ul>
+        @if(Auth::guest())
+          <li>{{ link_to_route('users.create', 'Create Account') }}</li>
+          <li>{{ link_to_route('login', 'Sign In') }}</li>
+        @else
+          <li>{{ link_to_route('logout', 'Sign Out') }}</li>
+        @endif
+      </ul>
+    </div>
+
     <div class="subfooter">
       &copy; 2014 DoSomething.org.
-
     </div>
     </footer>
   </div>

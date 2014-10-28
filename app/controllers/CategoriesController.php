@@ -1,13 +1,14 @@
 <?php
 
-
 class CategoriesController extends \BaseController {
 
   protected $category;
+  protected $categoryValidator;
 
-  public function __construct(Category $category)
+  public function __construct(Category $category, CategoryValidator $categoryValidator)
   {
     $this->category = $category;
+    $this->categoryValidator = $categoryValidator;
   }
 
   /**
@@ -40,11 +41,11 @@ class CategoriesController extends \BaseController {
    */
   public function store()
   {
-    $category = new category(Input::all());
+    $input = Input::all();
+    $this->categoryValidator->validate($input);
 
-    if(!$category->save()) {
-      return Redirect::back()->withInput()->withErrors($category->getErrors());
-    }
+    $category = new category($input);
+    $category->save();
 
     return Redirect::route('categories.index');
   }
@@ -83,11 +84,11 @@ class CategoriesController extends \BaseController {
    */
   public function update(category $category)
   {
-    $category->fill(Input::all());
+    $input = Input::all();
+    $this->categoryValidator->validate($input);
 
-    if(!$category->save()) {
-      return Redirect::back()->withInput()->withErrors($category->getErrors());
-    }
+    $category->fill($input);
+    $category->save();
 
     return Redirect::route('categories.index');
   }

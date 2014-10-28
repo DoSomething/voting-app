@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'CandidatesController@index');
+Route::get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
 /**
  * Candidates
@@ -31,3 +31,18 @@ Route::bind('categories', function($slug) {
 });
 
 Route::resource('categories', 'CategoriesController');
+
+
+/**
+ * Users
+ */
+Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
+
+
+/**
+ * Sessions
+ */
+Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
+Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
+
