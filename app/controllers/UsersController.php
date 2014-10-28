@@ -17,6 +17,8 @@ class UsersController extends \BaseController {
 	 */
 	public function create()
 	{
+    if(Auth::check()) return Redirect::home();
+
     return View::make('users.create');
 	}
 
