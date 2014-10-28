@@ -35,5 +35,5 @@ Route::resource('categories', 'CategoriesController');
 /**
  * Users
  */
-Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
 
