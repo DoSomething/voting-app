@@ -13,11 +13,11 @@
   <div class="chrome--wrapper">
     @if(Session::has('flash_message'))
     <div class="messages">
-      {{ Session:: get('flash_message') }}
+      {{ Session::get('flash_message') }}
     </div>
     @endif
     <nav class="chrome--nav">
-      <a class="logo" href="http://www.dosomething.org"><img src="/logo.png" alt="Celebs Gone Good"></a>
+      <a class="logo" href="{{{ route('home') }}}"><img src="/logo.png" alt="Celebs Gone Good"></a>
       <a class="hamburger js-toggle-mobile-menu" href="#">&#xe606;</a>
       <div class="menu">
         <ul class="primary-nav">

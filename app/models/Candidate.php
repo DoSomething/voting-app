@@ -42,11 +42,28 @@ class Candidate extends Eloquent implements SluggableInterface {
     'save_to' => 'slug'
   ];
 
+  /**
+   * Inverse has-many relationship to Categories.
+   */
   public function category()
   {
     return $this->belongsTo('Category');
   }
 
+  /**
+   * Many-to-many relationship between Users and Candidates.
+   */
+  public function votes()
+  {
+    return $this->belongsToMany('User', 'votes')->withTimestamps();
+  }
+
+  /**
+   * Save a photo, generate thumbnail, and attach it to the model.
+   *
+   * @param mixed $photo Input to Intervention\Image::make (such as Input::file)
+   * @see http://image.intervention.io/api/make
+   */
   public function savePhoto($photo)
   {
       $filename = $this->sluggify()->slug . '.jpg';
@@ -61,12 +78,4 @@ class Candidate extends Eloquent implements SluggableInterface {
       $this->attributes['photo'] = $filename;
   }
 
-  public function thumbnail()
-  {
-    if($this->photo) {
-      return "/images/thumb-" . $this->photo;
-    } else {
-      return "/placeholder.png";
-    }
-  }
 }

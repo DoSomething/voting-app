@@ -8,6 +8,18 @@
   <p>{{{ $candidate->description }}}</p>
   @endif
 
+  @if($votes)
+  <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
+  <ul>
+  @forelse ($votes as $vote)
+    <li>{{{ $vote->email }}}</li>
+  @empty
+    <li>No votes! :(</li>
+  @endforelse
+  </ul>
+  @endif
+
+
   @if($candidate->photo)
   <h4>Photo</h4>
   <a href="/images/{{{ $candidate->photo }}}"><img src="/images/thumb-{{{ $candidate->photo }}}" alt="{{{ $candidate->name }}}" width="200" height="200"></a>
