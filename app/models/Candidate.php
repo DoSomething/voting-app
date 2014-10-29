@@ -53,7 +53,7 @@ class Candidate extends Eloquent implements SluggableInterface {
   /**
    * Many-to-many relationship between Users and Candidates.
    */
-  public function voters()
+  public function votes()
   {
     return $this->belongsToMany('User', 'votes')->withTimestamps();
   }

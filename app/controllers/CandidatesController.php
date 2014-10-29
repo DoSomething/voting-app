@@ -65,7 +65,10 @@ class CandidatesController extends \BaseController {
    */
   public function show(Candidate $candidate)
   {
-    return View::make('candidates.show', compact('candidate'));
+    $votes = $candidate->votes;
+    $vote_count = $candidate->votes()->count();
+
+    return View::make('candidates.show', compact('candidate', 'votes', 'vote_count'));
   }
 
 
