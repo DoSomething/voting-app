@@ -66,12 +66,4 @@ class Candidate extends Eloquent implements SluggableInterface {
       $this->attributes['photo'] = $filename;
   }
 
-  public function thumbnail()
-  {
-    if($this->photo) {
-      return "/images/thumb-" . $this->photo;
-    } else {
-      return "/placeholder.png";
-    }
-  }
 }
