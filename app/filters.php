@@ -35,15 +35,12 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-  if (Auth::guest())
-  {
-    if (Request::ajax())
-    {
+  if (Auth::guest()) {
+    if (Request::ajax()) {
       return Response::make('Unauthorized', 401);
     }
-    else
-    {
-      return Redirect::guest('login');
+    else {
+      return Redirect::guest('login')->with('flash_message', 'You must be logged in to view that!');
     }
   }
 });
@@ -83,8 +80,24 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-  if (Session::token() != Input::get('_token'))
-  {
+  if (Session::token() != Input::get('_token')) {
     throw new Illuminate\Session\TokenMismatchException;
+  }
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Role Filter
+|--------------------------------------------------------------------------
+|
+| The admin filter protects routes that should be not be accessible by everyone.
+|
+*/
+
+Route::filter('role', function($route, $request, $role)
+{
+ if (Auth::guest() or !Auth::user()->hasRole($role)) {
+    return Response::make('Unauthorized', 401);
   }
 });
