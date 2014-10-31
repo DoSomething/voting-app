@@ -97,7 +97,7 @@ Route::filter('csrf', function()
 
 Route::filter('role', function($route, $request, $role)
 {
- if (Auth::guest() or !Auth::user()->hasRole($role)) {
+  if (Auth::guest() or !Auth::user()->hasRole($role)) {
     return Response::make('Unauthorized', 401);
-  }
+   }
 });
