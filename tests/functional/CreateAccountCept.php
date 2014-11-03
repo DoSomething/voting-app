@@ -3,15 +3,18 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('an unregistered user');
-$I->wantTo('sign up for an account');
+$I->wantTo('create an account');
+
+$email = 'johndoe@example.com';
+$password = 'testing1234';
 
 $I->amOnPage('/');
 
 $I->click('Create Account');
 $I->seeCurrentUrlEquals('/users/create');
 
-$I->fillField('Email', 'johndoe@example.com');
-$I->fillField('Password', 'testing1234');
+$I->fillField('Email', $email);
+$I->fillField('Password', $password);
 $I->fillField('Password Confirmation', 'testing1234');
 $I->click('Create New Account');
 
@@ -21,4 +24,4 @@ $I->seeRecord('users', [
   'email' => 'johndoe@example.com'
 ]);
 
-$I->assertTrue(Auth::check());
+$I->assertTrue(Auth::check(), "logged in as a user");
