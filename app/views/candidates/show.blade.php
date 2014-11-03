@@ -12,7 +12,7 @@
   <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
   <ul>
   @forelse ($votes as $vote)
-    <li>{{{ $vote->email }}}</li>
+    <li>{{{ $vote->user->email }}}</li>
   @empty
     <li>No votes! :(</li>
   @endforelse

@@ -41,11 +41,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
-   * Many-to-many relationship between Users and Candidates.
+   * A user has many votes.
    */
   public function votes()
   {
-    return $this->belongsToMany('Candidate', 'votes')->withTimestamps();
+    return $this->hasMany('Vote');
+  }
   }
 
 }
