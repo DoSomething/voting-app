@@ -32,7 +32,9 @@ Route::bind('candidates', function($slug) {
 Route::resource('candidates', 'CandidatesController');
 
 /**
+ * Votes
  */
+Route::resource('votes', 'VotesController', ['only' => ['store']]);
 
 /**
  * Users

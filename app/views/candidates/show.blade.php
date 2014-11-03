@@ -19,6 +19,11 @@
   </ul>
   @endif
 
+  {{ Form::open(['route' => 'votes.store']) }}
+  {{ Form::hidden('candidate_id', $candidate->id) }}
+  {{ Form::submit('Vote', ['class' => 'btn']) }}
+  {{ Form::close() }}
+
 
   @if($candidate->photo)
   <h4>Photo</h4>
