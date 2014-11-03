@@ -41,11 +41,25 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
-   * Many-to-many relationship between Users and Candidates.
+   * A user has many votes.
    */
   public function votes()
   {
-    return $this->belongsToMany('Candidate', 'votes')->withTimestamps();
+    return $this->hasMany('Vote');
+  }
+
+  /**
+   * Check whether a user is allowed to vote on a given candidate.
+   * User is allowed to vote if they haven't voted in this category in the last 24 hours.
+   */
+  public function canVote(Candidate $candidate)
+  {
+    $existing_vote = Vote::whereUserId($this->id)
+      ->inCategory($candidate->category)
+      ->withinLastDay()
+      ->first();
+
+    return is_null($existing_vote);
   }
 
   /**

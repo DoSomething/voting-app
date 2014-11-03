@@ -12,12 +12,17 @@
   <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
   <ul>
   @forelse ($votes as $vote)
-    <li>{{{ $vote->email }}}</li>
+    <li>{{{ $vote->user->email }}}</li>
   @empty
     <li>No votes! :(</li>
   @endforelse
   </ul>
   @endif
+
+  {{ Form::open(['route' => 'votes.store']) }}
+  {{ Form::hidden('candidate_id', $candidate->id) }}
+  {{ Form::submit('Vote', ['class' => 'btn']) }}
+  {{ Form::close() }}
 
 
   @if($candidate->photo)

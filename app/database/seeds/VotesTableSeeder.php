@@ -10,7 +10,12 @@ class VotesTableSeeder extends Seeder {
       $candidate = Candidate::orderBy(DB::raw('RAND()'))->first();
       $user = User::orderBy(DB::raw('RAND()'))->first();
 
-      $user->votes()->attach($candidate->id);
+      $vote = Vote::create([
+        'candidate_id' => $candidate->id,
+        'user_id' => $user->id
+      ]);
+
+      $vote->save();
     }
 
 
