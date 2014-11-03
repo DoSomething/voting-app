@@ -123,6 +123,7 @@ return array(
     'Illuminate\Workbench\WorkbenchServiceProvider',
 
     /* additional service providers: */
+    'Clockwork\Support\Laravel\ClockworkServiceProvider',
     'Cviebrock\EloquentSluggable\SluggableServiceProvider',
     'Intervention\Image\ImageServiceProvider',
     'Laracasts\Validation\ValidationServiceProvider',
@@ -196,6 +197,7 @@ return array(
 
     /* additional aliases */
     'Image' => 'Intervention\Image\Facades\Image',
+    'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
   ),
 
