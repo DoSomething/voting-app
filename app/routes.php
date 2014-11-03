@@ -14,16 +14,6 @@
 Route::get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
 /**
- * Candidates
- */
-Route::bind('candidates', function($slug) {
-  return Candidate::whereSlug($slug)->first();
-});
-
-Route::resource('candidates', 'CandidatesController');
-
-
-/**
  * Categories
  */
 Route::bind('categories', function($slug) {
@@ -32,12 +22,22 @@ Route::bind('categories', function($slug) {
 
 Route::resource('categories', 'CategoriesController');
 
+/**
+ * Candidates
+ */
+Route::bind('candidates', function($slug) {
+  return Candidate::whereSlug($slug)->first();
+});
+
+Route::resource('candidates', 'CandidatesController');
+
+/**
+ */
 
 /**
  * Users
  */
 Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
-
 
 /**
  * Sessions
