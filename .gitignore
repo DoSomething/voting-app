@@ -13,3 +13,6 @@ composer.lock
 Thumbs.db
 
 tests/_output/*
+tests/acceptance/AcceptanceTester.php
+tests/functional/FunctionalTester.php
+tests/unit/UnitTester.php
