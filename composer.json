@@ -6,6 +6,7 @@
   "require": {
     "laravel/framework": "4.2.*",
     "cviebrock/eloquent-sluggable": "2.*",
+    "erusev/parsedown-extra": "~0.2.3",
     "intervention/image": "~2.0",
     "laracasts/presenter": "0.1.*",
     "laracasts/validation": "~1.0"
