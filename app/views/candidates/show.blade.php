@@ -12,7 +12,7 @@
   <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
   <ul>
   @forelse ($votes as $vote)
-    <li>{{{ $vote->user->email }}}</li>
+    <li>{{ link_to_route('users.show', $vote->user->email, $vote->user->id) }}</li>
   @empty
     <li>No votes! :(</li>
   @endforelse

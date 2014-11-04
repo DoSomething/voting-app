@@ -7,7 +7,7 @@
   <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
   <ul>
   @forelse ($votes as $vote)
-    <li>{{{ $vote->candidate->name }}}</li>
+    <li>{{ link_to_route('candidates.show', $vote->candidate->name, $vote->candidate->slug) }}</li>
   @empty
     <li>No votes! :(</li>
   @endforelse
