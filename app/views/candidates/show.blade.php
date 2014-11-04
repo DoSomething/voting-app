@@ -19,10 +19,15 @@
   </ul>
   @endif
 
-  {{ Form::open(['route' => 'votes.store']) }}
-  {{ Form::hidden('candidate_id', $candidate->id) }}
-  {{ Form::submit('Vote', ['class' => 'btn']) }}
-  {{ Form::close() }}
+  <h4>Your Vote</h4>
+  @if (Auth::user()->canVote($candidate))
+    {{ Form::open(['route' => 'votes.store']) }}
+    {{ Form::hidden('candidate_id', $candidate->id) }}
+    {{ Form::submit('Vote', ['class' => 'btn']) }}
+    {{ Form::close() }}
+  @else
+    You've already voted today!
+  @endif
 
 
   @if($candidate->photo)
