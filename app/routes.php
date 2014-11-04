@@ -40,7 +40,7 @@ Route::resource('votes', 'VotesController', ['only' => ['store']]);
  * Users
  */
 Route::bind('users', function($id) {
-  return User::find($id)->first();
+  return User::whereId($id)->first();
 });
 
 Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
