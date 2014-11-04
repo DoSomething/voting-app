@@ -40,10 +40,11 @@
 
     @if(Auth::user() && Auth::user()->hasRole('admin'))
     <div class="col js-footer-col">
-      <h4>Models</h4>
+      <h4>Administration</h4>
       <ul>
           <li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
           <li>{{ link_to_route('categories.index', 'Categories') }}</li>
+          <li>{{ link_to_route('pages.index', 'Pages') }}</li>
           <li>{{ link_to_route('users.index', 'Users') }}</li>
       </ul>
     </div>
