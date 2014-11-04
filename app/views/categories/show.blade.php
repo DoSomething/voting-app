@@ -3,6 +3,10 @@
 @section('content')
   <h3>{{{ $category->name }}}</h3>
 
+  @if( !Auth::user()->canVoteInCategory($category))
+  <div class="messages">You can't vote again in this category yet.</div>
+  @endif
+
   <h4>Candidates</h4>
   <ul class="gallery -mosaic">
   @forelse($category->candidates as $candidate)

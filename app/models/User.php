@@ -63,6 +63,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
+   * Check whether a user is allowed to vote on a given candidate.
+   * User is allowed to vote if they haven't voted in this category in the last 24 hours.
+   */
+  public function canVoteInCategory(Category $category)
+  {
+    $existing_vote = Vote::whereUserId($this->id)
+      ->inCategory($category)
+      ->withinLastDay()
+      ->first();
+
+    return is_null($existing_vote);
+  }
+
+  /**
    * Many-to-many relationship between users and roles.
    */
   public function roles()
