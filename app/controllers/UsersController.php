@@ -8,6 +8,8 @@ class UsersController extends \BaseController {
   {
     $this->user = $user;
     $this->userValidator = $userValidator;
+
+    $this->beforeFilter('role:admin', ['only' => ['index', 'show']]);
   }
 
   /**
