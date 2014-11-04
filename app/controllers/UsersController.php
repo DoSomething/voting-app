@@ -37,7 +37,7 @@ class UsersController extends \BaseController {
     $user->save();
 
     Auth::login($user);
-    return Redirect::to('/');
+    return Redirect::home()->withFlashMessage('You\'re all signed up! Get voting!');
 	}
 
 }

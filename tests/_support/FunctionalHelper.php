@@ -1,10 +1,17 @@
-<?php
-namespace Codeception\Module;
+<?php namespace Codeception\Module;
 
-// here you can define custom actions
-// all public methods declared in helper class will be available in $I
+use Laracasts\TestDummy\Factory as TestDummy;
 
-class FunctionalHelper extends \Codeception\Module
-{
+// All public methods declared in helper class will be available in $I
+
+class FunctionalHelper extends \Codeception\Module {
+
+  /**
+   * Provide a User fixture.
+   */
+  public function haveAnAccount($overrides = [])
+  {
+    $user = TestDummy::create('User', $overrides);
+  }
 
 }
