@@ -3,7 +3,7 @@
 @section('content')
   <h3>{{{ $category->name }}}</h3>
 
-  @if( !Auth::user()->canVoteInCategory($category))
+  @if( Auth::user() && !Auth::user()->canVoteInCategory($category))
   <div class="messages">You can't vote again in this category yet.</div>
   @endif
 
@@ -16,8 +16,9 @@
   @endforelse
   </ul>
 
-  <h4>Actions</h4>
-  <p>{{ link_to_route('categories.edit', 'Edit Category', [$category->slug], ['class' => 'btn secondary']) }}</p>
-  <p>{{ link_to_route('categories.index', 'Go Back') }}</p>
+  @if(Auth::user() && Auth::user()->hasRole('admin'))
+    <h4>Actions</h4>
+    <p>{{ link_to_route('categories.edit', 'Edit Category', [$category->slug], ['class' => 'btn secondary']) }}</p>
+  @endif
 
 @stop
