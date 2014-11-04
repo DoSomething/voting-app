@@ -39,7 +39,11 @@ Route::resource('votes', 'VotesController', ['only' => ['store']]);
 /**
  * Users
  */
-Route::resource('users', 'UsersController', ['only' => ['create', 'store']]);
+Route::bind('users', function($id) {
+  return User::find($id)->first();
+});
+
+Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
 
 /**
  * Sessions

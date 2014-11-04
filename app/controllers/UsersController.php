@@ -4,9 +4,21 @@ class UsersController extends \BaseController {
 
   protected $userValidator;
 
-  public function __construct(UserValidator $userValidator)
+  public function __construct(User $user, UserValidator $userValidator)
   {
+    $this->user = $user;
     $this->userValidator = $userValidator;
+  }
+
+  /**
+   * Display a listing of the resource.
+   *
+   * @return Response
+   */
+  public function index()
+  {
+    $users = $this->user->get();
+    return View::make('users.index', compact('users'));
   }
 
 	/**
@@ -39,5 +51,21 @@ class UsersController extends \BaseController {
     Auth::login($user);
     return Redirect::home()->withFlashMessage('You\'re all signed up! Get voting!');
 	}
+
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show(User $user)
+  {
+    $votes = $user->votes;
+    $vote_count = $user->votes()->count();
+
+    return View::make('users.show', compact('user', 'votes', 'vote_count'));
+  }
+
 
 }
