@@ -9,6 +9,8 @@ class CategoriesController extends \BaseController {
   {
     $this->category = $category;
     $this->categoryValidator = $categoryValidator;
+
+    $this->beforeFilter('role:admin', ['except' => ['show']]);
   }
 
   /**

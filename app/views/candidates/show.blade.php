@@ -8,7 +8,7 @@
   <p>{{{ $candidate->description }}}</p>
   @endif
 
-  @if($votes)
+  @if(Auth::user() && Auth::user()->hasRole('admin') && $votes)
   <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
   <ul>
   @forelse ($votes as $vote)
@@ -20,13 +20,17 @@
   @endif
 
   <h4>Your Vote</h4>
-  @if (Auth::user()->canVote($candidate))
-    {{ Form::open(['route' => 'votes.store']) }}
-    {{ Form::hidden('candidate_id', $candidate->id) }}
-    {{ Form::submit('Vote', ['class' => 'btn']) }}
-    {{ Form::close() }}
+  @if(Auth::user())
+    @if (Auth::user()->canVote($candidate))
+      {{ Form::open(['route' => 'votes.store']) }}
+      {{ Form::hidden('candidate_id', $candidate->id) }}
+      {{ Form::submit('Vote', ['class' => 'btn']) }}
+      {{ Form::close() }}
+    @else
+      You've already voted today!
+    @endif
   @else
-    You've already voted today!
+    {{ link_to_route('login', 'Sign in') }} to vote!
   @endif
 
 
@@ -41,7 +45,9 @@
   @endif
 
   <h4>Actions</h4>
-  <p>{{ link_to_route('candidates.edit', 'Edit Candidate', [$candidate->slug], ['class' => 'btn secondary']) }}</p>
+  @if(Auth::user() && Auth::user()->hasRole('admin'))
+    <p>{{ link_to_route('candidates.edit', 'Edit Candidate', [$candidate->slug], ['class' => 'btn secondary']) }}</p>
+  @endif
   <p>{{ link_to_route('candidates.index', 'Go Back') }}</p>
 
 @stop

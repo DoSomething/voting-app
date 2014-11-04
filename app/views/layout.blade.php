@@ -37,13 +37,17 @@
     </div>
 
     <footer class="chrome--footer">
+
+    @if(Auth::user() && Auth::user()->hasRole('admin'))
     <div class="col js-footer-col">
       <h4>Models</h4>
       <ul>
           <li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
           <li>{{ link_to_route('categories.index', 'Categories') }}</li>
+          <li>{{ link_to_route('users.index', 'Users') }}</li>
       </ul>
     </div>
+    @endif
 
     <div class="col js-footer-col">
       <h4>User</h4>
