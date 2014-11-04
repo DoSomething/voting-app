@@ -33,7 +33,7 @@ class SessionsController extends \BaseController {
     $this->sessionValidator->validate($input);
 
     if(Auth::attempt($input)) {
-      return Redirect::intended('/');
+      return Redirect::intended('/')->withFlashMessage('Welcome back!');
     }
 
     return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
@@ -50,7 +50,7 @@ class SessionsController extends \BaseController {
 	{
     Auth::logout();
 
-    return Redirect::home();
+    return Redirect::home()->withFlashMessage('You\'re now signed out.');;
 	}
 
 }
