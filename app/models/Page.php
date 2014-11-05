@@ -8,13 +8,6 @@ class Page extends \Eloquent implements SluggableInterface {
   use SluggableTrait;
 
   /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'pages';
-
-  /**
    * The attributes which may be mass-assigned.
    *
    * @var array

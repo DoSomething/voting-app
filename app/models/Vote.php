@@ -5,13 +5,6 @@ use \Carbon\Carbon;
 class Vote extends Eloquent {
 
   /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'votes';
-
-  /**
    * The attributes which may be mass-assigned.
    *
    * @var array

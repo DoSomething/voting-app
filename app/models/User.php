@@ -10,13 +10,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   use UserTrait, RemindableTrait;
 
   /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'users';
-
-  /**
    * The attributes which may be mass-assigned.
    *
    * @var array
