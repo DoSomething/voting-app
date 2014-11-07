@@ -46,7 +46,7 @@ class CategoriesController extends \BaseController {
     $input = Input::all();
     $this->categoryValidator->validate($input);
 
-    $category = new category($input);
+    $category = new Category($input);
     $category->save();
 
     return Redirect::route('categories.index');
