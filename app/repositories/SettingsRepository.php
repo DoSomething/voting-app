@@ -10,7 +10,7 @@ class SettingsRepository {
    */
   public function all()
   {
-    return DB::table('settings')->lists('value', 'key');
+    return DB::table('settings')->rememberForever('settings')->lists('value', 'key');
   }
 
 }
