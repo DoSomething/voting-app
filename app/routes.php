@@ -71,9 +71,3 @@ Route::bind('settings', function($key) {
 
 Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
 
-// @TODO: Move into a separate composers file.
-View::composer('layout', function($view)
-{
-  $allSettings = App::make('SettingsRepository')->all();
-  return $view->with('settings', $allSettings);
-});
