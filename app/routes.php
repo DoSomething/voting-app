@@ -52,7 +52,6 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
 
-
 /**
  * Pages
  */
@@ -61,3 +60,13 @@ Route::bind('pages', function($slug) {
 });
 
 Route::resource('pages', 'PagesController');
+
+
+/**
+ * Settings
+ */
+Route::bind('settings', function($key) {
+  return Setting::whereKey($key)->first();
+});
+
+Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
