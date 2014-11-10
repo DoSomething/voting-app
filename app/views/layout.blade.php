@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Celebs Gone Laravel</title>
+  <title>{{ $settings['site_title'] }}</title>
 
   <link rel="stylesheet" href="/dist/app.css" type="text/css" media="screen" charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +46,7 @@
           <li>{{ link_to_route('categories.index', 'Categories') }}</li>
           <li>{{ link_to_route('pages.index', 'Pages') }}</li>
           <li>{{ link_to_route('users.index', 'Users') }}</li>
+          <li>{{ link_to_route('settings.index', 'Site Settings') }}</li>
       </ul>
     </div>
     @endif

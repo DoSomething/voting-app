@@ -17,13 +17,6 @@ class Candidate extends Eloquent implements SluggableInterface {
   protected $presenter = 'CandidatePresenter';
 
   /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'candidates';
-
-  /**
    * The attributes which may be mass-assigned.
    *
    * @var array

@@ -10,13 +10,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   use UserTrait, RemindableTrait;
 
   /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'users';
-
-  /**
    * The attributes which may be mass-assigned.
    *
    * @var array
@@ -28,7 +21,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    *
    * @var array
    */
-  protected $hidden = array('password', 'remember_token');
+  protected $hidden = ['password', 'remember_token'];
 
   /**
    * Mutator to hash the password for safe storage.

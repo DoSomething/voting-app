@@ -9,7 +9,7 @@
 | which may be used to do any work before or after a request into your
 | application. Here you may also register your custom route filters.
 |
-*/
+ */
 
 App::before(function($request)
 {
@@ -31,7 +31,7 @@ App::after(function($request, $response)
 | session is logged into this application. The "basic" filter easily
 | integrates HTTP Basic authentication for quick, simple checking.
 |
-*/
+ */
 
 Route::filter('auth', function()
 {
@@ -60,7 +60,7 @@ Route::filter('auth.basic', function()
 | it simply checks that the current user is not logged in. A redirect
 | response will be issued if they are, which you may freely change.
 |
-*/
+ */
 
 Route::filter('guest', function()
 {
@@ -76,7 +76,7 @@ Route::filter('guest', function()
 | cross-site request forgery attacks. If this special token in a user
 | session does not match the one given in this request, we'll bail.
 |
-*/
+ */
 
 Route::filter('csrf', function()
 {
@@ -93,11 +93,11 @@ Route::filter('csrf', function()
 |
 | The admin filter protects routes that should be not be accessible by everyone.
 |
-*/
+ */
 
 Route::filter('role', function($route, $request, $role)
 {
   if (Auth::guest() or !Auth::user()->hasRole($role)) {
     return Response::make('Unauthorized', 401);
-   }
+  }
 });

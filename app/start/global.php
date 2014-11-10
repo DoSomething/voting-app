@@ -84,3 +84,16 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Require The Composers File
+|--------------------------------------------------------------------------
+|
+| We load a composers file with our View Composers.
+| @see http://laravel.com/docs/4.2/responses#view-composers
+|
+*/
+
+require app_path().'/composers.php';
