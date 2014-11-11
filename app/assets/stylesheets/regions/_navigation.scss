@@ -1,0 +1,47 @@
+// Primary navigation
+nav.primary {
+  margin-bottom: $base-spacing * 4;
+
+  .logo img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  ul {
+    display: block;
+    list-style: none;
+    padding: 0;
+
+    @include clearfix;
+
+    li {
+      text-align: center;
+
+      @include gallery(3);
+    }
+
+    a {
+      color: $white;
+      font-size: $medium-font-size;
+      font-weight: $weight-bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: $base-spacing/2 $base-spacing;
+
+      &:hover {
+        color: $cyan;
+      }
+
+      &.-is-active {
+        background: $cyan;
+        color: $black;
+
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+
+}
+

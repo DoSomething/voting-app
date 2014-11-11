@@ -1,0 +1,31 @@
+// Footer!
+
+footer.primary {
+  color: $gray;
+  margin-bottom: 4 * $base-spacing;
+  @include clearfix;
+
+  a {
+    color: $gray;
+
+    &:hover {
+      color: lighten($gray, 20%);
+      text-decoration: none;
+    }
+  }
+
+  .footer__links {
+    float: right;
+    list-style: none;
+    margin: 0;
+
+    li {
+      display: inline;
+      padding: 0 $base-spacing;
+    }
+  }
+}
+
+footer.admin {
+  border-top: 1px solid $gray;
+}

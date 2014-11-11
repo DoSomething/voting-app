@@ -15,10 +15,8 @@
   <li>No candidates</li>
   @endforelse
   </ul>
+@stop
 
-  @if(Auth::user() && Auth::user()->hasRole('admin'))
-    <h4>Actions</h4>
-    <p>{{ link_to_route('categories.edit', 'Edit Category', [$category->slug], ['class' => 'btn secondary']) }}</p>
-  @endif
-
+@section('actions')
+  <li>{{ link_to_route('categories.edit', 'Edit Category', [$category->slug], ['class' => 'btn secondary']) }}</li>
 @stop

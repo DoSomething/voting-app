@@ -9,8 +9,8 @@
     <li>No candidates.</li>
   @endforelse
   </ul>
+@stop
 
-    <h4>Actions</h4>
-    <p>{{ link_to_route('candidates.create', 'New Candidate') }}</p>
-
+@section('actions')
+  <li>{{ link_to_route('candidates.create', 'New Candidate') }}</li>
 @stop

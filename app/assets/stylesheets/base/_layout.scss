@@ -1,0 +1,11 @@
+// Page
+
+@include border-box-sizing;
+
+html {
+  background: $base-background-color url('images/bg.gif') no-repeat top center;
+}
+
+body {
+  @include container;
+}

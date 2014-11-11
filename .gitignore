@@ -11,6 +11,7 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+.sass-cache
 
 tests/_output/*
 tests/acceptance/AcceptanceTester.php

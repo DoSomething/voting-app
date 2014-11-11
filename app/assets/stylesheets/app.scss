@@ -11,35 +11,32 @@
 //                                                                        \__|      \__|
 
 
-// Set up our asset pipeline
-$neue-path: "../bower_components/neue/dist/assets/";
-$asset-path: "";
+// Susy
+@import "../bower_components/susy/sass/susy";
 
-// Import Bourbon, grid-settings, Neat, and Neue
-@import "../../../public/bower_components/bourbon/dist/bourbon";
-@import "../../../public/bower_components/neat/app/assets/stylesheets/neat-helpers";
-@import "../../../public/bower_components/neue/scss/helpers/grid-settings";
-@import "../../../public/bower_components/neat/app/assets/stylesheets/neat";
-@import "../../../public/bower_components/neue/scss/neue";
+// Utilities
+@import "utilities/variables";
+@import "utilities/mixins";
+@import "utilities/functions";
 
-// Add app styles:
-// ...
+// Base
+@import "base/fonts";
+@import "base/normalize";
+@import "base/layout";
+@import "base/typography";
 
-.chrome--nav {
-	.primary-nav li {
-		@include media($desktop) {
-			padding: 22px 0;
-		}
-	}
-}
+// Components
+@import "components/button";
+@import "components/form";
 
-.gallery.-mosaic {
-	background-color: #fff;
-}
+// Modules
+@import "modules/gallery";
+@import "modules/tile";
 
+// Regions
+@import "regions/container";
+@import "regions/footer";
+@import "regions/header";
+@import "regions/modal";
+@import "regions/navigation";
 
-.validation.error {
-  color: $error;
-  font-size: $font-small;
-  font-weight: $weight-sbold;
-}
