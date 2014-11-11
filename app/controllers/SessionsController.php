@@ -32,27 +32,13 @@ class SessionsController extends \BaseController {
     $input = Input::only('first_name', 'email', 'birthdate');
     $this->sessionValidator->validate($input);
 
-    $isUser = User::where('email', $input['email'])
-              ->where('first_name', $input['first_name'])
-              ->where('birthdate', $input['birthdate'])
-              ->first();
-    if ($isUser) {
-      // Why is this find required for Auth::login?
-      $user = User::find($isUser->id);
-      Auth::login($user);
-      return Redirect::intended('/')->withFlashMessage('Welcome back ' . $input['first_name']);
+    $user = User::isCurrentUser($input);
+    if (!$user) {
+      $user = User::createNewUser($input);
     }
-    else {
-      // Create a user.
-      $user = User::create([
-        'first_name' => $input['first_name'],
-        'email' => $input['email'],
-        'birthdate' => $input['birthdate'],
-      ]);
-      Auth::login($user);
-      return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
-    }
-
+    // Log in the user.
+    Auth::login($user);
+    return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
 	}
 
 	/**

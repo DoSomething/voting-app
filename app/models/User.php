@@ -31,6 +31,29 @@ class User extends Eloquent implements UserInterface{
     $this->attributes['password'] = Hash::make($password);
   }
 
+  public static function isCurrentUser($input)
+  {
+    $user = User::where('email', $input['email'])
+                ->where('first_name', $input['first_name'])
+                ->where('birthdate', $input['birthdate'])
+                ->first();
+    if ($user) {
+      return $user;
+    }
+    return FALSE;
+
+  }
+
+  public static function createNewUser($input)
+  {
+    $user = User::create([
+                'first_name' => $input['first_name'],
+                'email' => $input['email'],
+                'birthdate' => $input['birthdate'],
+                ]);
+    return $user;
+  }
+
   /**
    * A user has many votes.
    */
