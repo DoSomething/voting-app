@@ -65,6 +65,12 @@
         @endif
       </ul>
 
+      @if(Auth::user() && Auth::user()->hasRole('admin'))
+      <h4>Actions</h4>
+      <ul>
+        @yield('actions', 'No actions on this page.')
+      </ul>
+      @endif
     </footer>
   </div>
   </div>

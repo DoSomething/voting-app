@@ -9,8 +9,8 @@
     <li>No categories.</li>
   @endforelse
   </ul>
+@stop
 
-  <h4>Actions</h4>
-  <p>{{ link_to_route('categories.create', 'New Category') }}</p>
-
+@section('actions')
+  <li>{{ link_to_route('categories.create', 'New Category') }}</li>
 @stop

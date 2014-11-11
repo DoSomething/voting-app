@@ -45,11 +45,10 @@
   <h4>Category</h4>
   <p>{{ link_to_route('categories.show', $candidate->category->name, [$candidate->category->slug]) }}</p>
   @endif
+@stop
 
-  <h4>Actions</h4>
+@section('actions')
   @if(Auth::user() && Auth::user()->hasRole('admin'))
-    <p>{{ link_to_route('candidates.edit', 'Edit Candidate', [$candidate->slug], ['class' => 'btn secondary']) }}</p>
+    <li>{{ link_to_route('candidates.edit', 'Edit Candidate', [$candidate->slug], ['class' => 'btn secondary']) }}</li>
   @endif
-  <p>{{ link_to_route('candidates.index', 'Go Back') }}</p>
-
 @stop
