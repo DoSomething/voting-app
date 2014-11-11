@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ $settings['site_title'] }}</title>
+  <title>@yield('title', $settings['site_title'])</title>
 
   <link rel="stylesheet" href="/dist/app.css" type="text/css" media="screen" charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

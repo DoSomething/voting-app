@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section('title', $candidate->name)
+
 @section('content')
   <h3>{{{ $candidate->name }}}</h3>
 

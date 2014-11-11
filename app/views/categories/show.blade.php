@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section('title', $category->name)
+
 @section('content')
 
   @if( Auth::user() && !Auth::user()->canVoteInCategory($category))
