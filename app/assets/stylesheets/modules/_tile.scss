@@ -1,0 +1,58 @@
+// Tile!
+
+.tile {
+  position: relative;
+  padding-bottom: 100%;
+  margin-bottom: 30px;
+  height: 0;
+
+  > .wrapper {
+    display: block;
+    overflow: hidden;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .tile__meta {
+    position: absolute;
+    top: 0;
+    color: $white;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+
+    h1 {
+      display: inline-block;
+      background: $black;
+      font-weight: $weight-semibold;
+      font-size: $base-font-size;
+      text-transform: uppercase;
+      padding: $base-spacing;
+      margin: 0 $base-spacing;
+    }
+  }
+
+  .tile__action {
+    position: absolute;
+    color: $white;
+    text-align: center;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+  }
+
+}
+
+

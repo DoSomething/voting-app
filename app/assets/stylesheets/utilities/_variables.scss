@@ -1,0 +1,54 @@
+// Variables!
+
+// Layout (@see: http://susydocs.oddbird.net/en/latest/settings/)
+$susy: (
+  container: 1080px,
+  columns: 12,
+  gutters: 1/4,
+  debug: (
+    image: show,
+    color: blue,
+    output: overlay,
+    toggle: top right,
+  ),
+);
+
+
+// Font Stacks
+$base-font-family: "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+
+// Colors
+$black: #000;
+$cyan: #04f6dc;
+$pink: #f60463;
+$gray: #666;
+$white: #fff;
+
+$base-background-color: $black;
+$base-font-color: $white;
+
+$error-color: #ff4747;
+
+
+// Weights
+$weight-normal: 400;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+
+// Typography
+$largest-font-size: 42px;
+$large-font-size: 32px;
+$medium-font-size: 24px;
+$base-font-size: 16px; // base font size
+$small-font-size: 12px;
+
+$unitless-line-height: 1.5;
+$base-line-height: $base-font-size * $unitless-line-height;
+$header-line-height: 1.1;
+
+// Measurements
+$base-spacing: 12px;
+$base-border-radius: $base-spacing / 4;
+

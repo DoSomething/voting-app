@@ -1,0 +1,72 @@
+// Typography!
+
+// Defaults
+body {
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-weight: $weight-normal;
+  font-size: $base-font-size;
+  line-height: $unitless-line-height;
+}
+
+
+// Headings
+h1, h2, h3, h4, h5, h6,
+.heading.-alpha, .heading.-beta, .heading.-gamma,
+.heading.-delta, .heading.-epsilon {
+  font-family: $base-font-family;
+  font-weight: $weight-semibold;
+  line-height: $header-line-height;
+  text-rendering: optimizeLegibility;
+  margin: $base-line-height 0 0;
+}
+
+h1, .heading.-alpha {
+  font-size: $largest-font-size;
+}
+
+h2, .heading.-beta {
+  font-size: $large-font-size;
+}
+
+h3, .heading.-gamma {
+  font-size: $large-font-size;
+}
+
+h4, .heading.-delta {
+  font-size: $base-font-size;
+  font-weight: $weight-bold;
+}
+
+h5, h6, .heading.-epsilon {
+  font-size: $small-font-size;
+  font-weight: $weight-bold;
+  text-transform: uppercase;
+}
+
+
+// Paragraph text
+p {
+  margin: 0;
+}
+
+p + p {
+  margin-top: $base-line-height;
+}
+
+
+// Links
+a {
+  color: $cyan;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($cyan, 10%);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: darken($cyan, 10%);
+    outline: none;
+  }
+}

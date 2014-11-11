@@ -9,25 +9,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 </head>
 <body>
-  <div class="chrome">
-  <div class="chrome--wrapper">
     @if(Session::has('flash_message'))
     <div class="messages">
       {{ Session::get('flash_message') }}
     </div>
     @endif
-    <nav class="chrome--nav">
-      <a class="logo" href="{{{ route('home') }}}"><img src="/logo.png" alt="Celebs Gone Good"></a>
-      <a class="hamburger js-toggle-mobile-menu" href="#">&#xe606;</a>
-      <div class="menu">
-        <ul class="primary-nav">
-          @forelse(Category::all() as $category)
-          <li>{{ link_to_route('categories.show', $category->name, [$category->slug]) }}</li>
-          @empty
-          <li>No categories.</li>
-          @endforelse
-        </ul>
-      </div>
+    <nav class="primary">
+      <a class="logo" href="{{{ route('home') }}}"><img src="/dist/images/logo.png" alt="Celebs Gone Good"></a>
+      <ul>
+        @forelse(Category::all() as $category)
+        @empty
+        <li>No categories.</li>
+        @endforelse
+
+        <li><a href="#">Write In</a></li> {{-- @TODO: Link to write-in form. --}}
+      </ul>
     </nav>
 
     <div class="container">
@@ -36,10 +32,18 @@
       </div>
     </div>
 
-    <footer class="chrome--footer">
+    <footer class="primary">
+      {{ $settings['site_title'] }} is a program of <a href="https://www.dosomething.org">DoSomething.org</a>.
 
-    @if(Auth::user() && Auth::user()->hasRole('admin'))
-    <div class="col js-footer-col">
+      <ul class="footer__links">
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </footer>
+
+    <footer class="admin">
+      @if(Auth::user() && Auth::user()->hasRole('admin'))
       <h4>Administration</h4>
       <ul>
           <li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
@@ -48,10 +52,8 @@
           <li>{{ link_to_route('users.index', 'Users') }}</li>
           <li>{{ link_to_route('settings.index', 'Site Settings') }}</li>
       </ul>
-    </div>
-    @endif
+      @endif
 
-    <div class="col js-footer-col">
       <h4>User</h4>
       <ul>
         @if(Auth::guest())
@@ -61,11 +63,7 @@
           <li>{{ link_to_route('logout', 'Sign Out') }}</li>
         @endif
       </ul>
-    </div>
 
-    <div class="subfooter">
-      &copy; 2014 DoSomething.org.
-    </div>
     </footer>
   </div>
   </div>
