@@ -44,11 +44,12 @@ class SessionsController extends \BaseController {
     }
     else {
       // Create a user.
-      User::create([
+      $user = User::create([
         'first_name' => $input['first_name'],
         'email' => $input['email'],
         'birthdate' => $input['birthdate'],
       ]);
+      Auth::login($user);
       return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
     }
 
