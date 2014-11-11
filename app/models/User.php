@@ -12,7 +12,7 @@ class User extends Eloquent implements UserInterface{
    *
    * @var array
    */
-  protected $fillable = ['email', 'password'];
+  protected $fillable = ['first_name', 'email', 'phone', 'birthdate', 'password'];
 
   /**
    * The attributes excluded from the model's JSON form.
@@ -29,6 +29,28 @@ class User extends Eloquent implements UserInterface{
   public function setPasswordAttribute($password)
   {
     $this->attributes['password'] = Hash::make($password);
+  }
+
+  public static function isCurrentUser($input)
+  {
+    $user = User::where('email', $input['email'])
+                ->where('birthdate', $input['birthdate'])
+                ->first();
+    if ($user) {
+      return $user;
+    }
+    return FALSE;
+
+  }
+
+  public static function createNewUser($input)
+  {
+    $user = User::create([
+                'first_name' => $input['first_name'],
+                'email' => $input['email'],
+                'birthdate' => $input['birthdate'],
+                ]);
+    return $user;
   }
 
   /**

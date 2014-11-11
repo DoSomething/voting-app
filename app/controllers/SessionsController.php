@@ -29,14 +29,16 @@ class SessionsController extends \BaseController {
 	 */
 	public function store()
 	{
-    $input = Input::only('email', 'password');
+    $input = Input::only('first_name', 'email', 'birthdate');
     $this->sessionValidator->validate($input);
 
-    if(Auth::attempt($input)) {
-      return Redirect::intended('/')->withFlashMessage('Welcome back!');
+    $user = User::isCurrentUser($input);
+    if (!$user) {
+      $user = User::createNewUser($input);
     }
-
-    return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
+    // Log in the user.
+    Auth::login($user);
+    return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
 	}
 
 	/**
