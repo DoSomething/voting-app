@@ -10,8 +10,11 @@ class SessionValidator extends FormValidator {
    * @var array
    */
   protected $rules = [
-    'email' => 'required|email',
-    'password' => 'required'
+   // @TODO: require either email or phone number
+    'first_name' => 'required',
+    'email' => 'email',
+    'birthdate' => 'required|date'
+    // 'password' => 'required'
   ];
 
 }

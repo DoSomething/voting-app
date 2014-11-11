@@ -29,14 +29,29 @@ class SessionsController extends \BaseController {
 	 */
 	public function store()
 	{
-    $input = Input::only('email', 'password');
+    $input = Input::only('first_name', 'email', 'birthdate');
     $this->sessionValidator->validate($input);
 
-    if(Auth::attempt($input)) {
-      return Redirect::intended('/')->withFlashMessage('Welcome back!');
+    $isUser = User::where('email', $input['email'])
+              ->where('first_name', $input['first_name'])
+              ->where('birthdate', $input['birthdate'])
+              ->first();
+    if ($isUser) {
+      // Why is this find required for Auth::login?
+      $user = User::find($isUser->id);
+      Auth::login($user);
+      return Redirect::intended('/')->withFlashMessage('Welcome back ' . $input['first_name']);
+    }
+    else {
+      // Create a user.
+      User::create([
+        'first_name' => $input['first_name'],
+        'email' => $input['email'],
+        'birthdate' => $input['birthdate'],
+      ]);
+      return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
     }
 
-    return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
 	}
 
 	/**

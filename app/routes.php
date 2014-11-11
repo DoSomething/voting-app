@@ -1,5 +1,7 @@
 <?php
 
+if (Auth::user()) print Auth::user()->email;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
