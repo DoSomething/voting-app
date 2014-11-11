@@ -34,7 +34,6 @@ class User extends Eloquent implements UserInterface{
   public static function isCurrentUser($input)
   {
     $user = User::where('email', $input['email'])
-                ->where('first_name', $input['first_name'])
                 ->where('birthdate', $input['birthdate'])
                 ->first();
     if ($user) {
