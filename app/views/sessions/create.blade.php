@@ -10,7 +10,7 @@
 
     {{--@TODO email or phone number depending on country code--}}
     {{ Form::label('email', 'Email') }}
-    {{ Form::error('email', $errors) }}
+    {{ form_error('email', $errors) }}
     {{ Form::text('email') }}
 
     {{ Form::label('birthdate', 'Birthdate') }}
@@ -19,7 +19,7 @@
 
     {{-- @TODO: password login for admins
     {{ Form::label('password', 'Password') }}
-    {{ Form::error('password', $errors) }}
+    {{ form_error('password', $errors) }}
     {{ Form::password('password') }}
     --}}
 

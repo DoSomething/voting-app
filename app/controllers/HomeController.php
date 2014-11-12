@@ -15,9 +15,17 @@ class HomeController extends BaseController {
   |
   */
 
-  public function showWelcome()
+  public function index()
   {
-    return View::make('hello');
+    $category = Category::find(1);
+
+    if($category) {
+      $candidates = $category->candidates;
+      return View::make('categories.show', compact('category', 'candidates'));
+    } else {
+      return View::make('categories.create');
+    }
+
   }
 
 }

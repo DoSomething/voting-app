@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-  <h3>{{{ $page->title }}}</h3>
+  <h1>{{{ $page->title }}}</h1>
 
   {{ $page->content_html }}
 @stop

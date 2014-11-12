@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 /**
  * Categories

@@ -2,8 +2,12 @@
 
 footer.primary {
   color: $gray;
-  margin-bottom: 4 * $base-spacing;
+  margin: (2 * $base-spacing) 0;
   @include clearfix;
+
+  @include media('small') {
+    text-align: center;
+  }
 
   a {
     color: $gray;
@@ -15,17 +19,49 @@ footer.primary {
   }
 
   .footer__links {
-    float: right;
     list-style: none;
     margin: 0;
 
+    @include media('medium') {
+      float: right;
+    }
+
     li {
       display: inline;
-      padding: 0 $base-spacing;
+      padding: 0 $base-spacing/2;
+    }
+  }
+
+  .footer__link {
+    &:after {
+      @include icomoon-icon;
+    }
+
+    &.-facebook:after {
+      content: '\e600';
+    }
+
+    &.-twitter:after {
+      content: '\e603';
+    }
+
+    span {
+      display: none;
     }
   }
 }
 
 footer.admin {
+  .column {
+    @include media('medium') {
+      @include gallery(4);
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
   border-top: 1px solid $gray;
 }

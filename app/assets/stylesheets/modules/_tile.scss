@@ -14,6 +14,12 @@
     position: absolute;
     top: 0;
     width: 100%;
+
+    &:hover {
+      h1 {
+        background: lighten($black, 15%);
+      }
+    }
   }
 
   img {
@@ -24,20 +30,28 @@
 
   .tile__meta {
     position: absolute;
+    display: block;
     top: 0;
     color: $white;
-    text-align: center;
     width: 100%;
     z-index: 10;
 
+    @include media('medium') {
+      text-align: center;
+    }
+
     h1 {
-      display: inline-block;
       background: $black;
       font-weight: $weight-semibold;
       font-size: $base-font-size;
       text-transform: uppercase;
       padding: $base-spacing;
-      margin: 0 $base-spacing;
+      margin: 0;
+
+      @include media('medium') {
+        display: inline-block;
+        margin: 0 $base-spacing;
+      }
     }
   }
 
@@ -45,12 +59,21 @@
     position: absolute;
     color: $white;
     text-align: center;
-    bottom: -30px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
     z-index: 10;
+
+    @include media('small') {
+      top: 0;
+      right: 10px;
+
+    }
+
+    @include media('medium') {
+      bottom: -30px;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
 }

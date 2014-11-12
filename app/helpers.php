@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Html\FormBuilder;
-use Illuminate\Html\HtmlBuilder;
-
-
-FormBuilder::macro('error', function($field, $errors)
+/**
+ * Displays form errors.
+ */
+function form_error($field, $errors)
 {
   return $errors->first($field, '<span class="validation error">:message</span>');
-});
+}
 
 /**
  * Add an active class to current page's menu item.

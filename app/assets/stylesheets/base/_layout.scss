@@ -8,4 +8,5 @@ html {
 
 body {
   @include container;
+  padding: 0 gutter();
 }
