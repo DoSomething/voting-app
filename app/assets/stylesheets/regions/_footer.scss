@@ -28,7 +28,25 @@ footer.primary {
 
     li {
       display: inline;
-      padding: 0 $base-spacing;
+      padding: 0 $base-spacing/2;
+    }
+  }
+
+  .footer__link {
+    &:after {
+      @include icomoon-icon;
+    }
+
+    &.-facebook:after {
+      content: '\e600';
+    }
+
+    &.-twitter:after {
+      content: '\e603';
+    }
+
+    span {
+      display: none;
     }
   }
 }

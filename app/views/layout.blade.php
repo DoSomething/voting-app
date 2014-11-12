@@ -37,9 +37,9 @@
       {{ $settings['site_title'] }} is a program of <a href="https://www.dosomething.org">DoSomething.org</a>.
 
       <ul class="footer__links">
-        <li><a href="#">FAQs</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
+        <li><a class="footer__link -facebook" href="#"><span>Facebook</span></a></li>
+        <li><a class="footer__link -twitter" href="#"><span>Twitter</span></a></li>
+        <li><a  href="#">FAQs</a></li>
       </ul>
     </footer>
 
