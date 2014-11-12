@@ -10,9 +10,6 @@ build:
           code: sudo npm install
       - wercker/bundle-install@1.1.1
       - script:
-          name: change permissions
-          code: sudo chown -R dosomething:dosomething ./
-      - script:
           name: install bower dependencies
           code: bower install
       - script:
