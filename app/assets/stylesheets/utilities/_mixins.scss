@@ -7,3 +7,18 @@
     clear:both;
   }
 }
+
+
+// Include media query styles using semantic breakpoint names.
+@mixin media($name) {
+  // Check if the key exists in $breakpoints
+  @if map-has-key($breakpoints, $name) {
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Breakpoint `#{$breakpoint}` is not defined. Check $breakpoints variable.";
+  }
+}

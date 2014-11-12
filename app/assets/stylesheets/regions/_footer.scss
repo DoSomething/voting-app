@@ -5,6 +5,10 @@ footer.primary {
   margin-bottom: 4 * $base-spacing;
   @include clearfix;
 
+  @include media('small') {
+    text-align: center;
+  }
+
   a {
     color: $gray;
 
@@ -15,9 +19,12 @@ footer.primary {
   }
 
   .footer__links {
-    float: right;
     list-style: none;
     margin: 0;
+
+    @include media('medium') {
+      float: right;
+    }
 
     li {
       display: inline;
@@ -27,5 +34,16 @@ footer.primary {
 }
 
 footer.admin {
+  .column {
+    @include media('medium') {
+      @include gallery(4);
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
   border-top: 1px solid $gray;
 }
