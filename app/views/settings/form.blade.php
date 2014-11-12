@@ -2,6 +2,6 @@
 {{ $setting->key }}
 
 {{ Form::label('value', 'Value') }}
-{{ Form::error('value', $errors) }}
+{{ form_error('value', $errors) }}
 {{ Form::text('value') }}
 
