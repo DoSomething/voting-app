@@ -23,8 +23,7 @@ namespace :deploy do
 
   task :link_folders do
     run "ln -nfs #{shared_path}/.env.php #{release_path}/"
-    run "ln -nfs #{shared_path}/content #{release_path}/public"
-    run "ln -nfs #{shared_path}/pages #{release_path}/public/pages"
+    run "ln -nfs #{shared_path}/images #{release_path}/public"
     folders.each do |folder|
       run "ln -nfs #{shared_path}/#{folder} #{release_path}/app/storage/#{folder}"
     end
