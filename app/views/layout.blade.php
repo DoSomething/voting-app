@@ -43,35 +43,7 @@
       </ul>
     </footer>
 
-    <footer class="admin">
-      @if(Auth::user() && Auth::user()->hasRole('admin'))
-      <h4>Administration</h4>
-      <ul>
-          <li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
-          <li>{{ link_to_route('categories.index', 'Categories') }}</li>
-          <li>{{ link_to_route('pages.index', 'Pages') }}</li>
-          <li>{{ link_to_route('users.index', 'Users') }}</li>
-          <li>{{ link_to_route('settings.index', 'Site Settings') }}</li>
-      </ul>
-      @endif
-
-      <h4>User</h4>
-      <ul>
-        @if(Auth::guest())
-          <li>{{ link_to_route('users.create', 'Create Account') }}</li>
-          <li>{{ link_to_route('login', 'Sign In') }}</li>
-        @else
-          <li>{{ link_to_route('logout', 'Sign Out') }}</li>
-        @endif
-      </ul>
-
-      @if(Auth::user() && Auth::user()->hasRole('admin'))
-      <h4>Actions</h4>
-      <ul>
-        @yield('actions', 'No actions on this page.')
-      </ul>
-      @endif
-    </footer>
+    @include('partials.admin')
   </div>
   </div>
 
