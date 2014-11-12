@@ -4,9 +4,10 @@ class SessionsController extends \BaseController {
 
   protected $sessionsValidator;
 
-  public function __construct(SessionValidator $sessionValidator)
+  public function __construct(UserSessionValidator $userSessionValidator)
   {
-    $this->sessionValidator = $sessionValidator;
+    $this->userSessionValidator = $userSessionValidator;
+    // $this->adminSessionValidator
   }
 
 
