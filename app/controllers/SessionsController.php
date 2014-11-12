@@ -4,10 +4,10 @@ class SessionsController extends \BaseController {
 
   protected $sessionsValidator;
 
-  public function __construct(UserSessionValidator $userSessionValidator)
+  public function __construct(UserSessionValidator $userSessionValidator, AdminSessionValidator $adminSessionValidator)
   {
     $this->userSessionValidator = $userSessionValidator;
-    // $this->adminSessionValidator
+    $this->adminSessionValidator = $adminSessionValidator;
   }
 
 
@@ -44,12 +44,13 @@ class SessionsController extends \BaseController {
     // If coming from admin, use that login method.
     if (strpos($_SERVER['HTTP_REFERER'], 'admin')) {
       $input = Input::only('email', 'password');
+      $this->adminSessionValidator->validate($input);
       return $this->adminLogin($input);
     }
     // Use the user login/create method.
     else {
       $input = Input::only('first_name', 'email', 'birthdate');
-      $this->sessionValidator->validate($input);
+      $this->userSessionValidator->validate($input);
 
       return $this->userLogin($input);
     }
