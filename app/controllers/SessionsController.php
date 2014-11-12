@@ -51,7 +51,6 @@ class SessionsController extends \BaseController {
     else {
       $input = Input::only('first_name', 'email', 'birthdate');
       $this->userSessionValidator->validate($input);
-
       return $this->userLogin($input);
     }
   }
