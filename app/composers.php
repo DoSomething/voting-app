@@ -5,6 +5,7 @@
  */
 View::composer('layout', function($view)
 {
-  $allSettings = App::make('SettingsRepository')->all();
-  return $view->with('settings', $allSettings);
+  $categories = Category::all();
+  $settings = App::make('SettingsRepository')->all();
+  return $view->with('settings', $settings)->with('categories', $categories);
 });
