@@ -14,18 +14,8 @@
       {{ Session::get('flash_message') }}
     </div>
     @endif
-    <nav class="primary">
-      <a class="logo" href="{{{ route('home') }}}"><img src="/dist/images/logo.png" alt="Celebs Gone Good"></a>
-      <ul>
-        @forelse($categories as $category)
-        <li>{{ highlighted_link_to_route('categories.show', $category->name, [$category->slug]) }}</li>
-        @empty
-        <li>No categories.</li>
-        @endforelse
 
-        <li><a href="#">Write In</a></li> {{-- @TODO: Link to write-in form. --}}
-      </ul>
-    </nav>
+    @include('partials.navigation')
 
     <div class="container">
       <div class="wrapper">
@@ -33,15 +23,7 @@
       </div>
     </div>
 
-    <footer class="primary">
-      {{ $settings['site_title'] }} is a program of <a href="https://www.dosomething.org">DoSomething.org</a>.
-
-      <ul class="footer__links">
-        <li><a class="footer__link -facebook" href="#"><span>Facebook</span></a></li>
-        <li><a class="footer__link -twitter" href="#"><span>Twitter</span></a></li>
-        <li><a  href="{{ $settings['faq_link_url'] }}">{{ $settings['faq_link_text'] }}</a></li>
-      </ul>
-    </footer>
+    @include('partials.footer')
 
     @include('partials.admin')
   </div>
