@@ -24,14 +24,14 @@ class UsersTableSeeder extends Seeder {
       User::create([
         'first_name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
-        'birthdate' => $faker->dateTime('now'),
+        'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
       ]);
     }
     foreach(range(1,25) as $index) {
       User::create([
         'first_name' => $faker->firstName,
         'phone' => $faker->unique()->phoneNumber,
-        'birthdate' => $faker->dateTime('now'),
+        'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
       ]);
     }
   }
