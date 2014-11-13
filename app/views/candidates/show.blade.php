@@ -14,7 +14,9 @@
       </a>
     </article>
 
-    <p>{{{ $candidate->description }}}</p>
+    @if($candidate->description)
+      <p>{{{ $candidate->description }}}</p>
+    @endif
   </div>
 
   <div class="candidate__actions">
