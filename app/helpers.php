@@ -22,13 +22,3 @@ function highlighted_link_to_route($route, $text, $params, $activeClass = '-is-a
 
   return link_to_route($route, $text, $params, ['class' => $class]);
 };
-
-function format_date_for_save($date)
-{
-  return date('Y-m-d',(strtotime($date)));
-}
-
-function formate_date_for_view($date)
-{
-  return date('m-d-Y',(strtotime($date)));
-}

@@ -50,7 +50,6 @@ class SessionsController extends \BaseController {
     // Use the user login/create method.
     else if (Input::has('birthdate')) {
       $input = Input::only('first_name', 'email', 'birthdate');
-      $input['birthdate'] = format_date_for_save($input['birthdate']);
       $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
     }
