@@ -1,6 +1,13 @@
 // Container!
 
 .container {
+  @include clearfix;
 
+  >.wrapper {
+    @include span(8);
+    @include pre(2);
+
+    margin-bottom: $base-spacing * 4;
+  }
 
 }

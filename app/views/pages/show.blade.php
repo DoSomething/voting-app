@@ -1,9 +1,11 @@
 @extends('layout')
 
 @section('content')
-  <h1>{{{ $page->title }}}</h1>
+  <div class="wrapper">
+    <h1 class="highlighted">{{{ $page->title }}}</h1>
 
-  {{ $page->content_html }}
+    {{ $page->content_html }}
+  </div>
 @stop
 
 @section('actions')

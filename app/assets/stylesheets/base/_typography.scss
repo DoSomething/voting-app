@@ -19,6 +19,13 @@ h1, h2, h3, h4, h5, h6,
   line-height: $header-line-height;
   text-rendering: optimizeLegibility;
   margin: $base-line-height 0 0;
+
+  &.highlighted {
+    display: inline-block;
+    background: $cyan;
+    color: $black;
+    padding: $base-spacing/2 $base-spacing;
+  }
 }
 
 h1, .heading.-alpha {
