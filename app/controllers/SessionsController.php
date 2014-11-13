@@ -42,13 +42,13 @@ class SessionsController extends \BaseController {
   public function store()
   {
     // If coming from admin, use that login method.
-    if (strpos($_SERVER['HTTP_REFERER'], 'admin')) {
+    if (Input::has('password')) {
       $input = Input::only('email', 'password');
       $this->adminSessionValidator->validate($input);
       return $this->adminLogin($input);
     }
     // Use the user login/create method.
-    else {
+    else if (Input::has('birthdate')) {
       $input = Input::only('first_name', 'email', 'birthdate');
       $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
