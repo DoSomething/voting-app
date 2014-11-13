@@ -5,7 +5,7 @@
 @section('content')
 
   @if( Auth::user() && !Auth::user()->canVoteInCategory($category))
-  <div class="messages">You can't vote again in this category yet.</div>
+  <div class="messages">You can't vote again in this category yet. Come back tomorrow!</div>
   @endif
 
   <ul class="gallery">

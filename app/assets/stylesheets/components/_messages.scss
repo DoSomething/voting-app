@@ -1,0 +1,19 @@
+.messages {
+  color: $cyan;
+  font-size: $medium-font-size;
+  margin-bottom: gutter();
+  padding: $base-spacing;
+  text-align: center;
+
+  b, strong {
+    font-weight: $weight-bold;
+  }
+
+  a {
+    font-weight: $weight-bold;
+  }
+
+  &.error {
+    background: $error-color;
+  }
+}
