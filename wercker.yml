@@ -8,10 +8,10 @@ build:
       - script:
           name: npm install
           code: sudo npm install
-      - wercker/bundle-install@1.1.1
       - script:
           name: install bower dependencies
           code: bower install
+      - wercker/bundle-install@1.1.1
       - script:
           name: build assets
           code: gulp build
