@@ -18,9 +18,7 @@
     @include('partials.navigation')
 
     <div class="container">
-      <div class="wrapper">
-        @yield('content')
-      </div>
+      @yield('content')
     </div>
 
     @include('partials.footer')
