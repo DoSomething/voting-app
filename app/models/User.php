@@ -31,6 +31,27 @@ class User extends Eloquent implements UserInterface{
     $this->attributes['password'] = Hash::make($password);
   }
 
+  /**
+   * Mutator to update the birthdate for the expexted format.
+   *
+   * @var string
+   */
+  public function setBirthdateAttribute($birthdate)
+  {
+    $this->attributes['birthdate'] = date('Y-m-d',(strtotime($birthdate)));
+  }
+      /**
+   * Mutator to update the birthdate for the expexted format.
+   *
+   * @var string
+   */
+  public function getBirthdateAttribute($birthdate)
+  {
+    $this->attributes['birthdate'] = date('m-d-Y',(strtotime($birthdate)));
+  }
+
+
+
   public static function isCurrentUser($input)
   {
     $user = User::where('email', $input['email'])

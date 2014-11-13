@@ -15,7 +15,7 @@
 
     {{ Form::label('birthdate', 'Birthdate') }}
     {{ form_error('birthdate', $errors) }}
-    {{ Form::text('birthdate') }}
+    {{ Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) }}
 
     {{ Form::submit('Sign In', ['class' => 'btn']) }}
   {{ Form::close() }}
