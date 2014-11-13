@@ -6,12 +6,16 @@
   @include clearfix;
 
   .candidate__info {
-    @include span(4);
-    @include pre(1);
-    @include post(1);
+    @include media('medium') {
+      @include span(4);
+      @include pre(1);
+      @include post(1);
+    }
   }
 
   .candidate__actions {
-    @include span(6 last);
+    @include media('medium') {
+      @include span(5);
+    }
   }
 }
