@@ -20,16 +20,16 @@
   <div class="candidate__actions">
     @if(Auth::user())
       @if (Auth::user()->canVote($candidate))
-        <p>Welcome back, {{ Auth::user()->first_name }}! Ready to vote again?</p>
+        <p class="messages -inline">Welcome back, {{ Auth::user()->first_name }}! Ready to vote again?</p>
         {{ Form::open(['route' => 'votes.store']) }}
         {{ Form::hidden('candidate_id', $candidate->id) }}
         {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
         {{ Form::close() }}
       @else
-        <div class="messages -inline">You've already voted in this category today! Check back tomorrow!</div>
+        <p class="messages -inline">You've already voted in this category today! Check back tomorrow!</p>
       @endif
     @else
-      <div class="messages -inline">{{ link_to_route('login', 'Sign in') }} to vote!</div>
+      <p class="messages -inline">{{ link_to_route('login', 'Sign in') }} to vote!</p>
     @endif
 
     @if(Auth::user() && Auth::user()->hasRole('admin') && $votes)
