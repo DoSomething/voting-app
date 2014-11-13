@@ -72,3 +72,11 @@ Route::bind('settings', function($key) {
 
 Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
 
+/**
+ * Error handling
+ */
+App::missing(function($exception)
+{
+  return Response::view('missing', [], 404);
+});
+
