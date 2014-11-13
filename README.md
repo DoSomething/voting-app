@@ -4,6 +4,7 @@ Voting app for DoSomething.org campaigns, launching with Celebs Gone Good in Dec
 ## Getting Started
 1. Clone this repository.
 2. Add this directory to your local [DS Homestead](https://github.com/DoSomething/ds-homestead) environment.
+3. Copy `default.env.php` and create your own `.env.local.php`
 3. From within your VM, run `composer install && npm install && bower install` to set up dependencies.
 4. Run `gulp` to compile front-end assets and watch for changes!
 5. Create a `voting` database in your VM.
