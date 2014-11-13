@@ -2,7 +2,7 @@
 
 use Laracasts\Validation\FormValidator;
 
-class SessionValidator extends FormValidator {
+class UserSessionValidator extends FormValidator {
 
   /**
    * Validation rules for logging in.
@@ -10,11 +10,9 @@ class SessionValidator extends FormValidator {
    * @var array
    */
   protected $rules = [
-   // @TODO: require either email or phone number
     'first_name' => 'required',
-    'email' => 'email',
+    'email' => 'required|email',
     'birthdate' => 'required|date'
-    // 'password' => 'required'
   ];
 
 }

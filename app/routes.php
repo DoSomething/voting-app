@@ -51,6 +51,7 @@ Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'stor
 Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
+Route::get('admin', ['as' => 'admin.login', 'uses' => 'SessionsController@adminCreate']);
 
 /**
  * Pages
