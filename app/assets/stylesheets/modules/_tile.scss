@@ -76,6 +76,24 @@
     }
   }
 
+  // Alternate tile appearance
+  &.-alternate {
+    .tile__meta {
+      background: linear-gradient(transparent, #000);
+      top: auto;
+      bottom: 0;
+      text-align: left;
+      padding-top: $base-spacing * 2;
+
+      h1 {
+        background: none;
+        font-size: $large-font-size;
+        font-weight: $weight-bold;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
 }
 
 

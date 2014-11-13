@@ -28,6 +28,7 @@
 // Components
 @import "components/button";
 @import "components/form";
+@import "components/messages";
 
 // Modules
 @import "modules/gallery";
@@ -35,6 +36,7 @@
 
 // Regions
 @import "regions/container";
+@import "regions/candidate";
 @import "regions/footer";
 @import "regions/header";
 @import "regions/modal";

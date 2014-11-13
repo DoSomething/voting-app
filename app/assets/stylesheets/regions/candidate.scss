@@ -1,0 +1,21 @@
+// Candidate!
+
+.candidate {
+  margin-bottom: $base-spacing * 4;
+
+  @include clearfix;
+
+  .candidate__info {
+    @include media('medium') {
+      @include span(4);
+      @include pre(1);
+      @include post(1);
+    }
+  }
+
+  .candidate__actions {
+    @include media('medium') {
+      @include span(5);
+    }
+  }
+}
