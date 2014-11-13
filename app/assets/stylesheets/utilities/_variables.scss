@@ -2,7 +2,7 @@
 
 // Layout (@see: http://susydocs.oddbird.net/en/latest/settings/)
 $susy: (
-  container: 1080px,
+  container: 1200px,
   columns: 12,
   gutters: 1/4,
   debug: (
@@ -16,8 +16,8 @@ $susy: (
 
 // Breakpoints (see `media` mixin)
 $breakpoints: (
-  'small': ( max-width: 699px ),
-  'medium': ( min-width: 700px ),
+  'small': ( max-width: 659px ),
+  'medium': ( min-width: 660px ),
   'large': ( min-width: 1100px ),
 );
 

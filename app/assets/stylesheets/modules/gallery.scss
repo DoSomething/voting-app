@@ -11,6 +11,10 @@
     margin-bottom: gutter();
 
     @include media('medium') {
+      @include gallery(4);
+    }
+
+    @include media('large') {
       @include gallery(3);
     }
   }
