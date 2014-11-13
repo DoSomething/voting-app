@@ -5,11 +5,13 @@
   padding: $base-spacing;
   text-align: center;
 
-  b, strong {
-    font-weight: $weight-bold;
+  &.-inline {
+    color: inherit;
+    text-align: inherit;
+    padding: 0;
   }
 
-  a {
+  b, strong {
     font-weight: $weight-bold;
   }
 

@@ -26,14 +26,14 @@
         {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
         {{ Form::close() }}
       @else
-        You've already voted today!
+        <div class="messages -inline">You've already voted in this category today! Check back tomorrow!</div>
       @endif
     @else
-      {{ link_to_route('login', 'Sign in') }} to vote!
+      <div class="messages -inline">{{ link_to_route('login', 'Sign in') }} to vote!</div>
     @endif
 
     @if(Auth::user() && Auth::user()->hasRole('admin') && $votes)
-    <h4>{{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}</h4>
+    <h4>Hey, beautiful administrator. This candidate has {{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}.</h4>
     <ul>
     @forelse ($votes as $vote)
       <li>{{ link_to_route('users.show', $vote->user->email, $vote->user->id) }}</li>
