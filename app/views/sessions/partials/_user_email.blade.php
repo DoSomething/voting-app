@@ -1,7 +1,7 @@
 {{ Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) }}
 
   @if (isset($candidate))
-    {{ Form::hidden('candidate', $candidate->id)}}
+    {{ Form::hidden('candidate_id', $candidate->id) }}
   @endif
 
   {{ Form::label('first_name', 'First Name') }}

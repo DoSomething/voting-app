@@ -5,5 +5,4 @@
 
     @include('sessions/partials/_' . $type)
 
-
 @stop

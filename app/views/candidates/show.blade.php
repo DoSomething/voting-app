@@ -33,7 +33,6 @@
     @else
       {{--@TODO: switch to user_phone condiationally --}}
       @include('sessions/partials/_user_email')
-      }
     @endif
 
     @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)

@@ -50,7 +50,7 @@ class SessionsController extends \BaseController {
     }
     // Use the user login/create method.
     else if (Input::has('birthdate')) {
-      $input = Input::only('first_name', 'email', 'birthdate');
+      $input = Input::only('first_name', 'email', 'birthdate', 'candidate_id');
       $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
     }
@@ -77,10 +77,19 @@ class SessionsController extends \BaseController {
     $user = User::isCurrentUser($input);
 
     if (!$user) {
+      Event::fire('user.create');
       $user = User::createNewUser($input);
+    }
+    else {
+      // Not sure if this is needed.
+      Event::fire('user.signin');
     }
     // Log in the user.
     Auth::login($user);
+    if (!is_null($input['candidate_id'])) {
+        Event::fire('user.vote', array($input['candidate_id'], Auth::user()->id));
+    }
+
     return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
   }
 

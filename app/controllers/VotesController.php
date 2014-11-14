@@ -22,11 +22,7 @@ class VotesController extends \BaseController {
     // Check if the user is allowed to vote on this candidate.
     if(!$user->canVote($candidate)) return Redirect::back()->withFlashMessage('You can\'t vote on this category yet!');
 
-    // If so, cast a vote.
-    $vote = Vote::create([
-      'candidate_id' => $candidate->id,
-      'user_id' => $user->id
-    ]);
+    Vote::castVote($candidate->id, $user->id);
 
     return Redirect::back();
 	}
