@@ -1,10 +1,16 @@
 // Primary navigation
 nav.primary {
-  margin-bottom: $base-spacing * 4;
+  margin: ($base-spacing * 4) 0;
 
-  .logo img {
-    max-width: 100%;
-    margin: 0 auto;
+  .logo {
+    display: block;
+    text-align: center;
+    margin: ($base-spacing * 2) 0;
+    padding: $base-spacing * 2;
+
+    img {
+      max-width: 100%;
+    }
   }
 
   ul {
