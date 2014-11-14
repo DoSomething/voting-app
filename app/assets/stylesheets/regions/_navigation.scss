@@ -37,6 +37,23 @@ nav.primary {
       @include media('medium') {
         @include gallery(3);
       }
+
+      &:first-of-type a {
+        &:before, &:after {
+          display: inline-block;
+          color: $yellow;
+          @include icomoon-icon;
+        }
+
+        &:before {
+          content: '\2a';
+          transform: scale(-1, 1);
+        }
+
+        &:after {
+          content: '\2a';
+        }
+      }
     }
 
     a {
