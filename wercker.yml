@@ -1,0 +1,39 @@
+box: blisteringherb/scholarship@0.0.6
+build:
+    # The steps that will be executed on build
+    steps:
+      # A custom script step, name value is used in the UI
+      # and the code value contains the command that get executed
+      - leipert/composer-install@0.0.1
+      - script:
+          name: npm install
+          code: sudo npm install
+      - script:
+          name: install bower dependencies
+          code: bower install
+      - wercker/bundle-install@1.1.1
+      - script:
+          name: build assets
+          code: gulp build
+    after-steps:
+        - hipchat-notify:
+            token: $HIPCHAT_TOKEN
+            room-id: $HIPCHAT_ROOM_ID
+            from-name: wercker
+deploy:
+  steps:
+    - bundle-install
+    - script:
+        name: Make all files readable
+        code: find . -type f -exec chmod 644 {} \;
+    - script:
+        name: write private key env var
+        code: |-
+          export CAP_PRIVATE_KEY=`mktemp`
+          echo -e $WERCKER_APP_KEY_PRIVATE > $CAP_PRIVATE_KEY
+    - cap
+  after-steps:
+      - hipchat-notify:
+          token: $HIPCHAT_TOKEN
+          room-id: $HIPCHAT_ROOM_ID
+          from-name: wercker
