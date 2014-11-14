@@ -80,14 +80,12 @@ class SessionsController extends \BaseController {
       Event::fire('user.create');
       $user = User::createNewUser($input);
     }
-    else {
-      // Not sure if this is needed.
-      Event::fire('user.signin');
-    }
     // Log in the user.
     Auth::login($user);
+
     if (!is_null($input['candidate_id'])) {
-        Event::fire('user.vote', array($input['candidate_id'], Auth::user()->id));
+      // $candidate =
+      Event::fire('user.login.to.vote', array($input['candidate_id'], Auth::user()->id));
     }
 
     return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
