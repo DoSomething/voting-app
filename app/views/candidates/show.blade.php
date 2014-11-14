@@ -34,15 +34,8 @@
       <p class="messages -inline">{{ link_to_route('login', 'Sign in') }} to vote!</p>
     @endif
 
-    @if(Auth::user() && Auth::user()->hasRole('admin') && $votes)
+    @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
     <h4>Hey, beautiful administrator. This candidate has {{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}.</h4>
-    <ul>
-    @forelse ($votes as $vote)
-      <li>{{ link_to_route('users.show', $vote->user->email, $vote->user->id) }}</li>
-    @empty
-      <li>No votes! :(</li>
-    @endforelse
-    </ul>
     @endif
   </div>
 </div>
