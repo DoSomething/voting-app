@@ -20,7 +20,8 @@ class SessionsController extends \BaseController {
   public function create()
   {
     // @TODO: switch email/phone based on IP.
-    return View::make('sessions.create');
+    $type = 'user_email';
+    return View::make('sessions.create', compact('type'));
   }
 
   /**
@@ -29,8 +30,8 @@ class SessionsController extends \BaseController {
    */
   public function adminCreate()
   {
-    return View::make('sessions.admin-create');
-
+    $type = 'admin';
+    return View::make('sessions.create', compact('type'));
   }
 
   /**
@@ -74,6 +75,7 @@ class SessionsController extends \BaseController {
   public function userLogin($input)
   {
     $user = User::isCurrentUser($input);
+
     if (!$user) {
       $user = User::createNewUser($input);
     }
