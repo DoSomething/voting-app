@@ -3,6 +3,7 @@
 .candidate {
   display: table;
   position: relative;
+  width: 100%;
   margin-bottom: $base-spacing * 4;
 
   &:before, &:after {
