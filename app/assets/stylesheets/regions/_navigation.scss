@@ -2,15 +2,26 @@
 nav.primary {
   margin: ($base-spacing * 4) 0;
 
-  .logo {
+  .navigation__logo {
     display: block;
     text-align: center;
     margin: ($base-spacing * 2) 0;
-    padding: $base-spacing * 2;
+
+    @include media('medium') {
+      padding: $base-spacing * 2;
+    }
 
     img {
       max-width: 100%;
     }
+  }
+
+  .navigation__tagline {
+    font-size: $medium-font-size;
+    color: $gray;
+    text-align: center;
+    padding: $base-spacing;
+    margin-bottom: ($base-spacing * 4);
   }
 
   ul {
