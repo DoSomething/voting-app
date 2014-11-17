@@ -20,7 +20,8 @@ class SessionsController extends \BaseController {
   public function create()
   {
     // @TODO: switch email/phone based on IP.
-    return View::make('sessions.create');
+    $type = 'user_email';
+    return View::make('sessions.create', compact('type'));
   }
 
   /**
@@ -29,8 +30,8 @@ class SessionsController extends \BaseController {
    */
   public function adminCreate()
   {
-    return View::make('sessions.admin-create');
-
+    $type = 'admin';
+    return View::make('sessions.create', compact('type'));
   }
 
   /**
@@ -49,7 +50,7 @@ class SessionsController extends \BaseController {
     }
     // Use the user login/create method.
     else if (Input::has('birthdate')) {
-      $input = Input::only('first_name', 'email', 'birthdate');
+      $input = Input::only('first_name', 'email', 'birthdate', 'candidate_id');
       $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
     }
@@ -74,11 +75,23 @@ class SessionsController extends \BaseController {
   public function userLogin($input)
   {
     $user = User::isCurrentUser($input);
+
     if (!$user) {
+      Event::fire('user.create');
       $user = User::createNewUser($input);
     }
     // Log in the user.
     Auth::login($user);
+
+    // Is the user login on a vote page?
+    if (!is_null($input['candidate_id'])) {
+      $vote = Event::fire('user.login.to.vote', array($input['candidate_id'], Auth::user()->id));
+      if ($vote)
+        return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
+      else
+        return Redirect::intended('/')->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
+    }
+
     return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
   }
 

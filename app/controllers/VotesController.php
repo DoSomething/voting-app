@@ -16,19 +16,13 @@ class VotesController extends \BaseController {
 	public function store()
 	{
     $candidate_id = Input::get('candidate_id');
-    $candidate = Candidate::find($candidate_id);
-    $user = Auth::user();
+    $user_id = Auth::user()->id;
 
-    // Check if the user is allowed to vote on this candidate.
-    if(!$user->canVote($candidate)) return Redirect::back()->withFlashMessage('You can\'t vote on this category yet!');
+    $vote = Vote::createIfEligible($candidate_id, $user_id);
+    if (!$vote)
+      return Redirect::back()->withFlashMessage('You can\'t vote on this category yet!');
 
-    // If so, cast a vote.
-    $vote = Vote::create([
-      'candidate_id' => $candidate->id,
-      'user_id' => $user->id
-    ]);
-
-    return Redirect::back();
+    return Redirect::back()->withFlashMessage('We got that vote!');
 	}
 
 }

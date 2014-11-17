@@ -31,7 +31,8 @@
         <p class="messages -inline">You've already voted in this category today! Check back tomorrow!</p>
       @endif
     @else
-      <p class="messages -inline">{{ link_to_route('login', 'Sign in') }} to vote!</p>
+      {{--@TODO: switch to user_phone condiationally --}}
+      @include('sessions/partials/_user_email')
     @endif
 
     @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)

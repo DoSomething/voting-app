@@ -28,6 +28,28 @@ class Vote extends Eloquent {
   }
 
   /**
+   * Assuming a user is eligable to vote, save the vote
+   */
+  public static function createIfEligible($candidate_id, $user_id)
+  {
+    // Loook up user and candidate
+    $user = User::find($user_id);
+    $candidate = Candidate::find($candidate_id);
+
+    // Can the user vote?
+    if(!$user->canVote($candidate))
+      return FALSE;
+
+    // Create the vote.
+    $vote = Vote::create([
+      'candidate_id' => $candidate_id,
+      'user_id' => $user_id
+    ]);
+
+    return $vote;
+  }
+
+  /**
    * Scope a query to votes cast within the last 24 hours.
    */
   public function scopeWithinLastDay($query)
