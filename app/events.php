@@ -3,7 +3,7 @@
 // An event listener that handles user votes.
 Event::listen('user.login.to.vote', function($candidate_id, $user_id) {
   // @TODO: check if a user can vote!
-  $vote = Vote::createIfEligible($candidate_id, $user_id);
+  return $vote = Vote::createIfEligible($candidate_id, $user_id);
   // @TODO: Add a flash alert here.
 });
 

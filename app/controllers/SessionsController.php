@@ -83,9 +83,14 @@ class SessionsController extends \BaseController {
     // Log in the user.
     Auth::login($user);
 
+    // Is the user login on a vote page?
     if (!is_null($input['candidate_id'])) {
       // $candidate =
-      Event::fire('user.login.to.vote', array($input['candidate_id'], Auth::user()->id));
+      $vote = Event::fire('user.login.to.vote', array($input['candidate_id'], Auth::user()->id));
+      if ($vote)
+        return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
+      else
+        return Redirect::intended('/')->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
     }
 
     return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
