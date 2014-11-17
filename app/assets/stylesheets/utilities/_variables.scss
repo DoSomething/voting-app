@@ -6,9 +6,9 @@ $susy: (
   columns: 12,
   gutters: 1/4,
   debug: (
-    image: show,
+    // image: show,
+    // output: overlay,
     color: blue,
-    output: overlay,
     toggle: top right,
   ),
 );
