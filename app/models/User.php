@@ -86,6 +86,14 @@ class User extends Eloquent implements UserInterface{
   }
 
   /**
+   * A user has many write-in votes.
+   */
+  public function writeIn()
+  {
+    return $this->hasMany('WriteIn');
+  }
+
+  /**
    * Check whether a user is allowed to vote on a given candidate.
    * User is allowed to vote if they haven't voted in this category in the last 24 hours.
    */
