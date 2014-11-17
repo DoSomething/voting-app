@@ -19,5 +19,3 @@
 
   {{ Form::submit('Sign In', ['class' => 'btn']) }}
 {{ Form::close() }}
-
-
