@@ -1,5 +1,9 @@
 // Typography!
 
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
 // Defaults
 body {
   color: $base-font-color;
