@@ -1,13 +1,18 @@
 @extends('layout')
 
 @section('content')
-  <h3>{{{ $page->name }}}</h3>
+  <div class="wrapper">
+    <div class="row">
+      <h1 class="highlighted">Edit Page: {{{ $page->title }}}</h1>
+      <p>Page content can be formatted using <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a>.</p>
+    </div>
 
-  {{ Form::model($page, ['route'=> ['pages.update', $page->slug], 'method' => 'PATCH']) }}
-  @include('pages.form')
-  {{ Form::submit('Update Page', ['class' => 'btn']) }}
-  {{ Form::close() }}
+    <div class="row">
+      {{ Form::model($page, ['route'=> ['pages.update', $page->slug], 'method' => 'PATCH']) }}
+      @include('pages.form')
+      {{ Form::submit('Update Page', ['class' => 'btn']) }}
+      {{ Form::close() }}
+    </div>
 
-  <p>{{ link_to_route('pages.index', 'Go Back') }}</p>
-
+  </div>
 @stop

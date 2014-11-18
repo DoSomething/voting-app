@@ -1,14 +1,18 @@
 @extends('layout')
 
 @section('content')
-  <h3>{{{ $category->name }}}</h3>
+  <div class="wrapper">
+    <div class="row">
+      <h1 class="highlighted">Edit Category: {{{ $category->name }}}</h1>
+      <p>Changing the name of category will not change its URL.</p>
+    </div>
 
-  {{ Form::model($category, ['route'=> ['categories.update', $category->slug], 'method' => 'PATCH']) }}
-    @include('categories.form')
 
-    {{ Form::submit('Update Category', ['class' => 'btn']) }}
-  {{ Form::close() }}
+    {{ Form::model($category, ['route'=> ['categories.update', $category->slug], 'method' => 'PATCH']) }}
+      @include('categories.form')
 
-  <p>{{ link_to_route('categories.index', 'Go Back') }}</p>
+      {{ Form::submit('Update Category', ['class' => 'btn']) }}
+    {{ Form::close() }}
 
+  </div>
 @stop

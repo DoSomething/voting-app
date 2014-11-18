@@ -3,7 +3,7 @@
 
   {{ Form::label('email', 'Email') }}
   {{ form_error('email', $errors) }}
-  {{ Form::text('email') }}
+  {{ Form::text('email', null, ['placeholder' => 'you@dosomething.org']) }}
 
   {{ Form::label('password', 'Password') }}
   {{ form_error('password', $errors) }}

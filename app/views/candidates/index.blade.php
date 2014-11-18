@@ -1,7 +1,10 @@
 @extends('layout')
 
 @section('content')
-  <h3>All Candidates</h3>
+  <div class="row">
+    <h1 class="highlighted">All Candidates</h1>
+    <p>These are all candidates in the database. (Only visible for administrators.)</p>
+  </div>
   <ul class="gallery -mosaic">
   @forelse($candidates as $candidate)
     @include('candidates.tile', ['candidate' => $candidate])
