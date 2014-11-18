@@ -17,14 +17,13 @@ $('.js-drawer-link').on('click', function(e) {
 
   var $window = $(window);
   var $tile = $(this).parent('.tile');
+  var offset = $tile.offset().top;
   $tile.addClass('is-active');
 
   if($currentDrawer) {
     var $parent = $currentDrawer.parent('.tile');
 
     if($parent.is($tile)) {
-      // We're not toggling another drawer, so just stop.
-
       $parent.removeClass('is-active');
       $parent.addClass("is-animated");
       $parent.css('padding-bottom', '');
@@ -39,9 +38,16 @@ $('.js-drawer-link').on('click', function(e) {
     }
 
     // If they're on separate rows...
-    if($parent.offset().top !== $tile.offset().top) {
+    var parentOffset = $parent.offset().top;
+    var tileOffset = $tile.offset().top;
+    if(parentOffset !== tileOffset) {
       $parent.addClass("is-animated");
       $tile.addClass("is-animated");
+
+      if(parentOffset < tileOffset) {
+        // Moving down the page, so adjust the scroll offset to account for closing drawer.
+        offset = offset - $currentDrawer.height();
+      }
 
       setTimeout(function() {
         $parent.removeClass("is-animated");
@@ -78,7 +84,6 @@ $('.js-drawer-link').on('click', function(e) {
     $(window).scrollTop(originalWindowOffset);
   }
 
-  var offset = $tile.offset().top;
 
   $("html, body").animate({ scrollTop: offset + 150 }, 500);
 });
