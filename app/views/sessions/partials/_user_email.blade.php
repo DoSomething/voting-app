@@ -10,7 +10,6 @@
   {{ form_error('birthdate', $errors) }}
   {{ Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) }}
 
-  {{--@TODO email or phone number depending on country code--}}
   {{ Form::label('email', 'Email') }}
   {{ form_error('email', $errors) }}
   {{ Form::text('email', null, ['placeholder' => 'you@example.com']) }}

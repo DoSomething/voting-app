@@ -6,7 +6,6 @@
   {{ form_error('first_name', $errors) }}
   {{ Form::text('first_name') }}
 
-  {{--@TODO email or phone number depending on country code--}}
   {{ Form::label('phone', 'Cell Number') }}
   {{ form_error('phone', $errors) }}
   {{ Form::text('phone') }}
