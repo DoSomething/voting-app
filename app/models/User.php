@@ -59,7 +59,7 @@ class User extends Eloquent implements UserInterface{
 
     if ($user && $user->birthdate == $birthdate) {
       return $user;
-    } elseif ($user->birthdate != $birthdate) {
+    } elseif ($user && $user->birthdate != $birthdate) {
       return $user->email;
     }
     return FALSE;
