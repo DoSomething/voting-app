@@ -18,8 +18,10 @@ input[type="month"], input[type="time"],     input[type="week"], textarea {
   border: 1px solid $gray;
   border-radius: $base-border-radius;
   font-family: $base-font-family;
-  font-size: $base-font-size;
+  font-size: $medium-font-size;
+  width: 100%;
   padding: $base-spacing / 2;
+  margin-bottom: $base-spacing * 2;
 
   &:focus {
     border: 1px solid $cyan;
