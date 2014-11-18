@@ -27,10 +27,26 @@ input[type="month"], input[type="time"],     input[type="week"], textarea {
     border: 1px solid $cyan;
     outline: none;
   }
+
+  &:disabled, &.disabled {
+    background: transparent;
+  }
 }
 
 textarea {
   resize: vertical;
+}
+
+
+// File input
+input[type="file"] {
+  margin-bottom: $base-spacing * 2;
+}
+
+
+// Select boxes
+select {
+  margin-bottom: $base-spacing * 2;
 }
 
 
