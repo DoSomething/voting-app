@@ -12,4 +12,8 @@
 //                                                                        \__|      \__|
 //
 
-require('./drawer')
+// Attach unveil plugin.
+window.jQuery = require("jquery");
+
+require('./lazyload');
+require('./drawer');

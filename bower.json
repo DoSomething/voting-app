@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "susy": "~2.1.3",
-    "jquery": "~1.11.0"
+    "jquery": "~1.11.0",
+    "jquery-unveil": "~1.3.0"
   }
 }
