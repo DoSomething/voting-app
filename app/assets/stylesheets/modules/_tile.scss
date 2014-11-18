@@ -21,8 +21,11 @@
     position: relative;
     display: block;
     width: 100%;
-    padding-bottom: 4 * $base-spacing;
     transition: transform 0.5s;
+
+    @include media('medium') {
+      padding-bottom: 4 * $base-spacing;
+    }
   }
 
   img {
@@ -104,14 +107,27 @@
     top: auto;
     left: 0;
     width: 100%;
-    margin-top: $base-spacing;
     overflow: hidden;
     transition: opacity 0.5s;
+
+    @include media('medium') {
+      margin-top: $base-spacing * 2;;
+    }
   }
 
   .tile__details__inner {
     @include container;
-    padding-top: $base-spacing * 2;
+
+    @include media('small') {
+      .tile {
+        // Don't display any nested tile on mobile
+        display: none;
+      }
+
+      .candidate__actions {
+        padding: $base-spacing * 2;
+      }
+    }
   }
 
 }
