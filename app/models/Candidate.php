@@ -22,7 +22,7 @@ class Candidate extends Eloquent implements SluggableInterface {
    * @var array
    */
   protected $fillable = [
-    'name', 'description', 'category_id'
+    'name', 'description', 'category_id', 'twitter'
   ];
 
   /**
