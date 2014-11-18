@@ -15,6 +15,7 @@
   <li>No candidates</li>
   @endforelse
   </ul>
+
 @stop
 
 @section('actions')
