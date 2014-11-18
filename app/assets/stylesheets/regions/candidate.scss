@@ -42,6 +42,10 @@
     }
   }
 
+  .candidate__description {
+    padding: $base-spacing * 2;
+  }
+
   .candidate__actions {
     @include media('medium') {
       @include span(5);

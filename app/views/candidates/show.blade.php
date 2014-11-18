@@ -15,7 +15,7 @@
     </article>
 
     @if($candidate->description)
-      <p>{{{ $candidate->description }}}</p>
+      <p class="candidate__description">{{{ $candidate->description }}}</p>
     @endif
   </div>
 
