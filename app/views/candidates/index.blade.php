@@ -6,7 +6,7 @@
   @forelse($candidates as $candidate)
     @include('candidates.tile', ['candidate' => $candidate])
   @empty
-    <li>No candidates.</li>
+    <li class="empty">No candidates... yet!</li>
   @endforelse
   </ul>
 @stop

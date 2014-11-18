@@ -12,7 +12,7 @@
   @forelse($category->candidates as $candidate)
     @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
   @empty
-  <li>No candidates</li>
+    <li class="empty">No candidates in this category... yet!</li>
   @endforelse
   </ul>
 
