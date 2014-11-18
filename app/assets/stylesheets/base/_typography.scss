@@ -61,9 +61,16 @@ p {
   margin: 0;
 }
 
-p + p {
-  margin-top: $base-line-height;
+h1, h2, h3, h4, h5, h6, p {
+  + p {
+    margin-top: $base-line-height;
+  }
+
+  + form {
+    margin-top: $base-line-height;
+  }
 }
+
 
 
 // Links

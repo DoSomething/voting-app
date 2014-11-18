@@ -1,14 +1,16 @@
 @extends('layout')
 
 @section('content')
-  <h3>Setting: {{{ $setting->key }}}</h3>
+  <div class="wrapper">
+    <div class="row">
+      <h1 class="highlighted">Edit Setting: {{{ $setting->key }}}</h1>
+      <p>Refer to documentation before changing settings!</p>
+    </div>
 
-  {{ Form::model($setting, ['route'=> ['settings.update', $setting->key], 'method' => 'PATCH']) }}
-    @include('settings.form')
+    {{ Form::model($setting, ['route'=> ['settings.update', $setting->key], 'method' => 'PATCH']) }}
+      @include('settings.form')
 
-    {{ Form::submit('Update Setting', ['class' => 'btn']) }}
-  {{ Form::close() }}
-
-  <p>{{ link_to_route('settings.index', 'Go Back') }}</p>
-
+      {{ Form::submit('Update Setting', ['class' => 'btn']) }}
+    {{ Form::close() }}
+  </div>
 @stop

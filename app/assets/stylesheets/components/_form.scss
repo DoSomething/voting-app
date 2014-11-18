@@ -18,12 +18,18 @@ input[type="month"], input[type="time"],     input[type="week"], textarea {
   border: 1px solid $gray;
   border-radius: $base-border-radius;
   font-family: $base-font-family;
-  font-size: $base-font-size;
-  padding: $base-spacing / 2;
+  font-size: $medium-font-size;
+  width: 100%;
+  padding: ($base-spacing / 2) $base-spacing;
+  margin-bottom: $base-spacing * 2;
 
   &:focus {
     border: 1px solid $cyan;
     outline: none;
+  }
+
+  &:disabled, &.disabled {
+    background: transparent;
   }
 }
 
@@ -32,59 +38,17 @@ textarea {
 }
 
 
-// Buttons
-input[type="submit"], button, .button {
-  display: block;
-  background: $gray;
-  color: $white;
-  border-radius: $base-border-radius;
-  font-family: $base-font-family;
-  font-weight: $weight-bold;
-  font-size: $base-font-size;
-  text-decoration: none;
-  line-height: 1;
-  padding: $base-spacing;
-
-  &:hover {
-    color: $white;
-    text-decoration: none;
-  }
-
-  &.-primary {
-    background: $cyan;
-    color: $black;
-    font-size: $medium-font-size;
-  }
-
-  &.-round {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    background: $pink;
-    font-size: $medium-font-size;
-    text-transform: uppercase;
-    border-radius: 100%;
-    border: 4px solid $black;
-    line-height: 75px;
-
-    &:hover {
-      background: lighten($pink, 10%);
-    }
-
-    &:active {
-      background: darken($pink, 10%);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-    }
-  }
+// File input
+input[type="file"] {
+  margin-bottom: $base-spacing * 2;
 }
 
-input[type="submit"], button {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
+
+// Select boxes
+select {
+  margin-bottom: $base-spacing * 2;
 }
+
 
 // Server-side validation errors
 .validation.error {

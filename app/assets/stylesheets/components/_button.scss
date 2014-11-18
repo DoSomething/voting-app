@@ -1,1 +1,55 @@
-// Buttons!
+// Buttons
+input[type="submit"], button, .button {
+  display: block;
+  background: $gray;
+  color: $white;
+  border-radius: $base-border-radius;
+  font-family: $base-font-family;
+  font-weight: $weight-bold;
+  font-size: $base-font-size;
+  text-decoration: none;
+  line-height: 1;
+  padding: $base-spacing;
+
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
+
+  &.-primary {
+    background: $cyan;
+    color: $black;
+    font-size: $medium-font-size;
+    text-transform: uppercase;
+    padding-top: $base-spacing * 1.2;
+  }
+
+  &.-round {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: $pink;
+    font-size: $medium-font-size;
+    text-transform: uppercase;
+    border-radius: 100%;
+    border: 4px solid $black;
+    line-height: 75px;
+
+    &:hover {
+      background: lighten($pink, 10%);
+    }
+
+    &:active {
+      background: darken($pink, 10%);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+input[type="submit"], button {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}

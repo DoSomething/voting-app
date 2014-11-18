@@ -1,0 +1,12 @@
+// Empty state placeholder
+
+.gallery {
+  .empty {
+    width: 100%;
+    padding: $base-spacing * 4;
+    color: $gray;
+    font-size: $medium-font-size;
+    text-align: center;
+    border: 2px dashed $gray;
+  }
+}

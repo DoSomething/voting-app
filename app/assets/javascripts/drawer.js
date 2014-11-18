@@ -58,7 +58,7 @@ $('.js-drawer-link').on('click', function(e) {
 
   var details = template({
     name: $tile.find('h1').text(),
-    desc: $tile.data('description'),
+    description: $tile.data('description'),
     image: $tile.find('img').attr('src'),
     form: $("#form-template").html()
   });

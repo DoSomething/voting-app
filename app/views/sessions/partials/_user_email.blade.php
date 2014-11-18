@@ -4,16 +4,16 @@
 
   {{ Form::label('first_name', 'First Name') }}
   {{ form_error('first_name', $errors) }}
-  {{ Form::text('first_name') }}
-
-  {{--@TODO email or phone number depending on country code--}}
-  {{ Form::label('email', 'Email') }}
-  {{ form_error('email', $errors) }}
-  {{ Form::text('email') }}
+  {{ Form::text('first_name', null, ['placeholder' => 'What\'s your name?']) }}
 
   {{ Form::label('birthdate', 'Birthdate') }}
   {{ form_error('birthdate', $errors) }}
   {{ Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) }}
 
-  {{ Form::submit('Sign In', ['class' => 'btn']) }}
+  {{--@TODO email or phone number depending on country code--}}
+  {{ Form::label('email', 'Email') }}
+  {{ form_error('email', $errors) }}
+  {{ Form::text('email', null, ['placeholder' => 'you@example.com']) }}
+
+  {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
 {{ Form::close() }}

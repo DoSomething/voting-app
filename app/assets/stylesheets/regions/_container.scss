@@ -3,6 +3,10 @@
 .container {
   @include clearfix;
 
+  .row {
+    margin-bottom: $base-spacing * 4;
+  }
+
   >.wrapper {
     @include span(8);
     @include pre(2);

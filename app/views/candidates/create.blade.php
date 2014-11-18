@@ -1,13 +1,15 @@
 @extends('layout')
 
 @section('content')
-  <h3>New Candidate</h3>
+  <div class="wrapper">
+    <div class="row">
+      <h1 class="highlighted">New Candidate</h1>
+    </div>
 
-  {{ Form::open(['route'=> ['candidates.store'], 'files' => true]) }}
-  @include('candidates.form')
-  {{ Form::submit('Create Candidate', ['class' => 'btn']) }}
-  {{ Form::close() }}
+    {{ Form::open(['route'=> ['candidates.store'], 'files' => true]) }}
+    @include('candidates.form')
+    {{ Form::submit('Create Candidate') }}
+    {{ Form::close() }}
 
-  <p>{{ link_to_route('candidates.index', 'Go Back') }}</p>
-
+  </div>
 @stop
