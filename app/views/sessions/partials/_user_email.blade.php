@@ -15,5 +15,5 @@
   {{ form_error('birthdate', $errors) }}
   {{ Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) }}
 
-  {{ Form::submit('Sign In', ['class' => 'btn']) }}
+  {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
 {{ Form::close() }}
