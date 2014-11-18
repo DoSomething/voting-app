@@ -55,6 +55,7 @@ class User extends Eloquent implements UserInterface{
     $birthdate = date('Y-m-d',(strtotime($input['birthdate'])));
 
     $user = User::where('email', $input['email'])
+                ->where('phone', $input['phone'])
                 ->first();
 
     if ($user && $user->birthdate == $birthdate) {
