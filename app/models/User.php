@@ -50,18 +50,17 @@ class User extends Eloquent implements UserInterface{
     return date('m-d-Y',(strtotime($birthdate)));
   }
 
-
-
   public static function isCurrentUser($input)
   {
     $birthdate = date('Y-m-d',(strtotime($input['birthdate'])));
 
     $user = User::where('email', $input['email'])
-                ->where('birthdate', $birthdate)
                 ->first();
 
-    if ($user) {
+    if ($user && $user->birthdate == $birthdate) {
       return $user;
+    } elseif ($user->birthdate != $birthdate) {
+      return $user->email;
     }
     return FALSE;
 

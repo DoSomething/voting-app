@@ -75,7 +75,9 @@ class SessionsController extends \BaseController {
   public function userLogin($input)
   {
     $user = User::isCurrentUser($input);
-
+    if (is_string($user)) {
+      return Redirect::back()->withInput()->withFlashMessage('Looks like that\'s not the right birthdate');
+    }
     if (!$user) {
       Event::fire('user.create');
       $user = User::createNewUser($input);
