@@ -6,26 +6,32 @@
   width: 100%;
   margin-bottom: $base-spacing * 4;
 
-  &:before, &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: $base-spacing / 2;
-    background: $yellow;
-    box-shadow: 0 0 30px 5px rgba(lighten($yellow, 15%), 0.5), inset 0px 5px 5px rgba(255,255,255,0.5);
-    border-radius: $base-spacing;
+  @include media('medium') {
+    &:before, &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: $base-spacing / 2;
+      background: $yellow;
+      box-shadow: 0 0 30px 5px rgba(lighten($yellow, 15%), 0.5), inset 0px 5px 5px rgba(255,255,255,0.5);
+      border-radius: $base-spacing;
+    }
+
+    &:before {
+      top: 0;
+      left: 5px;
+      bottom: 0;
+    }
+
+    &:after {
+      top: 0;
+      right: 5px;
+      bottom: 0;
+    }
   }
 
-  &:before {
-    top: 0;
-    left: 0;
-    bottom: 0;
-  }
-
-  &:after {
-    top: 0;
-    right: 0;
-    bottom: 0;
+  > .wrapper {
+    padding: gutter();
   }
 
   .candidate__info {
@@ -34,6 +40,10 @@
       @include pre(1);
       @include post(1);
     }
+  }
+
+  .candidate__description {
+    padding: $base-spacing * 2;
   }
 
   .candidate__actions {

@@ -10,11 +10,16 @@
 
   <ul class="gallery">
   @forelse($category->candidates as $candidate)
-    @include('candidates.tile', ['candidate' => $candidate])
+    @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
   @empty
   <li>No candidates</li>
   @endforelse
   </ul>
+
+  <script type="text/html" id="form-template">
+    @include('candidates.voteForm', ['category' => $category])
+  </script>
+
 @stop
 
 @section('actions')

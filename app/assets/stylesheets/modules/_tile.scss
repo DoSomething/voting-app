@@ -1,24 +1,30 @@
 // Tile!
 
 .tile {
-  position: relative;
-  padding-bottom: 100%;
-  margin-bottom: 30px;
-  height: 0;
+
+  &.is-animated {
+    transition: padding 0.5s;
+
+    .tile__details {
+      opacity: 0;
+    }
+  }
+
+  &.is-active {
+    > .wrapper {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+  }
 
   > .wrapper {
+    position: relative;
     display: block;
-    overflow: hidden;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
     width: 100%;
+    transition: transform 0.5s;
 
-    &:hover {
-      h1 {
-        background: lighten($black, 15%);
-      }
+    @include media('medium') {
+      padding-bottom: 4 * $base-spacing;
     }
   }
 
@@ -29,15 +35,15 @@
   }
 
   .tile__meta {
-    position: absolute;
     display: block;
-    top: 0;
-    color: $white;
+    position: absolute;
     width: 100%;
-    z-index: 10;
+    color: $white;
+    z-index: 5;
 
     @include media('medium') {
       text-align: center;
+      padding: 0 $base-spacing;
     }
 
     h1 {
@@ -47,11 +53,6 @@
       text-transform: uppercase;
       padding: $base-spacing;
       margin: 0;
-
-      @include media('medium') {
-        display: inline-block;
-        margin: 0 $base-spacing;
-      }
     }
   }
 
@@ -64,11 +65,10 @@
     @include media('small') {
       top: 0;
       right: 10px;
-
     }
 
     @include media('medium') {
-      bottom: -30px;
+      bottom: 2 * $base-spacing;
       left: 0;
       right: 0;
       margin-left: auto;
@@ -78,6 +78,14 @@
 
   // Alternate tile appearance
   &.-alternate {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+
+    > .wrapper {
+      padding-bottom: 0;
+    }
+
     .tile__meta {
       background: linear-gradient(transparent, #000);
       top: auto;
@@ -90,6 +98,34 @@
         font-size: $large-font-size;
         font-weight: $weight-bold;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  .tile__details {
+    position: absolute;
+    top: auto;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    transition: opacity 0.5s;
+
+    @include media('medium') {
+      margin-top: $base-spacing * 2;;
+    }
+  }
+
+  .tile__details__inner {
+    @include container;
+
+    @include media('small') {
+      .tile {
+        // Don't display any nested tile on mobile
+        display: none;
+      }
+
+      .candidate__actions {
+        padding: $base-spacing * 2;
       }
     }
   }

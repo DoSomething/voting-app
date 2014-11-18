@@ -1,13 +1,13 @@
 <li>
-  <article class="tile">
-    <a class="wrapper" href="{{{ route('candidates.show', [$candidate->slug]) }}}">
+  <article class="tile" data-id="{{ $candidate->id }}" data-description="{{ $candidate->description }}">
+    <a class="wrapper {{ isset($drawer) ? 'js-drawer-link' : '' }}" href="{{{ route('candidates.show', [$candidate->slug]) }}}">
       <div class="tile__meta">
-        <h1 class="__title">{{{ $candidate->name }}}</h1>
+        <h1>{{{ $candidate->name }}}</h1>
       </div>
       <img alt="{{{ $candidate->name }}}" src="{{{ $candidate->present()->thumbnail }}}" src="" />
+      <span class="button -round tile__action">Vote</span>
     </a>
 
-    {{ link_to_route('candidates.show', 'Vote', [$candidate->slug], ['class' => 'button -round tile__action'])}}
   </article>
 </li>
 

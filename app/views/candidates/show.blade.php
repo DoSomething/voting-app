@@ -8,32 +8,19 @@
     <article class="tile -alternate">
       <a class="wrapper" href="{{{ route('candidates.show', [$candidate->slug]) }}}">
         <div class="tile__meta">
-          <h1 class="__title">{{{ $candidate->name }}}</h1>
+          <h1>{{{ $candidate->name }}}</h1>
         </div>
         <img alt="{{{ $candidate->name }}}" src="{{{ $candidate->present()->thumbnail }}}" src="" />
       </a>
     </article>
 
     @if($candidate->description)
-      <p>{{{ $candidate->description }}}</p>
+      <p class="candidate__description">{{{ $candidate->description }}}</p>
     @endif
   </div>
 
   <div class="candidate__actions">
-    @if(Auth::user())
-      @if (Auth::user()->canVote($candidate))
-        <p class="messages -inline">Welcome back, {{ Auth::user()->first_name }}! Ready to vote again?</p>
-        {{ Form::open(['route' => 'votes.store']) }}
-        {{ Form::hidden('candidate_id', $candidate->id) }}
-        {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
-        {{ Form::close() }}
-      @else
-        <p class="messages -inline">You've already voted in this category today! Check back tomorrow!</p>
-      @endif
-    @else
-      {{--@TODO: switch to user_phone condiationally --}}
-      @include('sessions/partials/_user_email')
-    @endif
+    @include('candidates.voteForm', ['category' => $candidate->category, 'id' => $candidate->id])
 
     @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
     <h4>Hey, beautiful administrator. This candidate has {{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}.</h4>
