@@ -28,6 +28,6 @@ class Category extends Eloquent implements SluggableInterface {
 
   public function candidates()
   {
-    return $this->hasMany('Candidate');
+    return $this->hasMany('Candidate')->orderBy('name', 'asc');
   }
 }
