@@ -8,6 +8,6 @@
     <li>No categories.</li>
     @endforelse
 
-    <li><a href="#">Write In</a></li> {{-- @TODO: Link to write-in form. --}}
+    <li>{{ link_to_route('write-in.create', 'Write In') }} </li>
   </ul>
 </nav>
