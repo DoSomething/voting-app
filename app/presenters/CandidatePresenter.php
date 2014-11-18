@@ -12,4 +12,5 @@ class CandidatePresenter extends Presenter {
       return "/placeholder.png";
     }
   }
+
 }
