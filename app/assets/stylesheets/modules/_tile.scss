@@ -2,6 +2,21 @@
 
 .tile {
 
+  &.is-animated {
+    transition: padding 0.5s;
+
+    .tile__details {
+      opacity: 0;
+    }
+  }
+
+  &.is-active {
+    > .wrapper {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+  }
+
   > .wrapper {
     position: relative;
     display: block;
@@ -82,6 +97,21 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
       }
     }
+  }
+
+  .tile__details {
+    position: absolute;
+    top: auto;
+    left: 0;
+    width: 100%;
+    margin-top: $base-spacing;
+    overflow: hidden;
+    transition: opacity 0.5s;
+  }
+
+  .tile__details__inner {
+    @include container;
+    padding-top: $base-spacing * 2;
   }
 
 }
