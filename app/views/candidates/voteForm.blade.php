@@ -2,7 +2,7 @@
   @if (Auth::user()->canVoteInCategory($category))
     <p class="messages -inline">Welcome back, {{ Auth::user()->first_name }}! Ready to vote again?</p>
     {{ Form::open(['route' => 'votes.store']) }}
-    {{ Form::hidden('candidate_id', (isset($id) ? $id : '')) }}
+    {{ Form::hidden('candidate_id', (isset($id) ? $id : null)) }}
     {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
     {{ Form::close() }}
   @else
