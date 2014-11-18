@@ -56,10 +56,14 @@ $('.js-drawer-link').on('click', function(e) {
     $currentDrawer = null;
   }
 
-  var name = $tile.find('h1').text();
-  var desc = $tile.data('description');
-  var src = $tile.find('img').attr('src');
-  var $details = $('<div class="tile__details"><div class="tile__details__inner">' + template({name: name, description: desc, image: src}) + '</div></div>');
+  var details = template({
+    name: $tile.find('h1').text(),
+    desc: $tile.data('description'),
+    image: $tile.find('img').attr('src'),
+    form: $("#form-template").html()
+  });
+
+  var $details = $('<div class="tile__details"><div class="tile__details__inner">' + details + '</div></div>');
   $tile.append($details);
   $tile.css('padding-bottom', $details.height());
   $details.css('opacity', '1');

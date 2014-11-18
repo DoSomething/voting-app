@@ -16,6 +16,10 @@
   @endforelse
   </ul>
 
+  <script type="text/html" id="form-template">
+    Hello, <strong>HTML</strong> world!
+  </script>
+
 @stop
 
 @section('actions')
