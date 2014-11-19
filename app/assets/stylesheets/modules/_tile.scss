@@ -30,8 +30,15 @@
 
   img {
     display: block;
+    background-color: darken($gray, 30%);
     width: 100%;
+    height: auto;
     z-index: 1;
+    transition: opacity 0.5s;
+
+    &[data-src] {
+      opacity: 0;
+    }
   }
 
   .tile__meta {
