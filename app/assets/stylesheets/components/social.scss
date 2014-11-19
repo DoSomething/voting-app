@@ -4,7 +4,7 @@
   display: block;
   list-style: none;
   font-size: $large-font-size;
-  padding: 0;
+  padding: $base-spacing 0;
 
   li {
     display: inline-block;
