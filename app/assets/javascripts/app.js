@@ -15,5 +15,6 @@
 // Attach unveil plugin.
 window.jQuery = require("jquery");
 
+require('./formloader');
 require('./lazyload');
 require('./drawer');
