@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('title', $candidate->name)
+@section('meta_title', $candidate->name)
+@section('meta_description', $candidate->description)
+@section('meta_image', URL::to($candidate->present()->thumbnail))
 
 @section('content')
 <div class="candidate">
