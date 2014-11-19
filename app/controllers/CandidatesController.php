@@ -104,6 +104,7 @@ class CandidatesController extends \BaseController {
     }
 
     $this->candidateValidator->validate($input);
+    $candidate->resluggify();
     $candidate->save();
 
     return Redirect::route('candidates.index');
