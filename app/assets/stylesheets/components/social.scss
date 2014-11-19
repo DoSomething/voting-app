@@ -1,0 +1,41 @@
+// Social Icons
+
+.social-links {
+  display: block;
+  list-style: none;
+  font-size: $large-font-size;
+  padding: 0;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: inline-block;
+    padding-right: $base-spacing;
+
+    &:hover {
+      color: lighten($cyan, 25%);
+      text-decoration: none;
+    }
+  }
+}
+
+.social-icon {
+  &:before {
+    @include icomoon-icon;
+  }
+
+  &.-facebook:before {
+    content: '\66';;
+  }
+
+  &.-twitter:before {
+    content: '\74';
+  }
+
+  span {
+    display: none;
+  }
+}
+

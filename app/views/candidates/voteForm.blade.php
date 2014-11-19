@@ -7,7 +7,21 @@
     {{ Form::close() }}
   @else
     <p class="heading -alpha">Thanks for voting! You can vote again in 24 hours.</p>
+    @if($candidate)
+      <p class="heading -gamma">Get {{ $candidate->name }} more votes!</p>
+      <ul class="social-links">
+        <li><a class="social-icon -facebook" href="#"><span>Facebook</span></a></li>
+        <li><a class="social-icon -twitter" href="#"><span>Twitter</span></a></li>
+      </ul>
+    @else
+      <p class="heading -gamma">Get @{{ name }} more votes!</p>
+      <ul class="social-links">
+        <li><a class="social-icon -facebook" href="#"><span>Facebook</span></a></li>
+        <li><a class="social-icon -twitter" href="#"><span>Twitter</span></a></li>
+      </ul>
+    @endif
   @endif
 @else
   @include('sessions/partials/_' . $type)
 @endif
+
