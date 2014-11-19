@@ -1,3 +1,5 @@
+<h1 class="highlighted">Administrator Sign In</h1>
+<p>With great power, comes great responsibility...</p>
 
 {{ Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) }}
 
