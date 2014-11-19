@@ -10,21 +10,11 @@
 
         {{ Form::open() }}
 
-          {{ Form::hidden('token', $token) }}
-
           {{ Form::label('email', 'Email') }}
           {{ Form::text('email', null, ['placeholder' => 'you@dosomething.org']) }}
 
-          {{ Form::label('password', 'Password') }}
-          {{ Form::password('password') }}
-
-          {{ Form::label('password_confirmation', 'Password Confirm') }}
-          {{ Form::password('password_confirmation') }}
-
           {{-- Submit Button --}}
-          <div class="field-group">
-            {{ Form::submit('Submit', ['class' => 'button -default']) }}
-          </div>
+         {{ Form::submit('Submit', ['class' => 'button -default']) }}
 
         {{ Form::close() }}
 

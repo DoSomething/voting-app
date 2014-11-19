@@ -25,7 +25,7 @@ class RemindersController extends Controller {
         return Redirect::back()->with('error', Lang::get($response));
 
       case Password::REMINDER_SENT:
-        return Redirect::back()->with('status', Lang::get($response));
+        return Redirect::back()->with('status', Lang::get($response))->with('flash_message', 'Check your email!');
     }
   }
 
@@ -55,7 +55,7 @@ class RemindersController extends Controller {
 
     $response = Password::reset($credentials, function($user, $password)
     {
-      $user->password = Hash::make($password);
+      $user->password = $password;
 
       $user->save();
     });
