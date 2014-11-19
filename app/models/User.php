@@ -72,7 +72,9 @@ class User extends Eloquent implements UserInterface{
     $user = User::create([
                 'first_name' => $input['first_name'],
                 'email' => $input['email'],
+                'phone' => $input['phone'],
                 'birthdate' => $input['birthdate'],
+                'country_code' => get_country_code(),
                 ]);
     return $user;
   }
