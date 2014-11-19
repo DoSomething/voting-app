@@ -9,6 +9,5 @@
     <p class="messages -inline">You've already voted in this category today! Check back tomorrow!</p>
   @endif
 @else
-  {{--@TODO: switch to user_phone condiationally --}}
-  @include('sessions/partials/_user_email')
+  @include('sessions/partials/_' . $type)
 @endif

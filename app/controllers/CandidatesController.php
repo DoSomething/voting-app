@@ -69,8 +69,9 @@ class CandidatesController extends \BaseController {
   {
     $votes = $candidate->votes;
     $vote_count = $candidate->votes()->count();
+    $type = get_login_type();
 
-    return View::make('candidates.show', compact('candidate', 'votes', 'vote_count'));
+    return View::make('candidates.show', compact('candidate', 'votes', 'vote_count', 'type'));
   }
 
 
