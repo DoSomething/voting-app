@@ -16,8 +16,8 @@ body {
 
 // Headings
 h1, h2, h3, h4, h5, h6,
-.heading.-alpha, .heading.-beta, .heading.-gamma,
-.heading.-delta, .heading.-epsilon {
+.heading.-hero, .heading.-alpha, .heading.-beta,
+.heading.-gamma, .heading.-delta, .heading.-epsilon {
   font-family: $base-font-family;
   font-weight: $weight-semibold;
   line-height: $header-line-height;
@@ -30,6 +30,11 @@ h1, h2, h3, h4, h5, h6,
     color: $black;
     padding: $base-spacing/2 $base-spacing;
   }
+}
+
+.heading.-hero {
+  margin: (2 * $base-line-height) 0;
+  font-size: $largest-font-size;
 }
 
 h1, .heading.-alpha {
