@@ -116,9 +116,10 @@ class CandidatesController extends \BaseController {
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(Candidate $candidate)
   {
-    //
+    $candidate->delete();
+    return Redirect::home()->with('flash_message', 'BAM, that person was removed!');
   }
 
 
