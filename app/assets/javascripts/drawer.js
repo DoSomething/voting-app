@@ -62,11 +62,14 @@ $('.js-drawer-link').on('click', function(e) {
     $currentDrawer = null;
   }
 
+  var name = $tile.find('h1').text();
+  var twitter = $tile.data('twitter');
+
   var details = template({
     name: $tile.find('h1').text(),
     description: $tile.data('description'),
     image: $tile.find('img').attr('src'),
-    form: $("#form-template").html()
+    form: $("#form-template").html().replace('{{ name }}', name).replace('TWITTER_LINK', twitter)
   });
 
   var $details = $('<div class="tile__details"><div class="tile__details__inner">' + details + '</div></div>');

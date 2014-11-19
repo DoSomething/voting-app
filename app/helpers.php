@@ -23,12 +23,18 @@ function highlighted_link_to_route($route, $text, $params, $activeClass = '-is-a
   return link_to_route($route, $text, $params, ['class' => $class]);
 };
 
+/**
+ *
+ */
 function get_country_code()
 {
   return Request::server('HTTP_X_FASTLY_COUNTRY_CODE');
 
 }
 
+/**
+ *
+ */
 function get_login_type()
 {
   $type = 'user_phone';
@@ -37,4 +43,12 @@ function get_login_type()
     $type = 'user_email';
   }
   return $type;
+}
+
+/**
+ * Generate a Twitter tweet web intent.
+ */
+function tweet_url($text, $url)
+{
+  return 'https://twitter.com/intent/tweet?text=' . urlencode($text) . '&url=' . urlencode($url);
 }

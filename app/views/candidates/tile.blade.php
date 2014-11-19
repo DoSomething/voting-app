@@ -1,5 +1,5 @@
 <li>
-  <article class="tile" data-id="{{ $candidate->id }}" data-description="{{ $candidate->description }}">
+  <article class="tile" data-id="{{ $candidate->id }}" data-description="{{ $candidate->description }}" data-twitter="{{ $candidate->present()->twitter }}">
     <a class="wrapper {{ isset($drawer) ? 'js-drawer-link' : '' }}" href="{{{ route('candidates.show', [$candidate->slug]) }}}">
       <div class="tile__meta">
         <h1>{{{ $candidate->name }}}</h1>
