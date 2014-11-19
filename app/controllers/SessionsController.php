@@ -20,7 +20,7 @@ class SessionsController extends \BaseController {
   public function create()
   {
     // @TODO: switch email/phone based on IP.
-    $type = 'user_email';
+    $type = 'user_phone';
     return View::make('sessions.create', compact('type'));
   }
 
@@ -50,7 +50,7 @@ class SessionsController extends \BaseController {
     }
     // Use the user login/create method.
     else if (Input::has('birthdate')) {
-      $input = Input::only('first_name', 'email', 'birthdate', 'candidate_id');
+      $input = Input::only('first_name', 'email', 'phone', 'birthdate', 'candidate_id');
       $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
     }
@@ -86,7 +86,7 @@ class SessionsController extends \BaseController {
     Auth::login($user);
 
     // Is the user login on a vote page?
-    if (isset($input['candidate_id']) && !is_null($input['candidate_id'])) {
+    if (isset($input['candidate_id']) && !empty($input['candidate_id'])) {
       $vote = Event::fire('user.login.to.vote', array($input['candidate_id'], Auth::user()->id));
       if ($vote)
         return Redirect::back()->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
@@ -94,7 +94,7 @@ class SessionsController extends \BaseController {
         return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
     }
 
-    return Redirect::back()->withFlashMessage('Welcome ' . $input['first_name']);
+    return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
   }
 
   /**

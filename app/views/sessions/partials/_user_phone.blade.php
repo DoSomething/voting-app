@@ -10,9 +10,9 @@
   {{ form_error('birthdate', $errors) }}
   {{ Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) }}
 
-  {{ Form::label('email', 'Email') }}
-  {{ form_error('email', $errors) }}
-  {{ Form::text('email', null, ['placeholder' => 'you@example.com']) }}
+  {{ Form::label('phone', 'Cell Number') }}
+  {{ form_error('phone', $errors) }}
+  {{ Form::text('phone') }} {{-- @TODO: add placeholder--}}
 
-  {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
+  {{ Form::submit('Sign In', ['class' => 'btn']) }}
 {{ Form::close() }}
