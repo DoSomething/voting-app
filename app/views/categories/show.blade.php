@@ -3,11 +3,6 @@
 @section('title', $category->name)
 
 @section('content')
-
-  @if( Auth::user() && !Auth::user()->canVoteInCategory($category))
-  <div class="messages">You can't vote again in this category yet. Come back tomorrow!</div>
-  @endif
-
   <ul class="gallery">
   @forelse($category->candidates as $candidate)
     @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
