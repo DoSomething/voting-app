@@ -18,10 +18,10 @@ class HomeController extends BaseController {
   public function index()
   {
     $category = Category::find(1);
-
+    $type = get_login_type();
     if($category) {
       $candidates = $category->candidates;
-      return View::make('categories.show', compact('category', 'candidates'));
+      return View::make('categories.show', compact('category', 'candidates', 'type'));
     } else {
       return View::make('categories.create');
     }

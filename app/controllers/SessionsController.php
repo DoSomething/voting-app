@@ -19,8 +19,8 @@ class SessionsController extends \BaseController {
    */
   public function create()
   {
-    // @TODO: switch email/phone based on IP.
-    $type = 'user_phone';
+    $type = get_login_type();
+
     return View::make('sessions.create', compact('type'));
   }
 
