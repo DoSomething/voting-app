@@ -14,5 +14,5 @@
   {{ form_error('phone', $errors) }}
   {{ Form::text('phone') }} {{-- @TODO: add placeholder--}}
 
-  {{ Form::submit('Sign In', ['class' => 'btn']) }}
+  {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
 {{ Form::close() }}
