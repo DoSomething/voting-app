@@ -4,15 +4,17 @@
 
 @section('content')
   <ul class="gallery">
-  @forelse($category->candidates as $candidate)
-    @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
-  @empty
+  @if($category->candidates)
+    @foreach($category->candidates as $candidate)
+      @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
+    @endforeach
+  @else
     <li class="empty">No candidates in this category... yet!</li>
-  @endforelse
+  @endif
   </ul>
 
   <script type="text/html" id="form-template">
-    @include('candidates.voteForm', ['category' => $category])
+    @include('candidates.voteForm', ['category' => $category, 'candidate' => null])
   </script>
 
 @stop
