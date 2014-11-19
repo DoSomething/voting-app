@@ -32,5 +32,8 @@
 @section('actions')
   @if(Auth::user() && Auth::user()->hasRole('admin'))
     <li>{{ link_to_route('candidates.edit', 'Edit Candidate', [$candidate->slug], ['class' => 'btn secondary']) }}</li>
+    {{ Form::open(['route'=> ['candidates.update', $candidate->slug], 'method' => 'delete']) }}
+          {{ Form::submit('Delete Candidate', ['class' => 'btn btn-danger']) }}
+    {{ Form::close() }}
   @endif
 @stop
