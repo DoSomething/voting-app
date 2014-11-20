@@ -49,11 +49,12 @@ class SessionsController extends \BaseController {
       return $this->adminLogin($input);
     }
     // Use the user login/create method.
-    else if (Input::has('birthdate')) {
+    else {
       $input = Input::only('first_name', 'email', 'phone', 'birthdate', 'candidate_id');
       $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
     }
+
   }
 
   /**
