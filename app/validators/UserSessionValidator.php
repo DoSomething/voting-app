@@ -13,7 +13,7 @@ class UserSessionValidator extends FormValidator {
     'first_name' => 'required',
     'phone' => 'required_without:email',
     'email' => 'required_without:phone|email',
-    'birthdate' => 'required|date'
+    'birthdate' => 'required|date',
   ];
 
 }
