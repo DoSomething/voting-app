@@ -55,7 +55,7 @@ function tweet_intent($text, $url)
 /**
  * Generate a Facebook web intent.
  */
-function facebook_intent($text, $url)
+function facebook_intent($url)
 {
   return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
 }

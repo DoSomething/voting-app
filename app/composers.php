@@ -9,3 +9,12 @@ View::composer('layout', function($view)
   $settings = App::make('SettingsRepository')->all();
   return $view->with('settings', $settings)->with('categories', $categories);
 });
+
+/**
+ * View Composer for candidate page.
+ */
+View::composer('candidates.show', function($view)
+{
+  $settings = App::make('SettingsRepository')->all();
+  return $view->with('settings', $settings);
+});
