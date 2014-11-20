@@ -52,6 +52,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     return date('m-d-Y',(strtotime($birthdate)));
   }
 
+  /**
+   * Mutator to update the phone number tp the expexted format.
+   *
+   * @var string
+   */
+  public function setPhoneAttribute($phone)
+  {
+    $this->attributes['phone'] = preg_replace('/[^0-9]/','', $phone);
+  }
+
   public static function isCurrentUser($input)
   {
     $birthdate = date('Y-m-d',(strtotime($input['birthdate'])));
