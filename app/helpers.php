@@ -18,6 +18,7 @@ function highlighted_link_to_route($route, $text, $params, $activeClass = '-is-a
   $class = '';
   if(Request::url() == $url) {
     $class = $activeClass;
+    $class = 'is-active';
   }
 
   return link_to_route($route, $text, $params, ['class' => $class]);
