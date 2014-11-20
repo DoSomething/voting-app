@@ -21,12 +21,12 @@ nav.primary {
     color: $gray;
     text-align: center;
     padding: $base-spacing;
-    margin-bottom: ($base-spacing * 4);
   }
 
   ul {
     display: block;
     list-style: none;
+    margin-top: $base-spacing * 4;
     padding: 0;
 
     @include clearfix;

@@ -22,7 +22,8 @@ class VotesController extends \BaseController {
     if (!$vote)
       return Redirect::back()->withFlashMessage('You can\'t vote on this category yet!');
 
-    return Redirect::back()->withFlashMessage('We got that vote!');
+    $candidate = Candidate::find($candidate_id);
+    return Redirect::route('candidates.show', [$candidate->slug])->withFlashMessage('We got that vote!');
 	}
 
 }
