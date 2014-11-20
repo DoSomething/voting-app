@@ -11,12 +11,6 @@
   @include('partials.metadata')
 </head>
 <body>
-    @if(Session::has('flash_message'))
-    <div class="messages">
-      {{ Session::get('flash_message') }}
-    </div>
-    @endif
-
     @include('partials.navigation')
 
     <div class="container">
