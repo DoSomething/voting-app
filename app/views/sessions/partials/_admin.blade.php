@@ -14,3 +14,4 @@
   {{ Form::submit('Sign In', ['class' => 'btn']) }}
 {{ Form::close() }}
 
+{{ link_to('/password/remind', 'Forgot password') }}
