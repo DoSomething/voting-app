@@ -12,7 +12,7 @@
 
   {{ Form::label('phone', 'Cell Number') }}
   {{ form_error('phone', $errors) }}
-  {{ Form::text('phone') }} {{-- @TODO: add placeholder--}}
+  {{ Form::text('phone', null, ['placeholder' => '555-867-5309']) }}
 
   {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
 {{ Form::close() }}
