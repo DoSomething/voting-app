@@ -48,7 +48,15 @@ function get_login_type()
 /**
  * Generate a Twitter tweet web intent.
  */
-function tweet_url($text, $url)
+function tweet_intent($text, $url)
 {
   return 'https://twitter.com/intent/tweet?text=' . urlencode($text) . '&url=' . urlencode($url);
+}
+
+/**
+ * Generate a Facebook web intent.
+ */
+function facebook_intent($text, $url)
+{
+  return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
 }

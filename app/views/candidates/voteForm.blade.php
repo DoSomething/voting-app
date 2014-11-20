@@ -10,14 +10,14 @@
     @if($candidate)
       <p class="heading -gamma">Get {{ $candidate->name }} more votes!</p>
       <ul class="social-links">
-        <li><a class="social-icon -facebook" href="#"><span>Facebook</span></a></li>
-        <li><a class="social-icon -twitter" href="#"><span>Twitter</span></a></li>
+        <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent('I voted!', 'http://bit.ly/1zDXHTV') }}"><span>Facebook</span></a></li>
+        <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I voted for ' . $candidate->twitter . ' in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', 'http://bit.ly/1zDXHTV') }}"><span>Twitter</span></a></li>
       </ul>
     @else
       <p class="heading -gamma">Get @{{ name }} more votes!</p>
       <ul class="social-links">
-        <li><a class="social-icon -facebook" href="#"><span>Facebook</span></a></li>
-        <li><a class="social-icon -twitter" href="{{ tweet_url('I voted for TWITTER_LINK in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', 'http://bit.ly/1zDXHTV') }}"><span>Twitter</span></a></li>
+        <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent('I voted!', 'http://bit.ly/1zDXHTV') }}"><span>Facebook</span></a></li>
+        <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I voted for TWITTER_NAME in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', 'http://bit.ly/1zDXHTV') }}"><span>Twitter</span></a></li>
       </ul>
     @endif
   @endif

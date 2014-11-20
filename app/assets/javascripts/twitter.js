@@ -1,48 +1,27 @@
 /**
- * Twitter Intent functionality.
- * @see https://dev.twitter.com/web/intents
+ * Open Facebook and Twitter share dialogs.
  */
 
-(function() {
-  if (window.__twitterIntentHandler) return;
-  var intentRegex = /twitter\.com(\:\d{2,4})?\/intent\/(\w+)/,
-      windowOptions = 'scrollbars=yes,resizable=yes,toolbar=no,location=yes',
-      width = 550,
-      height = 420,
-      winHeight = screen.height,
-      winWidth = screen.width;
+var $ = require('jquery');
 
-  function handleIntent(e) {
-    e = e || window.event;
-    var target = e.target || e.srcElement,
-        m, left, top;
+var windowOptions = 'scrollbars=yes,resizable=yes,toolbar=no,location=yes',
+    width = 550,
+    height = 420,
+    winHeight = screen.height,
+    winWidth = screen.width;
 
-    while (target && target.nodeName.toLowerCase() !== 'a') {
-      target = target.parentNode;
-    }
+function handleIntent(e) {
+  left = Math.round((winWidth / 2) - (width / 2));
+  top = 0;
 
-    if (target && target.nodeName.toLowerCase() === 'a' && target.href) {
-      m = target.href.match(intentRegex);
-      if (m) {
-        left = Math.round((winWidth / 2) - (width / 2));
-        top = 0;
-
-        if (winHeight > height) {
-          top = Math.round((winHeight / 2) - (height / 2));
-        }
-
-        window.open(target.href, 'intent', windowOptions + ',width=' + width +
-                                           ',height=' + height + ',left=' + left + ',top=' + top);
-        e.returnValue = false;
-        e.preventDefault && e.preventDefault();
-      }
-    }
+  if (winHeight > height) {
+    top = Math.round((winHeight / 2) - (height / 2));
   }
 
-  if (document.addEventListener) {
-    document.addEventListener('click', handleIntent, false);
-  } else if (document.attachEvent) {
-    document.attachEvent('onclick', handleIntent);
-  }
-  window.__twitterIntentHandler = true;
-}());
+  window.open(this.href, 'intent', windowOptions + ',width=' + width +
+   ',height=' + height + ',left=' + left + ',top=' + top);
+
+  e.preventDefault();
+}
+
+$('body').on('click', 'a.js-share-link', handleIntent);
