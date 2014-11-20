@@ -13,4 +13,13 @@ class CandidatePresenter extends Presenter {
     }
   }
 
+  public function twitter()
+  {
+    if(isset($this->twitter)) {
+      return $this->twitter;
+    } else {
+      return $this->name;
+    }
+  }
+
 }

@@ -7,7 +7,7 @@
 
   @include clearfix;
 
-  li {
+  > li {
     margin-bottom: gutter();
 
     @include media('medium') {

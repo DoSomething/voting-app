@@ -3,21 +3,18 @@
 @section('title', $category->name)
 
 @section('content')
-
-  @if( Auth::user() && !Auth::user()->canVoteInCategory($category))
-  <div class="messages">You can't vote again in this category yet. Come back tomorrow!</div>
-  @endif
-
   <ul class="gallery">
-  @forelse($category->candidates as $candidate)
-    @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
-  @empty
+  @if($category->candidates)
+    @foreach($category->candidates as $candidate)
+      @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
+    @endforeach
+  @else
     <li class="empty">No candidates in this category... yet!</li>
-  @endforelse
+  @endif
   </ul>
 
   <script type="text/html" id="form-template">
-    @include('candidates.voteForm', ['category' => $category])
+    @include('candidates.voteForm', ['category' => $category, 'candidate' => null])
   </script>
 
 @stop

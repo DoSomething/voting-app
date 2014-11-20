@@ -31,24 +31,6 @@ footer.primary {
       padding: 0 $base-spacing/2;
     }
   }
-
-  .footer__link {
-    &:after {
-      @include icomoon-icon;
-    }
-
-    &.-facebook:after {
-      content: '\66';;
-    }
-
-    &.-twitter:after {
-      content: '\74';
-    }
-
-    span {
-      display: none;
-    }
-  }
 }
 
 footer.admin {

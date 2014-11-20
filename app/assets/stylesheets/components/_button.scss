@@ -16,12 +16,21 @@ input[type="submit"], button, .button {
     text-decoration: none;
   }
 
+  &:disabled {
+    opacity: 0.5;
+  }
+
   &.-primary {
     background: $cyan;
     color: $black;
     font-size: $medium-font-size;
     text-transform: uppercase;
     padding-top: $base-spacing * 1.2;
+  }
+
+  &.-danger {
+    color: $white;
+    background: $error-color;
   }
 
   &.-round {
