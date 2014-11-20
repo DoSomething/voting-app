@@ -17,6 +17,6 @@
     <li>No categories.</li>
     @endif
 
-    <li>{{ link_to_route('write-in.create', 'Write In') }} </li>
+    <li>{{ highlighted_link_to_route('write-in.create', 'Write In') }} </li>
   </ul>
 </nav>
