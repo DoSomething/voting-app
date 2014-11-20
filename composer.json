@@ -9,7 +9,8 @@
     "erusev/parsedown-extra": "~0.2.3",
     "intervention/image": "~2.0",
     "laracasts/presenter": "0.1.*",
-    "laracasts/validation": "~1.0"
+    "laracasts/validation": "~1.0",
+    "dosomething/messagebroker-phplib": "dev-master"
   },
   "require-dev": {
     "codeception/codeception": "~2.0",
