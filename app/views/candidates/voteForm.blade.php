@@ -7,19 +7,11 @@
     {{ Form::close() }}
   @else
     <p class="heading -alpha">Thanks for voting! You can vote again in 24 hours.</p>
-    @if($candidate)
-      <p class="heading -gamma">Get {{ $candidate->name }} more votes!</p>
-      <ul class="social-links">
-        <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent('I voted!', 'http://bit.ly/1zDXHTV') }}"><span>Facebook</span></a></li>
-        <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I voted for ' . $candidate->twitter . ' in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', 'http://bit.ly/1zDXHTV') }}"><span>Twitter</span></a></li>
-      </ul>
-    @else
-      <p class="heading -gamma">Get @{{ name }} more votes!</p>
-      <ul class="social-links">
-        <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent('I voted!', 'http://bit.ly/1zDXHTV') }}"><span>Facebook</span></a></li>
-        <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I voted for TWITTER_NAME in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', 'http://bit.ly/1zDXHTV') }}"><span>Twitter</span></a></li>
-      </ul>
-    @endif
+    <p class="heading -gamma">Get {{ $candidate->name or "CANDIDATE_NAME" }} more votes!</p>
+    <ul class="social-links">
+      <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent('I voted!', 'http://bit.ly/1zDXHTV') }}"><span>Facebook</span></a></li>
+      <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I voted for ' . (isset($candidate->twitter) ? $candidate->twitter : 'TWITTER_NAME') . ' in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', 'http://bit.ly/1zDXHTV') }}"><span>Twitter</span></a></li>
+    </ul>
   @endif
 @else
   @include('sessions/partials/_' . $type)
