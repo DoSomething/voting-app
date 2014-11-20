@@ -56,6 +56,11 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy'])
 Route::get('admin', ['as' => 'admin.login', 'uses' => 'SessionsController@adminCreate']);
 
 /**
+ * Password Reset
+ */
+Route::controller('password', 'RemindersController');
+
+/**
  * Pages
  */
 Route::bind('pages', function($slug) {
