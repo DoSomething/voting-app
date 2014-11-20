@@ -13,8 +13,8 @@ class UserSessionValidator extends FormValidator {
    */
   protected $rules = [
     'first_name' => 'required',
-    'phone' => 'required_without:email|regex:#^(?:\+?([0-9]{1,3})([\-\s\.]{1})?)?\(?([0-9]{3})\)?(?:[\-\s\.]{1})?([0-9]{3})(?:[\-\s\.]{1})?([0-9]{4})#',
-    'email' => 'required_without:phone|email',
+    'phone' => 'required_without:email|unique:users|regex:#^(?:\+?([0-9]{1,3})([\-\s\.]{1})?)?\(?([0-9]{3})\)?(?:[\-\s\.]{1})?([0-9]{3})(?:[\-\s\.]{1})?([0-9]{4})#',
+    'email' => 'required_without:phone|unique:users|email',
     'birthdate' => 'required|date',
   ];
 
