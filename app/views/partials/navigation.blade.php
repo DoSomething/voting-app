@@ -8,12 +8,15 @@
   @endif
 
   <ul>
-    @forelse($categories as $category)
-    <li>{{ highlighted_link_to_route('categories.show', $category->name, [$category->slug]) }}</li>
-    @empty
+    @if($categories)
+      <li>{{ highlighted_link_to_route('categories.show', $categories[0]->name, [$categories[0]->slug], '/') }}</li>
+      @for($i = 1; $i < count($categories); $i++)
+      <li>{{ highlighted_link_to_route('categories.show', $categories[$i]->name, [$categories[$i]->slug]) }}</li>
+      @endfor
+    @else
     <li>No categories.</li>
-    @endforelse
+    @endif
 
-    <li>{{ link_to_route('write-in.create', 'Write In') }} </li>
+    <li>{{ highlighted_link_to_route('write-in.create', 'Write In') }} </li>
   </ul>
 </nav>

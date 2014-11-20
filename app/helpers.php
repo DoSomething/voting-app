@@ -11,13 +11,13 @@ function form_error($field, $errors)
 /**
  * Add an active class to current page's menu item.
  */
-function highlighted_link_to_route($route, $text, $params, $activeClass = '-is-active')
+function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = null)
 {
   $url = route($route, $params);
 
   $class = '';
-  if(Request::url() == $url) {
-    $class = $activeClass;
+  if(Request::url() == $url || Request::path() == $forceOnPath) {
+    $class = 'is-active';
   }
 
   return link_to_route($route, $text, $params, ['class' => $class]);
@@ -29,7 +29,6 @@ function highlighted_link_to_route($route, $text, $params, $activeClass = '-is-a
 function get_country_code()
 {
   return Request::server('HTTP_X_FASTLY_COUNTRY_CODE');
-
 }
 
 /**
