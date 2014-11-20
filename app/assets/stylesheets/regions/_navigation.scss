@@ -21,6 +21,10 @@ nav.primary {
     color: $gray;
     text-align: center;
     padding: $base-spacing;
+
+    @include media('medium') {
+      padding: $base-spacing (8 * $base-spacing);
+    }
   }
 
   ul {
