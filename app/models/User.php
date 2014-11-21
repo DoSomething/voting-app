@@ -82,12 +82,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   public static function createNewUser($input)
   {
     $user = User::create([
-                'first_name' => $input['first_name'],
-                'email' => $input['email'],
-                'phone' => $input['phone'],
-                'birthdate' => $input['birthdate'],
-                'country_code' => get_country_code(),
-                ]);
+      'first_name' => $input['first_name'],
+      'email' => $input['email'],
+      'phone' => $input['phone'],
+      'birthdate' => $input['birthdate'],
+      'country_code' => get_country_code(),
+    ]);
+
+    Event::fire('user.create', [$user]);
+
     return $user;
   }
 

@@ -80,7 +80,6 @@ class SessionsController extends \BaseController {
       return Redirect::back()->withInput()->withFlashMessage('Looks like that\'s not the right birthdate');
     }
     if (!$user) {
-      Event::fire('user.create');
       $user = User::createNewUser($input);
     }
     // Log in the user.
