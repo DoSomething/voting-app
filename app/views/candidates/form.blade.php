@@ -10,6 +10,10 @@
 {{ form_error('photo', $errors) }}
 {{ Form::file('photo') }}
 
+{{ Form::label('photo_source', 'Photo Source') }}
+{{ form_error('photo_source', $errors) }}
+{{ Form::text('photo_source', NULL, ['placeholder' => 'http://example.com']) }}
+
 {{ Form::label('description', 'Description (optional)') }}
 {{ form_error('description', $errors) }}
 {{ Form::textarea('description') }}
