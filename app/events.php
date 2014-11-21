@@ -23,7 +23,7 @@ Event::listen('user.login.to.vote', function($candidate_id, $user_id) {
     // Request specific information
     'activity' => 'cgg2014_vote',
     'application_id' => 201,
-    'activity_timestamp' => '???',
+    'activity_timestamp' => time(),
     'email_template' => 'mb-cgg2014-vote',
     'email_tags' => [
       0 => 'cgg2014_vote',
@@ -58,7 +58,7 @@ Event::listen('user.create', function($user) {
     // Request specific information
     'activity' => 'cgg2014_signup',
     'application_id' => 201,
-    'activity_timestamp' => '???',
+    'activity_timestamp' => time(),
     'email_template' => 'mb-cgg2014-signup',
     'email_tags' => [
       0 => 'cgg2014_signup',
