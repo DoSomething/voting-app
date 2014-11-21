@@ -10,7 +10,8 @@ class CandidateValidator extends FormValidator {
    * @var array
    */
   protected $rules = [
-    'name' => 'required'
+    'name' => 'required',
+    'photo_source' => 'url'
   ];
 
 }
