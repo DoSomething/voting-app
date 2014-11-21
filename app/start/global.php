@@ -53,7 +53,10 @@ App::error(function(Exception $exception, $code)
 
 App::error(function(Laracasts\Validation\FormValidationException $exception, $code)
 {
-  return Redirect::back()->withInput()->withErrors($exception->getErrors());
+  return Redirect::back()->withInput()
+    ->withErrors($exception->getErrors())
+    ->withFlashMessage('There were some problems with that submission. Try again!')
+    ->with('flash_message_type', 'error');
 });
 
 /*
