@@ -52,6 +52,7 @@ Event::listen('user.create', function($user) {
     'email' => $user->email,
     'mobile' => $user->phone,
     'birthdate' => strtotime($user->birthdate), // Message Broker expects UNIX timestamp
+    'country_code' => $user->country_code,
 
     // Request specific information
     'activity' => 'cgg2014_signup',
