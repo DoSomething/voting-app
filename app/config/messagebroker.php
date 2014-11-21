@@ -21,6 +21,15 @@ return [
         'auto_delete' => getenv('MB_EXTERNAL_APPLICATIONS_USER_QUEUE_AUTO_DELETE'),
         'bindingKey' => getenv('MB_EXTERNAL_APPLICATIONS_USER_QUEUE_BINDING_KEY'),
       ],
+
+      'externalApplicationVoteQueue' => [
+        'name' => getenv('MB_EXTERNAL_APPLICATIONS_VOTE_QUEUE'),
+        'passive' => getenv('MB_EXTERNAL_APPLICATIONS_VOTE_QUEUE_PASSIVE'),
+        'durable' => getenv('MB_EXTERNAL_APPLICATIONS_VOTE_QUEUE_DURABLE'),
+        'exclusive' => getenv('MB_EXTERNAL_APPLICATIONS_VOTE_QUEUE_EXCLUSIVE'),
+        'auto_delete' => getenv('MB_EXTERNAL_APPLICATIONS_VOTE_QUEUE_AUTO_DELETE'),
+        'bindingKey' => getenv('MB_EXTERNAL_APPLICATIONS_VOTE_QUEUE_BINDING_KEY'),
+      ],
     ],
   ],
 
