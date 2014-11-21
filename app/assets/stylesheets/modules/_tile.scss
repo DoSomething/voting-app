@@ -123,6 +123,8 @@
   }
 
   .tile__details__inner {
+    position: relative;
+
     @include container;
 
     @include media('small') {
@@ -134,6 +136,28 @@
       .candidate__actions {
         padding: $base-spacing * 2;
       }
+    }
+  }
+
+  .tile__details__close {
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    top: $base-spacing;
+    right: 3 * $base-spacing;
+    font-size: $large-font-size;
+    font-weight: $weight-bold;
+    color: $gray;
+    z-index: 10;
+    border: 2px solid darken($gray, 25%);
+    border-radius: 100%;
+
+    &:hover{
+      color: $light-gray;
+      border-color: $light-gray;
+      text-decoration: none;
     }
   }
 
