@@ -24,16 +24,7 @@ $('.js-drawer-link').on('click', function(e) {
     var $parent = $currentDrawer.parent('.tile');
 
     if($parent.is($tile)) {
-      $parent.removeClass('is-active');
-      $parent.addClass("is-animated");
-      $parent.css('padding-bottom', '');
-
-      setTimeout(function() {
-        $parent.removeClass("is-animated");
-      }, 1000);
-
-      $currentDrawer.remove();
-      $currentDrawer = null;
+      closeDrawer();
       return;
     }
 
@@ -111,3 +102,31 @@ $(window).on('scroll touchstart mousedown DOMMouseScroll mousewheel keyup', func
     $('html, body').stop();
   }
 });
+
+/**
+ * Close drawer.
+ */
+function closeDrawer()
+{
+  var $tile = $currentDrawer.parent('.tile');
+
+  $tile.addClass("is-animated");
+  $tile.removeClass('is-active');
+  $tile.css('padding-bottom', '');
+
+  setTimeout(function() {
+    $tile.removeClass("is-animated");
+  }, 1000);
+
+  $currentDrawer.remove();
+  $currentDrawer = null;
+}
+
+
+/**
+ * Close drawer when close button is clicked.
+ */
+$('body').on('click', '.js-drawer-close', function(e) {
+  e.preventDefault();
+  closeDrawer();
+})
