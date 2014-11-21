@@ -20,6 +20,9 @@
     @if($candidate->description)
       <p class="candidate__description">{{{ $candidate->description }}}</p>
     @endif
+    @if ($candidate->photo_source)
+      {{ link_to($candidate->photo_source, 'Photo Credit') }}
+    @endif
   </div>
 
   <div class="candidate__actions">
