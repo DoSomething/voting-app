@@ -14,7 +14,7 @@ class AddPhotoSourceLink extends Migration {
   {
     Schema::table('candidates', function(Blueprint $table)
     {
-      $table->string('photo_source')->after('photo');
+      $table->string('photo_source')->after('photo')->nullable();
     });
   }
 
