@@ -1,11 +1,7 @@
 <?php
 
 // An event listener that handles user votes.
-Event::listen('user.login.to.vote', function($candidate_id, $user_id) {
-  // @TODO: check if a user can vote!
-  $vote = Vote::createIfEligible($candidate_id, $user_id);
-  // @TODO: Add a flash alert here.
-
+Event::listen('user.vote', function($candidate, $user) {
   // Sign user up for transaction messages.
   $credentials = Config::get('messagebroker.credentials');
   $config = Config::get('messagebroker.config');
