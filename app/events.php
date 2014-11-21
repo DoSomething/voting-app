@@ -15,6 +15,8 @@ Event::listen('user.vote', function($candidate, $user) {
     'email' => $user->email,
     'mobile' => $user->phone,
     'birthdate' => strtotime($user->birthdate), // Message Broker expects UNIX timestamp
+    'candidate_id' => $candidate->id,
+    'candidate_name' => $candidate->name,
 
     // Request specific information
     'activity' => 'cgg2014_vote',
