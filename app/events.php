@@ -26,8 +26,8 @@ Event::listen('user.vote', function($candidate, $user) {
     'email_tags' => [
       0 => 'cgg2014_vote',
     ],
-    'mailchimp_grouping_id' => '', //  need this from Marah
-    'mailchimp_group_name' => '', // need this from Marah
+    'mailchimp_grouping_id' => '10621',
+    'mailchimp_group_name' => 'CelebsGoneGood2014',
     'merge_vars' => [
       'FNAME' => $user->first_name
     ]
@@ -62,8 +62,8 @@ Event::listen('user.create', function($user) {
     'email_tags' => [
       0 => 'cgg2014_signup',
     ],
-    'mailchimp_grouping_id' => '', //  need this from Marah
-    'mailchimp_group_name' => '', // need this from Marah
+    'mailchimp_grouping_id' => '10621',
+    'mailchimp_group_name' => 'CelebsGoneGood2014',
     'merge_vars' => [
       'FNAME' => $user->first_name
     ]
