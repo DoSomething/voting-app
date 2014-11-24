@@ -34,7 +34,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
-   * Mutator to update the birthdate for the expexted format.
+   * Mutator to update the birthdate for the expected format.
    *
    * @var string
    */
@@ -42,8 +42,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   {
     $this->attributes['birthdate'] = date('Y-m-d',(strtotime($birthdate)));
   }
-      /**
-   * Mutator to update the birthdate for the expexted format.
+
+  /**
+   * Mutator to update the birthdate for the expected format.
    *
    * @var string
    */
@@ -53,13 +54,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
-   * Mutator to update the phone number tp the expexted format.
+   * Mutator to update the phone number tp the expected format.
    *
    * @var string
    */
   public function setPhoneAttribute($phone)
   {
     $this->attributes['phone'] = preg_replace('/[^0-9]/','', $phone);
+  }
+
+  /**
+   * Get birthdate formatted as a UNIX timestamp.
+   */
+  public function birthdate_timestamp()
+  {
+    return strtotime($this->attributes['birthdate']);
   }
 
   public static function isCurrentUser($input)
@@ -82,12 +91,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   public static function createNewUser($input)
   {
     $user = User::create([
-                'first_name' => $input['first_name'],
-                'email' => $input['email'],
-                'phone' => $input['phone'],
-                'birthdate' => $input['birthdate'],
-                'country_code' => get_country_code(),
-                ]);
+      'first_name' => $input['first_name'],
+      'email' => $input['email'],
+      'phone' => $input['phone'],
+      'birthdate' => $input['birthdate'],
+      'country_code' => get_country_code(),
+    ]);
+
+    Event::fire('user.create', [$user]);
+
     return $user;
   }
 
@@ -163,7 +175,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   {
     return $this->roles()->attach($role);
   }
-
-
 
 }

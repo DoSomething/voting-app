@@ -80,7 +80,6 @@ class SessionsController extends \BaseController {
       return Redirect::back()->withInput()->withFlashMessage('Looks like that\'s not the right birthdate');
     }
     if (!$user) {
-      Event::fire('user.create');
       $user = User::createNewUser($input);
     }
     // Log in the user.
@@ -88,7 +87,8 @@ class SessionsController extends \BaseController {
 
     // Is the user login on a vote page?
     if (isset($input['candidate_id']) && !empty($input['candidate_id'])) {
-      $vote = Event::fire('user.login.to.vote', array($input['candidate_id'], Auth::user()->id));
+      $vote = Vote::createIfEligible($input['candidate_id'], $user->id);
+
       if ($vote) {
         $candidate = Candidate::find($input['candidate_id']);
         return Redirect::route('candidates.show', [$candidate->slug])->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
