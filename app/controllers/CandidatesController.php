@@ -10,7 +10,7 @@ class CandidatesController extends \BaseController {
     $this->candidate = $candidate;
     $this->candidateValidator = $candidateValidator;
 
-    $this->beforeFilter('role:admin', ['except' => ['index', 'show']]);
+    $this->beforeFilter('role:admin', ['except' => ['show']]);
   }
 
   /**
