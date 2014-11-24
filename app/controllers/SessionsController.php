@@ -51,7 +51,18 @@ class SessionsController extends \BaseController {
     // Use the user login/create method.
     else {
       $input = Input::only('first_name', 'email', 'phone', 'birthdate', 'candidate_id');
-      $this->userSessionValidator->validate($input);
+
+      try {
+        $this->userSessionValidator->validate($input);
+      } catch(Laracasts\Validation\FormValidationException $exception) {
+        // If there is a form validation error, show form errors on candidate page.
+        $candidate = Candidate::find($input['candidate_id']);
+        return Redirect::route('candidates.show', [$candidate->slug])->withInput()
+          ->withErrors($exception->getErrors())
+          ->withFlashMessage('There were some problems with that submission. Try again!')
+          ->with('flash_message_type', 'error');
+      }
+
       return $this->userLogin($input);
     }
 
