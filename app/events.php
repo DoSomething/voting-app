@@ -14,7 +14,7 @@ Event::listen('user.vote', function($candidate, $user) {
     'first_name' => $user->first_name,
     'email' => $user->email,
     'mobile' => $user->phone,
-    'birthdate' => strtotime($user->birthdate), // Message Broker expects UNIX timestamp
+    'birthdate' => $user->birthdate_timestamp, // Message Broker expects UNIX timestamp
     'candidate_id' => $candidate->id,
     'candidate_name' => $candidate->name,
 
@@ -28,6 +28,7 @@ Event::listen('user.vote', function($candidate, $user) {
     ],
     'mailchimp_grouping_id' => '10621',
     'mailchimp_group_name' => 'CelebsGoneGood2014',
+    'mc_opt_in_path_id' => '174269',
     'merge_vars' => [
       'FNAME' => $user->first_name
     ]
@@ -51,7 +52,7 @@ Event::listen('user.create', function($user) {
     'first_name' => $user->first_name,
     'email' => $user->email,
     'mobile' => $user->phone,
-    'birthdate' => strtotime($user->birthdate), // Message Broker expects UNIX timestamp
+    'birthdate' => $user->birthdate_timestamp, // Message Broker expects UNIX timestamp
     'country_code' => $user->country_code,
 
     // Request specific information
@@ -64,6 +65,7 @@ Event::listen('user.create', function($user) {
     ],
     'mailchimp_grouping_id' => '10621',
     'mailchimp_group_name' => 'CelebsGoneGood2014',
+    'mc_opt_in_path_id' => '174269',
     'merge_vars' => [
       'FNAME' => $user->first_name
     ]
