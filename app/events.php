@@ -68,7 +68,8 @@ Event::listen('user.create', function($user) {
     'mc_opt_in_path_id' => '174269',
     'merge_vars' => [
       'FNAME' => $user->first_name
-    ]
+    ],
+    'user_registration_source' => 'cgg2014'
   ];
 
   $payload = serialize($payload);
