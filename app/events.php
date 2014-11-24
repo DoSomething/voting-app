@@ -14,7 +14,7 @@ Event::listen('user.vote', function($candidate, $user) {
     'first_name' => $user->first_name,
     'email' => $user->email,
     'mobile' => $user->phone,
-    'birthdate' => $user->birthdate_timestamp, // Message Broker expects UNIX timestamp
+    'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
     'candidate_id' => $candidate->id,
     'candidate_name' => $candidate->name,
 
@@ -52,7 +52,7 @@ Event::listen('user.create', function($user) {
     'first_name' => $user->first_name,
     'email' => $user->email,
     'mobile' => $user->phone,
-    'birthdate' => $user->birthdate_timestamp, // Message Broker expects UNIX timestamp
+    'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
     'country_code' => $user->country_code,
 
     // Request specific information
