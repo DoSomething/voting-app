@@ -61,7 +61,7 @@ $('.js-drawer-link').on('click', function(e) {
     name: $tile.find('h1').text(),
     description: $tile.data('description'),
     image: $tile.find('img').attr('src'),
-    form: $("#form-template").html().replace('CANDIDATE_NAME', name).replace('TWITTER_NAME', twitter).replace('CANDIDATE_LINK', link)
+    form: $("#form-template").html().replace('CANDIDATE_NAME', name).replace('TWITTER_NAME', twitter).replace(/CANDIDATE_LINK/g, link)
   });
 
   var $details = $('<div class="tile__details"><div class="tile__details__inner">' + details + '</div></div>');
