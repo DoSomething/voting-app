@@ -102,7 +102,9 @@ class SessionsController extends \BaseController {
 
       if ($vote) {
         $candidate = Candidate::find($input['candidate_id']);
-        return Redirect::route('candidates.show', [$candidate->slug])->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
+        $url = URL::route('candidates.show', [$candidate->slug, '#message']);
+
+        return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
       } else {
         return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
       }
