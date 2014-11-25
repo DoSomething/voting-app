@@ -38,11 +38,14 @@ function get_country_code()
  */
 function get_login_type()
 {
-  $type = 'user_phone';
+  $type = 'phone';
   $country_code = get_country_code();
+
+  // If user is not in the US, ask for their email instead.
   if (isset($country_code) && $country_code != 'US') {
-    $type = 'user_email';
+    $type = 'email';
   }
+
   return $type;
 }
 

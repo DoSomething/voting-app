@@ -19,9 +19,7 @@ class SessionsController extends \BaseController {
    */
   public function create()
   {
-    $type = get_login_type();
-
-    return View::make('sessions.create', compact('type'));
+    return View::make('sessions.create');
   }
 
   /**
@@ -32,8 +30,7 @@ class SessionsController extends \BaseController {
    */
   public function adminCreate()
   {
-    $type = 'admin';
-    return View::make('sessions.create', compact('type'));
+    return View::make('sessions.admin');
   }
 
   /**

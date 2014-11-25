@@ -2,8 +2,9 @@
 
 @section('content')
   <div class="wrapper">
-
-    @include('sessions/partials/_' . $type)
+    {{ Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) }}
+      @include('sessions.form')
+      {{ Form::submit('Log In') }}
+    {{ Form::close() }}
   </div>
-
 @stop
