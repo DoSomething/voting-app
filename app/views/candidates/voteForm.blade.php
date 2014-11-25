@@ -6,7 +6,7 @@
     {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
     {{ Form::close() }}
   @else
-    <p class="heading -alpha">Thanks for voting! You can vote again in 24 hours.</p>
+    <p class="heading -alpha">Thanks for voting! You can vote again in this category in 24 hours.</p>
     <p class="heading -gamma">Get {{ $candidate->name or "CANDIDATE_NAME" }} more votes!</p>
     <ul class="social-links">
       <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent((isset($candidate) ? route('candidates.show', [$candidate->slug]) : 'CANDIDATE_LINK')) }}"><span>Facebook</span></a></li>
