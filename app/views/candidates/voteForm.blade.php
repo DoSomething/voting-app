@@ -1,6 +1,6 @@
 @if(Auth::user())
   @if (Auth::user()->canVoteInCategory($category))
-    <p class="heading -hero">Welcome back, {{ Auth::user()->first_name }}! Ready to vote again?</p>
+    <p class="heading -hero">Hey, {{ Auth::user()->first_name }}! Ready to cast your vote for {{{ $category->name }}}?</p>
     {{ Form::open(['route' => 'votes.store']) }}
     {{ Form::hidden('candidate_id', (isset($id) ? $id : null)) }}
     {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
