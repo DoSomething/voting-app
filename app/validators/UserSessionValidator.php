@@ -15,7 +15,7 @@ class UserSessionValidator extends FormValidator {
     'first_name' => 'required',
     'phone' => 'required_without:email|unique:users|regex:#^(?:\+?([0-9]{1,3})([\-\s\.]{1})?)?\(?([0-9]{3})\)?(?:[\-\s\.]{1})?([0-9]{3})(?:[\-\s\.]{1})?([0-9]{4})#',
     'email' => 'required_without:phone|unique:users|email',
-    'birthdate' => 'required|date',
+    'birthdate' => 'required|date|before:today',
   ];
 
   protected $messages = [
