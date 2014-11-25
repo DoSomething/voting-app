@@ -13,7 +13,7 @@ class SessionsController extends \BaseController {
 
   /**
    * Show the form for creating a new resource.
-   * GET /sessions/create
+   * GET /login
    *
    * @return Response
    */
@@ -26,7 +26,9 @@ class SessionsController extends \BaseController {
 
   /**
    * Allows an admin to log in.
+   * GET /admin
    *
+   * @return Response
    */
   public function adminCreate()
   {
@@ -81,7 +83,10 @@ class SessionsController extends \BaseController {
 
     return Redirect::home()->withFlashMessage('You\'re now signed out.');;
   }
+
   /**
+   * Authentication for a non-admin user.
+   * See create() above.
    *
    */
   public function userLogin($input)
