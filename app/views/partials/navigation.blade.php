@@ -2,7 +2,7 @@
   <a class="navigation__logo" href="{{{ route('home') }}}"><img src="/dist/images/logo.png" alt="Celebs Gone Good"></a>
 
   @if(Session::has('flash_message'))
-    <div class="messages {{ Session::get('flash_message_type', '') }}">{{ Session::get('flash_message') }}</div>
+    <div id="message" class="messages {{ Session::get('flash_message_type', '') }}">{{ Session::get('flash_message') }}</div>
   @else
     <p class="navigation__tagline">Vote for your favorite celeb who has done kick ass things in the world.</p>
   @endif
