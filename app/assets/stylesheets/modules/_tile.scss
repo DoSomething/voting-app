@@ -115,7 +115,9 @@
     left: 0;
     width: 100%;
     overflow: hidden;
+    background: $base-background-color;
     transition: opacity 0.5s;
+    z-index: 100;
 
     @include media('medium') {
       margin-top: $base-spacing * 2;;
