@@ -17,6 +17,7 @@
     <li>No categories.</li>
     @endif
 
-    <li>{{ highlighted_link_to_route('write-in.create', 'Write In') }} </li>
+    {{-- @TODO: It would be great if this could point to any page. --}}
+    <li>{{ highlighted_link_to_route('pages.show', 'FAQ', 'faq') }} </li>
   </ul>
 </nav>
