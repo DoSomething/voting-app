@@ -14,6 +14,10 @@
     </ul>
   @endif
 @else
-  @include('sessions/partials/_' . $type)
+    {{ Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) }}
+      @include('sessions.form', [$type])
+      {{ Form::hidden('candidate_id', (isset($candidate->id) ? $candidate->id : null)) }}
+      {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
+    {{ Form::close() }}
 @endif
 

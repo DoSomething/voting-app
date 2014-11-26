@@ -71,6 +71,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     return strtotime($this->attributes['birthdate']);
   }
 
+  /**
+   * Check if a user matching the given input exists.
+   * @param $input Input
+   * @return User|bool Matching user object or false if nonexistant.
+   */
   public static function isCurrentUser($input)
   {
     $birthdate = date('Y-m-d',(strtotime($input['birthdate'])));
@@ -88,6 +93,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
   }
 
+  /**
+   * Create new user, and fire corresponding event.
+   */
   public static function createNewUser($input)
   {
     $user = User::create([

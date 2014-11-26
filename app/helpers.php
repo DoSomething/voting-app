@@ -24,7 +24,8 @@ function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = n
 };
 
 /**
- *
+ * Return contents of Fastly's GeoIP country code header.
+ * @return string|null Country Code, or null if header is not set.
  */
 function get_country_code()
 {
@@ -32,15 +33,19 @@ function get_country_code()
 }
 
 /**
- *
+ * Determine which field to show in user form. Domestic users should
+ * see phone field, and international users should see email field.
  */
 function get_login_type()
 {
-  $type = 'user_phone';
+  $type = 'phone';
   $country_code = get_country_code();
+
+  // If user is not in the US, ask for their email instead.
   if (isset($country_code) && $country_code != 'US') {
-    $type = 'user_email';
+    $type = 'email';
   }
+
   return $type;
 }
 

@@ -13,25 +13,24 @@ class SessionsController extends \BaseController {
 
   /**
    * Show the form for creating a new resource.
-   * GET /sessions/create
+   * GET /login
    *
    * @return Response
    */
   public function create()
   {
-    $type = get_login_type();
-
-    return View::make('sessions.create', compact('type'));
+    return View::make('sessions.create');
   }
 
   /**
    * Allows an admin to log in.
+   * GET /admin
    *
+   * @return Response
    */
   public function adminCreate()
   {
-    $type = 'admin';
-    return View::make('sessions.create', compact('type'));
+    return View::make('sessions.admin');
   }
 
   /**
@@ -81,7 +80,10 @@ class SessionsController extends \BaseController {
 
     return Redirect::home()->withFlashMessage('You\'re now signed out.');;
   }
+
   /**
+   * Authentication for a non-admin user.
+   * See create() above.
    *
    */
   public function userLogin($input)
