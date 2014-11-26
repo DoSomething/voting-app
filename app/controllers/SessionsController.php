@@ -79,14 +79,12 @@ class SessionsController extends \BaseController {
   public function userLogin($input)
   {
     $user = User::isCurrentUser($input);
-    if (is_string($user)) {
-      return Redirect::back()->withInput()->withFlashMessage('Looks like that\'s not the right birthdate');
-    }
 
     if (!$user) {
       $this->registrationValidator->validate($input);
       $user = User::createNewUser($input);
     }
+
     // Log in the user.
     Auth::login($user);
 
