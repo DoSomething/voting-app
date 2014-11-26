@@ -3,7 +3,8 @@ var changed = require('gulp-changed');
 
 var FILES = {
   './app/assets/fonts/**/*.{ttf,woff,eof,svg}': './public/dist/fonts',
-  './app/assets/bower_components/respond/dest/respond.min.js': './public/dist/lib'
+  './app/assets/bower_components/respond/dest/respond.min.js': './public/dist/lib',
+  './app/assets/bower_components/html5shiv/dist/html5shiv.min.js': './public/dist/lib'
 };
 
 gulp.task('copy', function() {
