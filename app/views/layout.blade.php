@@ -11,17 +11,15 @@
   @include('partials.metadata')
 </head>
 <body>
-    @include('partials.navigation')
+  @include('partials.navigation')
 
-    <div class="container">
-      @yield('content')
-    </div>
-
-    @include('partials.footer')
-
-    @include('partials.admin')
+  <div class="container">
+    @yield('content')
   </div>
-  </div>
+
+  @include('partials.footer')
+
+  @include('partials.admin')
 
   <script src="/dist/app.js" type="text/javascript" charset="utf-8"></script>
 
