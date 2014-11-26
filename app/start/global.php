@@ -53,10 +53,21 @@ App::error(function(Exception $exception, $code)
 
 App::error(function(Laracasts\Validation\FormValidationException $exception, $code)
 {
-  return Redirect::back()->withInput()
+  // By default, redirect back.
+  $redirect = Redirect::back();
+
+  // If form has a Candidate ID, redirect to that candidate page.
+  if($candidate_id = Input::get('candidate_id')) {
+    $candidate = Candidate::find($candidate_id);
+    $redirect = Redirect::route('candidates.show', [$candidate->slug]);
+  }
+
+  return $redirect
+    ->withInput()
     ->withErrors($exception->getErrors())
     ->withFlashMessage('There were some problems with that submission. Try again!')
     ->with('flash_message_type', 'error');
+
 });
 
 /*

@@ -44,17 +44,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
-   * Mutator to update the birthdate for the expected format.
-   *
-   * @var string
-   */
-  public function getBirthdateAttribute($birthdate)
-  {
-    return date('m-d-Y',(strtotime($birthdate)));
-  }
-
-  /**
-   * Mutator to update the phone number tp the expected format.
+   * Mutator to update the phone number for the expected format.
    *
    * @var string
    */
@@ -78,17 +68,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    */
   public static function isCurrentUser($input)
   {
-    $birthdate = date('Y-m-d',(strtotime($input['birthdate'])));
+    $searchQuery = new User($input);
 
-    $user = User::where('email', $input['email'])
-                ->where('phone', $input['phone'])
-                ->first();
+    $user = User::where('email', $searchQuery->email)
+      ->where('phone', $searchQuery->phone)
+      ->where('birthdate', $searchQuery->birthdate)
+      ->first();
 
-    if ($user && $user->birthdate == $birthdate) {
+    if ($user) {
       return $user;
-    } elseif ($user && $user->birthdate != $birthdate) {
-      return $user->email;
     }
+
     return FALSE;
 
   }

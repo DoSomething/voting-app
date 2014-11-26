@@ -4,10 +4,11 @@ class SessionsController extends \BaseController {
 
   protected $sessionsValidator;
 
-  public function __construct(UserSessionValidator $userSessionValidator, AdminSessionValidator $adminSessionValidator)
+  public function __construct(UserSessionValidator $userSessionValidator, AdminSessionValidator $adminSessionValidator, UserRegistrationValidator $registrationValidator)
   {
     $this->userSessionValidator = $userSessionValidator;
     $this->adminSessionValidator = $adminSessionValidator;
+    $this->registrationValidator = $registrationValidator;
   }
 
 
@@ -50,18 +51,7 @@ class SessionsController extends \BaseController {
     // Use the user login/create method.
     else {
       $input = Input::only('first_name', 'email', 'phone', 'birthdate', 'candidate_id');
-
-      try {
-        $this->userSessionValidator->validate($input);
-      } catch(Laracasts\Validation\FormValidationException $exception) {
-        // If there is a form validation error, show form errors on candidate page.
-        $candidate = Candidate::find($input['candidate_id']);
-        return Redirect::route('candidates.show', [$candidate->slug])->withInput()
-          ->withErrors($exception->getErrors())
-          ->withFlashMessage('There were some problems with that submission. Try again!')
-          ->with('flash_message_type', 'error');
-      }
-
+      $this->userSessionValidator->validate($input);
       return $this->userLogin($input);
     }
 
@@ -89,12 +79,12 @@ class SessionsController extends \BaseController {
   public function userLogin($input)
   {
     $user = User::isCurrentUser($input);
-    if (is_string($user)) {
-      return Redirect::back()->withInput()->withFlashMessage('Looks like that\'s not the right birthdate');
-    }
+
     if (!$user) {
+      $this->registrationValidator->validate($input);
       $user = User::createNewUser($input);
     }
+
     // Log in the user.
     Auth::login($user);
 
