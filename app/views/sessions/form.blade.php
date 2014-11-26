@@ -11,7 +11,7 @@
     {{ form_error('email', $errors) }}
     {{ Form::text('email', null, ['placeholder' => 'you@example.com']) }}
   @else
-    {{ Form::label('phone', 'Email') }}
+    {{ Form::label('phone', 'Cell Number') }}
     {{ form_error('phone', $errors) }}
     {{ Form::text('phone', null, ['placeholder' => '555-555-5555']) }}
   @endif
