@@ -4,10 +4,11 @@ class SessionsController extends \BaseController {
 
   protected $sessionsValidator;
 
-  public function __construct(UserSessionValidator $userSessionValidator, AdminSessionValidator $adminSessionValidator)
+  public function __construct(UserSessionValidator $userSessionValidator, AdminSessionValidator $adminSessionValidator, UserRegistrationValidator $registrationValidator)
   {
     $this->userSessionValidator = $userSessionValidator;
     $this->adminSessionValidator = $adminSessionValidator;
+    $this->registrationValidator = $registrationValidator;
   }
 
 
@@ -81,7 +82,9 @@ class SessionsController extends \BaseController {
     if (is_string($user)) {
       return Redirect::back()->withInput()->withFlashMessage('Looks like that\'s not the right birthdate');
     }
+
     if (!$user) {
+      $this->registrationValidator->validate($input);
       $user = User::createNewUser($input);
     }
     // Log in the user.
