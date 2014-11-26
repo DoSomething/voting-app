@@ -11,6 +11,7 @@
   <!--[if lte IE 8]>
   <script src="/dist/respond.min.js"></script>
 
+    <script src="/dist/lib/html5shiv.min.js"></script>
   <![endif]-->
 
   @include('partials.metadata')
