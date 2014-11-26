@@ -7,6 +7,18 @@ class Category extends Eloquent implements SluggableInterface {
 
   use SluggableTrait;
 
+  public static function boot()
+  {
+    parent::boot();
+
+    Category::saved(function($category)
+    {
+      // Clear categories cache whenever model is updated
+      Cache::forget('categories');
+    });
+
+  }
+
   /**
    * The attributes which may be mass-assigned.
    *

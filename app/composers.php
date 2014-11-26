@@ -5,7 +5,7 @@
  */
 View::composer('layout', function($view)
 {
-  $categories = Category::all();
+  $categories = Category::rememberForever('categories')->get();
   $settings = App::make('SettingsRepository')->all();
   return $view->with('settings', $settings)->with('categories', $categories);
 });
