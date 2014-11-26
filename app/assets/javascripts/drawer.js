@@ -61,6 +61,8 @@ $('.js-drawer-link').on('click', function(e) {
     .replace(/CANDIDATE_NAME/g, name)
     .replace(/TWITTER_NAME/g, twitter)
     .replace(/CANDIDATE_LINK/g, link)
+    .replace('Thanks for voting!', 'You\'ve already voted in this category.');
+
   var details = template({
     name: $tile.find('h1').text(),
     description: $tile.data('description'),
