@@ -57,11 +57,17 @@ $('.js-drawer-link').on('click', function(e) {
   var twitter = $tile.data('twitter');
   var link = $tile.find('a').attr('href');
 
+  var formHTML = $("#form-template").html()
+    .replace(/CANDIDATE_NAME/g, name)
+    .replace(/TWITTER_NAME/g, twitter)
+    .replace(/CANDIDATE_LINK/g, link)
+    .replace('Thanks for voting!', 'You\'ve already voted in this category.');
+
   var details = template({
     name: $tile.find('h1').text(),
     description: $tile.data('description'),
     image: $tile.find('img').attr('src'),
-    form: $("#form-template").html().replace('CANDIDATE_NAME', name).replace('TWITTER_NAME', twitter).replace(/CANDIDATE_LINK/g, link)
+    form: formHTML
   });
 
   var $details = $('<div class="tile__details"><div class="tile__details__inner">' + details + '</div></div>');
