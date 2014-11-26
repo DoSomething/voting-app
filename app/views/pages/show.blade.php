@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="wrapper">
-    <h1 class="highlighted">{{{ $page->title }}}</h1>
+    <h1>{{{ $page->title }}}</h1>
 
     {{ $page->content_html }}
   </div>
