@@ -13,6 +13,11 @@
   @endif
   </ul>
 
+  <div class="wrapper -narrow">
+    <h4>Was there a celeb we missed?</h4>
+    <p>If you know a celeb who's done kick ass things in the world, but don't see them on our list, let us know by emailing <a href="#">writein@celebsgonegood.com</a>. Thanks!</p>
+  </div>
+
   <script type="text/html" id="form-template">
     @include('candidates.voteForm', ['category' => $category, 'candidate' => null])
   </script>
