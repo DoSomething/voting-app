@@ -44,17 +44,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
   /**
-   * Mutator to update the birthdate for the expected format.
-   *
-   * @var string
-   */
-  public function getBirthdateAttribute($birthdate)
-  {
-    return date('m-d-Y',(strtotime($birthdate)));
-  }
-
-  /**
-   * Mutator to update the phone number tp the expected format.
+   * Mutator to update the phone number for the expected format.
    *
    * @var string
    */
