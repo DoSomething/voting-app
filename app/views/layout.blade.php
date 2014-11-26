@@ -9,9 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
   <!--[if lte IE 8]>
-  <script src="/dist/respond.min.js"></script>
-
     <script src="/dist/lib/html5shiv.min.js"></script>
+    <script src="/dist/lib/respond.min.js"></script>
   <![endif]-->
 
   @include('partials.metadata')
