@@ -50,6 +50,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    */
   public function setPhoneAttribute($phone)
   {
+    // Skip mutator if attribute is null.
+    if(is_null($phone)) return;
+
+    // Otherwise, remove all non-numeric characters.
     $this->attributes['phone'] = preg_replace('/[^0-9]/','', $phone);
   }
 
