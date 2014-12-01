@@ -90,17 +90,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   /**
    * Create new user, and fire corresponding event.
    */
-  public static function createNewUser($input)
+  public static function createNewUser($attributes)
   {
-    $user = User::create([
-      'first_name' => $input['first_name'],
-      'email' => $input['email'],
-      'phone' => $input['phone'],
-      'birthdate' => $input['birthdate'],
-      'country_code' => get_country_code(),
-    ]);
-
-    Event::fire('user.create', [$user]);
+    $user = new User($attributes);
+    $user->country_code = get_country_code();
+    $user->save();
 
     return $user;
   }
