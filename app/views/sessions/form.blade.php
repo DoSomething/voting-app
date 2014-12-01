@@ -17,7 +17,7 @@
   @endif
 
   <label class="control checkbox">
-    {{ Form::checkbox('opt_in', null, true) }}
+    {{ Form::checkbox('opt_in', 1, true) }}
     <span class="control-indicator"></span>
     Yes, send me updates from DoSomething.org
   </label>
