@@ -42,19 +42,17 @@ class SessionsController extends \BaseController {
    */
   public function store()
   {
+    $input = Input::all();
+
     // If coming from admin, use that login method.
     if (Input::has('password')) {
-      $input = Input::only('email', 'password');
       $this->adminSessionValidator->validate($input);
-      return $this->adminLogin($input);
-    }
-    // Use the user login/create method.
-    else {
-      $input = Input::only('first_name', 'email', 'phone', 'birthdate', 'candidate_id');
-      $this->userSessionValidator->validate($input);
-      return $this->userLogin($input);
+      return $this->adminLogin();
     }
 
+    // Otherwise, use the user login/create method.
+    $this->userSessionValidator->validate($input);
+    return $this->userLogin();
   }
 
   /**
@@ -73,13 +71,14 @@ class SessionsController extends \BaseController {
 
   /**
    * Authentication for a non-admin user.
-   * See create() above.
-   *
+   * @see SessionsController#create()
    */
-  public function userLogin($input)
+  public function userLogin()
   {
+    $input = Input::all();
     $user = User::isCurrentUser($input);
 
+    // If user doesn't exist, attempt to create.
     if (!$user) {
       $this->registrationValidator->validate($input);
       $user = User::createNewUser($input);
@@ -94,7 +93,7 @@ class SessionsController extends \BaseController {
     Auth::login($user);
 
     // Is the user login on a vote page?
-    if (isset($input['candidate_id']) && !empty($input['candidate_id'])) {
+    if (Input::has('candidate_id')) {
       $vote = Vote::createIfEligible($input['candidate_id'], $user->id);
 
       if ($vote) {
@@ -111,15 +110,15 @@ class SessionsController extends \BaseController {
   }
 
   /**
-   *
+   * Authentication for an admin user.
+   * @see SessionsController#create()
    */
-  public function adminLogin($input)
+  public function adminLogin()
   {
-    // $this->sessionValidator->validate($input);
-    if(Auth::attempt($input)) {
+    $credentials = Input::only('email', 'password');
+    if(Auth::attempt($credentials)) {
       return Redirect::intended('/')->withFlashMessage('Welcome back!');
-    }
-    else {
+    } else {
       return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
     }
 
