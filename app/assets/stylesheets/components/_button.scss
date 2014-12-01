@@ -26,6 +26,7 @@ input[type="submit"], button, .button {
     font-size: $medium-font-size;
     text-transform: uppercase;
     padding-top: $base-spacing * 1.2;
+    margin: ($base-spacing * 2) auto;
   }
 
   &.-danger {
