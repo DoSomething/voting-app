@@ -29,7 +29,7 @@ function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = n
  */
 function get_country_code()
 {
-  return Request::server('HTTP_X_FASTLY_COUNTRY_CODE');
+  return (Request::server('HTTP_X_FASTLY_COUNTRY_CODE')) ? Request::server('HTTP_X_FASTLY_COUNTRY_CODE') : 'US';
 }
 
 /**
