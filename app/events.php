@@ -15,6 +15,9 @@ Event::listen('user.vote', function($candidate, $user) {
     'email' => $user->email,
     'mobile' => $user->phone,
     'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
+    'country_code' => $user->country_code,
+
+    // Candidate information
     'candidate_id' => $candidate->id,
     'candidate_name' => $candidate->name,
 
