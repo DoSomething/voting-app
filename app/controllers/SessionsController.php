@@ -76,12 +76,15 @@ class SessionsController extends \BaseController {
   public function userLogin()
   {
     $input = Input::all();
+
     $user = User::isCurrentUser($input);
+    $newUserAccount = false;
 
     // If user doesn't exist, attempt to create.
     if (!$user) {
       $this->registrationValidator->validate($input);
       $user = User::createNewUser($input);
+      $newUserAccount = true;
 
       // Trigger a transactional message if the user opted in.
       if(Input::has('opt_in')) {
@@ -99,6 +102,11 @@ class SessionsController extends \BaseController {
       if ($vote) {
         $candidate = Candidate::find($input['candidate_id']);
         $url = URL::route('candidates.show', [$candidate->slug, '#message']);
+
+        // Trigger a vote transactional message only for new users.
+        if($newUserAccount) {
+          Event::fire('user.vote', [$candidate, $user]);
+        }
 
         return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
       } else {
