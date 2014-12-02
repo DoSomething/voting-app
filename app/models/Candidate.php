@@ -35,6 +35,7 @@ class Candidate extends Eloquent implements SluggableInterface {
     'save_to' => 'slug'
   ];
 
+  protected $appends = array('share_name');
   /**
    * Inverse has-many relationship to Categories.
    */
@@ -69,6 +70,17 @@ class Candidate extends Eloquent implements SluggableInterface {
         ->save(public_path('images') . '/' . 'thumb-' . $filename);
 
       $this->attributes['photo'] = $filename;
+  }
+
+  /**
+   * Custom share name attribute
+   *
+   * @return string twitter handle, or celeb name
+   * @see $appends array
+   */
+  public function getShareNameAttribute()
+  {
+    return (!empty($this->twitter)) ? $this->twitter : $this->name;
   }
 
 }
