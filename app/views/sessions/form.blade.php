@@ -16,9 +16,3 @@
     {{ Form::text('phone', null, ['placeholder' => '555-555-5555']) }}
   @endif
 
-  <label class="control checkbox">
-    {{ Form::checkbox('opt_in', null, true) }}
-    <span class="control-indicator"></span>
-    Yes, send me updates from DoSomething.org
-  </label>
-

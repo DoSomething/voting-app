@@ -85,11 +85,7 @@ class SessionsController extends \BaseController {
       $this->registrationValidator->validate($input);
       $user = User::createNewUser($input);
       $newUserAccount = true;
-
-      // Trigger a transactional message if the user opted in.
-      if(Input::has('opt_in')) {
-        Event::fire('user.create', [$user]);
-      }
+      Event::fire('user.create', [$user]);
     }
 
     // Log in the user.
