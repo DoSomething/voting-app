@@ -22,7 +22,7 @@ class DropWriteInTable extends Migration {
    */
   public function down()
   {
-    //
+    throw new Exception('Irreversible migration, sorry mate.');
   }
 
 }
