@@ -2,6 +2,8 @@
 
 // An event listener that handles user votes.
 Event::listen('user.vote', function($candidate, $user) {
+  // Don't send messages locally.
+  if (App::environment('local')) return;
   // Sign user up for transaction messages.
   $credentials = Config::get('messagebroker.credentials');
   $config = Config::get('messagebroker.config');
@@ -17,7 +19,7 @@ Event::listen('user.vote', function($candidate, $user) {
     'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
     'country_code' => $user->country_code,
 
-    // Candidate information
+    // Candidate information.
     'candidate_id' => $candidate->id,
     'candidate_name' => $candidate->name,
 
@@ -40,9 +42,12 @@ Event::listen('user.vote', function($candidate, $user) {
   $payload = serialize($payload);
   $mb->publishMessage($payload);
 
+
 });
 
 Event::listen('user.create', function($user) {
+  // Don't send messages locally.
+  if (App::environment('local')) return;
   // Sign user up for transaction messages.
   $credentials = Config::get('messagebroker.credentials');
   $config = Config::get('messagebroker.config');
@@ -77,4 +82,5 @@ Event::listen('user.create', function($user) {
 
   $payload = serialize($payload);
   $mb->publishMessage($payload);
+
 });
