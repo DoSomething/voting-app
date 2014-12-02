@@ -35,8 +35,6 @@ Route::resource('candidates', 'CandidatesController');
  * Votes
  */
 Route::resource('votes', 'VotesController', ['only' => ['store']]);
-Route::get('write-in', ['as' => 'write-in.create', 'uses' => 'WriteInController@create']);
-Route::post('write-in', ['as' => 'write-in.store', 'uses' => 'WriteInController@store']);
 
 /**
  * Users
