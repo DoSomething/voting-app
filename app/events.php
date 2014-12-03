@@ -48,6 +48,12 @@ Event::listen('first.vote', function($candidate, $user) {
 Event::listen('user.create', function($user) {
   // Don't send messages locally.
   if (App::environment('local')) return;
+
+  //  // Log this event to stathat.
+  $stathat_key = Config::get('services.stathat.key');
+  if ($stathat_key)
+    stathat_ez_count($stathat_key, 'cgg - user register', 1);
+
   // Sign user up for transaction messages.
   $credentials = Config::get('messagebroker.credentials');
   $config = Config::get('messagebroker.config');
