@@ -28,4 +28,8 @@ return array(
 		'secret' => '',
 	),
 
+	'stathat' => array(
+		'key' => getenv('STATHAT_EZ_KEY')
+	),
+
 );

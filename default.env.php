@@ -5,4 +5,5 @@ return [
   'DB_USERNAME'     => 'username',
   'DB_PASSWORD'     => 'password',
   'DB_NAME'         => 'db_name',
+  'STATHAT_EZ_KEY'  => 'key',
 ];
