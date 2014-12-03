@@ -10,7 +10,7 @@
     <p class="heading -gamma">Get {{ $candidate->name or "CANDIDATE_NAME" }} more votes!</p>
     <ul class="social-links">
       <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent((isset($candidate) ? route('candidates.show', [$candidate->slug]) : 'CANDIDATE_LINK')) }}"><span>Facebook</span></a></li>
-      <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I voted for ' . (isset($candidate) ? $candidate->share_name : 'TWITTER_NAME') . ' in #celebsgonegood who rocked this year! Vote for your fave celeb NOW:', (isset($candidate) ? route('candidates.show', [$candidate->slug]) : 'CANDIDATE_LINK')) }}"><span>Twitter</span></a></li>
+      <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent('I just voted for ' . (isset($candidate) ? $candidate->share_name : 'TWITTER_NAME') . ' in @dosomething\'s #celebsgonegood, click here to vote too:', (isset($candidate) ? route('candidates.show', [$candidate->slug]) : 'CANDIDATE_LINK')) }}"><span>Twitter</span></a></li>
     </ul>
   @endif
 @else
