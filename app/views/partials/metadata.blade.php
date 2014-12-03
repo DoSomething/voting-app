@@ -1,6 +1,6 @@
 {{-- General social metadata --}}
 <link rel="canonical" href="{{{ URL::current() }}}" />
-<meta name="description" content="@yield('meta_description', 'Vote for your favorite celeb who has done kick ass things in the world.')" />
+<meta name="description" content="@yield('meta_description', 'Vote for your favorite celebrity who has done kick ass things in the world this year.')" />
 
 {{-- Twitter --}}
 <meta name="twitter:site" content="@dosomething" />
