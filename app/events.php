@@ -86,6 +86,7 @@ Event::listen('user.create', function($user) {
 });
 
 Event::listen('user.vote', function() {
+  if (App::environment('local')) return;
   // Log this event to stathat.
   $stathat_key = Config::get('services.stathat.key');
   if ($stathat_key)
