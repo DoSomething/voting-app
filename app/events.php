@@ -1,7 +1,7 @@
 <?php
 
 // An event listener that handles user votes.
-Event::listen('user.vote', function($candidate, $user) {
+Event::listen('first.vote', function($candidate, $user) {
   // Don't send messages locally.
   if (App::environment('local')) return;
   // Sign user up for transaction messages.
@@ -48,6 +48,12 @@ Event::listen('user.vote', function($candidate, $user) {
 Event::listen('user.create', function($user) {
   // Don't send messages locally.
   if (App::environment('local')) return;
+
+  //  // Log this event to stathat.
+  $stathat_key = Config::get('services.stathat.key');
+  if ($stathat_key)
+    stathat_ez_count($stathat_key, 'cgg - user register', 1);
+
   // Sign user up for transaction messages.
   $credentials = Config::get('messagebroker.credentials');
   $config = Config::get('messagebroker.config');
@@ -83,4 +89,12 @@ Event::listen('user.create', function($user) {
   $payload = serialize($payload);
   $mb->publishMessage($payload);
 
+});
+
+Event::listen('user.vote', function() {
+  if (App::environment('local')) return;
+  // Log this event to stathat.
+  $stathat_key = Config::get('services.stathat.key');
+  if ($stathat_key)
+    stathat_ez_count($stathat_key, 'cgg - vote', 1);
 });

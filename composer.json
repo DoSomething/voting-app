@@ -30,7 +30,10 @@
       "app/repositories",
       "app/validators"
     ],
-    "files": ["app/helpers.php"]
+    "files": [
+    "app/helpers.php",
+    "app/stathat.php"
+    ]
   },
   "scripts": {
     "post-install-cmd": [

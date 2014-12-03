@@ -46,6 +46,7 @@ class Vote extends Eloquent {
       'user_id' => $user_id
     ]);
 
+    Event::fire('user.vote');
     return $vote;
   }
 
