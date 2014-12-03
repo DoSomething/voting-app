@@ -1,0 +1,18 @@
+// Tables
+
+table {
+  width: 100%;
+  max-width: 100%;
+}
+
+thead {
+  font-weight: $weight-bold;
+}
+
+tr {
+  border-bottom: 1px solid $gray;
+}
+
+td {
+  padding: $base-spacing 0;
+}
