@@ -18,6 +18,7 @@
       @include('sessions.form', [$type])
       {{ Form::hidden('candidate_id', (isset($candidate->id) ? $candidate->id : null)) }}
       {{ Form::submit('Count My Vote', ['class' => 'button -primary']) }}
+      <p class="legal" id="ctia">By voting you agree receive future updates from DoSomething.org. Message & data rates may apply. Text STOP to opt-out, HELP for help.</p>
     {{ Form::close() }}
 @endif
 
