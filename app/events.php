@@ -84,3 +84,10 @@ Event::listen('user.create', function($user) {
   $mb->publishMessage($payload);
 
 });
+
+Event::listen('user.vote', function() {
+  // Log this event to stathat.
+  $stathat_key = Config::get('services.stathat.key');
+  if ($stathat_key)
+    stathat_ez_count($stathat_key, 'cgg - vote', 1);
+});
