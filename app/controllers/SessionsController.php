@@ -101,7 +101,7 @@ class SessionsController extends \BaseController {
 
         // Trigger a vote transactional message only for new users.
         if($newUserAccount) {
-          Event::fire('user.vote', [$candidate, $user]);
+          Event::fire('first.vote', [$candidate, $user]);
         }
 
         return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');

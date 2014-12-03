@@ -1,7 +1,7 @@
 <?php
 
 // An event listener that handles user votes.
-Event::listen('user.vote', function($candidate, $user) {
+Event::listen('first.vote', function($candidate, $user) {
   // Don't send messages locally.
   if (App::environment('local')) return;
   // Sign user up for transaction messages.
