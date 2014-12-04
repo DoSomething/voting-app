@@ -8,16 +8,17 @@
   <table>
     <thead>
       <tr>
-        <td>Candidate Name</td>
+        <td> {{ sort_applicants_by('name', 'Candidate Name')}} </td>
         <td>Category</td>
-        <td>Votes</td>
+        <td> {{ sort_applicants_by('votes', 'Votes') }} </td>
+
       </tr>
     </thead>
     @forelse($candidates as $candidate)
     <tr>
-      <td>{{ link_to_route('candidates.show', $candidate->name, [ $candidate->slug ]) }}</td>
-      <td>{{ $candidate->category->name }}</td>
-      <td>{{ $candidate->votes->count() }} votes</td>
+      <td>{{ $candidate->name }}</td>
+      <td>{{ $candidate->category }}</td>
+      <td>{{ ($candidate->votes)}} votes</td>
     </tr>
     @empty
     <div class="empty">No candidates... yet!</div>

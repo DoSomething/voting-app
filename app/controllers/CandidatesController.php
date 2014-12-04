@@ -20,7 +20,19 @@ class CandidatesController extends \BaseController {
    */
   public function index()
   {
-    $candidates = $this->candidate->get();
+    // Get optional request params.
+    $sort_by = Request::get('sort_by');
+    $direction = Request::get('direction');
+
+    $query = DB::table('candidates')
+               ->join('categories', 'categories.id', '=', 'candidates.category_id')
+               ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
+               ->select('candidates.name as name', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+               ->groupBy('candidates.name');
+     if ($sort_by) {
+      $query->orderBy($sort_by, $direction);
+    }
+    $candidates = $query->get();
     return View::make('candidates.index', compact('candidates'));
   }
 
