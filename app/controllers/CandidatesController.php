@@ -27,7 +27,7 @@ class CandidatesController extends \BaseController {
     $query = DB::table('candidates')
                ->join('categories', 'categories.id', '=', 'candidates.category_id')
                ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
-               ->select('candidates.name as name', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+               ->select('candidates.name as name', 'candidates.slug', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
                ->groupBy('candidates.name');
      if ($sort_by) {
       $query->orderBy($sort_by, $direction);
