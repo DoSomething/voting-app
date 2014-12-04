@@ -4,14 +4,24 @@
   <div class="wrapper">
     <div class="row">
       <h1 class="highlighted">All Users</h1>
+      <p> Currently there are {{ $users->count() }} in the system. </p>
     </div>
 
-    <ul>
+    <table>
+    <thead>
+      <tr>
+        <td> User </td>
+        <td> Contact </td>
+      </tr>
+    </thead>
     @forelse($users as $user)
-      <li>{{ link_to_route('users.show', $user->email, $user->id) }}
+    <tr>
+      <td> {{ $user->first_name }} </td>
+      <td> {{ $user->phone or $user->email }} </td>
+    </tr>
     @empty
-      <li>No users.</li>
+      <div class="empty">No users... yet!</div>
     @endforelse
-    </ul>
-  </div>
+
+  </table>
 @stop

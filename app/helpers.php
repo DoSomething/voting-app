@@ -64,3 +64,12 @@ function facebook_intent($url)
 {
   return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
 }
+
+/**
+ * A helper function to used to sort candidates.
+ */
+function sort_candidates_by($column, $body)
+{
+  $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
+  return link_to_route('candidates.index', $body, ['sort_by' => $column, 'direction' => $direction]);
+}
