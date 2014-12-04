@@ -33,6 +33,7 @@ class CandidatesController extends \BaseController {
       $query->orderBy($sort_by, $direction);
     }
     $candidates = $query->get();
+
     return View::make('candidates.index', compact('candidates'));
   }
 
