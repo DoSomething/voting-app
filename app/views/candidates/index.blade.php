@@ -8,9 +8,9 @@
   <table>
     <thead>
       <tr>
-        <td> {{ sort_applicants_by('name', 'Candidate Name')}} </td>
+        <td> {{ sort_candidates_by('name', 'Candidate Name')}} </td>
         <td>Category</td>
-        <td> {{ sort_applicants_by('votes', 'Votes') }} </td>
+        <td> {{ sort_candidates_by('votes', 'Votes') }} </td>
 
       </tr>
     </thead>

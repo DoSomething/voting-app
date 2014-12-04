@@ -68,7 +68,7 @@ function facebook_intent($url)
 /**
  * A helper function to used to sort candidates.
  */
-function sort_applicants_by($column, $body)
+function sort_candidates_by($column, $body)
 {
   $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
   return link_to_route('candidates.index', $body, ['sort_by' => $column, 'direction' => $direction]);
