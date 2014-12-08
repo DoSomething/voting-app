@@ -1,0 +1,13 @@
+.pagination {
+  list-style: none;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 0 $base-spacing;
+  }
+
+  .disabled {
+    color: $gray;
+  }
+}
