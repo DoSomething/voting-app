@@ -42,6 +42,11 @@ Event::listen('first.vote', function($candidate, $user) {
   $payload = serialize($payload);
   $mb->publishMessage($payload);
 
+  if (extension_loaded('newrelic')) {
+    Log::info('New Relic extension loaded');
+    newrelic_add_custom_parameter('user_birthdate', $user->birthdate_timestamp());
+  }
+
 
 });
 
