@@ -8,23 +8,25 @@
     </div>
 
     <table>
-    <thead>
+      <thead>
+        <tr>
+          <td> User </td>
+          <td> Contact </td>
           <td> Admin </td>
+        </tr>
+      </thead>
+      @forelse($users as $user)
       <tr>
-        <td> User </td>
-        <td> Contact </td>
+        <td> {{ $user->first_name }} </td>
+        <td> {{ $user->phone or $user->email }} </td>
         <td> {{ ($user->hasRole('admin') ? '✓' : '') }} </td>
       </tr>
-    </thead>
-    @forelse($users as $user)
-    <tr>
-      <td> {{ $user->first_name }} </td>
-      <td> {{ $user->phone or $user->email }} </td>
-    </tr>
-    @empty
-      <div class="empty">No users... yet!</div>
-    @endforelse
-  </table>
+      @empty
+        <div class="empty">No users... yet!</div>
+      @endforelse
+    </table>
 
-    {{ $users->links() }}
+  {{ $users->links() }}
+
+  </div>
 @stop
