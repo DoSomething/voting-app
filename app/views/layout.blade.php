@@ -8,6 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
+  <link rel="shortcut icon" href="/dist/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/dist/images/apple-touch-icon.png">
+
   <!--[if lte IE 8]>
     <script src="/dist/lib/html5shiv.min.js"></script>
     <script src="/dist/lib/respond.min.js"></script>
