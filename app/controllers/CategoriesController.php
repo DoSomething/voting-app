@@ -11,6 +11,7 @@ class CategoriesController extends \BaseController {
     $this->categoryValidator = $categoryValidator;
 
     $this->beforeFilter('role:admin', ['except' => ['show']]);
+    $this->beforeFilter('csrf', ['on' => ['post', 'put', 'patch', 'delete']]);
   }
 
   /**

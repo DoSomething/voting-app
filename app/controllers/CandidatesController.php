@@ -11,6 +11,7 @@ class CandidatesController extends \BaseController {
     $this->candidateValidator = $candidateValidator;
 
     $this->beforeFilter('role:admin', ['except' => ['show']]);
+    $this->beforeFilter('csrf', ['on' => ['post', 'put', 'patch', 'delete']]);
   }
 
   /**
