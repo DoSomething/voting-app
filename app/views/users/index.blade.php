@@ -9,9 +9,11 @@
 
     <table>
     <thead>
+          <td> Admin </td>
       <tr>
         <td> User </td>
         <td> Contact </td>
+        <td> {{ ($user->hasRole('admin') ? '✓' : '') }} </td>
       </tr>
     </thead>
     @forelse($users as $user)

@@ -19,7 +19,7 @@ class UsersController extends \BaseController {
    */
   public function index()
   {
-    $users = $this->user->paginate(25);
+    $users = $this->user->with('roles')->paginate(25);
     return View::make('users.index', compact('users'));
   }
 
