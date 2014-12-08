@@ -15,7 +15,7 @@
 
   <div class="wrapper -narrow">
     <h4>Was there a celeb we missed?</h4>
-    <p>If you know a celeb who's done kickass things in the world, but don't see them on our list, let us know by emailing {{ link_to('mailto:writein@celebsgonegood.com', 'writein@celebsgonegood.com') }}. Thanks!</p>
+    <p>If you know a celeb who's done kickass things in the world, but don't see them on our list, let us know by emailing {{ link_to('mailto:writein@celebsgonegood.com', 'writein@celebsgonegood.com') }}. Make sure to include the work they've done in 2014 for social good (in 140 characters or less). Thank you!</p>
   </div>
 
   <script type="text/html" id="form-template">
