@@ -11,6 +11,7 @@ class SettingsController extends \BaseController {
     $this->settingValidator = $settingValidator;
 
     $this->beforeFilter('role:admin');
+    $this->beforeFilter('csrf', ['on' => ['post', 'put', 'patch', 'delete']]);
   }
 
   /**

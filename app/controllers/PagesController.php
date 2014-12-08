@@ -11,6 +11,7 @@ class PagesController extends \BaseController {
     $this->pageValidator = $pageValidator;
 
     $this->beforeFilter('role:admin', ['except' => ['show']]);
+    $this->beforeFilter('csrf', ['on' => ['post', 'put', 'patch', 'delete']]);
   }
 
 	/**
