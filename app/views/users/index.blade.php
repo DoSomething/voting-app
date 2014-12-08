@@ -4,7 +4,7 @@
   <div class="wrapper">
     <div class="row">
       <h1 class="highlighted">All Users</h1>
-      <p> Currently there are {{ $users->count() }} in the system. </p>
+      <p>There are a whopping {{ number_format($count) }} total registered users.</p>
     </div>
 
     <table>
