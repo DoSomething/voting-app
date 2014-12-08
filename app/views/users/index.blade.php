@@ -22,6 +22,7 @@
     @empty
       <div class="empty">No users... yet!</div>
     @endforelse
-
   </table>
+
+    {{ $users->links() }}
 @stop
