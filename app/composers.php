@@ -18,3 +18,9 @@ View::composer('candidates.show', function($view)
   $settings = App::make('SettingsRepository')->all();
   return $view->with('settings', $settings);
 });
+
+View::composer('candidates.voteForm', function($view)
+{
+  $settings = App::make('SettingsRepository')->all();
+  return $view->with('settings', $settings);
+});

@@ -51,9 +51,16 @@ function get_login_type()
 
 /**
  * Generate a Twitter tweet web intent.
+ * @param $text    String  Text for tweet, with TWITTER_NAME placeholder for twitter handle
+ * @param $url     String  URL to attach to tweet
+ * @param $twitter String  (optional) Text to replace TWITTER_NAME placeholder with.
  */
-function tweet_intent($text, $url)
+function tweet_intent($text, $url, $twitter = null)
 {
+  if(!is_null($twitter)) {
+    $text = str_replace('TWITTER_NAME', $twitter, $text);
+  }
+
   return 'https://twitter.com/intent/tweet?text=' . urlencode($text) . '&url=' . urlencode($url);
 }
 
