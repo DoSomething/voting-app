@@ -7,12 +7,23 @@
       <p>These settings allow you to customize this instance of Voting App.</p>
     </div>
 
-    <ul>
-    @forelse($settings as $setting)
-      <li>{{ link_to_route('settings.edit', $setting->key, [$setting->key]) }}: {{{ $setting->value }}}</li>
-    @empty
-      <li>No settings.</li>
-    @endforelse
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <td>Setting Name</td>
+          <td>Value</td>
+          <td>&nbsp;</td>
+        </tr>
+      </thead>
+      @forelse($settings as $setting)
+      <tr>
+        <td><strong>{{ $setting->key }}</strong></td>
+        <td>{{ $setting->value }}</td>
+        <td>{{ link_to_route('settings.edit', 'edit', [$setting->key]) }}</td>
+      </tr>
+      @empty
+        <div class="empty">No settings... yet!</div>
+      @endforelse
+    </table>
   </div>
 @stop
