@@ -3,7 +3,12 @@ build:
     # The steps that will be executed on build
     steps:
       - leipert/composer-install@0.0.1
-      - wercker/npm-install@0.9.3
+      - script:
+          name: npm install
+          code: |-
+            mkdir -p $WERCKER_CACHE_DIR/wercker/npm
+            npm config set cache $WERCKER_CACHE_DIR/wercker/npm
+            sudo npm install
       - plasticine/bower-install@0.0.4
       - wercker/bundle-install@1.1.1
       - script:
