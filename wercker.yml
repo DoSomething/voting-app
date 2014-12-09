@@ -2,15 +2,14 @@ box: blisteringherb/scholarship@0.0.6
 build:
     # The steps that will be executed on build
     steps:
-      # A custom script step, name value is used in the UI
-      # and the code value contains the command that get executed
       - leipert/composer-install@0.0.1
       - script:
           name: npm install
-          code: sudo npm install
-      - script:
-          name: install bower dependencies
-          code: bower install
+          code: |-
+            mkdir -p $WERCKER_CACHE_DIR/wercker/npm
+            npm config set cache $WERCKER_CACHE_DIR/wercker/npm
+            sudo npm install
+      - hgen/bower-install@0.5.7
       - wercker/bundle-install@1.1.1
       - script:
           name: build assets
