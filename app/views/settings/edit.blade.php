@@ -4,7 +4,11 @@
   <div class="wrapper">
     <div class="row">
       <h1 class="highlighted">Edit Setting: {{{ $setting->key }}}</h1>
-      <p>Refer to documentation before changing settings!</p>
+
+      @if($setting->description)
+      <h4>Documentation</h4>
+      {{{ $setting->description }}}
+      @endif
     </div>
 
     {{ Form::model($setting, ['route'=> ['settings.update', $setting->key], 'method' => 'PATCH']) }}
