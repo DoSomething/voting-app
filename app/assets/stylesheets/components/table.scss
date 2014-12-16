@@ -3,6 +3,10 @@
 table {
   width: 100%;
   max-width: 100%;
+
+  .empty {
+    color: $gray;
+  }
 }
 
 thead {

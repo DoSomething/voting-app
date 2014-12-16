@@ -17,8 +17,8 @@
       </thead>
       @forelse($settings as $setting)
       <tr>
-        <td><strong>{{ $setting->key }}</strong></td>
-        <td>{{ $setting->value }}</td>
+        <td><strong>{{{ $setting->key }}}</strong></td>
+        <td>{{ $setting->pretty_value() }}</td>
         <td>{{ link_to_route('settings.edit', 'edit', [$setting->key]) }}</td>
       </tr>
       @empty

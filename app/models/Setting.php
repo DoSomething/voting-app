@@ -26,4 +26,22 @@ class Setting extends \Eloquent {
    */
   protected $fillable = ['key', 'value'];
 
+  /**
+   * Returns a nice human-readable value.
+   */
+  public function pretty_value() {
+    // Display a boolean type:
+    if($this->type == 'boolean') {
+      return ($this->value ? '✓ Enabled' : '✘ Disabled');
+    }
+
+    // Display empty strings:
+    if(empty($this->value)) {
+      return '<span class="empty">(empty)</span>';
+    }
+
+    // Anything else:
+    return e($this->value);
+  }
+
 }
