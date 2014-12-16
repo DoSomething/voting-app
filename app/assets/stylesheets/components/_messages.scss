@@ -20,17 +20,33 @@
   }
 }
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .messages {
   color: $cyan;
   font-size: $medium-font-size;
   margin-bottom: gutter();
   padding: $base-spacing;
   text-align: center;
+  animation-name: fadeInUp;
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
 
   &.-inline {
     color: inherit;
     text-align: inherit;
     padding: 0;
+    animation-name: none;
   }
 
   b, strong {
@@ -39,7 +55,6 @@
 
   &.error {
     animation-name: tada;
-    animation-fill-mode: both;
     animation-duration: 1.5s;
     color: $error-color;
   }
