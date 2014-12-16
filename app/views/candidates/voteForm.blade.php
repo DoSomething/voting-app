@@ -8,10 +8,7 @@
   @else
     <p class="heading -alpha">Thanks for voting! You can vote again in this category in 24 hours.</p>
     <p class="heading -gamma">Get {{ $candidate->name or "CANDIDATE_NAME" }} more votes!</p>
-    <ul class="social-links">
-      <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent((isset($candidate) ? route('candidates.show', [$candidate->slug]) : 'CANDIDATE_LINK')) }}"><span>Facebook</span></a></li>
-      <li><a class="social-icon -twitter js-share-link" href="{{ tweet_intent($settings['twitter_language'], (isset($candidate) ? route('candidates.show', [$candidate->slug]) : 'CANDIDATE_LINK'), (isset($candidate) ? $candidate->share_name : null)) }}"><span>Twitter</span></a></li>
-    </ul>
+    @include('candidates.share');
   @endif
 @else
     {{ Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) }}
