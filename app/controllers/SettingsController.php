@@ -48,12 +48,11 @@ class SettingsController extends \BaseController {
   public function update(Setting $setting)
   {
     $input = Input::only('value');
-    $this->settingValidator->validate($input);
 
     $setting->fill($input);
     $setting->save();
 
-    return Redirect::route('settings.index');
+    return Redirect::route('settings.index')->withFlashMessage('Setting updated.');
   }
 
 }
