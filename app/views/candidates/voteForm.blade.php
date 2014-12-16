@@ -1,5 +1,15 @@
-@if(Auth::user())
+{{-- If voting is disabled, show a 'voting is closed' message. --}}
+@if(!$settings['enable_voting'])
+  <p class="heading -alpha">Voting is closed.</p>
+  {{-- If winners are not being shown...  --}}
+  @if(true) {{-- @TODO: Add variable when setting is made! --}}
+    <p class="heading -gamma">We'll post the results soon!</p>
+  @else
+    <p class="heading -gamma">Better luck next year!</p>
+  @endif
+
 {{-- If user is logged in... --}}
+@elseif(Auth::user())
 
   {{--  ...and can vote, show the voting form.  --}}
   @if (Auth::user()->canVoteInCategory($category))
