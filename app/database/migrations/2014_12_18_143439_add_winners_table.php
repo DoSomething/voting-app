@@ -16,7 +16,7 @@ class AddWinnersTable extends Migration {
     {
       $table->increments('id');
       $table->integer('candidate_id')->unsigned();
-      $table->integer('rank')->unsigned();
+      $table->integer('rank')->unsigned()->nullable();
       $table->text('description');
     });
   }
