@@ -16,8 +16,8 @@
     </thead>
     @forelse($winners as $winner)
     <tr>
-      <td> {{ $winner->candidate->name }} </td>
-      <td> category </td>
+      <td> {{ $winner->name }} </td>
+      <td> {{ $winner->category }} </td>
       <td> {{ $winner->rank }}
     </tr>
     @empty

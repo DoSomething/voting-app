@@ -10,6 +10,11 @@ class WinnersController extends \BaseController {
   public function index()
   {
     $winners = Winner::with('candidate')->get();
+    $winners = DB::table('winners')
+                  ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
+                  ->join('categories', 'candidates.category_id', '=', 'categories.id')
+                  ->select('candidates.name', 'winners.rank', 'categories.name as category')
+                  ->get();
     return View::make('winners.index', compact('winners'));
   }
 
