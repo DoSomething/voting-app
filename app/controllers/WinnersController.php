@@ -9,7 +9,8 @@ class WinnersController extends \BaseController {
    */
   public function index()
   {
-
+    $winners = Winner::with('candidate')->get();
+    return View::make('winners.index', compact('winners'));
   }
 
 
