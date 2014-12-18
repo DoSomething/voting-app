@@ -86,6 +86,26 @@ Route::filter('csrf', function()
 });
 
 
+
+/*
+|--------------------------------------------------------------------------
+| Voting Enabled Filter
+|--------------------------------------------------------------------------
+|
+| This filter requires the 'Enable Voting' setting to be enabled for an
+| action to occur.
+|
+ */
+Route::filter('voting_enabled', function()
+{
+  $settings = App::make('SettingsRepository')->all();
+
+  if(!$settings['enable_voting']) {
+    return Redirect::to('/')->withFlashMessage('Sorry, voting is disabled!')
+      ->with('flash_message_type', 'error');
+  }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Role Filter
