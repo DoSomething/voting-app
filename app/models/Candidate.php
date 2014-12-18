@@ -53,6 +53,14 @@ class Candidate extends Eloquent implements SluggableInterface {
   }
 
   /**
+   * A candidate may be a winner.
+   */
+  public function winner()
+  {
+    return $this->hasOne('Winner');
+  }
+
+  /**
    * Save a photo, generate thumbnail, and attach it to the model.
    *
    * @param mixed $photo Input to Intervention\Image::make (such as Input::file)
