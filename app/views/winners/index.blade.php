@@ -21,7 +21,7 @@
       <td> {{ $winner->rank }}
     </tr>
     @empty
-    <div class="empty">No candidates... yet!</div>
+    <div class="empty">No winners... yet!</div>
     @endforelse
   </table>
 @stop
