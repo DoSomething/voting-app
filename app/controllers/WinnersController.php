@@ -46,7 +46,7 @@ class WinnersController extends \BaseController {
    * @param  int  $id
    * @return Response
    */
-  public function show(Candidate $candidate)
+  public function show($id)
   {
 
   }
@@ -58,9 +58,10 @@ class WinnersController extends \BaseController {
    * @param  int  $id
    * @return Response
    */
-  public function edit(Candidate $candidate)
+  public function edit($id)
   {
-
+    $winner = Winner::whereId($id)->with('candidate')->firstOrFail();
+    return View::make('winners.edit', compact('winner'));
   }
 
 
@@ -70,9 +71,13 @@ class WinnersController extends \BaseController {
    * @param  int  $id
    * @return Response
    */
-  public function update(Candidate $candidate)
+  public function update($id)
   {
+    $winner = Winner::whereId($id)->firstOrFail();
+    $input = Input::all();
+    $winner->fill($input)->save();
 
+    return Redirect::route('candidates.index')->with('flash_message', 'Cool, we saved that as a winner');
   }
 
 
@@ -82,7 +87,7 @@ class WinnersController extends \BaseController {
    * @param  int  $id
    * @return Response
    */
-  public function destroy(Candidate $candidate)
+  public function destroy($id)
   {
 
   }
