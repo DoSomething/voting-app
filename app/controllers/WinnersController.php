@@ -13,7 +13,7 @@ class WinnersController extends \BaseController {
     $winners = DB::table('winners')
                   ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
                   ->join('categories', 'candidates.category_id', '=', 'categories.id')
-                  ->select('candidates.name', 'winners.rank', 'categories.name as category')
+                  ->select('candidates.name', 'candidates.slug', 'winners.rank', 'categories.name as category')
                   ->orderBy('category', 'DESC')
                   ->orderBy('rank')
                   ->get();

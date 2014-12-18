@@ -16,7 +16,7 @@
     </thead>
     @forelse($winners as $winner)
     <tr>
-      <td> {{ $winner->name }} </td>
+      <td>{{ link_to_route('candidates.show', $winner->name, [ $winner->slug ]) }}</td>
       <td> {{ $winner->category }} </td>
       <td> {{ $winner->rank }}
     </tr>
