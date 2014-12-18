@@ -9,7 +9,15 @@
     <thead>
       <tr>
         <td> {{ sort_candidates_by('name', 'Candidate Name')}} </td>
-        <td>Category</td>
+        <td> Categoroy
+          <ul>
+            @forelse($categories as $category)
+               <li> {{ filter_candidates_by($category->id, $category->name) }} </li>
+               @empty
+              <div class="empty">No categories... yet!</div>
+            @endforelse
+          </ul>
+        </td>
         <td> {{ sort_candidates_by('votes', 'Votes') }} </td>
 
       </tr>

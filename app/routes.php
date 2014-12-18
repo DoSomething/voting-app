@@ -34,7 +34,7 @@ Route::resource('candidates', 'CandidatesController');
 /**
  * Winners
  */
-Route::resource('winners', 'WinnersController');
+Route::resource('winners', 'WinnersController', ['before' => 'role:admin']);
 
 /**
  * Votes

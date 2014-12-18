@@ -80,3 +80,11 @@ function sort_candidates_by($column, $body)
   $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
   return link_to_route('candidates.index', $body, ['sort_by' => $column, 'direction' => $direction]);
 }
+
+/**
+ * A helper function to used to sort candidates.
+ */
+function filter_candidates_by($status, $body)
+{
+  return link_to_route('candidates.index', $body, ['filter_by' => $status]);
+}
