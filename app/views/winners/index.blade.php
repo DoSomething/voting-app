@@ -9,14 +9,14 @@
   <table>
     <thead>
       <tr>
-        <td> Name </td>
+        <td> Name, edit winner </td>
         <td> Category </td>
         <td> Rank </td>
       </tr>
     </thead>
     @forelse($winners as $winner)
     <tr>
-      <td>{{ link_to_route('candidates.show', $winner->name, [ $winner->slug ]) }}</td>
+      <td>{{ link_to_route('winners.edit', $winner->name, [ $winner->id ]) }}</td>
       <td> {{ $winner->category }} </td>
       <td> {{ $winner->rank }}
     </tr>
