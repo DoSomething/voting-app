@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <td> {{ sort_candidates_by('name', 'Candidate Name')}} </td>
-        <td> Categoroy
+        <td> Category
           <ul>
             @forelse($categories as $category)
                <li> {{ filter_candidates_by($category->id, $category->name) }} </li>
