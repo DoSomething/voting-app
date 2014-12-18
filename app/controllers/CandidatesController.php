@@ -24,18 +24,23 @@ class CandidatesController extends \BaseController {
     // Get optional request params.
     $sort_by = Request::get('sort_by');
     $direction = Request::get('direction');
+    $filter_by = Request::get('filter_by');
 
     $query = DB::table('candidates')
                ->join('categories', 'categories.id', '=', 'candidates.category_id')
                ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
-               ->select('candidates.name as name', 'candidates.slug', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+               ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
                ->groupBy('candidates.name');
-     if ($sort_by) {
+    if ($sort_by) {
       $query->orderBy($sort_by, $direction);
     }
+    if ($filter_by) {
+      $query->where('category_id', $filter_by);
+    }
     $candidates = $query->get();
+    $categories = Category::select('id', 'name')->get();
 
-    return View::make('candidates.index', compact('candidates'));
+    return View::make('candidates.index', compact('candidates', 'categories'));
   }
 
 

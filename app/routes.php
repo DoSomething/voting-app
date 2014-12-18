@@ -32,6 +32,11 @@ Route::bind('candidates', function($slug) {
 Route::resource('candidates', 'CandidatesController');
 
 /**
+ * Winners
+ */
+Route::resource('winners', 'WinnersController', ['before' => 'role:admin']);
+
+/**
  * Votes
  */
 Route::resource('votes', 'VotesController', ['only' => ['store']]);
