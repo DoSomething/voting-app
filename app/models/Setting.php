@@ -32,7 +32,7 @@ class Setting extends \Eloquent {
   public function pretty_value() {
     // Display a boolean type:
     if($this->type == 'boolean') {
-      return ($this->value ? '✓ Enabled' : '✘ Disabled');
+      return ($this->value ? '✓ on' : '<span class="empty"> ✘ off </span> ');
     }
 
     // Display empty strings:
