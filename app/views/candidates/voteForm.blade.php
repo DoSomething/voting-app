@@ -6,7 +6,7 @@
     <p class="heading -gamma">We'll post the results soon!</p>
   {{-- Winners being shown --}}
   @else
-    <p class="heading -gamma">Better luck next year!</p>
+    <p> {{ $winner->description or "WINNER_DESCRIPTION" }} </p>
   @endif
 
 {{-- If user is logged in... --}}
