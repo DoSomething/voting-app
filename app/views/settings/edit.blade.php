@@ -19,9 +19,9 @@
         {{ Form::text('value') }}
       @elseif ($setting->type == 'boolean')
         <label class="control checkbox">
-          {{ Form::checkbox('value', null, true) }}
+          {{ Form::checkbox('value', 1) }}
           <span class="control-indicator"></span>
-          Enabled
+          On
         </label>
         {{ form_error('value', $errors) }}
       @else
