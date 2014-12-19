@@ -14,7 +14,9 @@
   @endif
   </ul>
 
-
+  @if($winners)
+    <h3 class="gallery-heading"> All Nominees </h3>
+  @endif
   <ul class="gallery">
   @if($category->candidates)
     @foreach($category->candidates as $candidate)
