@@ -31,7 +31,7 @@
   </div>
 
   <script type="text/html" id="form-template">
-    @include('candidates.voteForm', ['category' => $category, 'candidate' => null])
+    @include('candidates.voteForm', ['category' => $category, 'candidate' => null, 'winner' => null])
   </script>
 
 @stop
