@@ -3,6 +3,18 @@
 @section('title', $category->name)
 
 @section('content')
+  {{-- If there are winners, put them first. --}}
+  <ul class="gallery">
+  @if($winners)
+    @foreach($winners as $winner)
+      @include('winners.tile', ['winner' => $winner, 'drawer' => true])
+    @endforeach
+  @endif
+  </ul>
+
+  @if($winners)
+    <h3 class="gallery-heading"> All Nominees </h3>
+  @endif
   <ul class="gallery">
   @if($category->candidates)
     @foreach($category->candidates as $candidate)
@@ -19,7 +31,7 @@
   </div>
 
   <script type="text/html" id="form-template">
-    @include('candidates.voteForm', ['category' => $category, 'candidate' => null])
+    @include('candidates.voteForm', ['category' => $category, 'candidate' => null, 'winner' => null])
   </script>
 
 @stop

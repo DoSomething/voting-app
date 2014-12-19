@@ -56,11 +56,14 @@ $('.js-drawer-link').on('click', function(e) {
   var name = $tile.find('h1').text();
   var twitter = $tile.data('twitter');
   var link = $tile.find('a').attr('href');
+  var description = $tile.data('winner-description') || 'Better luck next year.';
+
 
   var formHTML = $("#form-template").html()
     .replace(/CANDIDATE_NAME/g, name)
     .replace(/TWITTER_NAME/g, twitter)
     .replace(/CANDIDATE_LINK/g, link)
+    .replace(/WINNER_DESCRIPTION/g, description)
     .replace('Thanks for voting!', 'You\'ve already voted in this category.');
 
   var details = template({
