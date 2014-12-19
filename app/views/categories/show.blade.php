@@ -3,6 +3,18 @@
 @section('title', $category->name)
 
 @section('content')
+  {{-- If there are winners, put them first. --}}
+  <ul class="gallery">
+  @if($winners)
+    @foreach($winners as $winner)
+      @include('winners.tile', ['winner' => $winner, 'drawer' => true])
+    @endforeach
+  @else
+    <li class="empty">No winners in this category... yet!</li>
+  @endif
+  </ul>
+
+
   <ul class="gallery">
   @if($category->candidates)
     @foreach($category->candidates as $candidate)

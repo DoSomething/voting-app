@@ -64,7 +64,8 @@ class CategoriesController extends \BaseController {
   {
     $candidates = $category->candidates;
     $type = get_login_type();
-    return View::make('categories.show', compact('category', 'candidates', 'type'));
+    $winners = Winner::getCategoryWinners($category);
+    return View::make('categories.show', compact('category', 'candidates', 'type', 'winners'));
   }
 
 
