@@ -9,8 +9,6 @@
     @foreach($winners as $winner)
       @include('winners.tile', ['winner' => $winner, 'drawer' => true])
     @endforeach
-  @else
-    <li class="empty">No winners in this category... yet!</li>
   @endif
   </ul>
 
