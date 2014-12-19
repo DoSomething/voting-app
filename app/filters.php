@@ -96,7 +96,7 @@ Route::filter('csrf', function()
 | action to occur.
 |
  */
-Route::filter('voting_enabled', function()
+Route::filter('voting_disabled', function()
 {
   $settings = App::make('SettingsRepository')->all();
 

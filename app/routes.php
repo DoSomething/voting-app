@@ -49,7 +49,7 @@ Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'stor
  * Sessions
  */
 Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
-Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create', 'before' => 'voting_enabled']);
+Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create', 'before' => 'voting_disabled']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
 Route::get('admin', ['as' => 'admin.login', 'uses' => 'SessionsController@adminCreate']);
 

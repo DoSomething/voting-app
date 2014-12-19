@@ -5,7 +5,7 @@ class VotesController extends \BaseController {
   public function __construct()
   {
     $this->beforeFilter('auth');
-    $this->beforeFilter('voting_enabled');
+    $this->beforeFilter('voting_disabled');
   }
 
 	/**
