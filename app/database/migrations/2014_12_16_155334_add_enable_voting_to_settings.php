@@ -18,6 +18,10 @@ class AddEnableVotingToSettings extends Migration {
       'description' => 'Enable this setting to allow users to vote. If disabled, vote buttons & forms will be removed.',
       'value' => 'on'
     ]);
+
+    DB::statement('ALTER TABLE `settings` MODIFY `type` VARCHAR(255) AFTER `value`');
+    DB::statement('ALTER TABLE `settings` MODIFY `description` TEXT AFTER `type`');
+
   }
 
 
