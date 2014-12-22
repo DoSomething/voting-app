@@ -40,9 +40,13 @@ class WinnersController extends \BaseController {
    */
   public function store()
   {
-    $winner = new Winner;
-    $winner->candidate_id = Input::get('id');
-    $winner->save();
+    $candidate_id = Input::get('id');
+    $winner = Winner::where('candidate_id', '=', $candidate_id)->first();
+    if (!$winner) {
+      $winner = new Winner;
+      $winner->candidate_id = $candidate_id;
+      $winner->save();
+    }
 
     return Redirect::route('winners.edit', array('id' => $winner->id));
 
