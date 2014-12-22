@@ -24,7 +24,7 @@
   @else
     <p class="heading -alpha">Thanks for voting! You can vote again in this category in 24 hours.</p>
     <p class="heading -gamma">Get {{ $candidate->name or "CANDIDATE_NAME" }} more votes!</p>
-    @include('candidates.share');
+    @include('candidates.share')
   @endif
 
 {{-- If user is not logged in, show the login/vote form. --}}
