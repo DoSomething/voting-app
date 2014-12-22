@@ -102,7 +102,9 @@ class WinnersController extends \BaseController {
    */
   public function destroy($id)
   {
-
+    $winner = Winner::whereId($id)->firstOrFail();
+    $winner->delete();
+    Return Redirect::route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
   }
 
 
