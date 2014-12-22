@@ -90,7 +90,7 @@ class WinnersController extends \BaseController {
     $input = Input::all();
     $winner->fill($input)->save();
 
-    return Redirect::route('candidates.index')->with('flash_message', 'Cool, we saved that as a winner');
+    return Redirect::route('winners.index')->with('flash_message', 'Cool, we saved that person as a winner.');
   }
 
 
@@ -104,7 +104,7 @@ class WinnersController extends \BaseController {
   {
     $winner = Winner::whereId($id)->firstOrFail();
     $winner->delete();
-    Return Redirect::route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
+    return Redirect::route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
   }
 
 
