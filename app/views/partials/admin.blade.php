@@ -5,6 +5,7 @@
     <ul>
         <li>{{ link_to_route('candidates.index', 'Candidates') }}</li>
         <li>{{ link_to_route('categories.index', 'Categories') }}</li>
+        <li>{{ link_to_route('winners.index', 'Winners') }}</li>
         <li>{{ link_to_route('pages.index', 'Pages') }}</li>
         <li>{{ link_to_route('users.index', 'Users') }}</li>
         <li>{{ link_to_route('settings.index', 'Site Settings') }}</li>
