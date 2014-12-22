@@ -33,6 +33,8 @@ class CandidatesController extends \BaseController {
                ->groupBy('candidates.name');
     if ($sort_by) {
       $query->orderBy($sort_by, $direction);
+    } else  {
+      $query->orderBy('votes', 'DESC');
     }
     if ($filter_by) {
       $query->where('category_id', $filter_by);
