@@ -40,9 +40,13 @@ class WinnersController extends \BaseController {
    */
   public function store()
   {
-    $winner = new Winner;
-    $winner->candidate_id = Input::get('id');
-    $winner->save();
+    $candidate_id = Input::get('id');
+    $winner = Winner::where('candidate_id', '=', $candidate_id)->first();
+    if (!$winner) {
+      $winner = new Winner;
+      $winner->candidate_id = $candidate_id;
+      $winner->save();
+    }
 
     return Redirect::route('winners.edit', array('id' => $winner->id));
 
@@ -98,7 +102,9 @@ class WinnersController extends \BaseController {
    */
   public function destroy($id)
   {
-
+    $winner = Winner::whereId($id)->firstOrFail();
+    $winner->delete();
+    Return Redirect::route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
   }
 
 
