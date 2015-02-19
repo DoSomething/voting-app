@@ -18,6 +18,6 @@ return array(
       'version' => '1',
       'port'    => '80',
       'app_id'  => '456',
-      'api_key' => 'abc4324'
+      'api_key' => 'abc4324',
   ),
 );
