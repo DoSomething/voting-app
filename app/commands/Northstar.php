@@ -60,7 +60,7 @@ class Northstar extends Command {
     $users = User::all();
 
     foreach($users as $user) {
-      $arrrrr =  array(
+      $tojson =  array(
         'email' => $user->email,
         'mobile' => $user->mobile,
         'cgg_id' => $user->id,
@@ -71,7 +71,7 @@ class Northstar extends Command {
         'created_at' => $user->updated_at,
       );
       $response = $this->client->post('users', [
-        'body' => json_encode($arrrrr)
+        'body' => json_encode($tojson)
       ]);
 
       echo $user->email . " migrated. \n";
