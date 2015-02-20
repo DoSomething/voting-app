@@ -83,19 +83,19 @@ class Northstar extends Command {
    *
    * @return array
    */
-  protected function getArguments()
-  {
+  // protected function getArguments()
+  // {
 
-  }
+  // }
 
   /**
    * Get the console command options.
    *
    * @return array
    */
-  protected function getOptions()
-  {
+  // protected function getOptions()
+  // {
 
-  }
+  // }
 
 }
