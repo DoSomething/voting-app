@@ -31,5 +31,11 @@ return array(
 	'stathat' => array(
 		'key' => getenv('STATHAT_EZ_KEY')
 	),
-
+  'northstar' => array(
+      'url'     => getenv('NORTHSTAR_URL'),
+      'version' => '1',
+      'port'    => '80',
+      'app_id'  => getenv('NORTHSTAR_APP_ID'),
+      'api_key' => getenv('NORTHSTAR_API_KEY')
+  ),
 );
