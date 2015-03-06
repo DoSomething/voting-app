@@ -58,20 +58,25 @@ class Northstar extends Command {
   public function fire()
   {
     $users = User::all();
-
-    foreach($users as $user) {
-       $tojson =  array(
-        'email' => $user->email,
-        'mobile' => $user->phone,
-        'cgg_id' => $user->id,
-        'first_name' => $user->first_name,
-        'birthdate' => $user->birthdate,
-        'country' => $user->country_code
-      );
-      $response = $this->client->post('users', [
-        'body' => json_encode($tojson)
-      ]);
-      echo $user->first_name . " migrated. \n";
+    $last_user_imported = Setting::where('key', '=', 'last_user_imported')->first();
+    // echo ($last_user_imported[0]->value); //die;
+    foreach($users as $key => $user) {
+      if ($key > $last_user_imported->value) {
+         $tojson =  array(
+          'email' => $user->email,
+          'mobile' => $user->phone,
+          'cgg_id' => $user->id,
+          'first_name' => $user->first_name,
+          'birthdate' => $user->birthdate,
+          'country' => $user->country_code
+        );
+        $response = $this->client->post('users', [
+          'body' => json_encode($tojson)
+        ]);
+        $last_user_imported->value = $user->id;
+        $last_user_imported->save();
+        echo $user->first_name . " migrated. \n";
+      }
     }
   }
 
