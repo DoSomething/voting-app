@@ -1,8 +1,26 @@
+var elixir = require('laravel-elixir');
+
 /*
- * We use Gulp to build client-side assets.
- *
- * To add a new task, add a new task file to `gulp/tasks`.
+ |--------------------------------------------------------------------------
+ | Elixir Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Elixir provides a clean, fluent API for defining some basic Gulp tasks
+ | for your Laravel application. By default, we are compiling the Less
+ | file for our application, as well as publishing vendor resources.
+ |
  */
 
-var requireDir = require('require-dir');
-requireDir('./tasks');
+elixir(function(mix) {
+
+  // Styles
+  mix.sass('app.scss');
+
+  // Scripts
+  mix.browserify('app.js');
+
+  // Copy assets
+  mix.copy('resources/assets/fonts', 'public/assets/fonts');
+  mix.copy('resources/assets/images', 'public/assets/images');
+
+});
