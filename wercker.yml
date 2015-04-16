@@ -2,6 +2,9 @@ box: blisteringherb/scholarship@0.0.6
 build:
     # The steps that will be executed on build
     steps:
+      - script:
+          name: Update Composer
+          code: sudo composer self-update
       - leipert/composer-install@0.0.1
       - script:
           name: npm install
@@ -9,11 +12,10 @@ build:
             mkdir -p $WERCKER_CACHE_DIR/wercker/npm
             npm config set cache $WERCKER_CACHE_DIR/wercker/npm
             sudo npm install
-      - hgen/bower-install@0.5.7
       - wercker/bundle-install@1.1.1
       - script:
           name: build assets
-          code: gulp build
+          code: gulp
     after-steps:
         - hipchat-notify:
             token: $HIPCHAT_TOKEN

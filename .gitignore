@@ -1,20 +1,17 @@
-public/dist
-public/images
-bower_components
-node_modules
-
-/bootstrap/compiled.php
+# Vendor files
 /vendor
-composer.phar
-composer.lock
-.env.*.php
-.env.php
+/node_modules
+
+# Configration
+.env
+
+# OS X
 .DS_Store
 Thumbs.db
-.sass-cache
 
-tests/_output/*
-tests/acceptance/AcceptanceTester.php
-tests/functional/FunctionalTester.php
-tests/unit/UnitTester.php
+# Built assets (created by Gulp)
+/public/assets
+/public/css
+/public/js
+/public/thumbnails
 

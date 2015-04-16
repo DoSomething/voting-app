@@ -1,0 +1,46 @@
+@extends('app')
+
+@section('title', $candidate->name)
+@section('meta_title', $candidate->name)
+@section('meta_description', 'Vote for ' . $candidate->name . ' in ' . $settings['site_title'] . '.')
+@section('meta_image', URL::to($candidate->thumbnail()))
+
+@section('content')
+    <div class="candidate">
+        <div class="candidate__info">
+            <article class="tile -alternate">
+                <a class="wrapper" href="{{ route('candidates.show', [$candidate->slug]) }}">
+                    <div class="tile__meta">
+                        <h1>{{{ $candidate->name }}}</h1>
+                    </div>
+                    <img alt="{{{ $candidate->name }}}" src="{{{ $candidate->thumbnail() }}}"/>
+                </a>
+            </article>
+
+            @if($candidate->description)
+                <p class="candidate__description">{{{ $candidate->description }}}</p>
+            @endif
+            @if ($candidate->photo_source)
+                {!! link_to($candidate->photo_source, 'Photo Credit') !!}
+            @endif
+        </div>
+
+        <div class="candidate__actions">
+            @include('candidates.voteForm', ['category' => $candidate->category, 'id' => $candidate->id])
+
+            @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
+                <h4>Hey, beautiful administrator. This candidate
+                    has {{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}.</h4>
+            @endif
+        </div>
+    </div>
+@stop
+
+@section('actions')
+    @if(Auth::user() && Auth::user()->hasRole('admin'))
+        <li>{{ link_to_route('candidates.edit', 'Edit Candidate', [$candidate->slug], ['class' => 'btn secondary']) }}</li>
+        {{ Form::open(['route'=> ['candidates.update', $candidate->slug], 'method' => 'delete']) }}
+        {{ Form::submit('Delete Candidate', ['class' => 'button -danger']) }}
+        {{ Form::close() }}
+    @endif
+@stop
