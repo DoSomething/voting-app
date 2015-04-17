@@ -58,37 +58,37 @@ class CategoriesController extends \Controller
   /**
    * Display the specified resource.
    *
-   * @param  int $id
+   * @param category $category
    * @return Response
    */
-  public function show(category $category)
+  public function show(Category $category)
   {
     $candidates = $category->candidates;
     $type = get_login_type();
     $winners = Winner::getCategoryWinners($category);
-    return View::make('categories.show', compact('category', 'candidates', 'type', 'winners'));
+    return view('categories.show', compact('category', 'candidates', 'type', 'winners'));
   }
 
 
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int $id
+   * @param Category $category
    * @return Response
    */
-  public function edit(category $category)
+  public function edit(Category $category)
   {
-    return View::make('categories.edit', compact('category'));
+    return view('categories.edit', compact('category'));
   }
 
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  int $id
+   * @param Category $category
    * @return Response
    */
-  public function update(category $category)
+  public function update(Category $category)
   {
     $input = Input::all();
     // @TODO FormRequest
@@ -97,7 +97,7 @@ class CategoriesController extends \Controller
     $category->fill($input);
     $category->save();
 
-    return Redirect::route('categories.index');
+    return redirect()->route('categories.index');
   }
 
 
