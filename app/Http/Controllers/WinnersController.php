@@ -19,7 +19,7 @@ class WinnersController extends \Controller
       ->orderBy('rank')
       ->get();
 
-    return View::make('winners.index', compact('winners', 'categories'));
+    return view('winners.index', compact('winners', 'categories'));
   }
 
 
@@ -49,7 +49,7 @@ class WinnersController extends \Controller
       $winner->save();
     }
 
-    return Redirect::route('winners.edit', array('id' => $winner->id));
+    return redirect()->route('winners.edit', array('id' => $winner->id));
 
   }
 
@@ -75,7 +75,7 @@ class WinnersController extends \Controller
   public function edit($id)
   {
     $winner = Winner::whereId($id)->with('candidate')->firstOrFail();
-    return View::make('winners.edit', compact('winner'));
+    return view('winners.edit', compact('winner'));
   }
 
 
@@ -91,7 +91,7 @@ class WinnersController extends \Controller
     $input = Input::all();
     $winner->fill($input)->save();
 
-    return Redirect::route('winners.index')->with('flash_message', 'Cool, we saved that person as a winner.');
+    return route('winners.index')->with('flash_message', 'Cool, we saved that person as a winner.');
   }
 
 
@@ -105,7 +105,7 @@ class WinnersController extends \Controller
   {
     $winner = Winner::whereId($id)->firstOrFail();
     $winner->delete();
-    return Redirect::route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
+    return redirect()->route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
   }
 
 
