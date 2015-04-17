@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Requests\SettingRequest;
+
 class SettingsController extends \Controller
 {
 
   protected $setting;
-  protected $settingValidator;
 
-  public function __construct(Setting $setting, SettingValidator $settingValidator)
+  public function __construct(Setting $setting)
   {
     $this->setting = $setting;
-    $this->settingValidator = $settingValidator;
 
     $this->beforeFilter('role:admin');
   }
@@ -45,11 +45,9 @@ class SettingsController extends \Controller
    * @param Setting $setting
    * @return Response
    */
-  public function update(Setting $setting)
+  public function update(Setting $setting, SettingRequest $request)
   {
-    $input = Input::only('value');
-
-    $setting->fill($input);
+    $setting->fill($request->all());
     $setting->save();
 
     return redirect()->route('settings.index')->withFlashMessage('Setting updated.');

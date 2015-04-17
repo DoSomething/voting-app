@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Requests\CategoryRequest;
+
 class CategoriesController extends \Controller
 {
 
@@ -9,8 +11,6 @@ class CategoriesController extends \Controller
   public function __construct(Category $category)
   {
     $this->category = $category;
-    // @TODO FormRequest
-//    $this->categoryValidator = $categoryValidator;
 
     $this->beforeFilter('role:admin', ['except' => ['show']]);
   }
@@ -41,14 +41,12 @@ class CategoriesController extends \Controller
   /**
    * Store a newly created resource in storage.
    *
+   * @param CategoryRequest $request
    * @return Response
    */
-  public function store()
+  public function store(CategoryRequest $request)
   {
-    $input = Input::all();
-    $this->categoryValidator->validate($input);
-
-    $category = new Category($input);
+    $category = new Category($request->all());
     $category->save();
 
     return redirect()->route('categories.index');
@@ -86,15 +84,12 @@ class CategoriesController extends \Controller
    * Update the specified resource in storage.
    *
    * @param Category $category
+   * @param CategoryRequest $request
    * @return Response
    */
-  public function update(Category $category)
+  public function update(Category $category, CategoryRequest $request)
   {
-    $input = Input::all();
-    // @TODO FormRequest
-//    $this->categoryValidator->validate($input);
-
-    $category->fill($input);
+    $category->fill($request->all());
     $category->save();
 
     return redirect()->route('categories.index');

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Requests\CandidateRequest;
+
 class CandidatesController extends \Controller
 {
 
@@ -17,6 +19,7 @@ class CandidatesController extends \Controller
    */
   public function index()
   {
+    // @TODO So much going on here!
     // Get optional request params.
     $sort_by = Request::get('sort_by');
     $direction = Request::get('direction');
@@ -56,15 +59,12 @@ class CandidatesController extends \Controller
   /**
    * Store a newly created resource in storage.
    *
+   * @param CandidateRequest $request
    * @return Response
    */
-  public function store()
+  public function store(CandidateRequest $request)
   {
-    $input = Input::all();
-    // @TODO FormRequest
-//    $this->candidateValidator->validate($input);
-
-    $candidate = new Candidate($input);
+    $candidate = new Candidate($request->all());
 
     if ($file = Input::file('photo')) {
       $image = Image::make($file->getRealPath());
@@ -109,12 +109,12 @@ class CandidatesController extends \Controller
    * Update the specified resource in storage.
    *
    * @param Candidate $candidate
+   * @param CandidateRequest $request
    * @return Response
    */
-  public function update(Candidate $candidate)
+  public function update(Candidate $candidate, CandidateRequest $request)
   {
-    $input = Input::all();
-    $candidate->fill($input);
+    $candidate->fill($request->all());
 
     if ($file = Input::file('photo')) {
       $image = Image::make($file->getRealPath());

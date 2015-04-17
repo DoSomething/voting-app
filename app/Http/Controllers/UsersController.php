@@ -8,8 +8,6 @@ class UsersController extends \Controller
   public function __construct(User $user)
   {
     $this->user = $user;
-//    $this->userValidator = $userValidator;
-    // @TODO FormRequest
 
     $this->beforeFilter('role:admin', ['only' => ['index', 'show']]);
   }
@@ -49,8 +47,10 @@ class UsersController extends \Controller
   public function store()
   {
     $input = Input::all();
-//    $this->userValidator->validate($input);
-    // @TODO FormRequest
+    $this->validate($input, [
+      'email' => 'required|email|unique:users',
+      'password' => 'required|confirmed'
+    ]);
 
     $user = new User($input);
     $user->save();

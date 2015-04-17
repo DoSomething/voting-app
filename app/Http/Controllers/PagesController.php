@@ -1,15 +1,18 @@
 <?php
 
+use App\Http\Requests\PageRequest;
+
 class PagesController extends \Controller
 {
 
+  /**
+   * @var Page
+   */
   protected $page;
-  protected $pageValidator;
 
   public function __construct(Page $page)
   {
     $this->page = $page;
-//    $this->pageValidator = $pageValidator;
 
     $this->beforeFilter('role:admin', ['except' => ['show']]);
   }
@@ -41,15 +44,12 @@ class PagesController extends \Controller
    * Store a newly created resource in storage.
    * POST /pages
    *
+   * @param PageRequest $request
    * @return Response
    */
-  public function store()
+  public function store(PageRequest $request)
   {
-    $input = Input::all();
-    // @TODO FormRequest
-//    $this->pageValidator->validate($input);
-
-    $page = new Page($input);
+    $page = new Page($request->all());
     $page->save();
 
     return redirect()->route('pages.index');
@@ -86,13 +86,9 @@ class PagesController extends \Controller
    * @param Page $page
    * @return Response
    */
-  public function update(Page $page)
+  public function update(Page $page, PageRequest $request)
   {
-    $input = Input::all();
-    $page->fill($input);
-
-    // @TODO FormRequest
-//    $this->pageValidator->validate($input);
+    $page->fill($request->all());
     $page->save();
 
     return redirect()->route('pages.index');
