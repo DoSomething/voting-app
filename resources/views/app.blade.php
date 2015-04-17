@@ -13,10 +13,10 @@
     <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('/assets/images/apple-touch-icon.png') }}">
 
-    <!--[if lte IE 8]>
-    <script src="/assets/vendor/html5shiv.min.js"></script>
-    <script src="/assets/vendor/respond.min.js"></script>
-    <![endif]-->
+  <!--[if lte IE 8]>
+  <script src="{{ asset('/assets/vendor/html5shiv.min.js') }}"></script>
+  <script src="{{ asset('/assets/vendor/respond.min.js') }}"></script>
+  <![endif]-->
 
     {{--@include('partials.metadata')--}}
 </head>
