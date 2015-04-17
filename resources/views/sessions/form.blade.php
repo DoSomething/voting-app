@@ -9,12 +9,12 @@
 {!! Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) !!}
 
 @if(get_login_type() == 'email')
-    {!! Form::label('email', 'Email') !!}
-    {!! form_error('email', $errors) !!}
-    {!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}
+  {!! Form::label('email', 'Email') !!}
+  {!! form_error('email', $errors) !!}
+  {!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}
 @else
-    {!! Form::label('phone', 'Cell Number') !!}
-    {!! form_error('phone', $errors) !!}
-    {!! Form::text('phone', null, ['placeholder' => '555-555-5555']) !!}
+  {!! Form::label('phone', 'Cell Number') !!}
+  {!! form_error('phone', $errors) !!}
+  {!! Form::text('phone', null, ['placeholder' => '555-555-5555']) !!}
 @endif
 
