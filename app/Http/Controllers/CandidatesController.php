@@ -38,7 +38,7 @@ class CandidatesController extends \Controller
     $candidates = $query->get();
     $categories = Category::select('id', 'name')->get();
 
-    return View::make('candidates.index', compact('candidates', 'categories'));
+    return view('candidates.index', compact('candidates', 'categories'));
   }
 
 
@@ -49,7 +49,7 @@ class CandidatesController extends \Controller
    */
   public function create()
   {
-    return View::make('candidates.create');
+    return view('candidates.create');
   }
 
 
@@ -73,7 +73,7 @@ class CandidatesController extends \Controller
 
     $candidate->save();
 
-    return Redirect::route('candidates.index');
+    return redirect()->route('candidates.index');
   }
 
 
@@ -89,7 +89,7 @@ class CandidatesController extends \Controller
     $vote_count = $candidate->votes()->count();
     $type = get_login_type();
 
-    return View::make('candidates.show', compact('candidate', 'votes', 'vote_count', 'type'));
+    return view('candidates.show', compact('candidate', 'votes', 'vote_count', 'type'));
   }
 
 
@@ -101,7 +101,7 @@ class CandidatesController extends \Controller
    */
   public function edit(Candidate $candidate)
   {
-    return View::make('candidates.edit', compact('candidate'));
+    return view('candidates.edit', compact('candidate'));
   }
 
 
@@ -126,7 +126,7 @@ class CandidatesController extends \Controller
 
     $candidate->save();
 
-    return Redirect::route('candidates.index');
+    return redirect()->route('candidates.index');
   }
 
 
@@ -139,7 +139,7 @@ class CandidatesController extends \Controller
   public function destroy(Candidate $candidate)
   {
     $candidate->delete();
-    return Redirect::home()->with('flash_message', 'BAM, that person was removed!');
+    return redirect()->home()->with('flash_message', 'BAM, that person was removed!');
   }
 
 }

@@ -23,7 +23,7 @@ class PagesController extends \Controller
   public function index()
   {
     $pages = $this->page->get();
-    return View::make('pages.index', compact('pages'));
+    return view('pages.index', compact('pages'));
   }
 
   /**
@@ -34,7 +34,7 @@ class PagesController extends \Controller
    */
   public function create()
   {
-    return View::make('pages.create');
+    return view('pages.create');
   }
 
   /**
@@ -52,7 +52,7 @@ class PagesController extends \Controller
     $page = new Page($input);
     $page->save();
 
-    return Redirect::route('pages.index');
+    return redirect()->route('pages.index');
   }
 
   /**
@@ -64,7 +64,7 @@ class PagesController extends \Controller
    */
   public function show(Page $page)
   {
-    return View::make('pages.show', compact('page'));
+    return view('pages.show', compact('page'));
   }
 
   /**
@@ -76,7 +76,7 @@ class PagesController extends \Controller
    */
   public function edit(Page $page)
   {
-    return View::make('pages.edit', compact('page'));
+    return view('pages.edit', compact('page'));
   }
 
   /**
@@ -95,17 +95,17 @@ class PagesController extends \Controller
 //    $this->pageValidator->validate($input);
     $page->save();
 
-    return Redirect::route('pages.index');
+    return redirect()->route('pages.index');
   }
 
   /**
    * Remove the specified resource from storage.
    * DELETE /pages/{id}
    *
-   * @param  int $id
+   * @param Page $page
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(Page $page)
   {
     //
   }

@@ -22,12 +22,11 @@ class VotesController extends \Controller
 
     $vote = Vote::createIfEligible($candidate_id, $user_id);
     if (!$vote)
-      return Redirect::back()->withFlashMessage('You can\'t vote on this category yet!');
+      return redirect()->back()->withFlashMessage('You can\'t vote on this category yet!');
 
     $candidate = Candidate::find($candidate_id);
-    $url = URL::route('candidates.show', [$candidate->slug, '#message']);
 
-    return Redirect::to($url)->withFlashMessage('We got that vote!');
+    return redirect()->route('candidates.show', [$candidate->slug, '#message'])->withFlashMessage('We got that vote!');
   }
 
 }

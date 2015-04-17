@@ -24,7 +24,7 @@ class UsersController extends \Controller
     $users = $this->user->with('roles')->paginate(25);
     $count = $this->user->count();
 
-    return View::make('users.index', compact('users', 'count'));
+    return view('users.index', compact('users', 'count'));
   }
 
   /**
@@ -37,7 +37,7 @@ class UsersController extends \Controller
   {
     if (Auth::check()) return Redirect::home();
 
-    return View::make('users.create');
+    return view('users.create');
   }
 
   /**
@@ -56,7 +56,7 @@ class UsersController extends \Controller
     $user->save();
 
     Auth::login($user);
-    return Redirect::home()->withFlashMessage('You\'re all signed up! Get voting!');
+    return redirect()->home()->withFlashMessage('You\'re all signed up! Get voting!');
   }
 
 
@@ -71,7 +71,7 @@ class UsersController extends \Controller
     $votes = $user->votes;
     $vote_count = $user->votes()->count();
 
-    return View::make('users.show', compact('user', 'votes', 'vote_count'));
+    return view('users.show', compact('user', 'votes', 'vote_count'));
   }
 
 

@@ -23,26 +23,26 @@ class SettingsController extends \Controller
   public function index()
   {
     $settings = $this->setting->get();
-    return View::make('settings.index', compact('settings'));
+    return view('settings.index', compact('settings'));
   }
 
   /**
    * Show the form for editing the specified resource.
    * GET /settings/{id}/edit
    *
-   * @param  int $id
+   * @param Setting $setting
    * @return Response
    */
   public function edit(Setting $setting)
   {
-    return View::make('settings.edit', compact('setting'));
+    return view('settings.edit', compact('setting'));
   }
 
   /**
    * Update the specified resource in storage.
    * PUT /settings/{id}
    *
-   * @param  int $id
+   * @param Setting $setting
    * @return Response
    */
   public function update(Setting $setting)
@@ -52,7 +52,7 @@ class SettingsController extends \Controller
     $setting->fill($input);
     $setting->save();
 
-    return Redirect::route('settings.index')->withFlashMessage('Setting updated.');
+    return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
   }
 
 }

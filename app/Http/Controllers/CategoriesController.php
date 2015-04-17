@@ -23,7 +23,7 @@ class CategoriesController extends \Controller
   public function index()
   {
     $categories = $this->category->get();
-    return View::make('categories.index', compact('categories'));
+    return view('categories.index', compact('categories'));
   }
 
 
@@ -34,7 +34,7 @@ class CategoriesController extends \Controller
    */
   public function create()
   {
-    return View::make('categories.create');
+    return view('categories.create');
   }
 
 
@@ -51,7 +51,7 @@ class CategoriesController extends \Controller
     $category = new Category($input);
     $category->save();
 
-    return Redirect::route('categories.index');
+    return redirect()->route('categories.index');
   }
 
 
