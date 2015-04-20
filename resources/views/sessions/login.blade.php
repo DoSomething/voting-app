@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="wrapper">
-        {!! Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) !!}
+        <h1 class="highlighted">Login</h1>
+        {!! Form::open(['route'=> ['sessions.userLogin'], 'id' => 'sign_in_form']) !!}
         @include('sessions.form')
         {!! Form::submit('Log In') !!}
         {!! Form::close() !!}
