@@ -8,11 +8,11 @@ class PagesTableSeeder extends Seeder
 
   public function run()
   {
-    $faker = Faker\Factory::create();
+      $faker = Faker\Factory::create();
 
-    Page::truncate();
+      Page::truncate();
 
-    Page::create([
+      Page::create([
       'title' => 'FAQ',
       'content' => "### What is Lorem Ipsum?\n" .
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n" .
@@ -21,6 +21,5 @@ class PagesTableSeeder extends Seeder
         "### Why?\n" .
         "Designers are weird.\n"
     ]);
-
   }
 }

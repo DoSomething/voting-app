@@ -10,7 +10,7 @@ class SettingRequest extends Request
    */
   public function authorize()
   {
-    return true;
+      return true;
   }
 
   /**
@@ -20,9 +20,8 @@ class SettingRequest extends Request
    */
   public function rules()
   {
-    return [
+      return [
       'value' => 'required'
     ];
   }
-
 }

@@ -13,7 +13,7 @@ class UpdateUsersTable extends Migration
    */
   public function up()
   {
-    Schema::table('users', function (Blueprint $table) {
+      Schema::table('users', function (Blueprint $table) {
       $table->dropUnique('users_email_unique');
       $table->index('email');
       $table->dropColumn('remember_token');
@@ -32,7 +32,7 @@ class UpdateUsersTable extends Migration
    */
   public function down()
   {
-    Schema::table('users', function (Blueprint $table) {
+      Schema::table('users', function (Blueprint $table) {
       $table->dropIndex('users_email_index');
       $table->unique('email');
       $table->rememberToken();
@@ -40,8 +40,6 @@ class UpdateUsersTable extends Migration
       $table->dropColumn('phone');
       $table->dropColumn('birthdate');
     });
-    DB::statement('ALTER TABLE `users` MODIFY `email` varchar(255);');
-
+      DB::statement('ALTER TABLE `users` MODIFY `email` varchar(255);');
   }
-
 }

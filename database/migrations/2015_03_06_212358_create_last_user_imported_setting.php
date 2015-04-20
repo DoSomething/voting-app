@@ -13,7 +13,7 @@ class CreateLastUserImportedSetting extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'last_user_imported',
       'value' => -1
     ]);
@@ -26,7 +26,6 @@ class CreateLastUserImportedSetting extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'last_user_imported']);
+      DB::table('settings')->delete(['key' => 'last_user_imported']);
   }
-
 }

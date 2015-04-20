@@ -7,12 +7,12 @@ class SettingsController extends \Controller
 
   protected $setting;
 
-  public function __construct(Setting $setting)
-  {
-    $this->setting = $setting;
+    public function __construct(Setting $setting)
+    {
+        $this->setting = $setting;
 
-    $this->beforeFilter('role:admin');
-  }
+        $this->beforeFilter('role:admin');
+    }
 
   /**
    * Display a listing of the resource.
@@ -22,8 +22,8 @@ class SettingsController extends \Controller
    */
   public function index()
   {
-    $settings = $this->setting->get();
-    return view('settings.index', compact('settings'));
+      $settings = $this->setting->get();
+      return view('settings.index', compact('settings'));
   }
 
   /**
@@ -35,7 +35,7 @@ class SettingsController extends \Controller
    */
   public function edit(Setting $setting)
   {
-    return view('settings.edit', compact('setting'));
+      return view('settings.edit', compact('setting'));
   }
 
   /**
@@ -47,10 +47,9 @@ class SettingsController extends \Controller
    */
   public function update(Setting $setting, SettingRequest $request)
   {
-    $setting->fill($request->all());
-    $setting->save();
+      $setting->fill($request->all());
+      $setting->save();
 
-    return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
+      return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
   }
-
 }

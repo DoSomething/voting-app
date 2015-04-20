@@ -10,7 +10,7 @@ class CategoryRequest extends Request
    */
   public function authorize()
   {
-    return true;
+      return true;
   }
 
   /**
@@ -20,9 +20,8 @@ class CategoryRequest extends Request
    */
   public function rules()
   {
-    return [
+      return [
       'name' => 'required',
     ];
   }
-
 }

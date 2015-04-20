@@ -38,4 +38,3 @@
     rates may apply. Text STOP to opt-out, HELP for help.</p>
   {!! Form::close() !!}
 @endif
-

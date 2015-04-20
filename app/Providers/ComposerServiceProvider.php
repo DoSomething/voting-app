@@ -14,9 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
    */
   public function boot()
   {
-
-    View::composer(['app', 'candidates.show', 'candidates.voteForm', 'categories.show'], 'App\Http\ViewComposers\LayoutComposer');
-
+      View::composer(['app', 'candidates.show', 'candidates.voteForm', 'categories.show'], 'App\Http\ViewComposers\LayoutComposer');
   }
 
   /**
@@ -26,7 +24,6 @@ class ComposerServiceProvider extends ServiceProvider
    */
   public function register()
   {
-    // ...
+      // ...
   }
-
 }

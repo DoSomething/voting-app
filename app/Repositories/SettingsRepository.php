@@ -9,8 +9,7 @@ class SettingsRepository
    */
   public function all()
   {
-    // @TODO: ->rememberForever('settings') deprecated in Laravel 5!
+      // @TODO: ->rememberForever('settings') deprecated in Laravel 5!
     return DB::table('settings')->lists('value', 'key');
   }
-
 }

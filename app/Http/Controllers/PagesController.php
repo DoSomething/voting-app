@@ -10,12 +10,12 @@ class PagesController extends \Controller
    */
   protected $page;
 
-  public function __construct(Page $page)
-  {
-    $this->page = $page;
+    public function __construct(Page $page)
+    {
+        $this->page = $page;
 
-    $this->beforeFilter('role:admin', ['except' => ['show']]);
-  }
+        $this->beforeFilter('role:admin', ['except' => ['show']]);
+    }
 
   /**
    * Display a listing of the resource.
@@ -25,8 +25,8 @@ class PagesController extends \Controller
    */
   public function index()
   {
-    $pages = $this->page->get();
-    return view('pages.index', compact('pages'));
+      $pages = $this->page->get();
+      return view('pages.index', compact('pages'));
   }
 
   /**
@@ -37,7 +37,7 @@ class PagesController extends \Controller
    */
   public function create()
   {
-    return view('pages.create');
+      return view('pages.create');
   }
 
   /**
@@ -49,10 +49,10 @@ class PagesController extends \Controller
    */
   public function store(PageRequest $request)
   {
-    $page = new Page($request->all());
-    $page->save();
+      $page = new Page($request->all());
+      $page->save();
 
-    return redirect()->route('pages.index');
+      return redirect()->route('pages.index');
   }
 
   /**
@@ -64,7 +64,7 @@ class PagesController extends \Controller
    */
   public function show(Page $page)
   {
-    return view('pages.show', compact('page'));
+      return view('pages.show', compact('page'));
   }
 
   /**
@@ -76,7 +76,7 @@ class PagesController extends \Controller
    */
   public function edit(Page $page)
   {
-    return view('pages.edit', compact('page'));
+      return view('pages.edit', compact('page'));
   }
 
   /**
@@ -88,10 +88,10 @@ class PagesController extends \Controller
    */
   public function update(Page $page, PageRequest $request)
   {
-    $page->fill($request->all());
-    $page->save();
+      $page->fill($request->all());
+      $page->save();
 
-    return redirect()->route('pages.index');
+      return redirect()->route('pages.index');
   }
 
   /**
@@ -103,7 +103,6 @@ class PagesController extends \Controller
    */
   public function destroy(Page $page)
   {
-    //
+      //
   }
-
 }

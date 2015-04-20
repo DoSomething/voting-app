@@ -13,7 +13,6 @@ body {
   line-height: $unitless-line-height;
 }
 
-
 // Headings
 h1, h2, h3, h4, h5, h6,
 .heading.-hero, .heading.-alpha, .heading.-beta,
@@ -60,7 +59,6 @@ h5, h6, .heading.-epsilon {
   text-transform: uppercase;
 }
 
-
 // Paragraph text
 p {
   margin: 0;
@@ -75,8 +73,6 @@ h1, h2, h3, h4, h5, h6, p {
     margin-top: $base-line-height;
   }
 }
-
-
 
 // Links
 a {

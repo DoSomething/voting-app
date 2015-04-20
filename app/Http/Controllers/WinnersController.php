@@ -10,8 +10,8 @@ class WinnersController extends \Controller
    */
   public function index()
   {
-    $winners = Winner::with('candidate')->get();
-    $winners = DB::table('winners')
+      $winners = Winner::with('candidate')->get();
+      $winners = DB::table('winners')
       ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
       ->join('categories', 'candidates.category_id', '=', 'categories.id')
       ->select('candidates.name', 'winners.id', 'winners.rank', 'categories.name as category')
@@ -19,7 +19,7 @@ class WinnersController extends \Controller
       ->orderBy('rank')
       ->get();
 
-    return view('winners.index', compact('winners', 'categories'));
+      return view('winners.index', compact('winners', 'categories'));
   }
 
 
@@ -30,7 +30,6 @@ class WinnersController extends \Controller
    */
   public function create()
   {
-
   }
 
 
@@ -41,16 +40,15 @@ class WinnersController extends \Controller
    */
   public function store()
   {
-    $candidate_id = Input::get('id');
-    $winner = Winner::where('candidate_id', '=', $candidate_id)->first();
-    if (!$winner) {
-      $winner = new Winner;
-      $winner->candidate_id = $candidate_id;
-      $winner->save();
-    }
+      $candidate_id = Input::get('id');
+      $winner = Winner::where('candidate_id', '=', $candidate_id)->first();
+      if (!$winner) {
+          $winner = new Winner;
+          $winner->candidate_id = $candidate_id;
+          $winner->save();
+      }
 
-    return redirect()->route('winners.edit', array('id' => $winner->id));
-
+      return redirect()->route('winners.edit', array('id' => $winner->id));
   }
 
 
@@ -62,7 +60,6 @@ class WinnersController extends \Controller
    */
   public function show($id)
   {
-
   }
 
 
@@ -74,8 +71,8 @@ class WinnersController extends \Controller
    */
   public function edit($id)
   {
-    $winner = Winner::whereId($id)->with('candidate')->firstOrFail();
-    return view('winners.edit', compact('winner'));
+      $winner = Winner::whereId($id)->with('candidate')->firstOrFail();
+      return view('winners.edit', compact('winner'));
   }
 
 
@@ -87,11 +84,11 @@ class WinnersController extends \Controller
    */
   public function update($id)
   {
-    $winner = Winner::whereId($id)->firstOrFail();
-    $input = Input::all();
-    $winner->fill($input)->save();
+      $winner = Winner::whereId($id)->firstOrFail();
+      $input = Input::all();
+      $winner->fill($input)->save();
 
-    return route('winners.index')->with('flash_message', 'Cool, we saved that person as a winner.');
+      return route('winners.index')->with('flash_message', 'Cool, we saved that person as a winner.');
   }
 
 
@@ -103,10 +100,8 @@ class WinnersController extends \Controller
    */
   public function destroy($id)
   {
-    $winner = Winner::whereId($id)->firstOrFail();
-    $winner->delete();
-    return redirect()->route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
+      $winner = Winner::whereId($id)->firstOrFail();
+      $winner->delete();
+      return redirect()->route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
   }
-
-
 }

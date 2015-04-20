@@ -13,7 +13,7 @@ class AddCategoryIdToCandidates extends Migration
    */
   public function up()
   {
-    Schema::table('candidates', function (Blueprint $table) {
+      Schema::table('candidates', function (Blueprint $table) {
       $table->integer('category_id')->unsigned();
     });
   }
@@ -25,9 +25,8 @@ class AddCategoryIdToCandidates extends Migration
    */
   public function down()
   {
-    Schema::table('candidates', function (Blueprint $table) {
+      Schema::table('candidates', function (Blueprint $table) {
       $table->dropColumn('category_id');
     });
   }
-
 }

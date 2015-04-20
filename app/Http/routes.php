@@ -97,7 +97,7 @@ Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', '
 Route::filter('voting_enabled', function () {
   $settings = App::make('SettingsRepository')->all();
   if (!$settings['enable_voting']) {
-    return Redirect::to('/')->withFlashMessage('Sorry, voting is disabled!')
+      return Redirect::to('/')->withFlashMessage('Sorry, voting is disabled!')
       ->with('flash_message_type', 'error');
   }
 });
@@ -109,6 +109,6 @@ Route::filter('voting_enabled', function () {
  */
 Route::filter('role', function ($route, $request, $role) {
   if (Auth::guest() or !Auth::user()->hasRole($role)) {
-    return Response::make('Unauthorized', 401);
+      return Response::make('Unauthorized', 401);
   }
 });

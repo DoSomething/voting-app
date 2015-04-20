@@ -13,7 +13,7 @@ class AddShowWinnersToSettings extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'show_winners',
       'type' => 'boolean',
       'description' => 'Enable this setting to display winners in each category. This will only work if voting is disabled.',
@@ -28,7 +28,6 @@ class AddShowWinnersToSettings extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'show_winners']);
+      DB::table('settings')->delete(['key' => 'show_winners']);
   }
-
 }

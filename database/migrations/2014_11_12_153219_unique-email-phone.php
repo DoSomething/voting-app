@@ -13,7 +13,7 @@ class UniqueEmailPhone extends Migration
    */
   public function up()
   {
-    Schema::table('users', function (Blueprint $table) {
+      Schema::table('users', function (Blueprint $table) {
       $table->unique('email');
       $table->unique('phone');
     });
@@ -26,10 +26,9 @@ class UniqueEmailPhone extends Migration
    */
   public function down()
   {
-    Schema::table('users', function (Blueprint $table) {
+      Schema::table('users', function (Blueprint $table) {
       $table->dropUnique('users_email_unique');
       $table->dropUnique('users_phone_unique');
     });
   }
-
 }

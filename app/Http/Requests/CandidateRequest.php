@@ -10,7 +10,7 @@ class CandidateRequest extends Request
    */
   public function authorize()
   {
-    return true;
+      return true;
   }
 
   /**
@@ -20,10 +20,9 @@ class CandidateRequest extends Request
    */
   public function rules()
   {
-    return [
+      return [
       'name' => 'required',
       'photo_source' => 'url',
     ];
   }
-
 }

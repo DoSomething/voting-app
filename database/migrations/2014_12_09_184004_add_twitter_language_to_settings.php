@@ -13,7 +13,7 @@ class AddTwitterLanguageToSettings extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'twitter_language',
       'value' => 'Vote for TWITTER_NAME for #VotingApp with @dosomething!'
     ]);
@@ -27,7 +27,6 @@ class AddTwitterLanguageToSettings extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'twitter_language']);
+      DB::table('settings')->delete(['key' => 'twitter_language']);
   }
-
 }

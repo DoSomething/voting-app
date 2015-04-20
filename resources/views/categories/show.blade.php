@@ -44,4 +44,3 @@
 @section('actions')
   <li><a href="{{ route('categories.edit', [$category->slug]) }}">Edit Category</a></li>
 @stop
-

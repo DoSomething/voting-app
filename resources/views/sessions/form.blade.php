@@ -17,4 +17,3 @@
   {!! form_error('phone', $errors) !!}
   {!! Form::text('phone', null, ['placeholder' => '555-555-5555']) !!}
 @endif
-

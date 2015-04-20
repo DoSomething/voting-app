@@ -10,7 +10,7 @@ class UserRegisterRequest extends Request
    */
   public function authorize()
   {
-    return true;
+      return true;
   }
 
   /**
@@ -20,7 +20,7 @@ class UserRegisterRequest extends Request
    */
   public function rules()
   {
-    return [
+      return [
       'phone' => 'unique:users',
       'email' => 'unique:users',
     ];
@@ -33,10 +33,9 @@ class UserRegisterRequest extends Request
    */
   public function messages()
   {
-    return [
+      return [
       'phone.unique' => 'That phone number is already registered with a different user. Check your other information and try again.',
       'email.unique' => 'That email is already registered with a different user. Check your other information and try again.',
     ];
   }
-
 }

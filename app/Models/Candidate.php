@@ -28,14 +28,14 @@ class Candidate extends Model implements SluggableInterface
     'save_to' => 'slug'
   ];
 
-  protected $appends = array('share_name');
+    protected $appends = array('share_name');
 
   /**
    * Inverse has-many relationship to Categories.
    */
   public function category()
   {
-    return $this->belongsTo('Category');
+      return $this->belongsTo('Category');
   }
 
   /**
@@ -43,7 +43,7 @@ class Candidate extends Model implements SluggableInterface
    */
   public function votes()
   {
-    return $this->hasMany('Vote');
+      return $this->hasMany('Vote');
   }
 
   /**
@@ -51,7 +51,7 @@ class Candidate extends Model implements SluggableInterface
    */
   public function winner()
   {
-    return $this->hasOne('Winner');
+      return $this->hasOne('Winner');
   }
 
   /**
@@ -59,11 +59,11 @@ class Candidate extends Model implements SluggableInterface
    */
   public function thumbnail()
   {
-    if ($this->photo) {
-      return "/thumbnails/thumb-" . $this->photo;
-    } else {
-      return "/placeholder.png";
-    }
+      if ($this->photo) {
+          return "/thumbnails/thumb-" . $this->photo;
+      } else {
+          return "/placeholder.png";
+      }
   }
 
   /**
@@ -74,7 +74,7 @@ class Candidate extends Model implements SluggableInterface
    */
   public function savePhoto($photo)
   {
-    $filename = $this->sluggify()->slug . '.jpg';
+      $filename = $this->sluggify()->slug . '.jpg';
 
     // Save full-size image
     $photo->encode('jpg', 75)->save(public_path('thumbnails') . '/' . $filename);
@@ -83,7 +83,7 @@ class Candidate extends Model implements SluggableInterface
     $photo->encode('jpg', 75)->fit(400)
       ->save(public_path('thumbnails') . '/' . 'thumb-' . $filename);
 
-    $this->attributes['photo'] = $filename;
+      $this->attributes['photo'] = $filename;
   }
 
   /**
@@ -94,7 +94,6 @@ class Candidate extends Model implements SluggableInterface
    */
   public function getShareNameAttribute()
   {
-    return (!empty($this->twitter)) ? $this->twitter : $this->name;
+      return (!empty($this->twitter)) ? $this->twitter : $this->name;
   }
-
 }

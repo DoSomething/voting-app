@@ -5,12 +5,12 @@ class UsersController extends \Controller
 
   protected $userValidator;
 
-  public function __construct(User $user)
-  {
-    $this->user = $user;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
 
-    $this->beforeFilter('role:admin', ['only' => ['index', 'show']]);
-  }
+        $this->beforeFilter('role:admin', ['only' => ['index', 'show']]);
+    }
 
   /**
    * Display a listing of the resource.
@@ -19,10 +19,10 @@ class UsersController extends \Controller
    */
   public function index()
   {
-    $users = $this->user->with('roles')->paginate(25);
-    $count = $this->user->count();
+      $users = $this->user->with('roles')->paginate(25);
+      $count = $this->user->count();
 
-    return view('users.index', compact('users', 'count'));
+      return view('users.index', compact('users', 'count'));
   }
 
   /**
@@ -33,9 +33,11 @@ class UsersController extends \Controller
    */
   public function create()
   {
-    if (Auth::check()) return Redirect::home();
+      if (Auth::check()) {
+          return Redirect::home();
+      }
 
-    return view('users.create');
+      return view('users.create');
   }
 
   /**
@@ -46,17 +48,17 @@ class UsersController extends \Controller
    */
   public function store()
   {
-    $input = Input::all();
-    $this->validate($input, [
+      $input = Input::all();
+      $this->validate($input, [
       'email' => 'required|email|unique:users',
       'password' => 'required|confirmed'
     ]);
 
-    $user = new User($input);
-    $user->save();
+      $user = new User($input);
+      $user->save();
 
-    Auth::login($user);
-    return redirect()->home()->withFlashMessage('You\'re all signed up! Get voting!');
+      Auth::login($user);
+      return redirect()->home()->withFlashMessage('You\'re all signed up! Get voting!');
   }
 
 
@@ -68,11 +70,9 @@ class UsersController extends \Controller
    */
   public function show(User $user)
   {
-    $votes = $user->votes;
-    $vote_count = $user->votes()->count();
+      $votes = $user->votes;
+      $vote_count = $user->votes()->count();
 
-    return view('users.show', compact('user', 'votes', 'vote_count'));
+      return view('users.show', compact('user', 'votes', 'vote_count'));
   }
-
-
 }

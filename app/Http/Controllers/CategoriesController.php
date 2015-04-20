@@ -6,14 +6,14 @@ class CategoriesController extends \Controller
 {
 
   protected $category;
-  protected $categoryValidator;
+    protected $categoryValidator;
 
-  public function __construct(Category $category)
-  {
-    $this->category = $category;
+    public function __construct(Category $category)
+    {
+        $this->category = $category;
 
-    $this->beforeFilter('role:admin', ['except' => ['show']]);
-  }
+        $this->beforeFilter('role:admin', ['except' => ['show']]);
+    }
 
   /**
    * Display a listing of the resource.
@@ -22,8 +22,8 @@ class CategoriesController extends \Controller
    */
   public function index()
   {
-    $categories = $this->category->get();
-    return view('categories.index', compact('categories'));
+      $categories = $this->category->get();
+      return view('categories.index', compact('categories'));
   }
 
 
@@ -34,7 +34,7 @@ class CategoriesController extends \Controller
    */
   public function create()
   {
-    return view('categories.create');
+      return view('categories.create');
   }
 
 
@@ -46,10 +46,10 @@ class CategoriesController extends \Controller
    */
   public function store(CategoryRequest $request)
   {
-    $category = new Category($request->all());
-    $category->save();
+      $category = new Category($request->all());
+      $category->save();
 
-    return redirect()->route('categories.index');
+      return redirect()->route('categories.index');
   }
 
 
@@ -61,10 +61,10 @@ class CategoriesController extends \Controller
    */
   public function show(Category $category)
   {
-    $candidates = $category->candidates;
-    $type = get_login_type();
-    $winners = Winner::getCategoryWinners($category);
-    return view('categories.show', compact('category', 'candidates', 'type', 'winners'));
+      $candidates = $category->candidates;
+      $type = get_login_type();
+      $winners = Winner::getCategoryWinners($category);
+      return view('categories.show', compact('category', 'candidates', 'type', 'winners'));
   }
 
 
@@ -76,7 +76,7 @@ class CategoriesController extends \Controller
    */
   public function edit(Category $category)
   {
-    return view('categories.edit', compact('category'));
+      return view('categories.edit', compact('category'));
   }
 
 
@@ -89,10 +89,10 @@ class CategoriesController extends \Controller
    */
   public function update(Category $category, CategoryRequest $request)
   {
-    $category->fill($request->all());
-    $category->save();
+      $category->fill($request->all());
+      $category->save();
 
-    return redirect()->route('categories.index');
+      return redirect()->route('categories.index');
   }
 
 
@@ -104,8 +104,6 @@ class CategoriesController extends \Controller
    */
   public function destroy($id)
   {
-    //
+      //
   }
-
-
 }

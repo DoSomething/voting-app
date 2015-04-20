@@ -10,7 +10,7 @@ class PageRequest extends Request
    */
   public function authorize()
   {
-    return true;
+      return true;
   }
 
   /**
@@ -20,10 +20,9 @@ class PageRequest extends Request
    */
   public function rules()
   {
-    return [
+      return [
       'title' => 'required',
       'content' => 'required'
     ];
   }
-
 }

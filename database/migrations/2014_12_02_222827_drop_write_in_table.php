@@ -13,7 +13,7 @@ class DropWriteInTable extends Migration
    */
   public function up()
   {
-    Schema::drop('write_ins');
+      Schema::drop('write_ins');
   }
 
   /**
@@ -23,7 +23,6 @@ class DropWriteInTable extends Migration
    */
   public function down()
   {
-    throw new Exception('Irreversible migration, sorry mate.');
+      throw new Exception('Irreversible migration, sorry mate.');
   }
-
 }

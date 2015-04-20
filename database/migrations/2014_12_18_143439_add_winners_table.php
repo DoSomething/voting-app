@@ -13,7 +13,7 @@ class AddWinnersTable extends Migration
    */
   public function up()
   {
-    Schema::create('winners', function (Blueprint $table) {
+      Schema::create('winners', function (Blueprint $table) {
       $table->increments('id');
       $table->integer('candidate_id')->unsigned();
       $table->integer('rank')->unsigned()->nullable();
@@ -28,7 +28,6 @@ class AddWinnersTable extends Migration
    */
   public function down()
   {
-    Schema::drop('winners');
+      Schema::drop('winners');
   }
-
 }

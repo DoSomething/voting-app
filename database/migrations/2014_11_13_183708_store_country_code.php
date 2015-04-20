@@ -13,7 +13,7 @@ class StoreCountryCode extends Migration
    */
   public function up()
   {
-    Schema::table('users', function (Blueprint $table) {
+      Schema::table('users', function (Blueprint $table) {
       $table->string('country_code')->after('birthdate');
     });
   }
@@ -25,9 +25,8 @@ class StoreCountryCode extends Migration
    */
   public function down()
   {
-    Schema::table('users', function (Blueprint $table) {
+      Schema::table('users', function (Blueprint $table) {
       $table->dropColumn('country_code');
     });
   }
-
 }

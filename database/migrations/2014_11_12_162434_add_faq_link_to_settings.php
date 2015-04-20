@@ -13,12 +13,12 @@ class AddFaqLinkToSettings extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'faq_link_text',
       'value' => 'FAQs'
     ]);
 
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'faq_link_url',
       'value' => '/pages/faq'
     ]);
@@ -32,8 +32,7 @@ class AddFaqLinkToSettings extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'faq_link_text']);
-    DB::table('settings')->delete(['key' => 'faq_link_url']);
+      DB::table('settings')->delete(['key' => 'faq_link_text']);
+      DB::table('settings')->delete(['key' => 'faq_link_url']);
   }
-
 }

@@ -8,7 +8,7 @@
   }
 
   @include media('medium') {
-    >.wrapper {
+    > .wrapper {
       margin-bottom: $base-spacing * 4;
 
       @include span(8);

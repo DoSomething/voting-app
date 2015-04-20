@@ -14,7 +14,7 @@ $uri = urldecode(
 // built-in PHP web server. This provides a convenient way to test a Laravel
 // application without having installed a "real" web server software here.
 if ($uri !== '/' && file_exists(__DIR__ . '/public' . $uri)) {
-  return false;
+    return false;
 }
 
 require_once __DIR__ . '/public/index.php';
