@@ -13,9 +13,8 @@
 @elseif(Auth::user())
 
     {{--  ...and can vote, show the voting form.  --}}
-    @if (Auth::user()->canVoteInCategory($category))
-        <p class="heading -hero">Hey, {{ Auth::user()->first_name }}! Ready to cast your vote
-            for {{{ $category->name }}}?</p>
+    @if (Auth::user()->canVote())
+        <p class="heading -hero">Hey, {{ Auth::user()->first_name }}! Ready to cast your vote?</p>
         {!! Form::open(['route' => 'votes.store']) !!}
         {!! Form::hidden('candidate_id', (isset($id) ? $id : null)) !!}
         {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
@@ -23,7 +22,7 @@
 
         {{-- ...and already voted, display a message. --}}
     @else
-        <p class="heading -alpha">Thanks for voting! You can vote again in this category in 24 hours.</p>
+        <p class="heading -alpha">Thanks for voting! You can vote again in 24 hours.</p>
         <p class="heading -gamma">Get {{ $candidate->name or "CANDIDATE_NAME" }} more votes!</p>
         @include('candidates.share')
     @endif

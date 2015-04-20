@@ -30,7 +30,7 @@ class Vote extends Model
     }
 
     /**
-     * Assuming a user is eligable to vote, save the vote
+     * Assuming a user is eligible to vote, save the vote
      */
     public static function createIfEligible($candidate_id, $user_id)
     {
@@ -39,7 +39,7 @@ class Vote extends Model
         $candidate = Candidate::find($candidate_id);
 
         // Can the user vote?
-        if (!$user->canVote($candidate)) {
+        if (!$user->canVote()) {
             return false;
         }
 

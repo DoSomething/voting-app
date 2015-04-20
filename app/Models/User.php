@@ -118,29 +118,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Check whether a user is allowed to vote on a given candidate.
-     * User is allowed to vote if they haven't voted in this category in the last 24 hours.
-     * @param Candidate $candidate
+     * Check whether a user is allowed to vote.
+     * User is allowed to vote once per 24 hours.
      * @return bool
      */
-    public function canVote(Candidate $candidate)
+    public function canVote()
     {
         $existing_vote = Vote::whereUserId($this->id)
-            ->inCategory($candidate->category)
-            ->withinLastDay()
-            ->first();
-
-        return is_null($existing_vote);
-    }
-
-    /**
-     * Check whether a user is allowed to vote on a given candidate.
-     * User is allowed to vote if they haven't voted in this category in the last 24 hours.
-     */
-    public function canVoteInCategory(Category $category)
-    {
-        $existing_vote = Vote::whereUserId($this->id)
-            ->inCategory($category)
             ->withinLastDay()
             ->first();
 
