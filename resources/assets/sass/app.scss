@@ -10,18 +10,22 @@
 //                                                                        $$ |      $$ |
 //                                                                        $$ |      $$ |
 //                                                                        \__|      \__|
+
 // Susy
 @import "../../../node_modules/susy/sass/susy";
+
 // Utilities
 @import "utilities/variables";
 @import "utilities/mixins";
 @import "utilities/functions";
+
 // Base
 @import "base/fonts";
 @import "base/data";
 @import "base/normalize";
 @import "base/layout";
 @import "base/typography";
+
 // Components
 @import "components/button";
 @import "components/empty";
@@ -31,14 +35,14 @@
 @import "components/pagination";
 @import "components/social";
 @import "components/table";
+
 // Modules
 @import "modules/gallery";
 @import "modules/tile";
+
 // Regions
 @import "regions/container";
 @import "regions/candidate";
 @import "regions/footer";
-@import "regions/header";
-@import "regions/modal";
 @import "regions/navigation";
 

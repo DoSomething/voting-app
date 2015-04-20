@@ -23,4 +23,8 @@ elixir(function(mix) {
   mix.copy('resources/assets/fonts', 'public/assets/fonts');
   mix.copy('resources/assets/images', 'public/assets/images');
 
+  // Third-party code
+  mix.copy('node_modules/html5shiv/dist/html5shiv.min.js', 'public/assets/vendor/html5shiv.min.js');
+  mix.copy('node_modules/respond.js/dest/respond.min.js', 'public/assets/vendor/respond.min.js');
+
 });

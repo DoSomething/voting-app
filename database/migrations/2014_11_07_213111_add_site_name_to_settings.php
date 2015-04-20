@@ -13,7 +13,7 @@ class AddSiteNameToSettings extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'site_title',
       'value' => 'Voting App'
     ]);
@@ -27,7 +27,6 @@ class AddSiteNameToSettings extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'site_title']);
+      DB::table('settings')->delete(['key' => 'site_title']);
   }
-
 }

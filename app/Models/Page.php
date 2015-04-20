@@ -29,10 +29,9 @@ class Page extends Model implements SluggableInterface
     'save_to' => 'slug'
   ];
 
-  public function setContentAttribute($content)
-  {
-    $this->attributes['content'] = $content;
-    $this->attributes['content_html'] = Parsedown::instance()->text($content);
-  }
-
+    public function setContentAttribute($content)
+    {
+        $this->attributes['content'] = $content;
+        $this->attributes['content_html'] = Parsedown::instance()->text($content);
+    }
 }

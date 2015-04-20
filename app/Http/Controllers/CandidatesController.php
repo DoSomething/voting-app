@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Requests\CandidateRequest;
+
 class CandidatesController extends \Controller
 {
 
   private $candidate;
 
-  public function __construct(Candidate $candidate)
-  {
-    $this->candidate = $candidate;
-  }
+    public function __construct(Candidate $candidate)
+    {
+        $this->candidate = $candidate;
+    }
 
   /**
    * Display a listing of the resource.
@@ -17,28 +19,29 @@ class CandidatesController extends \Controller
    */
   public function index()
   {
+      // @TODO So much going on here!
     // Get optional request params.
     $sort_by = Request::get('sort_by');
-    $direction = Request::get('direction');
-    $filter_by = Request::get('filter_by');
+      $direction = Request::get('direction');
+      $filter_by = Request::get('filter_by');
 
-    $query = DB::table('candidates')
+      $query = DB::table('candidates')
       ->join('categories', 'categories.id', '=', 'candidates.category_id')
       ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
       ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
       ->groupBy('candidates.name');
-    if ($sort_by) {
-      $query->orderBy($sort_by, $direction);
-    } else {
-      $query->orderBy('votes', 'DESC');
-    }
-    if ($filter_by) {
-      $query->where('category_id', $filter_by);
-    }
-    $candidates = $query->get();
-    $categories = Category::select('id', 'name')->get();
+      if ($sort_by) {
+          $query->orderBy($sort_by, $direction);
+      } else {
+          $query->orderBy('votes', 'DESC');
+      }
+      if ($filter_by) {
+          $query->where('category_id', $filter_by);
+      }
+      $candidates = $query->get();
+      $categories = Category::select('id', 'name')->get();
 
-    return View::make('candidates.index', compact('candidates', 'categories'));
+      return view('candidates.index', compact('candidates', 'categories'));
   }
 
 
@@ -49,31 +52,28 @@ class CandidatesController extends \Controller
    */
   public function create()
   {
-    return View::make('candidates.create');
+      return view('candidates.create');
   }
 
 
   /**
    * Store a newly created resource in storage.
    *
+   * @param CandidateRequest $request
    * @return Response
    */
-  public function store()
+  public function store(CandidateRequest $request)
   {
-    $input = Input::all();
-    // @TODO FormRequest
-//    $this->candidateValidator->validate($input);
+      $candidate = new Candidate($request->all());
 
-    $candidate = new Candidate($input);
+      if ($file = Input::file('photo')) {
+          $image = Image::make($file->getRealPath());
+          $candidate->savePhoto($image);
+      }
 
-    if ($file = Input::file('photo')) {
-      $image = Image::make($file->getRealPath());
-      $candidate->savePhoto($image);
-    }
+      $candidate->save();
 
-    $candidate->save();
-
-    return Redirect::route('candidates.index');
+      return redirect()->route('candidates.index');
   }
 
 
@@ -85,11 +85,11 @@ class CandidatesController extends \Controller
    */
   public function show(Candidate $candidate)
   {
-    $votes = $candidate->votes();
-    $vote_count = $candidate->votes()->count();
-    $type = get_login_type();
+      $votes = $candidate->votes();
+      $vote_count = $candidate->votes()->count();
+      $type = get_login_type();
 
-    return View::make('candidates.show', compact('candidate', 'votes', 'vote_count', 'type'));
+      return view('candidates.show', compact('candidate', 'votes', 'vote_count', 'type'));
   }
 
 
@@ -101,7 +101,7 @@ class CandidatesController extends \Controller
    */
   public function edit(Candidate $candidate)
   {
-    return View::make('candidates.edit', compact('candidate'));
+      return view('candidates.edit', compact('candidate'));
   }
 
 
@@ -109,24 +109,24 @@ class CandidatesController extends \Controller
    * Update the specified resource in storage.
    *
    * @param Candidate $candidate
+   * @param CandidateRequest $request
    * @return Response
    */
-  public function update(Candidate $candidate)
+  public function update(Candidate $candidate, CandidateRequest $request)
   {
-    $input = Input::all();
-    $candidate->fill($input);
+      $candidate->fill($request->all());
 
-    if ($file = Input::file('photo')) {
-      $image = Image::make($file->getRealPath());
-      $candidate->savePhoto($image);
-    }
+      if ($file = Input::file('photo')) {
+          $image = Image::make($file->getRealPath());
+          $candidate->savePhoto($image);
+      }
 
     // @TODO FormRequest
 //    $this->candidateValidator->validate($input);
 
     $candidate->save();
 
-    return Redirect::route('candidates.index');
+      return redirect()->route('candidates.index');
   }
 
 
@@ -138,8 +138,7 @@ class CandidatesController extends \Controller
    */
   public function destroy(Candidate $candidate)
   {
-    $candidate->delete();
-    return Redirect::home()->with('flash_message', 'BAM, that person was removed!');
+      $candidate->delete();
+      return redirect()->home()->with('flash_message', 'BAM, that person was removed!');
   }
-
 }

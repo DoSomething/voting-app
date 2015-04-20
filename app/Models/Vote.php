@@ -18,7 +18,7 @@ class Vote extends Model
    */
   public function user()
   {
-    return $this->belongsTo('User');
+      return $this->belongsTo('User');
   }
 
   /**
@@ -26,7 +26,7 @@ class Vote extends Model
    */
   public function candidate()
   {
-    return $this->belongsTo('Candidate');
+      return $this->belongsTo('Candidate');
   }
 
   /**
@@ -34,13 +34,14 @@ class Vote extends Model
    */
   public static function createIfEligible($candidate_id, $user_id)
   {
-    // Look up user and candidate
+      // Look up user and candidate
     $user = User::find($user_id);
-    $candidate = Candidate::find($candidate_id);
+      $candidate = Candidate::find($candidate_id);
 
     // Can the user vote?
-    if (!$user->canVote($candidate))
-      return FALSE;
+    if (!$user->canVote($candidate)) {
+        return false;
+    }
 
     // Create the vote.
     $vote = Vote::create([
@@ -48,8 +49,8 @@ class Vote extends Model
       'user_id' => $user_id
     ]);
 
-    Event::fire('user.vote');
-    return $vote;
+      Event::fire('user.vote');
+      return $vote;
   }
 
   /**
@@ -57,7 +58,7 @@ class Vote extends Model
    */
   public function scopeWithinLastDay($query)
   {
-    return $query->where('votes.created_at', '>', Carbon::now()->subDay()->toDateTimeString());
+      return $query->where('votes.created_at', '>', Carbon::now()->subDay()->toDateTimeString());
   }
 
   /**
@@ -65,8 +66,7 @@ class Vote extends Model
    */
   public function scopeInCategory($query, Category $category)
   {
-    return $query->join('candidates', 'candidate_id', '=', 'candidates.id')
+      return $query->join('candidates', 'candidate_id', '=', 'candidates.id')
       ->where('candidates.category_id', $category->id);
   }
-
 }

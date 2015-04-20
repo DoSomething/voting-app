@@ -1,19 +1,19 @@
 <?php
 
+use App\Http\Requests\CategoryRequest;
+
 class CategoriesController extends \Controller
 {
 
   protected $category;
-  protected $categoryValidator;
+    protected $categoryValidator;
 
-  public function __construct(Category $category)
-  {
-    $this->category = $category;
-    // @TODO FormRequest
-//    $this->categoryValidator = $categoryValidator;
+    public function __construct(Category $category)
+    {
+        $this->category = $category;
 
-    $this->beforeFilter('role:admin', ['except' => ['show']]);
-  }
+        $this->beforeFilter('role:admin', ['except' => ['show']]);
+    }
 
   /**
    * Display a listing of the resource.
@@ -22,8 +22,8 @@ class CategoriesController extends \Controller
    */
   public function index()
   {
-    $categories = $this->category->get();
-    return View::make('categories.index', compact('categories'));
+      $categories = $this->category->get();
+      return view('categories.index', compact('categories'));
   }
 
 
@@ -34,70 +34,65 @@ class CategoriesController extends \Controller
    */
   public function create()
   {
-    return View::make('categories.create');
+      return view('categories.create');
   }
 
 
   /**
    * Store a newly created resource in storage.
    *
+   * @param CategoryRequest $request
    * @return Response
    */
-  public function store()
+  public function store(CategoryRequest $request)
   {
-    $input = Input::all();
-    $this->categoryValidator->validate($input);
+      $category = new Category($request->all());
+      $category->save();
 
-    $category = new Category($input);
-    $category->save();
-
-    return Redirect::route('categories.index');
+      return redirect()->route('categories.index');
   }
 
 
   /**
    * Display the specified resource.
    *
-   * @param  int $id
+   * @param category $category
    * @return Response
    */
-  public function show(category $category)
+  public function show(Category $category)
   {
-    $candidates = $category->candidates;
-    $type = get_login_type();
-    $winners = Winner::getCategoryWinners($category);
-    return View::make('categories.show', compact('category', 'candidates', 'type', 'winners'));
+      $candidates = $category->candidates;
+      $type = get_login_type();
+      $winners = Winner::getCategoryWinners($category);
+      return view('categories.show', compact('category', 'candidates', 'type', 'winners'));
   }
 
 
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int $id
+   * @param Category $category
    * @return Response
    */
-  public function edit(category $category)
+  public function edit(Category $category)
   {
-    return View::make('categories.edit', compact('category'));
+      return view('categories.edit', compact('category'));
   }
 
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  int $id
+   * @param Category $category
+   * @param CategoryRequest $request
    * @return Response
    */
-  public function update(category $category)
+  public function update(Category $category, CategoryRequest $request)
   {
-    $input = Input::all();
-    // @TODO FormRequest
-//    $this->categoryValidator->validate($input);
+      $category->fill($request->all());
+      $category->save();
 
-    $category->fill($input);
-    $category->save();
-
-    return Redirect::route('categories.index');
+      return redirect()->route('categories.index');
   }
 
 
@@ -109,8 +104,6 @@ class CategoriesController extends \Controller
    */
   public function destroy($id)
   {
-    //
+      //
   }
-
-
 }

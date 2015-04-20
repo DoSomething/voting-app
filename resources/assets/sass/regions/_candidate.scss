@@ -13,7 +13,7 @@
       position: absolute;
       width: $base-spacing / 2;
       background: $yellow;
-      box-shadow: 0 0 30px 5px rgba(lighten($yellow, 15%), 0.5), inset 0px 5px 5px rgba(255,255,255,0.5);
+      box-shadow: 0 0 30px 5px rgba(lighten($yellow, 15%), 0.5), inset 0px 5px 5px rgba(255, 255, 255, 0.5);
       border-radius: $base-spacing;
     }
 

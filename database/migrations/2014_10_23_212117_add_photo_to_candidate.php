@@ -13,7 +13,7 @@ class AddPhotoToCandidate extends Migration
    */
   public function up()
   {
-    Schema::table('candidates', function (Blueprint $table) {
+      Schema::table('candidates', function (Blueprint $table) {
       $table->string('photo');
     });
   }
@@ -25,9 +25,8 @@ class AddPhotoToCandidate extends Migration
    */
   public function down()
   {
-    Schema::table('candidates', function (Blueprint $table) {
+      Schema::table('candidates', function (Blueprint $table) {
       $table->dropColumn('photo');
     });
   }
-
 }

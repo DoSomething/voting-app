@@ -13,16 +13,15 @@ class AddEnableVotingToSettings extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'enable_voting',
       'type' => 'boolean',
       'description' => 'Enable this setting to allow users to vote. If disabled, vote buttons & forms will be removed.',
       'value' => 1
     ]);
 
-    DB::statement('ALTER TABLE `settings` MODIFY `type` VARCHAR(255) AFTER `value`');
-    DB::statement('ALTER TABLE `settings` MODIFY `description` TEXT AFTER `type`');
-
+      DB::statement('ALTER TABLE `settings` MODIFY `type` VARCHAR(255) AFTER `value`');
+      DB::statement('ALTER TABLE `settings` MODIFY `description` TEXT AFTER `type`');
   }
 
 
@@ -33,7 +32,6 @@ class AddEnableVotingToSettings extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'enable_voting']);
+      DB::table('settings')->delete(['key' => 'enable_voting']);
   }
-
 }

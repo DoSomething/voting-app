@@ -28,14 +28,16 @@ class EventServiceProvider extends ServiceProvider
    */
   public function boot(DispatcherContract $events)
   {
-    parent::boot($events);
+      parent::boot($events);
 
     // @TODO These should be in their own Event classes in App\Events
 
     // An event listener that handles user votes.
     Event::listen('first.vote', function ($candidate, $user) {
       // Don't send messages locally.
-      if (App::environment('local')) return;
+      if (App::environment('local')) {
+          return;
+      }
       // Sign user up for transaction messages.
       $credentials = Config::get('messagebroker.credentials');
       $config = Config::get('messagebroker.config');
@@ -75,20 +77,23 @@ class EventServiceProvider extends ServiceProvider
       $mb->publishMessage($payload);
 
       if (extension_loaded('newrelic')) {
-        newrelic_add_custom_parameter("user_birthdate", $user->birthdate_timestamp());
+          newrelic_add_custom_parameter("user_birthdate", $user->birthdate_timestamp());
       }
 
 
     });
 
-    Event::listen('user.create', function ($user) {
+      Event::listen('user.create', function ($user) {
       // Don't send messages locally.
-      if (App::environment('local')) return;
+      if (App::environment('local')) {
+          return;
+      }
 
       //  // Log this event to stathat.
       $stathat_key = Config::get('services.stathat.key');
-      if ($stathat_key)
-        stathat_ez_count($stathat_key, 'cgg - user register', 1);
+      if ($stathat_key) {
+          stathat_ez_count($stathat_key, 'cgg - user register', 1);
+      }
 
       // Sign user up for transaction messages.
       $credentials = Config::get('messagebroker.credentials');
@@ -127,14 +132,15 @@ class EventServiceProvider extends ServiceProvider
 
     });
 
-    Event::listen('user.vote', function () {
-      if (App::environment('local')) return;
+      Event::listen('user.vote', function () {
+      if (App::environment('local')) {
+          return;
+      }
       // Log this event to stathat.
       $stathat_key = Config::get('services.stathat.key');
-      if ($stathat_key)
-        stathat_ez_count($stathat_key, 'cgg - vote', 1);
+      if ($stathat_key) {
+          stathat_ez_count($stathat_key, 'cgg - vote', 1);
+      }
     });
-
   }
-
 }

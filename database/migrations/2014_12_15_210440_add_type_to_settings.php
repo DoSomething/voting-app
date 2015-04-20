@@ -13,7 +13,7 @@ class AddTypeToSettings extends Migration
    */
   public function up()
   {
-    Schema::table('settings', function (Blueprint $table) {
+      Schema::table('settings', function (Blueprint $table) {
       $table->string('type')->default('text');
       $table->text('description')->nullable();
     });
@@ -27,10 +27,9 @@ class AddTypeToSettings extends Migration
    */
   public function down()
   {
-    Schema::table('settings', function (Blueprint $table) {
+      Schema::table('settings', function (Blueprint $table) {
       $table->dropColumn('description');
       $table->dropColumn('type');
     });
   }
-
 }

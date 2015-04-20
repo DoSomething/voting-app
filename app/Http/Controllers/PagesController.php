@@ -1,18 +1,21 @@
 <?php
 
+use App\Http\Requests\PageRequest;
+
 class PagesController extends \Controller
 {
 
+  /**
+   * @var Page
+   */
   protected $page;
-  protected $pageValidator;
 
-  public function __construct(Page $page)
-  {
-    $this->page = $page;
-//    $this->pageValidator = $pageValidator;
+    public function __construct(Page $page)
+    {
+        $this->page = $page;
 
-    $this->beforeFilter('role:admin', ['except' => ['show']]);
-  }
+        $this->beforeFilter('role:admin', ['except' => ['show']]);
+    }
 
   /**
    * Display a listing of the resource.
@@ -22,8 +25,8 @@ class PagesController extends \Controller
    */
   public function index()
   {
-    $pages = $this->page->get();
-    return View::make('pages.index', compact('pages'));
+      $pages = $this->page->get();
+      return view('pages.index', compact('pages'));
   }
 
   /**
@@ -34,25 +37,22 @@ class PagesController extends \Controller
    */
   public function create()
   {
-    return View::make('pages.create');
+      return view('pages.create');
   }
 
   /**
    * Store a newly created resource in storage.
    * POST /pages
    *
+   * @param PageRequest $request
    * @return Response
    */
-  public function store()
+  public function store(PageRequest $request)
   {
-    $input = Input::all();
-    // @TODO FormRequest
-//    $this->pageValidator->validate($input);
+      $page = new Page($request->all());
+      $page->save();
 
-    $page = new Page($input);
-    $page->save();
-
-    return Redirect::route('pages.index');
+      return redirect()->route('pages.index');
   }
 
   /**
@@ -64,7 +64,7 @@ class PagesController extends \Controller
    */
   public function show(Page $page)
   {
-    return View::make('pages.show', compact('page'));
+      return view('pages.show', compact('page'));
   }
 
   /**
@@ -76,7 +76,7 @@ class PagesController extends \Controller
    */
   public function edit(Page $page)
   {
-    return View::make('pages.edit', compact('page'));
+      return view('pages.edit', compact('page'));
   }
 
   /**
@@ -86,28 +86,23 @@ class PagesController extends \Controller
    * @param Page $page
    * @return Response
    */
-  public function update(Page $page)
+  public function update(Page $page, PageRequest $request)
   {
-    $input = Input::all();
-    $page->fill($input);
+      $page->fill($request->all());
+      $page->save();
 
-    // @TODO FormRequest
-//    $this->pageValidator->validate($input);
-    $page->save();
-
-    return Redirect::route('pages.index');
+      return redirect()->route('pages.index');
   }
 
   /**
    * Remove the specified resource from storage.
    * DELETE /pages/{id}
    *
-   * @param  int $id
+   * @param Page $page
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(Page $page)
   {
-    //
+      //
   }
-
 }

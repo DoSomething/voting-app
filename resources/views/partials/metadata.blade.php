@@ -16,4 +16,3 @@
 <meta property="og:site_name" content="{{ $settings['site_title'] }}"/>
 <meta property="og:title" content="@yield('meta_title', 'Celebs Gone Good')"/>
 <meta property="og:image" content="@yield('meta_image', URL::to('/dist/images/fb-share.jpg'))"/>
-

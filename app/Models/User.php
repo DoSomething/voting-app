@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function setPasswordAttribute($password)
   {
-    $this->attributes['password'] = \Hash::make($password);
+      $this->attributes['password'] = \Hash::make($password);
   }
 
   /**
@@ -49,7 +49,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function setBirthdateAttribute($birthdate)
   {
-    $this->attributes['birthdate'] = date('Y-m-d', (strtotime($birthdate)));
+      $this->attributes['birthdate'] = date('Y-m-d', (strtotime($birthdate)));
   }
 
   /**
@@ -59,8 +59,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function setPhoneAttribute($phone)
   {
-    // Skip mutator if attribute is null.
-    if (is_null($phone)) return;
+      // Skip mutator if attribute is null.
+    if (is_null($phone)) {
+        return;
+    }
 
     // Otherwise, remove all non-numeric characters.
     $this->attributes['phone'] = preg_replace('/[^0-9]/', '', $phone);
@@ -71,7 +73,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function birthdate_timestamp()
   {
-    return strtotime($this->attributes['birthdate']);
+      return strtotime($this->attributes['birthdate']);
   }
 
   /**
@@ -81,19 +83,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public static function isCurrentUser($input)
   {
-    $searchQuery = new User($input);
+      $searchQuery = new User($input);
 
-    $user = User::where('email', $searchQuery->email)
+      $user = User::where('email', $searchQuery->email)
       ->where('phone', $searchQuery->phone)
       ->where('birthdate', $searchQuery->birthdate)
       ->first();
 
-    if ($user) {
-      return $user;
-    }
+      if ($user) {
+          return $user;
+      }
 
-    return FALSE;
-
+      return false;
   }
 
   /**
@@ -101,11 +102,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public static function createNewUser($attributes)
   {
-    $user = new User($attributes);
-    $user->country_code = get_country_code();
-    $user->save();
+      $user = new User($attributes);
+      $user->country_code = get_country_code();
+      $user->save();
 
-    return $user;
+      return $user;
   }
 
   /**
@@ -113,7 +114,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function votes()
   {
-    return $this->hasMany('Vote');
+      return $this->hasMany('Vote');
   }
 
   /**
@@ -124,12 +125,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function canVote(Candidate $candidate)
   {
-    $existing_vote = Vote::whereUserId($this->id)
+      $existing_vote = Vote::whereUserId($this->id)
       ->inCategory($candidate->category)
       ->withinLastDay()
       ->first();
 
-    return is_null($existing_vote);
+      return is_null($existing_vote);
   }
 
   /**
@@ -138,12 +139,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function canVoteInCategory(Category $category)
   {
-    $existing_vote = Vote::whereUserId($this->id)
+      $existing_vote = Vote::whereUserId($this->id)
       ->inCategory($category)
       ->withinLastDay()
       ->first();
 
-    return is_null($existing_vote);
+      return is_null($existing_vote);
   }
 
   /**
@@ -151,7 +152,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function roles()
   {
-    return $this->belongsToMany('Role');
+      return $this->belongsToMany('Role');
   }
 
   /**
@@ -160,12 +161,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function hasRole($name)
   {
-    foreach ($this->roles as $role) {
-      if ($role->name === $name)
-        return true;
-    }
+      foreach ($this->roles as $role) {
+          if ($role->name === $name) {
+              return true;
+          }
+      }
 
-    return false;
+      return false;
   }
 
   /**
@@ -174,7 +176,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    */
   public function assignRole($role)
   {
-    $this->roles()->attach($role);
+      $this->roles()->attach($role);
   }
-
 }

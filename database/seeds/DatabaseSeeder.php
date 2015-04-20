@@ -13,18 +13,17 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
-    Model::unguard();
+      Model::unguard();
 
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-    $this->call('CategoriesTableSeeder');
-    $this->call('CandidatesTableSeeder');
-    $this->call('UsersTableSeeder');
-    $this->call('VotesTableSeeder');
-    $this->call('RolesTableSeeder');
-    $this->call('PagesTableSeeder');
+      $this->call('CategoriesTableSeeder');
+      $this->call('CandidatesTableSeeder');
+      $this->call('UsersTableSeeder');
+      $this->call('VotesTableSeeder');
+      $this->call('RolesTableSeeder');
+      $this->call('PagesTableSeeder');
 
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
   }
-
 }

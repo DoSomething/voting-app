@@ -11,8 +11,10 @@
     ]
   },
   "dependencies": {
+    "html5shiv": "^3.7.2",
     "jquery": "^1.11.0",
-    "unveil": "DFurnes/unveil.git#umd",
-    "susy": "^2.2.2"
+    "respond.js": "^1.4.2",
+    "susy": "^2.2.2",
+    "unveil": "DFurnes/unveil.git#umd"
   }
 }

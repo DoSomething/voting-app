@@ -1,18 +1,18 @@
 <?php
 
+use App\Http\Requests\SettingRequest;
+
 class SettingsController extends \Controller
 {
 
   protected $setting;
-  protected $settingValidator;
 
-  public function __construct(Setting $setting, SettingValidator $settingValidator)
-  {
-    $this->setting = $setting;
-    $this->settingValidator = $settingValidator;
+    public function __construct(Setting $setting)
+    {
+        $this->setting = $setting;
 
-    $this->beforeFilter('role:admin');
-  }
+        $this->beforeFilter('role:admin');
+    }
 
   /**
    * Display a listing of the resource.
@@ -22,37 +22,34 @@ class SettingsController extends \Controller
    */
   public function index()
   {
-    $settings = $this->setting->get();
-    return View::make('settings.index', compact('settings'));
+      $settings = $this->setting->get();
+      return view('settings.index', compact('settings'));
   }
 
   /**
    * Show the form for editing the specified resource.
    * GET /settings/{id}/edit
    *
-   * @param  int $id
+   * @param Setting $setting
    * @return Response
    */
   public function edit(Setting $setting)
   {
-    return View::make('settings.edit', compact('setting'));
+      return view('settings.edit', compact('setting'));
   }
 
   /**
    * Update the specified resource in storage.
    * PUT /settings/{id}
    *
-   * @param  int $id
+   * @param Setting $setting
    * @return Response
    */
-  public function update(Setting $setting)
+  public function update(Setting $setting, SettingRequest $request)
   {
-    $input = Input::only('value');
+      $setting->fill($request->all());
+      $setting->save();
 
-    $setting->fill($input);
-    $setting->save();
-
-    return Redirect::route('settings.index')->withFlashMessage('Setting updated.');
+      return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
   }
-
 }

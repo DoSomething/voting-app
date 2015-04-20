@@ -7,12 +7,11 @@ label {
   margin-bottom: $base-spacing / 4;
 }
 
-
 // Text inputs
-input[type="email"], input[type="number"],   input[type="password"], input[type="search"],
-input[type="tel"],   input[type="text"],     input[type="url"],      input[type="color"],
-input[type="date"],  input[type="datetime"], input[type="datetime-local"],
-input[type="month"], input[type="time"],     input[type="week"], textarea {
+input[type="email"], input[type="number"], input[type="password"], input[type="search"],
+input[type="tel"], input[type="text"], input[type="url"], input[type="color"],
+input[type="date"], input[type="datetime"], input[type="datetime-local"],
+input[type="month"], input[type="time"], input[type="week"], textarea {
   background: $white;
   color: $black;
   border: 1px solid $gray;
@@ -37,18 +36,15 @@ textarea {
   resize: vertical;
 }
 
-
 // File input
 input[type="file"] {
   margin-bottom: $base-spacing * 2;
 }
 
-
 // Select boxes
 select {
   margin-bottom: $base-spacing * 2;
 }
-
 
 // Checkboxes
 // Hat tip to @mdo (http://wtfforms.com)
@@ -72,7 +68,7 @@ select {
   top: 1px;
   left: 0;
   display: block;
-  width:  $base-font-size;
+  width: $base-font-size;
   height: $base-font-size;
   line-height: 1rem;
   font-size: 65%;
@@ -97,7 +93,6 @@ select {
   background-color: $gray;
   background-image: url(#{$data-checkbox-img});
 }
-
 
 // Server-side validation errors
 .validation.error {

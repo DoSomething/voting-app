@@ -13,7 +13,7 @@ class AddDescriptionsToExistingSettings extends Migration
    */
   public function up()
   {
-    Schema::table('settings', function (Blueprint $table) {
+      Schema::table('settings', function (Blueprint $table) {
       // Add a description to previously added twitter_language row
       DB::table('settings')
         ->where(['key' => 'twitter_language'])
@@ -40,7 +40,7 @@ class AddDescriptionsToExistingSettings extends Migration
    */
   public function down()
   {
-    Schema::table('settings', function (Blueprint $table) {
+      Schema::table('settings', function (Blueprint $table) {
       DB::table('settings')
         ->where(['key' => 'site_title'])
         ->update(['description' => null]);
@@ -54,5 +54,4 @@ class AddDescriptionsToExistingSettings extends Migration
         ->update(['description' => null]);
     });
   }
-
 }

@@ -10,7 +10,7 @@ class RemindersController extends \Controller
    */
   public function getRemind()
   {
-    return View::make('password.remind');
+      return View::make('password.remind');
   }
 
   /**
@@ -20,7 +20,7 @@ class RemindersController extends \Controller
    */
   public function postRemind()
   {
-    switch ($response = Password::remind(Input::only('email'))) {
+      switch ($response = Password::remind(Input::only('email'))) {
       case Password::INVALID_USER:
         return Redirect::back()->with('error', Lang::get($response));
 
@@ -37,9 +37,11 @@ class RemindersController extends \Controller
    */
   public function getReset($token = null)
   {
-    if (is_null($token)) App::abort(404);
+      if (is_null($token)) {
+          App::abort(404);
+      }
 
-    return View::make('password.reset')->with('token', $token);
+      return View::make('password.reset')->with('token', $token);
   }
 
   /**
@@ -49,17 +51,17 @@ class RemindersController extends \Controller
    */
   public function postReset()
   {
-    $credentials = Input::only(
+      $credentials = Input::only(
       'email', 'password', 'password_confirmation', 'token'
     );
 
-    $response = Password::reset($credentials, function ($user, $password) {
+      $response = Password::reset($credentials, function ($user, $password) {
       $user->password = $password;
 
       $user->save();
     });
 
-    switch ($response) {
+      switch ($response) {
       case Password::INVALID_PASSWORD:
       case Password::INVALID_TOKEN:
       case Password::INVALID_USER:
@@ -69,5 +71,4 @@ class RemindersController extends \Controller
         return Redirect::to('/');
     }
   }
-
 }

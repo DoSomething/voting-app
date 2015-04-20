@@ -18,16 +18,14 @@ class HomeController extends \Controller
 
   public function index()
   {
-    $category = Category::find(1);
-    $type = get_login_type();
-    if ($category) {
-      $candidates = $category->candidates;
-      $winners = Winner::getCategoryWinners($category);
-      return \View::make('categories.show', compact('category', 'candidates', 'type', 'winners'));
-    } else {
-      return \View::make('categories.create');
-    }
-
+      $category = Category::find(1);
+      $type = get_login_type();
+      if ($category) {
+          $candidates = $category->candidates;
+          $winners = Winner::getCategoryWinners($category);
+          return \View::make('categories.show', compact('category', 'candidates', 'type', 'winners'));
+      } else {
+          return \View::make('categories.create');
+      }
   }
-
 }

@@ -5,7 +5,7 @@
  */
 function form_error($field, $errors)
 {
-  return $errors->first($field, '<span class="validation error">:message</span>');
+    return $errors->first($field, '<span class="validation error">:message</span>');
 }
 
 /**
@@ -13,14 +13,14 @@ function form_error($field, $errors)
  */
 function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = null)
 {
-  $url = route($route, $params);
+    $url = route($route, $params);
 
-  $class = '';
-  if (Request::url() == $url || Request::path() == $forceOnPath) {
-    $class = 'is-active';
-  }
+    $class = '';
+    if (Request::url() == $url || Request::path() == $forceOnPath) {
+        $class = 'is-active';
+    }
 
-  return link_to_route($route, $text, $params, ['class' => $class]);
+    return link_to_route($route, $text, $params, ['class' => $class]);
 }
 
 ;
@@ -31,7 +31,7 @@ function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = n
  */
 function get_country_code()
 {
-  return (Request::server('HTTP_X_FASTLY_COUNTRY_CODE')) ? Request::server('HTTP_X_FASTLY_COUNTRY_CODE') : '?';
+    return (Request::server('HTTP_X_FASTLY_COUNTRY_CODE')) ? Request::server('HTTP_X_FASTLY_COUNTRY_CODE') : '?';
 }
 
 /**
@@ -40,15 +40,15 @@ function get_country_code()
  */
 function get_login_type()
 {
-  $type = 'phone';
-  $country_code = get_country_code();
+    $type = 'phone';
+    $country_code = get_country_code();
 
   // If user is not in the US, ask for their email instead.
   if (isset($country_code) && $country_code != 'US') {
-    $type = 'email';
+      $type = 'email';
   }
 
-  return $type;
+    return $type;
 }
 
 /**
@@ -59,11 +59,11 @@ function get_login_type()
  */
 function tweet_intent($text, $url, $twitter = null)
 {
-  if (!is_null($twitter)) {
-    $text = str_replace('TWITTER_NAME', $twitter, $text);
-  }
+    if (!is_null($twitter)) {
+        $text = str_replace('TWITTER_NAME', $twitter, $text);
+    }
 
-  return 'https://twitter.com/intent/tweet?text=' . urlencode($text) . '&url=' . urlencode($url);
+    return 'https://twitter.com/intent/tweet?text=' . urlencode($text) . '&url=' . urlencode($url);
 }
 
 /**
@@ -71,7 +71,7 @@ function tweet_intent($text, $url, $twitter = null)
  */
 function facebook_intent($url)
 {
-  return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
+    return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
 }
 
 /**
@@ -79,8 +79,8 @@ function facebook_intent($url)
  */
 function sort_candidates_by($column, $body)
 {
-  $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
-  return link_to_route('candidates.index', $body, ['sort_by' => $column, 'direction' => $direction]);
+    $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
+    return link_to_route('candidates.index', $body, ['sort_by' => $column, 'direction' => $direction]);
 }
 
 /**
@@ -88,5 +88,5 @@ function sort_candidates_by($column, $body)
  */
 function filter_candidates_by($status, $body)
 {
-  return link_to_route('candidates.index', $body, ['filter_by' => $status]);
+    return link_to_route('candidates.index', $body, ['filter_by' => $status]);
 }

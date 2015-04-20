@@ -5,13 +5,13 @@ class SessionsController extends \Controller
 
   protected $sessionsValidator;
 
-  public function __construct()
-  {
-//    $this->userSessionValidator = $userSessionValidator;
+    public function __construct()
+    {
+        //    $this->userSessionValidator = $userSessionValidator;
 //    $this->adminSessionValidator = $adminSessionValidator;
 //    $this->registrationValidator = $registrationValidator;
     // @TODO FormRequest
-  }
+    }
 
 
   /**
@@ -22,7 +22,7 @@ class SessionsController extends \Controller
    */
   public function create()
   {
-    return View::make('sessions.create');
+      return View::make('sessions.create');
   }
 
   /**
@@ -33,7 +33,7 @@ class SessionsController extends \Controller
    */
   public function adminCreate()
   {
-    return View::make('sessions.admin');
+      return View::make('sessions.admin');
   }
 
   /**
@@ -44,11 +44,11 @@ class SessionsController extends \Controller
    */
   public function store()
   {
-    $input = Input::all();
+      $input = Input::all();
 
     // If coming from admin, use that login method.
     if (Input::has('password')) {
-//      $this->adminSessionValidator->validate($input);
+        //      $this->adminSessionValidator->validate($input);
       // @TODO FormRequest
       return $this->adminLogin();
     }
@@ -68,9 +68,10 @@ class SessionsController extends \Controller
    */
   public function destroy($id = null)
   {
-    Auth::logout();
+      Auth::logout();
 
-    return Redirect::home()->withFlashMessage('You\'re now signed out.');;
+      return Redirect::home()->withFlashMessage('You\'re now signed out.');
+      ;
   }
 
   /**
@@ -79,18 +80,18 @@ class SessionsController extends \Controller
    */
   public function userLogin()
   {
-    $input = Input::all();
+      $input = Input::all();
 
-    $user = User::isCurrentUser($input);
-    $newUserAccount = false;
+      $user = User::isCurrentUser($input);
+      $newUserAccount = false;
 
     // If user doesn't exist, attempt to create.
     if (!$user) {
-//      $this->registrationValidator->validate($input);
+        //      $this->registrationValidator->validate($input);
       // @TODO
       $user = User::createNewUser($input);
-      $newUserAccount = true;
-      Event::fire('user.create', [$user]);
+        $newUserAccount = true;
+        Event::fire('user.create', [$user]);
     }
 
     // Log in the user.
@@ -98,24 +99,24 @@ class SessionsController extends \Controller
 
     // Is the user login on a vote page?
     if (Input::has('candidate_id')) {
-      $vote = Vote::createIfEligible($input['candidate_id'], $user->id);
+        $vote = Vote::createIfEligible($input['candidate_id'], $user->id);
 
-      if ($vote) {
-        $candidate = Candidate::find($input['candidate_id']);
-        $url = URL::route('candidates.show', [$candidate->slug, '#message']);
+        if ($vote) {
+            $candidate = Candidate::find($input['candidate_id']);
+            $url = URL::route('candidates.show', [$candidate->slug, '#message']);
 
         // Trigger a vote transactional message only for new users.
         if ($newUserAccount) {
-          Event::fire('first.vote', [$candidate, $user]);
+            Event::fire('first.vote', [$candidate, $user]);
         }
 
-        return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
-      } else {
-        return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
-      }
+            return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
+        } else {
+            return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
+        }
     }
 
-    return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
+      return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
   }
 
   /**
@@ -124,13 +125,11 @@ class SessionsController extends \Controller
    */
   public function adminLogin()
   {
-    $credentials = Input::only('email', 'password');
-    if (Auth::attempt($credentials)) {
-      return Redirect::intended('/')->withFlashMessage('Welcome back!');
-    } else {
-      return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
-    }
-
+      $credentials = Input::only('email', 'password');
+      if (Auth::attempt($credentials)) {
+          return Redirect::intended('/')->withFlashMessage('Welcome back!');
+      } else {
+          return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
+      }
   }
-
 }

@@ -7,11 +7,11 @@ class Setting extends Model
 
   public static function boot()
   {
-    parent::boot();
+      parent::boot();
 
-    static::updating(function ($post) {
+      static::updating(function ($post) {
       if (Cache::has('settings')) {
-        \Cache::forget('settings');
+          \Cache::forget('settings');
       }
     });
   }
@@ -33,18 +33,17 @@ class Setting extends Model
    */
   public function pretty_value()
   {
-    // Display a boolean type:
+      // Display a boolean type:
     if ($this->type === 'boolean') {
-      return ($this->value ? '✓ on' : '<span class="empty"> ✘ off </span> ');
+        return ($this->value ? '✓ on' : '<span class="empty"> ✘ off </span> ');
     }
 
     // Display empty strings:
     if (empty($this->value)) {
-      return '<span class="empty">(empty)</span>';
+        return '<span class="empty">(empty)</span>';
     }
 
     // Anything else:
     return e($this->value);
   }
-
 }

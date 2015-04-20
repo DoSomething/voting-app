@@ -13,7 +13,7 @@ class CreateCandidatesTable extends Migration
    */
   public function up()
   {
-    Schema::create('candidates', function (Blueprint $table) {
+      Schema::create('candidates', function (Blueprint $table) {
       $table->increments('id');
       $table->string('slug')->unique();
       $table->string('name');
@@ -29,7 +29,6 @@ class CreateCandidatesTable extends Migration
    */
   public function down()
   {
-    Schema::drop('candidates');
+      Schema::drop('candidates');
   }
-
 }

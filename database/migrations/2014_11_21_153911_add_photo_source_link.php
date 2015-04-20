@@ -13,7 +13,7 @@ class AddPhotoSourceLink extends Migration
    */
   public function up()
   {
-    Schema::table('candidates', function (Blueprint $table) {
+      Schema::table('candidates', function (Blueprint $table) {
       $table->string('photo_source')->after('photo')->nullable();
     });
   }
@@ -25,9 +25,8 @@ class AddPhotoSourceLink extends Migration
    */
   public function down()
   {
-    Schema::table('candidates', function (Blueprint $table) {
+      Schema::table('candidates', function (Blueprint $table) {
       $table->dropColumn('photo_source');
     });
   }
-
 }

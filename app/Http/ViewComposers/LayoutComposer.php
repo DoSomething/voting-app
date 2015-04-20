@@ -19,7 +19,7 @@ class LayoutComposer
    */
   public function __construct(SettingsRepository $settingsRepository)
   {
-    // Dependencies automatically resolved by service container...
+      // Dependencies automatically resolved by service container...
     $this->settingsRepository = $settingsRepository;
   }
 
@@ -30,8 +30,7 @@ class LayoutComposer
    */
   public function compose(View $view)
   {
-    $settings = $this->settingsRepository->all();
-    $view->with('settings', $settings);
+      $settings = $this->settingsRepository->all();
+      $view->with('settings', $settings);
   }
-
 }

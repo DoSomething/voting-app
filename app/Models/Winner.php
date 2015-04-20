@@ -22,7 +22,7 @@ class Winner extends Model
    */
   public function candidate()
   {
-    return $this->belongsTo('Candidate');
+      return $this->belongsTo('Candidate');
   }
 
   /**
@@ -31,10 +31,10 @@ class Winner extends Model
    */
   public static function getCategoryWinners(Category $category)
   {
-    $settings = \App::make('SettingsRepository')->all();
-    $secrets = \Request::get('winners');
-    if ($settings['show_winners'] || $secrets == '✓') {
-      $winners = DB::table('winners')
+      $settings = \App::make('SettingsRepository')->all();
+      $secrets = \Request::get('winners');
+      if ($settings['show_winners'] || $secrets == '✓') {
+          $winners = DB::table('winners')
         ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
         ->join('categories', 'candidates.category_id', '=', 'categories.id')
         ->where('categories.id', '=', $category->id)
@@ -42,10 +42,9 @@ class Winner extends Model
         ->orderBy('winners.rank')
         ->get();
 
-      return $winners;
-    }
+          return $winners;
+      }
 
-    return;
+      return;
   }
-
 }

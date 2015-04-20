@@ -13,7 +13,7 @@ class AddTaglineToSettings extends Migration
    */
   public function up()
   {
-    DB::table('settings')->insert([
+      DB::table('settings')->insert([
       'key' => 'tagline',
       'value' => 'Vote for your favorite celeb who has done kickass things in the world. Vote once per day in each category, and don\'t forget voting ends December 24th!'
     ]);
@@ -27,7 +27,6 @@ class AddTaglineToSettings extends Migration
    */
   public function down()
   {
-    DB::table('settings')->delete(['key' => 'tagline']);
+      DB::table('settings')->delete(['key' => 'tagline']);
   }
-
 }

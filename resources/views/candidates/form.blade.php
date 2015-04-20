@@ -21,4 +21,3 @@
 {{ Form::label('twitter', 'Twitter handle') }}
 {{ form_error('twitter', $errors) }}
 {{ Form::text('twitter', NULL, ['placeholder' => '@handle']) }}
-
