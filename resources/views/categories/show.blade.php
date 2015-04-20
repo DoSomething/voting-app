@@ -13,8 +13,10 @@
     </ul>
 
     @if($winners)
-        <h3 class="gallery-heading">All Nominees</h3>
+        <h1 class="highlighted gallery-heading">All Nominees</h1>
     @endif
+    <h2 class="gallery-heading">{{ $category->name }}</h2>
+
     <ul class="gallery">
         @if($category->candidates)
             @foreach($category->candidates as $candidate)
@@ -36,7 +38,7 @@
     </div>
 
     <script type="text/html" id="form-template">
-        @include('candidates.voteForm', ['category' => $category, 'candidate' => null, 'winner' => null])
+        @include('candidates.voteForm', ['candidate' => null, 'winner' => null])
     </script>
 
 @stop

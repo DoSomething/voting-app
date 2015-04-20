@@ -10,6 +10,8 @@ class CandidatesController extends \Controller
     public function __construct(Candidate $candidate)
     {
         $this->candidate = $candidate;
+
+        $this->beforeFilter('role:admin', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -19,29 +21,31 @@ class CandidatesController extends \Controller
      */
     public function index()
     {
-        // @TODO So much going on here!
-        // Get optional request params.
-        $sort_by = Request::get('sort_by');
-        $direction = Request::get('direction');
-        $filter_by = Request::get('filter_by');
+//        // @TODO We need an administrative view for this.
+//        // Get optional request params.
+//        $sort_by = Request::get('sort_by');
+//        $direction = Request::get('direction');
+//        $filter_by = Request::get('filter_by');
+//
+//        $query = DB::table('candidates')
+//            ->join('categories', 'categories.id', '=', 'candidates.category_id')
+//            ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
+//            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+//            ->groupBy('candidates.name');
+//        if ($sort_by) {
+//            $query->orderBy($sort_by, $direction);
+//        } else {
+//            $query->orderBy('votes', 'DESC');
+//        }
+//        if ($filter_by) {
+//            $query->where('category_id', $filter_by);
+//        }
+//
+//        $candidates = $query->get();
+        $type = get_login_type();
+        $categories = Category::with('candidates')->get();
 
-        $query = DB::table('candidates')
-            ->join('categories', 'categories.id', '=', 'candidates.category_id')
-            ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
-            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
-            ->groupBy('candidates.name');
-        if ($sort_by) {
-            $query->orderBy($sort_by, $direction);
-        } else {
-            $query->orderBy('votes', 'DESC');
-        }
-        if ($filter_by) {
-            $query->where('category_id', $filter_by);
-        }
-        $candidates = $query->get();
-        $categories = Category::select('id', 'name')->get();
-
-        return view('candidates.index', compact('candidates', 'categories'));
+        return view('candidates.index', compact('categories', 'type'));
     }
 
 
