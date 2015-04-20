@@ -1,45 +1,35 @@
 @extends('app')
 
 @section('content')
-    <div class="row">
-        <h1 class="highlighted">All Candidates</h1>
+    @forelse($categories as $category)
+        <h2 class="gallery-heading">{{ $category->name }}</h2>
 
-        <p>These are all candidates in the database. (Only visible for administrators.)</p>
+        <ul class="gallery">
+            @if($category->candidates)
+                @foreach($category->candidates as $candidate)
+                    @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
+                @endforeach
+            @else
+                <li class="empty">No candidates in this category... yet!</li>
+            @endif
+        </ul>
+    @empty
+        <div class="empty">No categories... yet!</div>
+    @endforelse
+
+    <div class="wrapper -narrow">
+        <h4>Was there a celeb we missed?</h4>
+
+        <p>
+            If you know a celeb who's done kickass things in the world, but don't see them on our list, let us know by
+            emailing <a href="mailto:writein@celebsgonegood.com">writein@celebsgonegood.com</a>. Make sure to
+            include the work they've done in 2014 for social good (in 140 characters or less). Thank you!
+        </p>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <td> {!! sort_candidates_by('name', 'Candidate Name') !!} </td>
-            <td> Category
-                <ul>
-                    @forelse($categories as $category)
-                        <li> {!! filter_candidates_by($category->id, $category->name) !!} </li>
-                    @empty
-                        <div class="empty">No categories... yet!</div>
-                    @endforelse
-                </ul>
-            </td>
-            <td> {!! sort_candidates_by('votes', 'Votes') !!} </td>
-            <td>Make Winner</td>
 
-        </tr>
-        </thead>
-        @forelse($candidates as $candidate)
-            <tr>
-                <td><a href="{{ route('candidates.show', [ $candidate->slug ]) }}">{{ $candidate->name }}</a></td>
-                <td>{{ $candidate->category }}</td>
-                <td>{{ $candidate->votes }} votes</td>
-                <td>
-                    {!! Form::open(['route' => 'winners.store']) !!}
-                    {!! Form::hidden('id', $candidate->id) !!}
-                    {!! Form::submit('Mark as Winner') !!}
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-        @empty
-            <div class="empty">No candidates... yet!</div>
-        @endforelse
-    </table>
+    <script type="text/html" id="form-template">
+        @include('candidates.voteForm', ['candidate' => null, 'winner' => null])
+    </script>
 @stop
 
 @section('actions')
