@@ -59,10 +59,13 @@ Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'stor
 /**
  * Sessions
  */
-Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
-Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create', 'before' => 'voting_enabled']);
-Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
+Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@userCreate', 'before' => 'voting_enabled']);
+Route::post('login', ['as' => 'sessions.userLogin', 'uses' => 'SessionsController@userLogin', 'before' => 'voting_enabled']);
+
 Route::get('admin', ['as' => 'admin.login', 'uses' => 'SessionsController@adminCreate']);
+Route::post('admin', ['as' => 'sessions.adminLogin', 'uses' => 'SessionsController@adminLogin']);
+
+Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
 
 /**
  * Password Reset

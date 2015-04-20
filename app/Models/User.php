@@ -78,7 +78,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     /**
      * Check if a user matching the given input exists.
-     * @param $input Input
+     * @param $input
      * @return User|bool Matching user object or false if nonexistant.
      */
     public static function isCurrentUser($input)

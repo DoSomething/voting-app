@@ -6,7 +6,7 @@
 
         <p>With great power, comes great responsibility...</p>
 
-        {!! Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) !!}
+        {!! Form::open(['route'=> ['sessions.adminLogin'], 'id' => 'sign_in_form']) !!}
 
         {!! Form::label('email', 'Email') !!}
         {!! form_error('email', $errors) !!}
@@ -20,7 +20,7 @@
         {!! Form::close() !!}
 
         <p>
-            <a href="{{ route('password') }}">Forgot password</a>
+            <a href="#">Forgot password</a>
         </p>
     </div>
 @stop

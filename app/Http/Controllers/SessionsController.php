@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Requests\UserSessionRequest;
+use App\Http\Requests\AdminSessionRequest;
+
 class SessionsController extends \Controller
 {
 
@@ -20,9 +23,9 @@ class SessionsController extends \Controller
      *
      * @return Response
      */
-    public function create()
+    public function userCreate()
     {
-        return View::make('sessions.create');
+        return View::make('sessions.login');
     }
 
     /**
@@ -34,29 +37,6 @@ class SessionsController extends \Controller
     public function adminCreate()
     {
         return View::make('sessions.admin');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * POST /sessions
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        $input = Input::all();
-
-        // If coming from admin, use that login method.
-        if (Input::has('password')) {
-            // $this->adminSessionValidator->validate($input);
-            // @TODO FormRequest
-            return $this->adminLogin();
-        }
-
-        // Otherwise, use the user login/create method.
-        // $this->userSessionValidator->validate($input);
-        // @TODO FormRequest
-        return $this->userLogin();
     }
 
     /**
@@ -74,19 +54,21 @@ class SessionsController extends \Controller
 
     /**
      * Authentication for a non-admin user.
-     * @see SessionsController#create()
+     * @param UserSessionRequest $request
      */
-    public function userLogin()
+    public function userLogin(UserSessionRequest $request)
     {
-        $input = Input::all();
-
+        $input = $request->all();
         $user = User::isCurrentUser($input);
         $newUserAccount = false;
 
         // If user doesn't exist, attempt to create.
         if (!$user) {
-            // $this->registrationValidator->validate($input);
-            // @TODO
+            $this->validate($request, [
+                'phone' => 'unique:users',
+                'email' => 'unique:users',
+            ]);
+
             $user = User::createNewUser($input);
             $newUserAccount = true;
             Event::fire('user.create', [$user]);
@@ -119,11 +101,11 @@ class SessionsController extends \Controller
 
     /**
      * Authentication for an admin user.
-     * @see SessionsController#create()
+     * @param AdminSessionRequest $request
      */
-    public function adminLogin()
+    public function adminLogin(AdminSessionRequest $request)
     {
-        $credentials = Input::only('email', 'password');
+        $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return Redirect::intended('/')->withFlashMessage('Welcome back!');
         } else {

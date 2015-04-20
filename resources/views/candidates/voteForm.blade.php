@@ -30,7 +30,7 @@
 
     {{-- If user is not logged in, show the login/vote form. --}}
 @else
-    {!! Form::open(['route'=> ['sessions.store'], 'id' => 'sign_in_form']) !!}
+    {!! Form::open(['route'=> ['sessions.userLogin'], 'id' => 'sign_in_form']) !!}
     @include('sessions.form', [$type])
     {!! Form::hidden('candidate_id', (isset($candidate->id) ? $candidate->id : null)) !!}
     {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
