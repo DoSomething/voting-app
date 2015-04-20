@@ -5,8 +5,8 @@ use Illuminate\Database\Seeder;
 class SettingsTableSeederTableSeeder extends Seeder
 {
 
-  public function run()
-  {
-      // Setting::create
-  }
+    public function run()
+    {
+        // Setting::create
+    }
 }

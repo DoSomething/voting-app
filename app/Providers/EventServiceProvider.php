@@ -9,138 +9,138 @@ use App;
 class EventServiceProvider extends ServiceProvider
 {
 
-  /**
-   * The event handler mappings for the application.
-   *
-   * @var array
-   */
-  protected $listen = [
-    'event.name' => [
-      'EventListener',
-    ],
-  ];
-
-  /**
-   * Register any other events for your application.
-   *
-   * @param  \Illuminate\Contracts\Events\Dispatcher $events
-   * @return void
-   */
-  public function boot(DispatcherContract $events)
-  {
-      parent::boot($events);
-
-    // @TODO These should be in their own Event classes in App\Events
-
-    // An event listener that handles user votes.
-    Event::listen('first.vote', function ($candidate, $user) {
-      // Don't send messages locally.
-      if (App::environment('local')) {
-          return;
-      }
-      // Sign user up for transaction messages.
-      $credentials = Config::get('messagebroker.credentials');
-      $config = Config::get('messagebroker.config');
-      $config['routingKey'] = 'cgg.event.vote';
-
-      $mb = new MessageBroker($credentials, $config);
-
-      $payload = [
-        // User information
-        'first_name' => $user->first_name,
-        'email' => $user->email,
-        'mobile' => $user->phone,
-        'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
-        'country_code' => $user->country_code,
-
-        // Candidate information.
-        'candidate_id' => $candidate->id,
-        'candidate_name' => $candidate->name,
-
-        // Request specific information
-        'activity' => 'cgg2014_vote',
-        'application_id' => 201,
-        'activity_timestamp' => time(),
-        'email_template' => 'mb-cgg2014-vote',
-        'email_tags' => [
-          0 => 'cgg2014_vote',
+    /**
+     * The event handler mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        'event.name' => [
+            'EventListener',
         ],
-        'mailchimp_grouping_id' => '10621',
-        'mailchimp_group_name' => 'CelebsGoneGood2014',
-        'mc_opt_in_path_id' => '174269',
-        'merge_vars' => [
-          'FNAME' => $user->first_name
-        ]
-      ];
+    ];
 
-      $payload = serialize($payload);
-      $mb->publishMessage($payload);
+    /**
+     * Register any other events for your application.
+     *
+     * @param  \Illuminate\Contracts\Events\Dispatcher $events
+     * @return void
+     */
+    public function boot(DispatcherContract $events)
+    {
+        parent::boot($events);
 
-      if (extension_loaded('newrelic')) {
-          newrelic_add_custom_parameter("user_birthdate", $user->birthdate_timestamp());
-      }
+        // @TODO These should be in their own Event classes in App\Events
+
+        // An event listener that handles user votes.
+        Event::listen('first.vote', function ($candidate, $user) {
+            // Don't send messages locally.
+            if (App::environment('local')) {
+                return;
+            }
+            // Sign user up for transaction messages.
+            $credentials = Config::get('messagebroker.credentials');
+            $config = Config::get('messagebroker.config');
+            $config['routingKey'] = 'cgg.event.vote';
+
+            $mb = new MessageBroker($credentials, $config);
+
+            $payload = [
+                // User information
+                'first_name' => $user->first_name,
+                'email' => $user->email,
+                'mobile' => $user->phone,
+                'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
+                'country_code' => $user->country_code,
+
+                // Candidate information.
+                'candidate_id' => $candidate->id,
+                'candidate_name' => $candidate->name,
+
+                // Request specific information
+                'activity' => 'cgg2014_vote',
+                'application_id' => 201,
+                'activity_timestamp' => time(),
+                'email_template' => 'mb-cgg2014-vote',
+                'email_tags' => [
+                    0 => 'cgg2014_vote',
+                ],
+                'mailchimp_grouping_id' => '10621',
+                'mailchimp_group_name' => 'CelebsGoneGood2014',
+                'mc_opt_in_path_id' => '174269',
+                'merge_vars' => [
+                    'FNAME' => $user->first_name
+                ]
+            ];
+
+            $payload = serialize($payload);
+            $mb->publishMessage($payload);
+
+            if (extension_loaded('newrelic')) {
+                newrelic_add_custom_parameter("user_birthdate", $user->birthdate_timestamp());
+            }
 
 
-    });
+        });
 
-      Event::listen('user.create', function ($user) {
-      // Don't send messages locally.
-      if (App::environment('local')) {
-          return;
-      }
+        Event::listen('user.create', function ($user) {
+            // Don't send messages locally.
+            if (App::environment('local')) {
+                return;
+            }
 
-      //  // Log this event to stathat.
-      $stathat_key = Config::get('services.stathat.key');
-      if ($stathat_key) {
-          stathat_ez_count($stathat_key, 'cgg - user register', 1);
-      }
+            //  // Log this event to stathat.
+            $stathat_key = Config::get('services.stathat.key');
+            if ($stathat_key) {
+                stathat_ez_count($stathat_key, 'cgg - user register', 1);
+            }
 
-      // Sign user up for transaction messages.
-      $credentials = Config::get('messagebroker.credentials');
-      $config = Config::get('messagebroker.config');
-      $config['routingKey'] = 'cgg.user.registration';
+            // Sign user up for transaction messages.
+            $credentials = Config::get('messagebroker.credentials');
+            $config = Config::get('messagebroker.config');
+            $config['routingKey'] = 'cgg.user.registration';
 
-      $mb = new MessageBroker($credentials, $config);
+            $mb = new MessageBroker($credentials, $config);
 
-      $payload = [
-        // User information
-        'first_name' => $user->first_name,
-        'email' => $user->email,
-        'mobile' => $user->phone,
-        'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
-        'country_code' => $user->country_code,
+            $payload = [
+                // User information
+                'first_name' => $user->first_name,
+                'email' => $user->email,
+                'mobile' => $user->phone,
+                'birthdate_timestamp' => $user->birthdate_timestamp(), // Message Broker expects UNIX timestamp
+                'country_code' => $user->country_code,
 
-        // Request specific information
-        'activity' => 'cgg2014_signup',
-        'application_id' => 201,
-        'activity_timestamp' => time(),
-        'email_template' => 'mb-cgg2014-signup',
-        'email_tags' => [
-          0 => 'cgg2014_signup',
-        ],
-        'mailchimp_grouping_id' => '10621',
-        'mailchimp_group_name' => 'CelebsGoneGood2014',
-        'mc_opt_in_path_id' => '174269',
-        'merge_vars' => [
-          'FNAME' => $user->first_name
-        ],
-        'user_registration_source' => 'cgg2014'
-      ];
+                // Request specific information
+                'activity' => 'cgg2014_signup',
+                'application_id' => 201,
+                'activity_timestamp' => time(),
+                'email_template' => 'mb-cgg2014-signup',
+                'email_tags' => [
+                    0 => 'cgg2014_signup',
+                ],
+                'mailchimp_grouping_id' => '10621',
+                'mailchimp_group_name' => 'CelebsGoneGood2014',
+                'mc_opt_in_path_id' => '174269',
+                'merge_vars' => [
+                    'FNAME' => $user->first_name
+                ],
+                'user_registration_source' => 'cgg2014'
+            ];
 
-      $payload = serialize($payload);
-      $mb->publishMessage($payload);
+            $payload = serialize($payload);
+            $mb->publishMessage($payload);
 
-    });
+        });
 
-      Event::listen('user.vote', function () {
-      if (App::environment('local')) {
-          return;
-      }
-      // Log this event to stathat.
-      $stathat_key = Config::get('services.stathat.key');
-      if ($stathat_key) {
-          stathat_ez_count($stathat_key, 'cgg - vote', 1);
-      }
-    });
-  }
+        Event::listen('user.vote', function () {
+            if (App::environment('local')) {
+                return;
+            }
+            // Log this event to stathat.
+            $stathat_key = Config::get('services.stathat.key');
+            if ($stathat_key) {
+                stathat_ez_count($stathat_key, 'cgg - vote', 1);
+            }
+        });
+    }
 }

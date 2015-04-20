@@ -8,26 +8,26 @@ use Parsedown;
 class Page extends Model implements SluggableInterface
 {
 
-  use SluggableTrait;
+    use SluggableTrait;
 
-  /**
-   * The attributes which may be mass-assigned.
-   *
-   * @var array
-   */
-  protected $fillable = [
-    'title', 'content'
-  ];
+    /**
+     * The attributes which may be mass-assigned.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'content'
+    ];
 
-  /**
-   * Configuration for generating slug with Eloquent-Sluggable.
-   *
-   * @var array
-   */
-  protected $sluggable = [
-    'build_from' => 'title',
-    'save_to' => 'slug'
-  ];
+    /**
+     * Configuration for generating slug with Eloquent-Sluggable.
+     *
+     * @var array
+     */
+    protected $sluggable = [
+        'build_from' => 'title',
+        'save_to' => 'slug'
+    ];
 
     public function setContentAttribute($content)
     {

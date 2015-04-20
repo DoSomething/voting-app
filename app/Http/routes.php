@@ -23,7 +23,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
  * Categories
  */
 Route::bind('categories', function ($slug) {
-  return Category::whereSlug($slug)->first();
+    return Category::whereSlug($slug)->first();
 });
 
 Route::resource('categories', 'CategoriesController');
@@ -32,7 +32,7 @@ Route::resource('categories', 'CategoriesController');
  * Candidates
  */
 Route::bind('candidates', function ($slug) {
-  return Candidate::whereSlug($slug)->first();
+    return Candidate::whereSlug($slug)->first();
 });
 
 Route::resource('candidates', 'CandidatesController');
@@ -51,7 +51,7 @@ Route::resource('votes', 'VotesController', ['only' => ['store']]);
  * Users
  */
 Route::bind('users', function ($id) {
-  return User::whereId($id)->first();
+    return User::whereId($id)->first();
 });
 
 Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
@@ -73,7 +73,7 @@ Route::get('admin', ['as' => 'admin.login', 'uses' => 'SessionsController@adminC
  * Pages
  */
 Route::bind('pages', function ($slug) {
-  return Page::whereSlug($slug)->first();
+    return Page::whereSlug($slug)->first();
 });
 
 Route::resource('pages', 'PagesController');
@@ -83,7 +83,7 @@ Route::resource('pages', 'PagesController');
  * Settings
  */
 Route::bind('settings', function ($key) {
-  return Setting::whereKey($key)->first();
+    return Setting::whereKey($key)->first();
 });
 
 Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
@@ -95,11 +95,11 @@ Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', '
  * action to occur.
  */
 Route::filter('voting_enabled', function () {
-  $settings = App::make('SettingsRepository')->all();
-  if (!$settings['enable_voting']) {
-      return Redirect::to('/')->withFlashMessage('Sorry, voting is disabled!')
-      ->with('flash_message_type', 'error');
-  }
+    $settings = App::make('SettingsRepository')->all();
+    if (!$settings['enable_voting']) {
+        return Redirect::to('/')->withFlashMessage('Sorry, voting is disabled!')
+            ->with('flash_message_type', 'error');
+    }
 });
 
 /**
@@ -108,7 +108,7 @@ Route::filter('voting_enabled', function () {
  * The admin filter protects routes that should be not be accessible by everyone.
  */
 Route::filter('role', function ($route, $request, $role) {
-  if (Auth::guest() or !Auth::user()->hasRole($role)) {
-      return Response::make('Unauthorized', 401);
-  }
+    if (Auth::guest() or !Auth::user()->hasRole($role)) {
+        return Response::make('Unauthorized', 401);
+    }
 });

@@ -2,9 +2,9 @@
 function do_post_request($url, $data, $optional_headers = null)
 {
     $params = array('http' => array(
-    'method' => 'POST',
-    'content' => $data
-  ));
+        'method' => 'POST',
+        'content' => $data
+    ));
     if ($optional_headers !== null) {
         $params['http']['header'] = $optional_headers;
     }
@@ -33,8 +33,8 @@ function do_async_post_request($url, $params)
     $parts = parse_url($url);
 
     $fp = fsockopen($parts['host'],
-    isset($parts['port']) ? $parts['port'] : 80,
-    $errno, $errstr, 30);
+        isset($parts['port']) ? $parts['port'] : 80,
+        $errno, $errstr, 30);
 
     $out = "POST " . $parts['path'] . " HTTP/1.1\r\n";
     $out .= "Host: " . $parts['host'] . "\r\n";

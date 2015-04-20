@@ -5,10 +5,10 @@ use App\Http\Requests\PageRequest;
 class PagesController extends \Controller
 {
 
-  /**
-   * @var Page
-   */
-  protected $page;
+    /**
+     * @var Page
+     */
+    protected $page;
 
     public function __construct(Page $page)
     {
@@ -17,92 +17,92 @@ class PagesController extends \Controller
         $this->beforeFilter('role:admin', ['except' => ['show']]);
     }
 
-  /**
-   * Display a listing of the resource.
-   * GET /pages
-   *
-   * @return Response
-   */
-  public function index()
-  {
-      $pages = $this->page->get();
-      return view('pages.index', compact('pages'));
-  }
+    /**
+     * Display a listing of the resource.
+     * GET /pages
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $pages = $this->page->get();
+        return view('pages.index', compact('pages'));
+    }
 
-  /**
-   * Show the form for creating a new resource.
-   * GET /pages/create
-   *
-   * @return Response
-   */
-  public function create()
-  {
-      return view('pages.create');
-  }
+    /**
+     * Show the form for creating a new resource.
+     * GET /pages/create
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return view('pages.create');
+    }
 
-  /**
-   * Store a newly created resource in storage.
-   * POST /pages
-   *
-   * @param PageRequest $request
-   * @return Response
-   */
-  public function store(PageRequest $request)
-  {
-      $page = new Page($request->all());
-      $page->save();
+    /**
+     * Store a newly created resource in storage.
+     * POST /pages
+     *
+     * @param PageRequest $request
+     * @return Response
+     */
+    public function store(PageRequest $request)
+    {
+        $page = new Page($request->all());
+        $page->save();
 
-      return redirect()->route('pages.index');
-  }
+        return redirect()->route('pages.index');
+    }
 
-  /**
-   * Display the specified resource.
-   * GET /pages/{id}
-   *
-   * @param Page $page
-   * @return Response
-   */
-  public function show(Page $page)
-  {
-      return view('pages.show', compact('page'));
-  }
+    /**
+     * Display the specified resource.
+     * GET /pages/{id}
+     *
+     * @param Page $page
+     * @return Response
+     */
+    public function show(Page $page)
+    {
+        return view('pages.show', compact('page'));
+    }
 
-  /**
-   * Show the form for editing the specified resource.
-   * GET /pages/{id}/edit
-   *
-   * @param Page $page
-   * @return Response
-   */
-  public function edit(Page $page)
-  {
-      return view('pages.edit', compact('page'));
-  }
+    /**
+     * Show the form for editing the specified resource.
+     * GET /pages/{id}/edit
+     *
+     * @param Page $page
+     * @return Response
+     */
+    public function edit(Page $page)
+    {
+        return view('pages.edit', compact('page'));
+    }
 
-  /**
-   * Update the specified resource in storage.
-   * PUT /pages/{id}
-   *
-   * @param Page $page
-   * @return Response
-   */
-  public function update(Page $page, PageRequest $request)
-  {
-      $page->fill($request->all());
-      $page->save();
+    /**
+     * Update the specified resource in storage.
+     * PUT /pages/{id}
+     *
+     * @param Page $page
+     * @return Response
+     */
+    public function update(Page $page, PageRequest $request)
+    {
+        $page->fill($request->all());
+        $page->save();
 
-      return redirect()->route('pages.index');
-  }
+        return redirect()->route('pages.index');
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   * DELETE /pages/{id}
-   *
-   * @param Page $page
-   * @return Response
-   */
-  public function destroy(Page $page)
-  {
-      //
-  }
+    /**
+     * Remove the specified resource from storage.
+     * DELETE /pages/{id}
+     *
+     * @param Page $page
+     * @return Response
+     */
+    public function destroy(Page $page)
+    {
+        //
+    }
 }
