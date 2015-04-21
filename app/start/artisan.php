@@ -12,4 +12,5 @@
 */
 
 Artisan::add(new Northstar);
+Artisan::add(new DrupalMigrate);
 
