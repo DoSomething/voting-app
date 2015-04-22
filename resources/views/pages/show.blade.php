@@ -9,5 +9,5 @@
 @stop
 
 @section('actions')
-    <li>{!! link_to_route('pages.edit', 'Edit Page', [$page->slug], ['class' => 'btn secondary']) !!}</li>
+    <li><a href="{{ route('pages.edit', [$page->slug]) }}">Edit Page</a></li>
 @stop

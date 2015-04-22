@@ -20,12 +20,16 @@
     <ul class="gallery">
         @if($category->candidates)
             @foreach($category->candidates as $candidate)
-                @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
+                @include('candidates.partials.tile', ['candidate' => $candidate, 'drawer' => true])
             @endforeach
         @else
             <li class="empty">No candidates in this category... yet!</li>
         @endif
     </ul>
+
+    <div class="wrapper -narrow">
+        <p class="messages -inline">Want to see more candidates? <a href="{{ route('home') }}">View all</a></p>
+    </div>
 
     <div class="wrapper -narrow">
         <h4>Was there a celeb we missed?</h4>
@@ -38,7 +42,7 @@
     </div>
 
     <script type="text/html" id="form-template">
-        @include('candidates.voteForm', ['candidate' => null, 'winner' => null])
+        @include('candidates.partials.voteForm', ['candidate' => null, 'winner' => null])
     </script>
 
 @stop

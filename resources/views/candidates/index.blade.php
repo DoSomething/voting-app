@@ -7,7 +7,7 @@
         <ul class="gallery">
             @if($category->candidates)
                 @foreach($category->candidates as $candidate)
-                    @include('candidates.tile', ['candidate' => $candidate, 'drawer' => true])
+                    @include('candidates.partials.tile', ['candidate' => $candidate, 'drawer' => true])
                 @endforeach
             @else
                 <li class="empty">No candidates in this category... yet!</li>
@@ -28,7 +28,7 @@
     </div>
 
     <script type="text/html" id="form-template">
-        @include('candidates.voteForm', ['candidate' => null, 'winner' => null])
+        @include('candidates.partials.voteForm', ['candidate' => null, 'winner' => null])
     </script>
 @stop
 

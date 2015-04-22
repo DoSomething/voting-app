@@ -1,12 +1,21 @@
 @extends('app')
 
 @section('content')
-    <h3>New Candidate</h3>
+    <div class="wrapper">
+        <div class="row">
+            <h1 class="highlighted">Create Page</h1>
 
-    {!! Form::open(['route'=> ['pages.store']]) !!}
-    @include('pages.form')
-    {!! Form::submit('Create Page', ['class' => 'btn']) !!}
-    {!! Form::close() !!}
+            <p>Page content can be formatted using <a href="http://daringfireball.net/projects/markdown/syntax"
+                                                      target="_blank">Markdown</a>.</p>
+        </div>
 
-    <p>{{ link_to_route('pages.index', 'Go Back') }}</p>
+        @include('partials.errors')
+
+        {!! Form::open(['route' => 'pages.store']) !!}
+            @include('pages.form')
+            {!! Form::submit('Create Page') !!}
+        {!! Form::close() !!}
+
+        <p><a href="{{ route('pages.index') }}">Go Back</a></p>
+    </div>
 @stop

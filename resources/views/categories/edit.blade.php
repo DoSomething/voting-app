@@ -8,10 +8,11 @@
             <p>Changing the name of category will not change its URL.</p>
         </div>
 
+        @include('partials.errors')
 
-        {!! Form::model($category, ['route'=> ['categories.update', $category->slug], 'method' => 'PATCH']) !!}
-        @include('categories.form')
-        {!! Form::submit('Update Category', ['class' => 'btn']) !!}
+        {!! Form::model($category, ['route'=> ['categories.update', $category->slug]]) !!}
+            @include('categories.form')
+            {!! Form::submit('Update Category') !!}
         {!! Form::close() !!}
 
     </div>

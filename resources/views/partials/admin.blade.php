@@ -15,7 +15,7 @@
         <div class="column">
             <h4>User</h4>
             <ul>
-                <li><a href="{{ route('logout') }}">Sign Out</a></li>
+                <li><a href="{{ url('/auth/logout') }}">Sign Out</a></li>
             </ul>
         </div>
 
