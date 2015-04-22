@@ -3,6 +3,11 @@
 class WinnersController extends \Controller
 {
 
+    public function __construct()
+    {
+        $this->beforeFilter('role:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *

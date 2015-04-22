@@ -18,6 +18,8 @@ class AuthController extends \Controller
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
+        $this->beforeFilter('voting_enabled', ['only' => ['getLogin', 'postLogin']]);
+        $this->middleware('guest', ['except' => 'getLogout']);
 
     use AuthenticatesAndRegistersUsers;
 

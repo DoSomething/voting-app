@@ -11,36 +11,37 @@
 |
 */
 
-//Route::controllers([
-//	'auth' => 'Auth\AuthController',
-//	'password' => 'Auth\PasswordController',
-//]);
-
-
 Route::get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
+
+/**
+ * Authentication & password reset
+ */
+Route::controllers([
+    'auth' => 'AuthController',
+    'password' => 'PasswordController'
+]);
+
+// Convenience routes
+Route::get('admin', function() {
+    return redirect()->to('/auth/admin');
+});
 
 /**
  * Categories
  */
-Route::bind('categories', function ($slug) {
-    return Category::whereSlug($slug)->first();
-});
-
+Route::bind('categories', function ($slug) { return Category::where('slug', $slug)->first(); });
 Route::resource('categories', 'CategoriesController');
 
 /**
  * Candidates
  */
-Route::bind('candidates', function ($slug) {
-    return Candidate::whereSlug($slug)->first();
-});
-
+Route::bind('candidates', function ($slug) { return Candidate::where('slug', $slug)->first(); });
 Route::resource('candidates', 'CandidatesController');
 
 /**
  * Winners
  */
-Route::resource('winners', 'WinnersController', ['before' => 'role:admin']);
+Route::resource('winners', 'WinnersController');
 
 /**
  * Votes
@@ -50,45 +51,19 @@ Route::resource('votes', 'VotesController', ['only' => ['store']]);
 /**
  * Users
  */
-Route::bind('users', function ($id) {
-    return User::whereId($id)->first();
-});
-
+Route::bind('users', function ($id) { return User::where('id', $id)->first(); });
 Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
-
-/**
- * Sessions
- */
-Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@userCreate', 'before' => 'voting_enabled']);
-Route::post('login', ['as' => 'sessions.userLogin', 'uses' => 'SessionsController@userLogin', 'before' => 'voting_enabled']);
-
-Route::get('admin', ['as' => 'admin.login', 'uses' => 'SessionsController@adminCreate']);
-Route::post('admin', ['as' => 'sessions.adminLogin', 'uses' => 'SessionsController@adminLogin']);
-
-Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
-
-/**
- * Password Reset
- */
-//Route::controller('password', 'RemindersController');
 
 /**
  * Pages
  */
-Route::bind('pages', function ($slug) {
-    return Page::whereSlug($slug)->first();
-});
-
+Route::bind('pages', function ($slug) { return Page::where('slug', $slug)->first(); });
 Route::resource('pages', 'PagesController');
-
 
 /**
  * Settings
  */
-Route::bind('settings', function ($key) {
-    return Setting::whereKey($key)->first();
-});
-
+Route::bind('settings', function ($key) { return Setting::where('key', $key)->first(); });
 Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
 
 /**
