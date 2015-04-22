@@ -15,7 +15,6 @@ class WinnersController extends \Controller
      */
     public function index()
     {
-        $winners = Winner::with('candidate')->get();
         $winners = DB::table('winners')
             ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
             ->join('categories', 'candidates.category_id', '=', 'categories.id')
@@ -25,16 +24,6 @@ class WinnersController extends \Controller
             ->get();
 
         return view('winners.index', compact('winners', 'categories'));
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
     }
 
 
@@ -54,17 +43,6 @@ class WinnersController extends \Controller
         }
 
         return redirect()->route('winners.edit', array('id' => $winner->id));
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
     }
 
 

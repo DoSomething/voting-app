@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Requests\SettingRequest;
+use Illuminate\Http\Request;
 
 class SettingsController extends \Controller
 {
@@ -42,12 +42,18 @@ class SettingsController extends \Controller
      * Update the specified resource in storage.
      * PUT /settings/{id}
      *
+     * @param Request $request
      * @param Setting $setting
      * @return Response
      */
-    public function update(Setting $setting, SettingRequest $request)
+    public function update(Request $request, Setting $setting)
     {
-        $setting->fill($request->all());
+        // If this is a text field, ensure it is not blank
+        if($setting->type === 'text') {
+            $this->validate($request, ['value' => 'required']);
+        }
+
+        $setting->value = $request->get('value');
         $setting->save();
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');

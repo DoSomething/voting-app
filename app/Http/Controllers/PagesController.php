@@ -94,15 +94,4 @@ class PagesController extends \Controller
         return redirect()->route('pages.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * DELETE /pages/{id}
-     *
-     * @param Page $page
-     * @return Response
-     */
-    public function destroy(Page $page)
-    {
-        //
-    }
 }
