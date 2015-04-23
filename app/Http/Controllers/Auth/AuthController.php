@@ -20,7 +20,7 @@ class AuthController extends \Controller
      */
     public function getLogin()
     {
-        return View::make('auth.login');
+        return view('auth.login');
     }
 
     /**
@@ -78,7 +78,7 @@ class AuthController extends \Controller
      */
     public function getAdmin()
     {
-        return View::make('auth.admin');
+        return view('auth.admin');
     }
 
     /**
