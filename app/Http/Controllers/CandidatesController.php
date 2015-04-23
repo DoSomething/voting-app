@@ -21,31 +21,37 @@ class CandidatesController extends \Controller
      */
     public function index()
     {
-//        // @TODO We need an administrative view for this.
-//        // Get optional request params.
-//        $sort_by = Request::get('sort_by');
-//        $direction = Request::get('direction');
-//        $filter_by = Request::get('filter_by');
-//
-//        $query = DB::table('candidates')
-//            ->join('categories', 'categories.id', '=', 'candidates.category_id')
-//            ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
-//            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
-//            ->groupBy('candidates.name');
-//        if ($sort_by) {
-//            $query->orderBy($sort_by, $direction);
-//        } else {
-//            $query->orderBy('votes', 'DESC');
-//        }
-//        if ($filter_by) {
-//            $query->where('category_id', $filter_by);
-//        }
-//
-//        $candidates = $query->get();
+        // Show admin interface instead for administrators.
+        if(Auth::check() && Auth::user()->hasRole('admin')) {
+            return $this->adminIndex();
+        }
+
         $type = get_login_type();
         $categories = Category::with('candidates')->get();
 
         return view('candidates.index', compact('categories', 'type'));
+    }
+
+    /**
+     * Display administrative view for candidates.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function adminIndex(){
+        // Get optional request params.
+        $sort_by = (Request::get('sort_by') ? Request::get('sort_by') : 'votes');
+        $direction = (Request::get('direction') ? Request::get('direction') : 'DESC');
+
+        $candidates = DB::table('candidates')
+            ->join('categories', 'categories.id', '=', 'candidates.category_id')
+            ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
+            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+            ->groupBy('candidates.name')
+            ->orderBy($sort_by, $direction)
+            ->get();
+
+        return view('candidates.adminIndex', compact('candidates'));
+
     }
 
 
