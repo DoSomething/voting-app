@@ -11,7 +11,7 @@
 
         <ul>
             @forelse($pages as $page)
-                <li>{!! link_to_route('pages.show', $page->title, $page->slug) !!}
+                <li><a href="{{ route('pages.show', [$page->slug]) }}">{{ $page->title }}</a></li>
             @empty
                 <li>No pages.</li>
             @endforelse
@@ -20,5 +20,5 @@
 @stop
 
 @section('actions')
-    <li>{!! link_to_route('pages.create', 'New Page') !!}</li>
+    <li><a href="{{ route('pages.create') }}">New Page</a></li>
 @stop

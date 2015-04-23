@@ -11,22 +11,23 @@
         <table>
             <thead>
             <tr>
-                <td> User</td>
-                <td> Contact</td>
-                <td> Admin</td>
+                <td>Contact</td>
+                <td>Admin</td>
+                <td>&nbsp;</td>
             </tr>
             </thead>
             @forelse($users as $user)
                 <tr>
-                    <td> {{ $user->first_name }} </td>
-                    <td> {{ $user->phone or $user->email }} </td>
-                    <td> {{ ($user->hasRole('admin') ? '✓' : '') }} </td>
+                    <td>{{ $user->phone or $user->email }}</td>
+                    <td>{{ ($user->hasRole('admin') ? '✓' : '') }}</td>
+                    <td><a href="{{ route('users.show', [$user->id]) }}">details</a></td>
                 </tr>
             @empty
                 <div class="empty">No users... yet!</div>
             @endforelse
         </table>
 
+        {{-- Pagination --}}
         {!! $users->render() !!}
     </div>
 @stop

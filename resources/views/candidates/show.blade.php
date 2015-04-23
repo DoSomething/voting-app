@@ -11,26 +11,26 @@
             <article class="tile -alternate">
                 <a class="wrapper" href="{{ route('candidates.show', [$candidate->slug]) }}">
                     <div class="tile__meta">
-                        <h1>{{{ $candidate->name }}}</h1>
+                        <h1>{{ $candidate->name }}</h1>
                     </div>
-                    <img alt="{{{ $candidate->name }}}" src="{{{ $candidate->thumbnail() }}}"/>
+                    <img alt="{{ $candidate->name }}" src="{{ $candidate->thumbnail() }}"/>
                 </a>
             </article>
 
             @if($candidate->description)
-                <p class="candidate__description">{{{ $candidate->description }}}</p>
+                <p class="candidate__description">{{ $candidate->description }}</p>
             @endif
             @if ($candidate->photo_source)
-                {!! link_to($candidate->photo_source, 'Photo Credit') !!}
+                <a href="{{ $candidate->photo_source }}">Photo Credit</a>
             @endif
         </div>
 
         <div class="candidate__actions">
-            @include('candidates.voteForm', ['category' => $candidate->category, 'id' => $candidate->id])
+            @include('candidates.partials.voteForm', ['category' => $candidate->category, 'id' => $candidate->id])
 
             @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
                 <h4>Hey, beautiful administrator. This candidate
-                    has {{{$vote_count }}} {{{ str_plural('vote', $vote_count)}}}.</h4>
+                    has {{ $vote_count }} {{ str_plural('vote', $vote_count)}}.</h4>
             @endif
         </div>
     </div>
@@ -40,8 +40,8 @@
     @if(Auth::user() && Auth::user()->hasRole('admin'))
         <li><a href="{{ route('candidates.edit', [$candidate->slug]) }}" class="btn secondary">Edit Candidate</a></li>
 
-        {!! Form::open(['route'=> ['candidates.update', $candidate->slug], 'method' => 'delete']) !!}
-        {!! Form::submit('Delete Candidate', ['class' => 'button -danger']) !!}
+        {!! Form::open(['route' => ['candidates.destroy', $candidate->slug], 'method' => 'DELETE']) !!}
+            {!! Form::submit('Delete Candidate', ['class' => 'button -danger']) !!}
         {!! Form::close() !!}
     @endif
 @stop

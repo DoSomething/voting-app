@@ -1,23 +1,17 @@
-{{ Form::label('name', 'Candidate Name') }}
-{{ form_error('name', $errors) }}
-{{ Form::text('name') }}
+{!! Form::label('name', 'Candidate Name') !!}
+{!! Form::text('name') !!}
 
-{{ Form::label('category_id', 'Category') }}
-{{ form_error('category_id', $errors) }}
-{{ Form::select('category_id', Category::lists('name', 'id'), ( isset($candidate->category) ? $candidate->category : null )); }}
+{!! Form::label('category_id', 'Category') !!}
+{!! Form::select('category_id', $categories) !!}
 
-{{ Form::label('description', 'Photo (optional)') }}
-{{ form_error('photo', $errors) }}
-{{ Form::file('photo') }}
+{!! Form::label('photo', 'Photo') !!}
+{!! Form::file('photo') !!}
 
-{{ Form::label('photo_source', 'Photo Source') }}
-{{ form_error('photo_source', $errors) }}
-{{ Form::text('photo_source', NULL, ['placeholder' => 'http://example.com']) }}
+{!! Form::label('photo_source') !!}
+{!! Form::text('photo_source', null, ['placeholder' => 'http://example.com']) !!}
 
-{{ Form::label('description', 'Description (optional)') }}
-{{ form_error('description', $errors) }}
-{{ Form::textarea('description') }}
+{!! Form::label('description') !!}
+{!! Form::textarea('description', null, ['rows' => '2']) !!}
 
-{{ Form::label('twitter', 'Twitter handle') }}
-{{ form_error('twitter', $errors) }}
-{{ Form::text('twitter', NULL, ['placeholder' => '@handle']) }}
+{!! Form::label('twitter') !!}
+{!! Form::text('twitter', null, ['placeholder' => '@handle']) !!}

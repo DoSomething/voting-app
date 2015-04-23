@@ -1,13 +1,18 @@
 @extends('app')
 
 @section('content')
-    <h3>{{{ $candidate->name }}}</h3>
+    <div class="wrapper">
+        <div class="row">
+            <h1 class="highlighted">Edit Candidate: {{ $candidate->name }}</h1>
+        </div>
 
-    {{ Form::model($candidate, ['route'=> ['candidates.update', $candidate->slug], 'files' => true, 'method' => 'PATCH']) }}
-    @include('candidates.form')
-    {{ Form::submit('Update Candidate', ['class' => 'btn']) }}
-    {{ Form::close() }}
+        @include('partials.errors')
 
-    <p>{{ link_to_route('candidates.index', 'Go Back') }}</p>
+        {!! Form::model($candidate, ['route' => ['candidates.update', $candidate->slug], 'files' => true]) !!}
+            @include('candidates.form')
+            {!! Form::submit('Update Candidate') !!}
+        {!! Form::close() !!}
 
+        <p><a href="{{ route('candidates.index') }}">Go Back</a></p>
+    </div>
 @stop

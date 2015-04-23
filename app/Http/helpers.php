@@ -1,14 +1,6 @@
 <?php
 
 /**
- * Displays form errors.
- */
-function form_error($field, $errors)
-{
-    return $errors->first($field, '<span class="validation error">:message</span>');
-}
-
-/**
  * Add an active class to current page's menu item.
  */
 function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = null)
@@ -22,8 +14,6 @@ function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = n
 
     return link_to_route($route, $text, $params, ['class' => $class]);
 }
-
-;
 
 /**
  * Return contents of Fastly's GeoIP country code header.
@@ -56,6 +46,7 @@ function get_login_type()
  * @param $text    String  Text for tweet, with TWITTER_NAME placeholder for twitter handle
  * @param $url     String  URL to attach to tweet
  * @param $twitter String  (optional) Text to replace TWITTER_NAME placeholder with.
+ * @return string
  */
 function tweet_intent($text, $url, $twitter = null)
 {

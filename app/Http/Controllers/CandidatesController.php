@@ -11,7 +11,7 @@ class CandidatesController extends \Controller
     {
         $this->candidate = $candidate;
 
-        $this->beforeFilter('role:admin', ['except' => ['index', 'show']]);
+        $this->middleware('admin', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -56,7 +56,8 @@ class CandidatesController extends \Controller
      */
     public function create()
     {
-        return view('candidates.create');
+        $categories = Category::lists('name', 'id');
+        return view('candidates.create', compact('categories'));
     }
 
 
@@ -77,7 +78,7 @@ class CandidatesController extends \Controller
 
         $candidate->save();
 
-        return redirect()->route('candidates.index');
+        return redirect()->route('candidates.show', [$candidate->slug]);
     }
 
 
@@ -105,7 +106,8 @@ class CandidatesController extends \Controller
      */
     public function edit(Candidate $candidate)
     {
-        return view('candidates.edit', compact('candidate'));
+        $categories = Category::lists('name', 'id');
+        return view('candidates.edit', compact('candidate', 'categories'));
     }
 
 
@@ -125,12 +127,9 @@ class CandidatesController extends \Controller
             $candidate->savePhoto($image);
         }
 
-        // @TODO FormRequest
-//    $this->candidateValidator->validate($input);
-
         $candidate->save();
 
-        return redirect()->route('candidates.index');
+        return redirect()->route('candidates.show', [$candidate->slug]);
     }
 
 
