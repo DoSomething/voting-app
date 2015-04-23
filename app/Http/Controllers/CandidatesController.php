@@ -40,16 +40,24 @@ class CandidatesController extends \Controller
      */
     public function adminIndex(){
         // Get optional request params.
-        $sort_by = (Request::get('sort_by') ? Request::get('sort_by') : 'votes');
-        $direction = (Request::get('direction') ? Request::get('direction') : 'DESC');
+        $sort_by = Request::get('sort_by');
+        $direction = Request::get('direction');
 
-        $candidates = DB::table('candidates')
+        $query = DB::table('candidates')
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
             ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
             ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
-            ->groupBy('candidates.name')
-            ->orderBy($sort_by, $direction)
-            ->get();
+            ->groupBy('candidates.name');
+
+        // If a sorting method & direction are provided, order by them.
+        if ($sort_by && $direction) {
+            $query->orderBy($sort_by, $direction);
+        }
+
+        // Within given sorting method, always list in descending vote order.
+        $query->orderBy('votes', 'DESC');
+
+        $candidates = $query->get();
 
         return view('candidates.adminIndex', compact('candidates'));
 
