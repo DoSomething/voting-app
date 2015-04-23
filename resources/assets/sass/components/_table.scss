@@ -11,6 +11,18 @@ table {
 
 thead {
   font-weight: $weight-bold;
+
+  .is-sorted-asc:after {
+    content: ' \25B2';
+  }
+
+  .is-sorted-desc:after {
+    content: ' \25BC';
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 tr {
