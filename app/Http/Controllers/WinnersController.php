@@ -5,7 +5,7 @@ class WinnersController extends \Controller
 
     public function __construct()
     {
-        $this->beforeFilter('role:admin');
+        $this->middleware('admin');
     }
 
     /**

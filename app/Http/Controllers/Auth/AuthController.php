@@ -8,7 +8,7 @@ class AuthController extends \Controller
 
     public function __construct()
     {
-        $this->beforeFilter('voting_enabled', ['only' => ['getLogin', 'postLogin']]);
+        $this->middleware('voting.enabled', ['only' => ['getLogin', 'postLogin']]);
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 

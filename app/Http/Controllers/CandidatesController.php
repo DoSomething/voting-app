@@ -11,7 +11,7 @@ class CandidatesController extends \Controller
     {
         $this->candidate = $candidate;
 
-        $this->beforeFilter('role:admin', ['except' => ['index', 'show']]);
+        $this->middleware('admin', ['except' => ['index', 'show']]);
     }
 
     /**

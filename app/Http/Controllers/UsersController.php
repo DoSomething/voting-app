@@ -9,7 +9,7 @@ class UsersController extends \Controller
     {
         $this->user = $user;
 
-        $this->beforeFilter('role:admin', ['only' => ['index', 'show']]);
+        $this->middleware('admin');
     }
 
     /**

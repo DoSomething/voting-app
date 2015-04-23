@@ -12,7 +12,7 @@ class CategoriesController extends \Controller
     {
         $this->category = $category;
 
-        $this->beforeFilter('role:admin', ['except' => ['show']]);
+        $this->middleware('admin', ['except' => ['show']]);
     }
 
     /**

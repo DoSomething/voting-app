@@ -14,7 +14,7 @@ class PagesController extends \Controller
     {
         $this->page = $page;
 
-        $this->beforeFilter('role:admin', ['except' => ['show']]);
+        $this->middleware('admin', ['except' => ['show']]);
     }
 
     /**
@@ -84,6 +84,7 @@ class PagesController extends \Controller
      * PUT /pages/{id}
      *
      * @param Page $page
+     * @param PageRequest $request
      * @return Response
      */
     public function update(Page $page, PageRequest $request)

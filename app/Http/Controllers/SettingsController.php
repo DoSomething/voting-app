@@ -11,7 +11,7 @@ class SettingsController extends \Controller
     {
         $this->setting = $setting;
 
-        $this->beforeFilter('role:admin');
+        $this->middleware('admin');
     }
 
     /**
