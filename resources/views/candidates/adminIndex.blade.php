@@ -4,6 +4,7 @@
     <div class="wrapper">
         <div class="row">
             <h1 class="highlighted">All Candidates</h1>
+            <p><strong>Hey, {{ Auth::user()->first_name }}!</strong> You can sort and edit candidates from here, or <a href="?guest=1">view as a guest</a>.</p>
         </div>
 
         <table>

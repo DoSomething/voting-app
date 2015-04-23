@@ -21,8 +21,9 @@ class CandidatesController extends \Controller
      */
     public function index()
     {
-        // Show admin interface instead for administrators.
-        if(Auth::check() && Auth::user()->hasRole('admin')) {
+        // Show admin interface instead for administrators. Admin users can
+        // use the `?guest=1` query parameter to bypass the admin view.
+        if(Auth::check() && Auth::user()->hasRole('admin') && !Request::get('guest')) {
             return $this->adminIndex();
         }
 
