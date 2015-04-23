@@ -18,7 +18,7 @@ class DrupalMigrate extends Command {
    *
    * @var string
    */
-  protected $description = 'This command migrates user data to the drupal database.';
+  protected $description = 'This command migrates user data to the Drupal database.';
 
   /**
    * HTTP client.
@@ -76,11 +76,6 @@ class DrupalMigrate extends Command {
           'user_registration_source' => 'CGG',
         ];
 
-        // Optional.
-        if (!empty($user->phone)) {
-          $fields['mobile'] = $user->phone;
-        }
-
         try {
           $this->client->post('users', [
             'body' => json_encode($fields)
@@ -119,7 +114,7 @@ class DrupalMigrate extends Command {
   {
     return [
       ['api_base_url', InputOption::VALUE_REQUIRED, 'Drupal API endpoint to push users to.'],
-      ['country_code', InputOption::VALUE_REQUIRED, 'Soecify country code to filter users.'],
+      ['country_code', InputOption::VALUE_REQUIRED, 'Specify country code to filter users with.'],
     ];
   }
 
