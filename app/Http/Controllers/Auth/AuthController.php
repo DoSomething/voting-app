@@ -63,7 +63,7 @@ class AuthController extends \Controller
 
                 return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
             } else {
-                return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted in that category today!');
+                return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted today!');
             }
         }
 
