@@ -1,21 +1,6 @@
 <?php
 
 /**
- * Add an active class to current page's menu item.
- */
-function highlighted_link_to_route($route, $text, $params = [], $forceOnPath = null)
-{
-    $url = route($route, $params);
-
-    $class = '';
-    if (Request::url() == $url || Request::path() == $forceOnPath) {
-        $class = 'is-active';
-    }
-
-    return link_to_route($route, $text, $params, ['class' => $class]);
-}
-
-/**
  * Return contents of Fastly's GeoIP country code header.
  * @return string|null Country Code, or null if header is not set.
  */
@@ -66,18 +51,26 @@ function facebook_intent($url)
 }
 
 /**
- * A helper function to used to sort candidates.
+ * Generate relative links for sorting tabular data.
+ * @param $column string Column to sort by
+ * @return string
  */
-function sort_candidates_by($column, $body)
+function sort_url($column)
 {
     $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
-    return link_to_route('candidates.index', $body, ['sort_by' => $column, 'direction' => $direction]);
+    return '?sort_by=' . e($column) . '&direction=' . e($direction);
 }
 
 /**
- * A helper function to used to sort candidates.
+ * Return a class to indicate the current sorting method.
+ * @param $column Column to indicate sorting status of
+ * @return string
  */
-function filter_candidates_by($status, $body)
-{
-    return link_to_route('candidates.index', $body, ['filter_by' => $status]);
+function sort_class($column) {
+    $sortColumn = Request::get('sort_by');
+    $sortClass = (Request::get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
+
+    if($column !== $sortColumn) return '';
+
+    return $sortClass;
 }

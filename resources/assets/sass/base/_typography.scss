@@ -80,12 +80,12 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: lighten($cyan, 10%);
+    color: lighten($cyan, 30%);
     text-decoration: underline;
   }
 
   &:active {
-    color: darken($cyan, 10%);
+    color: darken($cyan, 20%);
     outline: none;
   }
 }
