@@ -14,25 +14,46 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => '',
-        'secret' => '',
-    ],
+    'message_broker' => [
+        'config' => [
+            // Exchange options
+            'exchange' => [
+                'name' => 'directExternalApplicationsExchange',
+                'type' => 'topic',
+                'passive' => '0',
+                'durable' => '1',
+                'auto_delete' => '0',
+            ],
 
-    'mandrill' => [
-        'secret' => '',
-    ],
+            // Queue options
+            'queue' => [
+                'externalApplicationUserQueue' => [
+                    'name' => 'externalApplicationUserQueue',
+                    'passive' => '0',
+                    'durable' => '1',
+                    'exclusive' => '0',
+                    'auto_delete' => '0',
+                    'bindingKey' => '*.user.*',
+                ],
 
-    'ses' => [
-        'key' => '',
-        'secret' => '',
-        'region' => 'us-east-1',
-    ],
+                'externalApplicationVoteQueue' => [
+                    'name' => 'externalApplicationEventQueue',
+                    'passive' => '0',
+                    'durable' => '1',
+                    'exclusive' => '0',
+                    'auto_delete' => '0',
+                    'bindingKey' => '*.event.*',
+                ],
+            ],
+        ],
 
-    'stripe' => [
-        'model' => 'App\User',
-        'key' => '',
-        'secret' => '',
+        'credentials' => [
+            'host' => env('RABBITMQ_HOST', 'localhost'),
+            'port' => env('RABBITMQ_PORT', '5672'),
+            'username' => env('RABBITMQ_USERNAME', 'guest'),
+            'password' => env('RABBITMQ_PASSWORD', 'guest'),
+            'vhost' => env('RABBITMQ_VHOST', ''),
+        ],
     ],
 
 ];

@@ -39,9 +39,9 @@ class EventServiceProvider extends ServiceProvider
                 return;
             }
             // Sign user up for transaction messages.
-            $credentials = Config::get('messagebroker.credentials');
-            $config = Config::get('messagebroker.config');
-            $config['routingKey'] = 'cgg.event.vote';
+            $credentials = Config::get('services.message_broker.credentials');
+            $config = Config::get('services.message_broker.config');
+            $config['routingKey'] = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
 
             $mb = new MessageBroker($credentials, $config);
 
@@ -58,16 +58,16 @@ class EventServiceProvider extends ServiceProvider
                 'candidate_name' => $candidate->name,
 
                 // Request specific information
-                'activity' => 'cgg2014_vote',
+                'activity' => env('VOTE_ACTIVITY', 'votingapp_vote'),
                 'application_id' => 201,
                 'activity_timestamp' => time(),
-                'email_template' => 'mb-cgg2014-vote',
+                'email_template' => env('VOTE_TEMPLATE', 'mb-votingapp-vote'),
                 'email_tags' => [
-                    0 => 'cgg2014_vote',
+                    0 => env('VOTE_EMAIL_TAG', 'votingapp_signup'),
                 ],
-                'mailchimp_grouping_id' => '10621',
-                'mailchimp_group_name' => 'CelebsGoneGood2014',
-                'mc_opt_in_path_id' => '174269',
+                'mailchimp_grouping_id' => env('MAILCHIMP_GROUP_ID'),
+                'mailchimp_group_name' => env('MAILCHIMP_GROUP_NAME'),
+                'mc_opt_in_path_id' => env('MC_OPT_IN_PATH'),
                 'merge_vars' => [
                     'FNAME' => $user->first_name
                 ]
@@ -92,13 +92,13 @@ class EventServiceProvider extends ServiceProvider
             //  // Log this event to stathat.
             $stathat_key = Config::get('services.stathat.key');
             if ($stathat_key) {
-                stathat_ez_count($stathat_key, 'cgg - user register', 1);
+                stathat_ez_count($stathat_key, env('STATHAT_APP_NAME', 'votingapp') . ' - user register', 1);
             }
 
             // Sign user up for transaction messages.
-            $credentials = Config::get('messagebroker.credentials');
-            $config = Config::get('messagebroker.config');
-            $config['routingKey'] = 'cgg.user.registration';
+            $credentials = Config::get('services.message_broker.credentials');
+            $config = Config::get('services.message_broker.config');
+            $config['routingKey'] = env('REGISTER_ROUTING_KEY', 'votingapp.user.registration');
 
             $mb = new MessageBroker($credentials, $config);
 
@@ -111,20 +111,20 @@ class EventServiceProvider extends ServiceProvider
                 'country_code' => $user->country_code,
 
                 // Request specific information
-                'activity' => 'cgg2014_signup',
+                'activity' => env('REGISTER_ACTIVITY', 'votingapp_signup'),
                 'application_id' => 201,
                 'activity_timestamp' => time(),
-                'email_template' => 'mb-cgg2014-signup',
+                'email_template' => env('REGISTER_TEMPLATE', 'mb-votingapp-signup'),
                 'email_tags' => [
-                    0 => 'cgg2014_signup',
+                    0 => env('REGISTER_EMAIL_TAG', 'votingapp_signup'),
                 ],
-                'mailchimp_grouping_id' => '10621',
-                'mailchimp_group_name' => 'CelebsGoneGood2014',
-                'mc_opt_in_path_id' => '174269',
+                'mailchimp_grouping_id' => env('MAILCHIMP_GROUP_ID'),
+                'mailchimp_group_name' => env('MAILCHIMP_GROUP_NAME'),
+                'mc_opt_in_path_id' => env('MC_OPT_IN_PATH'),
                 'merge_vars' => [
                     'FNAME' => $user->first_name
                 ],
-                'user_registration_source' => 'cgg2014'
+                'user_registration_source' => env('REGISTER_MB_SOURCE', 'votingapp')
             ];
 
             $payload = serialize($payload);
@@ -139,7 +139,7 @@ class EventServiceProvider extends ServiceProvider
             // Log this event to stathat.
             $stathat_key = Config::get('services.stathat.key');
             if ($stathat_key) {
-                stathat_ez_count($stathat_key, 'cgg - vote', 1);
+                stathat_ez_count($stathat_key, env('STATHAT_APP_NAME', 'votingapp') . ' - vote', 1);
             }
         });
     }
