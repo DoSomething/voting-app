@@ -5,9 +5,10 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Vote;
 
-class UserCastFirstVote extends Event {
+class UserCastFirstVote extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
     public $first_name;
 
@@ -27,8 +28,8 @@ class UserCastFirstVote extends Event {
      * Create a new event instance.
      * @param Vote $vote
      */
-	public function __construct(Vote $vote)
-	{
+    public function __construct(Vote $vote)
+    {
         $this->first_name = $vote->user()->first_name;
         $this->email = $vote->user()->email;
         $this->phone = $vote->user()->phone;
@@ -37,6 +38,6 @@ class UserCastFirstVote extends Event {
 
         $this->candidate_id = $vote->candidate()->id;
         $this->candidate_name = $vote->candidate()->name;
-	}
+    }
 
 }

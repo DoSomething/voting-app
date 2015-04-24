@@ -1,14 +1,15 @@
 <?php namespace App\Handlers\Events;
 
-class UpdateVotingStats {
+class UpdateVotingStats
+{
 
-	/**
-	 * Handle the event.
-	 *
-	 * @return void
-	 */
-	public function handle()
-	{
+    /**
+     * Handle the event.
+     *
+     * @return void
+     */
+    public function handle()
+    {
         if (app()->environment('local')) {
             return;
         }
@@ -18,6 +19,6 @@ class UpdateVotingStats {
         if ($stathat_key) {
             stathat_ez_count($stathat_key, env('STATHAT_APP_NAME', 'votingapp') . ' - vote', 1);
         }
-	}
+    }
 
 }

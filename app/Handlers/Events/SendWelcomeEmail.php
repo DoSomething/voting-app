@@ -4,16 +4,17 @@ use App\Events\UserRegistered;
 use MessageBroker;
 use Config;
 
-class SendWelcomeEmail {
+class SendWelcomeEmail
+{
 
-	/**
-	 * Handle the event.
-	 *
-	 * @param  UserRegistered  $event
-	 * @return void
-	 */
-	public function handle(UserRegistered $event)
-	{
+    /**
+     * Handle the event.
+     *
+     * @param  UserRegistered $event
+     * @return void
+     */
+    public function handle(UserRegistered $event)
+    {
         // Don't send messages locally.
         if (app()->environment('local')) {
             return;
@@ -53,6 +54,6 @@ class SendWelcomeEmail {
 
         $payload = serialize($payload);
         $broker->publishMessage($payload);
-	}
+    }
 
 }

@@ -4,16 +4,17 @@ use App\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 
-class UserCastVote extends Event {
+class UserCastVote extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
-	/**
-	 * Create a new event instance.
-	 */
-	public function __construct()
-	{
-		//
-	}
+    /**
+     * Create a new event instance.
+     */
+    public function __construct()
+    {
+        //
+    }
 
 }

@@ -3,16 +3,17 @@
 use App\Events\UserCastFirstVote;
 use MessageBroker;
 
-class SendFirstVoteEmail {
+class SendFirstVoteEmail
+{
 
-	/**
-	 * Handle the event.
-	 *
-	 * @param  UserCastFirstVote  $event
-	 * @return void
-	 */
-	public function handle(UserCastFirstVote $event)
-	{
+    /**
+     * Handle the event.
+     *
+     * @param  UserCastFirstVote $event
+     * @return void
+     */
+    public function handle(UserCastFirstVote $event)
+    {
         // Don't send messages locally.
         if (app()->environment('local')) {
             return;
@@ -55,6 +56,6 @@ class SendFirstVoteEmail {
 
         $payload = serialize($payload);
         $broker->publishMessage($payload);
-	}
+    }
 
 }
