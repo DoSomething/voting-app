@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserCastVote;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -31,6 +32,7 @@ class Vote extends Model
 
     /**
      * Assuming a user is eligible to vote, save the vote
+     * @returns Vote
      */
     public static function createIfEligible($candidate_id, $user_id)
     {
@@ -49,7 +51,8 @@ class Vote extends Model
             'user_id' => $user_id
         ]);
 
-        Event::fire('user.vote');
+        event(new UserCastVote($vote));
+
         return $vote;
     }
 
