@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,12 +20,6 @@ class UsersTableSeeder extends Seeder
         User::create([
             'first_name' => 'Andrea',
             'email' => 'agaither@dosomething.org',
-            'password' => 'tops3cret',
-        ])->assignRole(1);
-
-        User::create([
-            'first_name' => 'Calvin',
-            'email' => 'cstowell@dosomething.org',
             'password' => 'tops3cret',
         ])->assignRole(1);
 
