@@ -89,7 +89,7 @@ class Candidate extends Model implements SluggableInterface
     /**
      * Custom share name attribute
      *
-     * @return string twitter handle, or celeb name
+     * @return string twitter handle, or candidate name
      * @see $appends array
      */
     public function getShareNameAttribute()
