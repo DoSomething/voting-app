@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'stathat' => [
+        'key' => env('STATHAT_EZ_KEY')
+    ],
+
     'message_broker' => [
         'config' => [
             // Exchange options

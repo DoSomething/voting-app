@@ -2,6 +2,9 @@
 
 use App\Http\Requests\UserSessionRequest;
 use App\Http\Requests\AdminSessionRequest;
+use App\Events\UserCastFirstVote;
+use App\Events\UserRegistered;
+
 
 class AuthController extends \Controller
 {
@@ -42,7 +45,8 @@ class AuthController extends \Controller
 
             $user = User::createNewUser($input);
             $newUserAccount = true;
-            Event::fire('user.create', [$user]);
+
+            event(new UserRegistered($user));
         }
 
         // Log in the user.
@@ -58,7 +62,7 @@ class AuthController extends \Controller
 
                 // Trigger a vote transactional message only for new users.
                 if ($newUserAccount) {
-                    Event::fire('first.vote', [$candidate, $user]);
+                    event(new UserCastFirstVote($vote));
                 }
 
                 return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
