@@ -18,12 +18,12 @@
     @endforelse
 
     <div class="wrapper -narrow">
-        <h4>Was there a celeb we missed?</h4>
+        <h4>Was there a {{ $settings['candidate_type'] }} we missed?</h4>
 
         <p>
-            If you know a celeb who's done kickass things in the world, but don't see them on our list, let us know by
-            emailing <a href="mailto:writein@celebsgonegood.com">writein@celebsgonegood.com</a>. Make sure to
-            include the work they've done in 2014 for social good (in 140 characters or less). Thank you!
+            If you know a {{ $settings['candidate_type'] }} who's done kickass things in the world, but don't see them
+            on our list, let us know by emailing <a href="mailto:writein@celebsgonegood.com">writein@celebsgonegood.com</a>.
+            Make sure to include the work they've done in the past year for social good (in 140 characters or less). Thank you!
         </p>
     </div>
 
