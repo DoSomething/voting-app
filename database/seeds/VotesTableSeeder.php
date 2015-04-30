@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Candidate;
-use App\User;
-use App\Vote;
 
 class VotesTableSeeder extends Seeder
 {

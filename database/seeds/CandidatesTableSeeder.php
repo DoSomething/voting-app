@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Candidate;
 
 class CandidatesTableSeeder extends Seeder
 {
@@ -12,7 +11,7 @@ class CandidatesTableSeeder extends Seeder
 
         Candidate::truncate();
 
-        // Top 20
+        // Basketball
         foreach (range(1, 8) as $index) {
             $candidate = Candidate::create([
                 'name' => $faker->name(),
@@ -26,25 +25,51 @@ class CandidatesTableSeeder extends Seeder
         }
 
 
-        // On the Rise
-        foreach (range(1, 6) as $index) {
+        // Sportsball
+        foreach (range(1, 12) as $index) {
             $candidate = Candidate::create([
                 'name' => $faker->name(),
                 'description' => $faker->paragraph(2),
                 'category_id' => 2,
             ]);
 
-            $image = Image::make($faker->imageUrl(640, 480, 'people'));
+            $image = Image::make($faker->imageUrl(640, 480, 'cats'));
             $candidate->savePhoto($image);
             $candidate->save();
         }
 
-        // Internet Celebs
-        foreach (range(1, 4) as $index) {
+        // Fütbol
+        foreach (range(1, 16) as $index) {
             $candidate = Candidate::create([
                 'name' => $faker->name(),
                 'description' => $faker->paragraph(2),
                 'category_id' => 3,
+            ]);
+
+            $image = Image::make($faker->imageUrl(640, 480, 'cats'));
+            $candidate->savePhoto($image);
+            $candidate->save();
+        }
+
+        // Hockey
+        foreach (range(1, 12) as $index) {
+            $candidate = Candidate::create([
+                'name' => $faker->name(),
+                'description' => $faker->paragraph(2),
+                'category_id' => 4,
+            ]);
+
+            $image = Image::make($faker->imageUrl(640, 480, 'cats'));
+            $candidate->savePhoto($image);
+            $candidate->save();
+        }
+
+        // Golf
+        foreach (range(1, 8) as $index) {
+            $candidate = Candidate::create([
+                'name' => $faker->name(),
+                'description' => $faker->paragraph(2),
+                'category_id' => 5,
             ]);
 
             $image = Image::make($faker->imageUrl(640, 480, 'cats'));

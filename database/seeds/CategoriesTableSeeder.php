@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Category;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -10,8 +9,10 @@ class CategoriesTableSeeder extends Seeder
     {
         Category::truncate();
 
-        Category::create(['name' => 'Top 20']);
-        Category::create(['name' => 'On the Rise']);
-        Category::create(['name' => 'Internet Celebs']);
+        Category::create(['name' => 'Basketball']);
+        Category::create(['name' => 'Sportsball']);
+        Category::create(['name' => 'Fütbol']);
+        Category::create(['name' => 'Hockey']);
+        Category::create(['name' => 'Golf']);
     }
 }
