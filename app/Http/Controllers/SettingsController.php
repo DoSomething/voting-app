@@ -22,8 +22,8 @@ class SettingsController extends \Controller
      */
     public function index()
     {
-        $settings = $this->setting->get();
-        return view('settings.index', compact('settings'));
+        $settingsList = $this->setting->get();
+        return view('settings.index', compact('settingsList'));
     }
 
     /**
@@ -55,6 +55,8 @@ class SettingsController extends \Controller
 
         $setting->value = $request->get('value');
         $setting->save();
+
+        Cache::forget('settings');
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
     }

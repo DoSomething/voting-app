@@ -3,7 +3,7 @@
 use Illuminate\Contracts\View\View;
 use SettingsRepository;
 
-class LayoutComposer
+class SettingsComposer
 {
 
     /**

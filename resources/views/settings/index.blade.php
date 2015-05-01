@@ -16,7 +16,7 @@
                 <td>&nbsp;</td>
             </tr>
             </thead>
-            @forelse($settings as $setting)
+            @forelse($settingsList as $setting)
                 <tr>
                     <td><strong>{{ $setting->key }}</strong></td>
                     <td>{!! $setting->pretty_value() !!}</td>
