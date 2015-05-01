@@ -1,5 +1,7 @@
 <?php namespace App\Handlers\Events;
 
+use StatHat;
+
 class UpdateRegistrationStats
 {
 
@@ -14,11 +16,7 @@ class UpdateRegistrationStats
             return;
         }
 
-        // Log this event to stathat.
-        $stathat_key = Config::get('services.stathat.key');
-        if ($stathat_key) {
-            stathat_ez_count($stathat_key, env('STATHAT_APP_NAME', 'votingapp') . ' - user register', 1);
-        }
+        StatHat::ezCount(env('STATHAT_APP_NAME', 'votingapp') . ' - user register');
 
     }
 
