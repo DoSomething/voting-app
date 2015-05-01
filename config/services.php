@@ -15,7 +15,7 @@ return [
     */
 
     'stathat' => [
-        'key' => env('STATHAT_EZ_KEY')
+        'ez_key' => env('STATHAT_EZ_KEY')
     ],
 
     'message_broker' => [
