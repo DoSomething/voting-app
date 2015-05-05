@@ -3,11 +3,8 @@ build:
     # The steps that will be executed on build
     steps:
       - script:
-          name: Install apt tools
-          code: sudo apt-get install software-properties-common python-software-properties
-      - script:
-          name: Update packages
-          code: sudo apt-add-repository ppa:izx/askubuntu && sudo apt-get update
+          name: Update apt
+          code: sudo apt-get update
       - script:
           name: Install libnotify
           code: sudo apt-get install libnotify-bin
