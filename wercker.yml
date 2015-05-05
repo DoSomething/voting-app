@@ -3,6 +3,9 @@ build:
     # The steps that will be executed on build
     steps:
       - script:
+          name: Update packages
+          code: sudo apt-add-repository ppa:izx/askubuntu && sudo apt-get update
+      - script:
           name: Install libnotify
           code: sudo apt-get install libnotify-bin
       - script:
