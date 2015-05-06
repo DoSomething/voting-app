@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c6fb7d91de2f1b11d1e622ffda7d94f5",
+    "hash": "d5114495b312580d6bb48443c9fe9dfd",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -319,16 +319,16 @@
         },
         {
             "name": "dosomething/stathat",
-            "version": "v0.0.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/stathat-php.git",
-                "reference": "a55f81d65243460886bb60a53ed945f5bbb49cce"
+                "reference": "e15cd99c697df1fbd78d7c445d06e4bbfba9460c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/stathat-php/zipball/a55f81d65243460886bb60a53ed945f5bbb49cce",
-                "reference": "a55f81d65243460886bb60a53ed945f5bbb49cce",
+                "url": "https://api.github.com/repos/DoSomething/stathat-php/zipball/e15cd99c697df1fbd78d7c445d06e4bbfba9460c",
+                "reference": "e15cd99c697df1fbd78d7c445d06e4bbfba9460c",
                 "shasum": ""
             },
             "require": {
@@ -353,7 +353,7 @@
                 }
             ],
             "description": "Simple API wrapper for StatHat.",
-            "time": "2015-05-01 17:37:33"
+            "time": "2015-05-05 21:23:23"
         },
         {
             "name": "erusev/parsedown",
@@ -1264,16 +1264,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.2.2",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "08f97eb4efa029e2fafb6d8c98b71731bf0cf621"
+                "reference": "dff239267fd1befa1cd40430c9ed12591aa720ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/08f97eb4efa029e2fafb6d8c98b71731bf0cf621",
-                "reference": "08f97eb4efa029e2fafb6d8c98b71731bf0cf621",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dff239267fd1befa1cd40430c9ed12591aa720ca",
+                "reference": "dff239267fd1befa1cd40430c9ed12591aa720ca",
                 "shasum": ""
             },
             "require": {
@@ -1283,7 +1283,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -1305,7 +1305,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-04-03 14:33:59"
+            "time": "2015-05-02 15:40:40"
         },
         {
             "name": "predis/predis",
