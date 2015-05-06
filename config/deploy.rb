@@ -27,11 +27,11 @@ namespace :deploy do
   folders = %w{logs dumps system}
 
   task :link_folders do
-    run "ln -nfs #{shared_path}/.env.php #{release_path}/"
+    run "ln -nfs #{shared_path}/.env #{release_path}/"
     run "ln -nfs #{shared_path}/images #{release_path}/public"
-    run "mkdir -p #{release_path}/app/storage"
+    run "ln -nfs #{shared_path}/thumbnails #{release_path}/public"
     folders.each do |folder|
-      run "ln -nfs #{shared_path}/#{folder} #{release_path}/app/storage/#{folder}"
+      run "ln -nfs #{shared_path}/#{folder} #{release_path}/storage/#{folder}"
     end
   end
 
