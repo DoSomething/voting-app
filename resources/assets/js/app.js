@@ -12,8 +12,8 @@
 //                                                                        \__|      \__|
 //
 
-//// Attach unveil plugin.
 window.jQuery = require("jquery");
+require('requestanimationframe'); // RequestAnimationFrame polyfill
 
 require('./formloader');
 require('./lazyload');

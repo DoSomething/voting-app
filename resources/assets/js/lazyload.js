@@ -1,8 +1,9 @@
-/**
- * Lazy load candidate thumbnail images.
- */
 var Layzr = require('layzr.js');
 
+/**
+ * Initialize lazy loading!
+ * @type {Layzr}
+ */
 var lazyr = new Layzr({
   selector: '[data-src]',
   attr: 'data-src',
