@@ -1,13 +1,16 @@
-require('unveil');
-var $ = require('jquery');
-
 /**
  * Lazy load candidate thumbnail images.
  */
-$(document).ready(function() {
-  $(".tile img").unveil(700, function() {
-    $(this).load(function() {
-      this.style.opacity = 1;
-    })
-  });
+var Layzr = require('layzr.js');
+
+var lazyr = new Layzr({
+  selector: '[data-src]',
+  attr: 'data-src',
+  threshold: 50,
+  callback: function() {
+    this.style.opacity = 1;
+  }
 });
+
+
+module.exports = lazyr;
