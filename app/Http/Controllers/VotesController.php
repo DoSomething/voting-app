@@ -3,6 +3,7 @@
 use App\Models\Candidate;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Auth;
 
 class VotesController extends Controller
 {

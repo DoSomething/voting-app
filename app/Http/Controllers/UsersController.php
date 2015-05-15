@@ -5,8 +5,6 @@ use App\Models\User;
 class UsersController extends Controller
 {
 
-    protected $userValidator;
-
     public function __construct(User $user)
     {
         $this->user = $user;
