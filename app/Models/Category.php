@@ -1,4 +1,4 @@
-<?php namespace App\Models;
+<?php namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
@@ -40,7 +40,7 @@ class Category extends Model implements SluggableInterface
 
     public function candidates()
     {
-        return $this->hasMany('App\Models\Candidate')->orderBy('name', 'asc');
+        return $this->hasMany('VotingApp\Models\Candidate')->orderBy('name', 'asc');
     }
 
 }

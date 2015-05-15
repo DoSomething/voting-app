@@ -1,7 +1,7 @@
-<?php namespace App\Http\Middleware;
+<?php namespace VotingApp\Http\Middleware;
 
 use Closure;
-use App\Repositories\SettingsRepository;
+use VotingApp\Repositories\SettingsRepository;
 
 
 class RedirectIfVotingDisabled {

@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
-use App\Models\User;
+use VotingApp\Models\User;
 
 class UsersController extends Controller
 {

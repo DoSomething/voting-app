@@ -1,4 +1,4 @@
-<?php namespace App\Models;
+<?php namespace VotingApp\Models;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;

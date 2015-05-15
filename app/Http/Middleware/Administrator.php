@@ -1,4 +1,4 @@
-<?php namespace App\Http\Middleware;
+<?php namespace VotingApp\Http\Middleware;
 
 use Auth;
 use Closure;

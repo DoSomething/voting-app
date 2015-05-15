@@ -1,6 +1,6 @@
-<?php namespace App\Handlers\Events;
+<?php namespace VotingApp\Handlers\Events;
 
-use App\Events\UserRegistered;
+use VotingApp\Events\UserRegistered;
 use MessageBroker;
 use Config;
 

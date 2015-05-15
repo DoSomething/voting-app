@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: VotingApp
+        psr4_prefix: VotingApp
         src_path: app

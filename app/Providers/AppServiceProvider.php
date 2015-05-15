@@ -1,4 +1,4 @@
-<?php namespace App\Providers;
+<?php namespace VotingApp\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'Illuminate\Contracts\Auth\Registrar',
-            'App\Services\Registrar'
+            'VotingApp\Services\Registrar'
         );
     }
 }

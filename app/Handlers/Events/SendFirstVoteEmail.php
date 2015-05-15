@@ -1,6 +1,6 @@
-<?php namespace App\Handlers\Events;
+<?php namespace VotingApp\Handlers\Events;
 
-use App\Events\UserCastFirstVote;
+use VotingApp\Events\UserCastFirstVote;
 use MessageBroker;
 
 class SendFirstVoteEmail

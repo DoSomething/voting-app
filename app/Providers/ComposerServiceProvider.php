@@ -1,4 +1,4 @@
-<?php namespace App\Providers;
+<?php namespace VotingApp\Providers;
 
 use View;
 use Illuminate\Support\ServiceProvider;
@@ -14,7 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['*'], 'App\Http\ViewComposers\SettingsComposer');
+        View::composer(['*'], 'VotingApp\Http\ViewComposers\SettingsComposer');
     }
 
     /**

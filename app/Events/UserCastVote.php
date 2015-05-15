@@ -1,6 +1,6 @@
-<?php namespace App\Events;
+<?php namespace VotingApp\Events;
 
-use App\Events\Event;
+use VotingApp\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 

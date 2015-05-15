@@ -1,12 +1,12 @@
-<?php namespace App\Providers;
+<?php namespace VotingApp\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use App\Models\Category;
-use App\Models\Candidate;
-use App\Models\User;
-use App\Models\Page;
-use App\Models\Setting;
+use VotingApp\Models\Category;
+use VotingApp\Models\Candidate;
+use VotingApp\Models\User;
+use VotingApp\Models\Page;
+use VotingApp\Models\Setting;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'VotingApp\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

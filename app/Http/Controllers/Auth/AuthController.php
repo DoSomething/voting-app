@@ -1,11 +1,11 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
-use App\Http\Requests\UserSessionRequest;
-use App\Http\Requests\AdminSessionRequest;
-use App\Events\UserCastFirstVote;
-use App\Events\UserRegistered;
-use App\Models\User;
-use App\Models\Candidate;
+use VotingApp\Http\Requests\UserSessionRequest;
+use VotingApp\Http\Requests\AdminSessionRequest;
+use VotingApp\Events\UserCastFirstVote;
+use VotingApp\Events\UserRegistered;
+use VotingApp\Models\User;
+use VotingApp\Models\Candidate;
 use Auth;
 
 

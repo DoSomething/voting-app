@@ -1,4 +1,4 @@
-<?php namespace App\Models;
+<?php namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -23,7 +23,7 @@ class Winner extends Model
      */
     public function candidate()
     {
-        return $this->belongsTo('App\Models\Candidate');
+        return $this->belongsTo('VotingApp\Models\Candidate');
     }
 
     /**
@@ -32,7 +32,7 @@ class Winner extends Model
      */
     public static function getCategoryWinners(Category $category)
     {
-        $settings = app()->make('App\Repositories\SettingsRepository')->all();
+        $settings = app()->make('VotingApp\Repositories\SettingsRepository')->all();
         $secrets = \Request::get('winners');
         if ($settings['show_winners'] || $secrets == '✓') {
             $winners = DB::table('winners')

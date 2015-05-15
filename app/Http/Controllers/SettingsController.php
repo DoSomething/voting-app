@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Setting;
+use VotingApp\Models\Setting;
 use Cache;
 
 class SettingsController extends Controller

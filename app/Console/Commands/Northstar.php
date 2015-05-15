@@ -1,4 +1,4 @@
-<?php namespace App\Console\Commands;
+<?php namespace VotingApp\Console\Commands;
 
 use Illuminate\Console\Command;
 

@@ -1,4 +1,4 @@
-<?php namespace App\Handlers\Events;
+<?php namespace VotingApp\Handlers\Events;
 
 use StatHat;
 

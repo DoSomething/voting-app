@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
-use App\Models\Winner;
+use VotingApp\Models\Winner;
 use Illuminate\Http\Request;
 use DB;
 

@@ -139,12 +139,12 @@ return [
         /*
          * Application Service Providers...
          */
-        'App\Providers\AppServiceProvider',
-        'App\Providers\BusServiceProvider',
-        'App\Providers\ComposerServiceProvider',
-        'App\Providers\ConfigServiceProvider',
-        'App\Providers\EventServiceProvider',
-        'App\Providers\RouteServiceProvider',
+        'VotingApp\Providers\AppServiceProvider',
+        'VotingApp\Providers\BusServiceProvider',
+        'VotingApp\Providers\ComposerServiceProvider',
+        'VotingApp\Providers\ConfigServiceProvider',
+        'VotingApp\Providers\EventServiceProvider',
+        'VotingApp\Providers\RouteServiceProvider',
 
         /*
          *  Third-party Service Providers...

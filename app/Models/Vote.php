@@ -1,6 +1,6 @@
-<?php namespace App\Models;
+<?php namespace VotingApp\Models;
 
-use App\Events\UserCastVote;
+use VotingApp\Events\UserCastVote;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -19,7 +19,7 @@ class Vote extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('VotingApp\Models\User');
     }
 
     /**
@@ -27,7 +27,7 @@ class Vote extends Model
      */
     public function candidate()
     {
-        return $this->belongsTo('App\Models\Candidate');
+        return $this->belongsTo('VotingApp\Models\Candidate');
     }
 
     /**

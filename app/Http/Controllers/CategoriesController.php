@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
-use App\Models\Winner;
+use VotingApp\Http\Requests\CategoryRequest;
+use VotingApp\Models\Category;
+use VotingApp\Models\Winner;
 
 class CategoriesController extends Controller
 {

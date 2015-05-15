@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
-use App\Http\Requests\CandidateRequest;
-use App\Models\Candidate;
-use App\Models\Category;
+use VotingApp\Http\Requests\CandidateRequest;
+use VotingApp\Models\Candidate;
+use VotingApp\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
 use DB;

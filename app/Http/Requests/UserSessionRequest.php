@@ -1,4 +1,4 @@
-<?php namespace App\Http\Requests;
+<?php namespace VotingApp\Http\Requests;
 
 use Candidate;
 use Input;

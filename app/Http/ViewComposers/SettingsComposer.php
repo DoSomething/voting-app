@@ -1,7 +1,7 @@
-<?php namespace App\Http\ViewComposers;
+<?php namespace VotingApp\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Repositories\SettingsRepository;
+use VotingApp\Repositories\SettingsRepository;
 
 class SettingsComposer
 {

@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace VotingApp\Http\Controllers;
 
-use App\Http\Requests\PageRequest;
-use App\Models\Page;
+use VotingApp\Http\Requests\PageRequest;
+use VotingApp\Models\Page;
 
 class PagesController extends Controller
 {

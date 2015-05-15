@@ -1,4 +1,4 @@
-<?php namespace App\Http;
+<?php namespace VotingApp\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,7 +16,7 @@ class Kernel extends HttpKernel
         'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
         'Illuminate\Session\Middleware\StartSession',
         'Illuminate\View\Middleware\ShareErrorsFromSession',
-        'App\Http\Middleware\VerifyCsrfToken',
+        'VotingApp\Http\Middleware\VerifyCsrfToken',
     ];
 
     /**
@@ -25,10 +25,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'admin' => 'App\Http\Middleware\Administrator',
-        'auth' => 'App\Http\Middleware\Authenticate',
+        'admin' => 'VotingApp\Http\Middleware\Administrator',
+        'auth' => 'VotingApp\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-        'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
-        'voting.enabled' => 'App\Http\Middleware\RedirectIfVotingDisabled',
+        'guest' => 'VotingApp\Http\Middleware\RedirectIfAuthenticated',
+        'voting.enabled' => 'VotingApp\Http\Middleware\RedirectIfVotingDisabled',
     ];
 }

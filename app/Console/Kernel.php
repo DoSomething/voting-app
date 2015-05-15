@@ -1,4 +1,4 @@
-<?php namespace App\Console;
+<?php namespace VotingApp\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\Northstar',
+        'VotingApp\Console\Commands\Northstar',
     ];
 
     /**

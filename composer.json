@@ -30,7 +30,7 @@
       "app/Http/Controllers"
     ],
     "psr-4": {
-      "App\\": "app/"
+      "VotingApp\\": "app/"
     },
     "files": [
       "app/Http/helpers.php"

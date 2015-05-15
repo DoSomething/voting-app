@@ -1,4 +1,4 @@
-<?php namespace App\Repositories;
+<?php namespace VotingApp\Repositories;
 
 use Cache;
 use DB;

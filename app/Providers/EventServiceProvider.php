@@ -1,4 +1,4 @@
-<?php namespace App\Providers;
+<?php namespace VotingApp\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -15,15 +15,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\UserRegistered' => [
-            'App\Handlers\Events\SendWelcomeEmail',
-            'App\Handlers\Events\UpdateRegistrationStats',
+        'VotingApp\Events\UserRegistered' => [
+            'VotingApp\Handlers\Events\SendWelcomeEmail',
+            'VotingApp\Handlers\Events\UpdateRegistrationStats',
         ],
-        'App\Events\UserCastVote' => [
-            'App\Handlers\Events\UpdateVotingStats',
+        'VotingApp\Events\UserCastVote' => [
+            'VotingApp\Handlers\Events\UpdateVotingStats',
         ],
-        'App\Events\UserCastFirstVote' => [
-            'App\Handlers\Events\SendFirstVoteEmail',
+        'VotingApp\Events\UserCastFirstVote' => [
+            'VotingApp\Handlers\Events\SendFirstVoteEmail',
         ],
     ];
 
