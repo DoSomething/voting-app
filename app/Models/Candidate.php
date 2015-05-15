@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
@@ -35,7 +35,7 @@ class Candidate extends Model implements SluggableInterface
      */
     public function category()
     {
-        return $this->belongsTo('Category');
+        return $this->belongsTo('App\Models\Category');
     }
 
     /**
@@ -43,7 +43,7 @@ class Candidate extends Model implements SluggableInterface
      */
     public function votes()
     {
-        return $this->hasMany('Vote');
+        return $this->hasMany('App\Models\Vote');
     }
 
     /**
@@ -51,7 +51,7 @@ class Candidate extends Model implements SluggableInterface
      */
     public function winner()
     {
-        return $this->hasOne('Winner');
+        return $this->hasOne('App\Models\Winner');
     }
 
     /**
@@ -96,4 +96,5 @@ class Candidate extends Model implements SluggableInterface
     {
         return (!empty($this->twitter)) ? $this->twitter : $this->name;
     }
+
 }

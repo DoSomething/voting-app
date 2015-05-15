@@ -1,8 +1,13 @@
-<?php
+<?php namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidateRequest;
+use App\Models\Candidate;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Auth;
+use DB;
 
-class CandidatesController extends \Controller
+class CandidatesController extends Controller
 {
 
     private $candidate;
@@ -17,14 +22,15 @@ class CandidatesController extends \Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @param Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // Show admin interface instead for administrators. Admin users can
         // use the `?guest=1` query parameter to bypass the admin view.
-        if(Auth::check() && Auth::user()->hasRole('admin') && !Request::get('guest')) {
-            return $this->adminIndex();
+        if(Auth::check() && Auth::user()->hasRole('admin') && !$request->get('guest')) {
+            return $this->adminIndex($request);
         }
 
         $type = get_login_type();
@@ -36,12 +42,13 @@ class CandidatesController extends \Controller
     /**
      * Display administrative view for candidates.
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function adminIndex(){
+    public function adminIndex(Request $request){
         // Get optional request params.
-        $sort_by = Request::get('sort_by');
-        $direction = Request::get('direction');
+        $sort_by = $request->get('sort_by');
+        $direction = $request->get('direction');
 
         $query = DB::table('candidates')
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
@@ -67,7 +74,7 @@ class CandidatesController extends \Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -80,13 +87,13 @@ class CandidatesController extends \Controller
      * Store a newly created resource in storage.
      *
      * @param CandidateRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CandidateRequest $request)
     {
         $candidate = new Candidate($request->all());
 
-        if ($file = Input::file('photo')) {
+        if ($file = $request->file('photo')) {
             $image = Image::make($file->getRealPath());
             $candidate->savePhoto($image);
         }
@@ -101,7 +108,7 @@ class CandidatesController extends \Controller
      * Display the specified resource.
      *
      * @param Candidate $candidate
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function show(Candidate $candidate)
     {
@@ -117,7 +124,7 @@ class CandidatesController extends \Controller
      * Show the form for editing the specified resource.
      *
      * @param Candidate $candidate
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function edit(Candidate $candidate)
     {
@@ -131,13 +138,13 @@ class CandidatesController extends \Controller
      *
      * @param Candidate $candidate
      * @param CandidateRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Candidate $candidate, CandidateRequest $request)
     {
         $candidate->fill($request->all());
 
-        if ($file = Input::file('photo')) {
+        if ($file = $request->file('photo')) {
             $image = Image::make($file->getRealPath());
             $candidate->savePhoto($image);
         }
@@ -152,7 +159,7 @@ class CandidatesController extends \Controller
      * Remove the specified resource from storage.
      *
      * @param Candidate $candidate
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Candidate $candidate)
     {

@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
@@ -40,6 +40,7 @@ class Category extends Model implements SluggableInterface
 
     public function candidates()
     {
-        return $this->hasMany('Candidate')->orderBy('name', 'asc');
+        return $this->hasMany('App\Models\Candidate')->orderBy('name', 'asc');
     }
+
 }

@@ -1,7 +1,7 @@
 <?php namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use SettingsRepository;
+use App\Repositories\SettingsRepository;
 
 class SettingsComposer
 {
@@ -33,4 +33,5 @@ class SettingsComposer
         $settings = $this->settingsRepository->all();
         $view->with('settings', $settings);
     }
+
 }

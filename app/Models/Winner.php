@@ -1,6 +1,7 @@
-<?php
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Winner extends Model
 {
@@ -22,7 +23,7 @@ class Winner extends Model
      */
     public function candidate()
     {
-        return $this->belongsTo('Candidate');
+        return $this->belongsTo('App\Models\Candidate');
     }
 
     /**
@@ -31,7 +32,7 @@ class Winner extends Model
      */
     public static function getCategoryWinners(Category $category)
     {
-        $settings = \App::make('SettingsRepository')->all();
+        $settings = app()->make('App\Repositories\SettingsRepository')->all();
         $secrets = \Request::get('winners');
         if ($settings['show_winners'] || $secrets == '✓') {
             $winners = DB::table('winners')
@@ -47,4 +48,5 @@ class Winner extends Model
 
         return;
     }
+
 }

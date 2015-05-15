@@ -13,7 +13,7 @@
 
         @include('partials.errors')
 
-        {!! Form::model($setting, ['route'=> ['settings.update', $setting->key], 'method' => 'PATCH']) !!}
+        {!! Form::model($setting, ['method' => 'PUT', 'route'=> ['settings.update', $setting->key]]) !!}
             @if ($setting->type == 'text')
                 {!! Form::label('value', 'Value') !!}
                 {!! Form::text('value') !!}

@@ -1,6 +1,6 @@
 <?php namespace App\Events;
 
-use App\Events\Event;
+use App\Models\User;
 
 use Illuminate\Queue\SerializesModels;
 
@@ -21,9 +21,9 @@ class UserRegistered extends Event
 
     /**
      * Create a new event instance.
-     * @param \User $user
+     * @param User $user
      */
-    public function __construct(\User $user)
+    public function __construct(User $user)
     {
         $this->first_name = $user->first_name;
         $this->email = $user->email;

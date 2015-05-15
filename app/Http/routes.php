@@ -11,57 +11,33 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
+// Homepage
+get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
-/**
- * Authentication & password reset
- */
-Route::controllers([
-    'auth' => 'AuthController',
-    'password' => 'PasswordController'
-]);
+// User Authentication
+get('auth/login', 'AuthController@getLogin');
+post('auth/login', 'AuthController@postLogin');
+
+// Admin Authentication
+get('auth/admin', 'AuthController@getAdmin');
+post('auth/admin', 'AuthController@postAdmin');
+
+// Password Reset
+get('password/email', 'PasswordController@getEmail');
+post('password/email', 'PasswordController@postEmail');
+get('password/reset', 'PasswordController@getReset');
+post('password/reset', 'PasswordController@postReset');
+
+// Restful resources
+resource('candidates', 'CandidatesController');
+resource('categories', 'CategoriesController');
+resource('pages', 'PagesController');
+resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
+resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
+resource('votes', 'VotesController', ['only' => ['store']]);
+resource('winners', 'WinnersController');
 
 // Convenience routes
-Route::get('admin', function() {
+get('admin', function() {
     return redirect()->to('/auth/admin');
 });
-
-/**
- * Categories
- */
-Route::bind('categories', function ($slug) { return Category::where('slug', $slug)->first(); });
-Route::resource('categories', 'CategoriesController');
-
-/**
- * Candidates
- */
-Route::bind('candidates', function ($slug) { return Candidate::where('slug', $slug)->first(); });
-Route::resource('candidates', 'CandidatesController');
-
-/**
- * Winners
- */
-Route::resource('winners', 'WinnersController');
-
-/**
- * Votes
- */
-Route::resource('votes', 'VotesController', ['only' => ['store']]);
-
-/**
- * Users
- */
-Route::bind('users', function ($id) { return User::where('id', $id)->first(); });
-Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
-
-/**
- * Pages
- */
-Route::bind('pages', function ($slug) { return Page::where('slug', $slug)->first(); });
-Route::resource('pages', 'PagesController');
-
-/**
- * Settings
- */
-Route::bind('settings', function ($key) { return Setting::where('key', $key)->first(); });
-Route::resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);

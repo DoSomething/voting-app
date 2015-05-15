@@ -1,8 +1,9 @@
-<?php
+<?php namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequest;
+use App\Models\Page;
 
-class PagesController extends \Controller
+class PagesController extends Controller
 {
 
     /**
@@ -21,7 +22,7 @@ class PagesController extends \Controller
      * Display a listing of the resource.
      * GET /pages
      *
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function index()
     {
@@ -33,7 +34,7 @@ class PagesController extends \Controller
      * Show the form for creating a new resource.
      * GET /pages/create
      *
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function create()
     {
@@ -45,7 +46,7 @@ class PagesController extends \Controller
      * POST /pages
      *
      * @param PageRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PageRequest $request)
     {
@@ -60,7 +61,7 @@ class PagesController extends \Controller
      * GET /pages/{id}
      *
      * @param Page $page
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function show(Page $page)
     {
@@ -72,7 +73,7 @@ class PagesController extends \Controller
      * GET /pages/{id}/edit
      *
      * @param Page $page
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function edit(Page $page)
     {
@@ -85,7 +86,7 @@ class PagesController extends \Controller
      *
      * @param Page $page
      * @param PageRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Page $page, PageRequest $request)
     {

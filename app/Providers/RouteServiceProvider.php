@@ -2,6 +2,11 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Category;
+use App\Models\Candidate;
+use App\Models\User;
+use App\Models\Page;
+use App\Models\Setting;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -13,8 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = null;
-    // @TODO 'App\Http\Controllers'
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -24,7 +28,25 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
+        $router->bind('categories', function ($slug) {
+            return Category::where('slug', $slug)->first();
+        });
+
+        $router->bind('candidates', function ($slug) {
+            return Candidate::where('slug', $slug)->first();
+        });
+
+        $router->bind('users', function ($id) {
+            return User::where('id', $id)->first();
+        });
+
+        $router->bind('pages', function ($slug) {
+            return Page::where('slug', $slug)->first();
+        });
+
+        $router->bind('settings', function ($key) {
+            return Setting::where('key', $key)->first();
+        });
 
         parent::boot($router);
     }

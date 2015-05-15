@@ -1,8 +1,10 @@
-<?php
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Setting;
+use Cache;
 
-class SettingsController extends \Controller
+class SettingsController extends Controller
 {
 
     protected $setting;
@@ -18,7 +20,7 @@ class SettingsController extends \Controller
      * Display a listing of the resource.
      * GET /settings
      *
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function index()
     {
@@ -31,7 +33,7 @@ class SettingsController extends \Controller
      * GET /settings/{id}/edit
      *
      * @param Setting $setting
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function edit(Setting $setting)
     {
@@ -44,7 +46,7 @@ class SettingsController extends \Controller
      *
      * @param Request $request
      * @param Setting $setting
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Setting $setting)
     {
@@ -60,4 +62,5 @@ class SettingsController extends \Controller
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
     }
+
 }

@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Models;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
@@ -33,4 +33,5 @@ class Page extends Model implements SluggableInterface
         $this->attributes['content'] = $content;
         $this->attributes['content_html'] = Parsedown::instance()->text($content);
     }
+
 }

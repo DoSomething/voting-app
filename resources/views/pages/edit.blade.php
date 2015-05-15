@@ -12,7 +12,7 @@
         @include('partials.errors')
 
         <div class="row">
-            {!! Form::model($page, ['route' => ['pages.update', $page->slug], 'method' => 'PATCH']) !!}
+            {!! Form::model($page, ['method' => 'PUT', 'route' => ['pages.update', $page->slug], 'method' => 'PATCH']) !!}
                 @include('pages.form')
                 {!! Form::submit('Create Page') !!}
             {!! Form::close() !!}

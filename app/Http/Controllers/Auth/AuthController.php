@@ -1,12 +1,15 @@
-<?php
+<?php namespace App\Http\Controllers;
 
 use App\Http\Requests\UserSessionRequest;
 use App\Http\Requests\AdminSessionRequest;
 use App\Events\UserCastFirstVote;
 use App\Events\UserRegistered;
+use App\Models\User;
+use App\Models\Candidate;
+use Auth;
 
 
-class AuthController extends \Controller
+class AuthController extends Controller
 {
 
     public function __construct()
@@ -19,16 +22,17 @@ class AuthController extends \Controller
      * Show the form for user login.
      * GET /login
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function getLogin()
     {
-        return view('auth.login');
+        return redirect('auth/admin');
     }
 
     /**
      * Authentication for a non-admin user.
      * @param UserSessionRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postLogin(UserSessionRequest $request)
     {
@@ -53,32 +57,32 @@ class AuthController extends \Controller
         Auth::login($user);
 
         // Is the user login on a vote page?
-        if (Input::has('candidate_id')) {
+        if ($request->has('candidate_id')) {
             $vote = Vote::createIfEligible($input['candidate_id'], $user->id);
 
             if ($vote) {
                 $candidate = Candidate::find($input['candidate_id']);
-                $url = URL::route('candidates.show', [$candidate->slug, '#message']);
+                $url = route('candidates.show', [$candidate->slug, '#message']);
 
                 // Trigger a vote transactional message only for new users.
                 if ($newUserAccount) {
                     event(new UserCastFirstVote($vote));
                 }
 
-                return Redirect::to($url)->withFlashMessage('Welcome ' . $input['first_name'] . '. We got that vote!');
+                return redirect()->to($url)->with('message', 'Welcome ' . $input['first_name'] . '. We got that vote!');
             } else {
-                return Redirect::back()->withFlashMessage('Welcome back ' . $input['first_name'] . '. You already voted today!');
+                return redirect()->back()->with('message', 'Welcome back ' . $input['first_name'] . '. You already voted today!');
             }
         }
 
-        return Redirect::intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
+        return redirect()->intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
     }
 
     /**
      * Show the form for admin login.
      * GET /admin
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function getAdmin()
     {
@@ -88,14 +92,15 @@ class AuthController extends \Controller
     /**
      * Authentication for an admin user.
      * @param AdminSessionRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postAdmin(AdminSessionRequest $request)
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return Redirect::intended('/')->withFlashMessage('Welcome back!');
+            return redirect()->intended('/')->with('message', 'Welcome back!');
         } else {
-            return Redirect::back()->withInput()->withFlashMessage('Invalid username or password!');
+            return redirect()->back()->withInput()->with('message', 'Invalid username or password!');
         }
     }
 

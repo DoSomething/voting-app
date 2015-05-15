@@ -8,7 +8,7 @@
 
         @include('partials.errors')
 
-        {!! Form::model($candidate, ['route' => ['candidates.update', $candidate->slug], 'files' => true]) !!}
+        {!! Form::model($candidate, ['method' => 'PUT', 'route' => ['candidates.update', $candidate->slug], 'files' => true]) !!}
             @include('candidates.form')
             {!! Form::submit('Update Candidate') !!}
         {!! Form::close() !!}

@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -114,7 +114,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function votes()
     {
-        return $this->hasMany('Vote');
+        return $this->hasMany('App\Models\Vote');
     }
 
     /**
@@ -136,7 +136,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function roles()
     {
-        return $this->belongsToMany('Role');
+        return $this->belongsToMany('App\Models\Role');
     }
 
     /**

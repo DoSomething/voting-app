@@ -1,4 +1,7 @@
-<?php
+<?php namespace App\Repositories;
+
+use Cache;
+use DB;
 
 class SettingsRepository
 {
@@ -12,7 +15,6 @@ class SettingsRepository
         return Cache::rememberForever('settings', function() {
             return DB::table('settings')->lists('value', 'key');
         });
-
-
     }
+
 }

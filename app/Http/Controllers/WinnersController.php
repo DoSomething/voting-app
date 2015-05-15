@@ -1,6 +1,10 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-class WinnersController extends \Controller
+use App\Models\Winner;
+use Illuminate\Http\Request;
+use DB;
+
+class WinnersController extends Controller
 {
 
     public function __construct()
@@ -11,7 +15,7 @@ class WinnersController extends \Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function index()
     {
@@ -30,7 +34,7 @@ class WinnersController extends \Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
     {
@@ -42,7 +46,7 @@ class WinnersController extends \Controller
             $winner->save();
         }
 
-        return redirect()->route('winners.edit', array('id' => $winner->id));
+        return redirect()->route('winners.edit', ['id' => $winner->id]);
     }
 
 
@@ -50,7 +54,7 @@ class WinnersController extends \Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -63,15 +67,16 @@ class WinnersController extends \Controller
      * Update the specified resource in storage.
      *
      * @param  int $id
-     * @return Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
         $winner = Winner::whereId($id)->firstOrFail();
-        $input = Input::all();
-        $winner->fill($input)->save();
+        $winner->fill($request->all());
+        $winner->save();
 
-        return route('winners.index')->with('flash_message', 'Cool, we saved that person as a winner.');
+        return redirect()->route('winners.index')->with('message', 'Cool, we saved that person as a winner.');
     }
 
 
@@ -79,12 +84,12 @@ class WinnersController extends \Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         $winner = Winner::whereId($id)->firstOrFail();
         $winner->delete();
-        return redirect()->route('winners.index')->with('flash_message', 'BAM! that winner was removed.');
+        return redirect()->route('winners.index')->with('message', 'BAM! that winner was removed.');
     }
 }

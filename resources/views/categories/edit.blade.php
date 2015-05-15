@@ -10,7 +10,7 @@
 
         @include('partials.errors')
 
-        {!! Form::model($category, ['route'=> ['categories.update', $category->slug]]) !!}
+        {!! Form::model($category, ['method' => 'PUT', 'route'=> ['categories.update', $category->slug]]) !!}
             @include('categories.form')
             {!! Form::submit('Update Category') !!}
         {!! Form::close() !!}

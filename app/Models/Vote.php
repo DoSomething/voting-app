@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Models;
 
 use App\Events\UserCastVote;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +19,7 @@ class Vote extends Model
      */
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\Models\User');
     }
 
     /**
@@ -27,18 +27,19 @@ class Vote extends Model
      */
     public function candidate()
     {
-        return $this->belongsTo('Candidate');
+        return $this->belongsTo('App\Models\Candidate');
     }
 
     /**
      * Assuming a user is eligible to vote, save the vote
-     * @returns Vote
+     * @param $candidate_id
+     * @param $user_id
+     * @return Vote
      */
     public static function createIfEligible($candidate_id, $user_id)
     {
         // Look up user and candidate
         $user = User::find($user_id);
-        $candidate = Candidate::find($candidate_id);
 
         // Can the user vote?
         if (!$user->canVote()) {
@@ -72,4 +73,5 @@ class Vote extends Model
         return $query->join('candidates', 'candidate_id', '=', 'candidates.id')
             ->where('candidates.category_id', $category->id);
     }
+
 }

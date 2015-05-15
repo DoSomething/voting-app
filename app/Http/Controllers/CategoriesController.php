@@ -1,8 +1,10 @@
-<?php
+<?php namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
+use App\Models\Winner;
 
-class CategoriesController extends \Controller
+class CategoriesController extends Controller
 {
 
     protected $category;
@@ -18,7 +20,7 @@ class CategoriesController extends \Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -26,23 +28,21 @@ class CategoriesController extends \Controller
         return view('categories.index', compact('categories'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
         return view('categories.create');
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param CategoryRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CategoryRequest $request)
     {
@@ -52,12 +52,11 @@ class CategoriesController extends \Controller
         return redirect()->route('categories.index');
     }
 
-
     /**
      * Display the specified resource.
      *
      * @param category $category
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function show(Category $category)
     {
@@ -67,25 +66,23 @@ class CategoriesController extends \Controller
         return view('categories.show', compact('category', 'candidates', 'type', 'winners'));
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param Category $category
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function edit(Category $category)
     {
         return view('categories.edit', compact('category'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param Category $category
      * @param CategoryRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Category $category, CategoryRequest $request)
     {

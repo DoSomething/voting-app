@@ -1,6 +1,8 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-class UsersController extends \Controller
+use App\Models\User;
+
+class UsersController extends Controller
 {
 
     protected $userValidator;
@@ -15,7 +17,7 @@ class UsersController extends \Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function index()
     {
@@ -29,7 +31,7 @@ class UsersController extends \Controller
      * Display the specified resource.
      *
      * @param User $user
-     * @return Response
+     * @return \Illuminate\View\View;
      */
     public function show(User $user)
     {
@@ -38,4 +40,5 @@ class UsersController extends \Controller
 
         return view('users.show', compact('user', 'votes', 'vote_count'));
     }
+
 }
