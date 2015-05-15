@@ -13,7 +13,9 @@
 //
 
 window.jQuery = require("jquery");
-require('requestanimationframe'); // RequestAnimationFrame polyfill
+
+// RequestAnimationFrame polyfill
+require('requestanimationframe');
 
 require('./formloader');
 require('./lazyload');
