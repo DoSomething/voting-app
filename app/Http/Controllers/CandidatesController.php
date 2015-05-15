@@ -163,7 +163,9 @@ class CandidatesController extends Controller
      */
     public function destroy(Candidate $candidate)
     {
+        $candidate->votes()->delete();
         $candidate->delete();
-        return redirect()->home()->with('flash_message', 'BAM, that person was removed!');
+
+        return redirect()->home()->with('message', 'BAM, that person was removed!');
     }
 }

@@ -9,6 +9,8 @@ class Candidate extends Model implements SluggableInterface
 
     use SluggableTrait;
 
+
+
     /**
      * The attributes which may be mass-assigned.
      *

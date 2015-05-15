@@ -29,7 +29,7 @@ class RedirectIfVotingDisabled {
         if (!$this->settings['enable_voting']) {
             return redirect(route('home'))
                 ->with('message', 'Sorry, voting is disabled!')
-                ->with('flash_message_type', 'error');
+                ->with('message_type', 'error');
         }
 
 		return $next($request);
