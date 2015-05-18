@@ -8,13 +8,32 @@
             <p>These are all categories in the database. Categories will automatically show up in the site navigation
                 above.</p>
         </div>
-        <ul>
+
+        <table>
+            <thead>
+            <tr>
+                <td>Name</td>
+                <td>Candidates</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            </thead>
             @forelse($categories as $category)
-                <li><a href="{{ route('categories.show', [$category->slug]) }}">{{ $category->name }}</a></li>
+                <tr>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->candidates->count() }} </td>
+                    <td><a href="{{ route('categories.show', [$category->slug]) }}">view</a></td>
+                    <td><a href="{{ route('categories.edit', [$category->slug]) }}">edit</a></td>
+                </tr>
             @empty
-                <li>No categories.</li>
+                <tr>
+                    <td class="empty">No winners... yet!</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             @endforelse
-        </ul>
+        </table>
     </div>
 @stop
 

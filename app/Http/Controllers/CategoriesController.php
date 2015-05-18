@@ -7,13 +7,8 @@ use VotingApp\Models\Winner;
 class CategoriesController extends Controller
 {
 
-    protected $category;
-    protected $categoryValidator;
-
-    public function __construct(Category $category)
+    public function __construct()
     {
-        $this->category = $category;
-
         $this->middleware('admin', ['except' => ['show']]);
     }
 
@@ -24,7 +19,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->get();
+        $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
 
