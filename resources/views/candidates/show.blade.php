@@ -38,10 +38,7 @@
 
 @section('actions')
     @if(Auth::user() && Auth::user()->hasRole('admin'))
-        <li><a href="{{ route('candidates.edit', [$candidate->slug]) }}" class="btn secondary">Edit Candidate</a></li>
-
-        {!! Form::open(['route' => ['candidates.destroy', $candidate->slug], 'method' => 'DELETE']) !!}
-            {!! Form::submit('Delete Candidate', ['class' => 'button -danger']) !!}
-        {!! Form::close() !!}
+        <li><a href="{{ route('candidates.edit', [$candidate->slug]) }}">Edit Candidate</a></li>
+        <li><a href="{{ route('candidates.destroy', [$candidate->slug]) }}" data-method="DELETE" data-confirm="Are you sure you want to delete this candidate, and all their votes?" class="button -danger">Delete Candidate</a></li>
     @endif
 @stop
