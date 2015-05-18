@@ -166,6 +166,6 @@ class CandidatesController extends Controller
         $candidate->votes()->delete();
         $candidate->delete();
 
-        return redirect()->home()->with('message', 'BAM, that person was removed!');
+        return redirect()->home()->with('message', 'BAM! That candidate was removed!');
     }
 }

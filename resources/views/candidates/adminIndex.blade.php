@@ -15,6 +15,7 @@
                 <td><a class="{{ sort_class('votes') }}" href="{{ sort_url('votes') }}">Votes</a></td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             </thead>
             @forelse($candidates as $candidate)
@@ -22,17 +23,17 @@
                     <td>{{ $candidate->name }}</td>
                     <td>{{ $candidate->category }}</td>
                     <td>{{ $candidate->votes }}</td>
+                    <td><a href="{{ route('candidates.show', [$candidate->slug]) }}">view</a></td>
                     <td><a href="{{ route('candidates.edit', [$candidate->slug]) }}">edit</a></td>
-                    <td>
-                        {!! Form::open(['route' => 'winners.store']) !!}
-                            {!! Form::hidden('id', $candidate->id) !!}
-                            {!! Form::submit('Mark as Winner') !!}
-                        {!! Form::close() !!}
-                    </td>
+                    <td><a href="{{ route('winners.store') }}" data-confirm="Mark this candidate as a winner?" data-method="POST" data-form-item="id" data-form-value="{{ $candidate->id }}">mark winner</a></td>
                 </tr>
             @empty
                 <div class="empty">No users... yet!</div>
             @endforelse
         </table>
+
+        <div class="form-actions">
+            <a class="button" href="{{ route('candidates.create') }}">New Candidate</a>
+        </div>
     </div>
 @stop

@@ -12,7 +12,12 @@
             @include('candidates.form')
             {!! Form::submit('Update Candidate') !!}
         {!! Form::close() !!}
+    </div>
 
-        <p><a href="{{ route('candidates.index') }}">Go Back</a></p>
+    <div class="wrapper">
+        <p>If this candidate is no longer wanted, you may delete it & all of its votes. This cannot be undone!</p>
+        <div class="form-actions">
+            <a href="{{ route('candidates.destroy', [$candidate->slug]) }}" data-method="DELETE" data-confirm="Are you sure you want to delete this candidate, and all their votes?" class="button -danger">Delete Candidate</a>
+        </div>
     </div>
 @stop

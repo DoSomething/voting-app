@@ -31,7 +31,3 @@
         @include('candidates.partials.voteForm', ['candidate' => null, 'winner' => null])
     </script>
 @stop
-
-@section('actions')
-    <li><a href="{{ route('candidates.create') }}">New Candidate</a></li>
-@stop

@@ -7,13 +7,8 @@ use VotingApp\Models\Winner;
 class CategoriesController extends Controller
 {
 
-    protected $category;
-    protected $categoryValidator;
-
-    public function __construct(Category $category)
+    public function __construct()
     {
-        $this->category = $category;
-
         $this->middleware('admin', ['except' => ['show']]);
     }
 
@@ -24,7 +19,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->get();
+        $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
 
@@ -90,6 +85,24 @@ class CategoriesController extends Controller
         $category->save();
 
         return redirect()->route('categories.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Category $category)
+    {
+        if($category->candidates()) {
+            return redirect()->back()
+                ->with('message', 'Can\'t delete a category with candidates in it.')
+                ->with('message_type', 'error');
+        }
+
+        $category->delete();
+        return redirect()->route('winners.index')->with('message', 'BAM! That category was removed.');
     }
 
 }

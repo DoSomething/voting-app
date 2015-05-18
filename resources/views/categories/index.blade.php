@@ -8,16 +8,35 @@
             <p>These are all categories in the database. Categories will automatically show up in the site navigation
                 above.</p>
         </div>
-        <ul>
-            @forelse($categories as $category)
-                <li><a href="{{ route('categories.show', [$category->slug]) }}">{{ $category->name }}</a></li>
-            @empty
-                <li>No categories.</li>
-            @endforelse
-        </ul>
-    </div>
-@stop
 
-@section('actions')
-    <li><a href="{{ route('categories.create') }}">New Category</a></li>
+        <table>
+            <thead>
+            <tr>
+                <td>Name</td>
+                <td>Candidates</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            </thead>
+            @forelse($categories as $category)
+                <tr>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->candidates->count() }} </td>
+                    <td><a href="{{ route('categories.show', [$category->slug]) }}">view</a></td>
+                    <td><a href="{{ route('categories.edit', [$category->slug]) }}">edit</a></td>
+                </tr>
+            @empty
+                <tr>
+                    <td class="empty">No winners... yet!</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforelse
+        </table>
+
+        <div class="form-actions">
+            <a class="button" href="{{ route('categories.create') }}">New Category</a>
+        </div>
+    </div>
 @stop

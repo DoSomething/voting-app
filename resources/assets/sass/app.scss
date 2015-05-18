@@ -30,6 +30,7 @@
 @import "components/button";
 @import "components/empty";
 @import "components/form";
+@import "components/form-actions";
 @import "components/legal";
 @import "components/messages";
 @import "components/pagination";
@@ -41,6 +42,7 @@
 @import "modules/tile";
 
 // Regions
+@import "regions/admin";
 @import "regions/container";
 @import "regions/candidate";
 @import "regions/footer";

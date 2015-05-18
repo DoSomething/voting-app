@@ -12,10 +12,14 @@
 //                                                                        \__|      \__|
 //
 
-//// Attach unveil plugin.
 window.jQuery = require("jquery");
 
-require('./formloader');
-require('./lazyload');
+// RequestAnimationFrame polyfill
+require('requestanimationframe');
+
+require('./form-loader');
+require('./lazy-load');
 require('./drawer');
 require('./twitter');
+require('./confirm');
+require('./method-link');
