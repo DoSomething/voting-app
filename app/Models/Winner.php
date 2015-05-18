@@ -12,7 +12,7 @@ class Winner extends Model
      * @var array
      */
     protected $fillable = [
-        'rank', 'description'
+        'candidate_id', 'rank', 'description'
     ];
 
     // No timestamps on the winners table.

@@ -34,18 +34,12 @@ class WinnersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $candidate_id = $request->get('id');
-        $winner = Winner::where('candidate_id', '=', $candidate_id)->first();
-        if (!$winner) {
-            $winner = new Winner;
-            $winner->candidate_id = $candidate_id;
-            $winner->save();
-        }
-
+        $winner = Winner::firstOrCreate(['candidate_id' => $request->get('id')]);
         return redirect()->route('winners.edit', ['id' => $winner->id]);
     }
 
