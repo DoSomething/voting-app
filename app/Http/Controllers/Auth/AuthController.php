@@ -26,7 +26,7 @@ class AuthController extends Controller
      */
     public function getLogin()
     {
-        return redirect('auth/admin');
+        return redirect('admin');
     }
 
     /**
@@ -115,6 +115,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return Redirect::home()->withFlashMessage('You\'re now signed out.');
+        return redirect()->home()->withFlashMessage('You\'re now signed out.');
     }
 }
