@@ -7,6 +7,7 @@ use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Page;
 use VotingApp\Models\Setting;
+use VotingApp\Models\Winner;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -46,6 +47,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->bind('settings', function ($key) {
             return Setting::where('key', $key)->first();
+        });
+
+        $router->bind('winners', function ($id) {
+            return Winner::where('id', $id)->first();
         });
 
         parent::boot($router);

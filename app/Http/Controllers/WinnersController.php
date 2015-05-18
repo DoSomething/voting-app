@@ -47,12 +47,11 @@ class WinnersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Winner $winner
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Winner $winner)
     {
-        $winner = Winner::whereId($id)->with('candidate')->firstOrFail();
         return view('winners.edit', compact('winner'));
     }
 
@@ -60,13 +59,12 @@ class WinnersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id
+     * @param Winner $winner
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id, Request $request)
+    public function update(Winner $winner, Request $request)
     {
-        $winner = Winner::whereId($id)->firstOrFail();
         $winner->fill($request->all());
         $winner->save();
 
@@ -77,12 +75,11 @@ class WinnersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Winner $winner
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Winner $winner)
     {
-        $winner = Winner::whereId($id)->firstOrFail();
         $winner->delete();
         return redirect()->route('winners.index')->with('message', 'BAM! that winner was removed.');
     }
