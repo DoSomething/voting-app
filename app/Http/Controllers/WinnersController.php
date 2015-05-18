@@ -36,9 +36,9 @@ class WinnersController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(Request $request)
     {
-        $candidate_id = Input::get('id');
+        $candidate_id = $request->get('id');
         $winner = Winner::where('candidate_id', '=', $candidate_id)->first();
         if (!$winner) {
             $winner = new Winner;
