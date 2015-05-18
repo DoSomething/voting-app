@@ -17,8 +17,8 @@ window.jQuery = require("jquery");
 // RequestAnimationFrame polyfill
 require('requestanimationframe');
 
-require('./formloader');
-require('./lazyload');
+require('./form-loader');
+require('./lazy-load');
 require('./drawer');
 require('./twitter');
 require('./confirm');
