@@ -22,3 +22,4 @@ require('./lazyload');
 require('./drawer');
 require('./twitter');
 require('./confirm');
+require('./method-link');
