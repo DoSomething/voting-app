@@ -21,3 +21,4 @@ require('./formloader');
 require('./lazyload');
 require('./drawer');
 require('./twitter');
+require('./confirm');
