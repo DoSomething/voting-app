@@ -2,7 +2,6 @@
 
 use VotingApp\Models\Winner;
 use Illuminate\Http\Request;
-use DB;
 
 class WinnersController extends Controller
 {
@@ -19,14 +18,7 @@ class WinnersController extends Controller
      */
     public function index()
     {
-        $winners = DB::table('winners')
-            ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
-            ->join('categories', 'candidates.category_id', '=', 'categories.id')
-            ->select('candidates.name', 'winners.id', 'winners.rank', 'categories.name as category')
-            ->orderBy('category', 'DESC')
-            ->orderBy('rank')
-            ->get();
-
+        $winners = Winner::with('candidate.category')->orderBy('rank')->get();
         return view('winners.index', compact('winners', 'categories'));
     }
 

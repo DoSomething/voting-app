@@ -5,7 +5,11 @@
         <div class="row">
             <h1 class="highlighted">All Winners</h1>
 
-            <p>These are all winners in the database. (Only visible for administrators.)</p>
+            <p>
+                These are all the winners in the database. New winners may be marked from the
+                <a href="{{ route('candidates.index') }}">Candidates page</a>. (Winners are only visible
+                to administrators, until the "show_winners" setting is toggled on.)
+            </p>
         </div>
         <table>
             <thead>
@@ -18,8 +22,8 @@
             </thead>
             @forelse($winners as $winner)
                 <tr>
-                    <td>{{ $winner->name }}</td>
-                    <td>{{ $winner->category }} </td>
+                    <td>{{ $winner->candidate->name }}</td>
+                    <td>{{ $winner->candidate->category->name }} </td>
                     <td>{{ $winner->rank }}
                     <td><a href="{{ route('winners.edit', [$winner->id]) }}">edit</a></td>
                 </tr>
