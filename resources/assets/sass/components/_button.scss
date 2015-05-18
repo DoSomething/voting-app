@@ -1,6 +1,6 @@
 // Buttons
 input[type="submit"], button, .button {
-  display: block;
+  display: inline-block;
   background: $gray;
   color: $white;
   border-radius: $base-border-radius;
