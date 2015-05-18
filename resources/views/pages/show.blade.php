@@ -7,7 +7,3 @@
         {!! $page->content_html !!}
     </div>
 @stop
-
-@section('actions')
-    <li><a href="{{ route('pages.edit', [$page->slug]) }}">Edit Page</a></li>
-@stop

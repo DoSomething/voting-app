@@ -44,9 +44,4 @@
     <script type="text/html" id="form-template">
         @include('candidates.partials.voteForm', ['candidate' => null, 'winner' => null])
     </script>
-
-@stop
-
-@section('actions')
-    <li><a href="{{ route('categories.edit', [$category->slug]) }}">Edit Category</a></li>
 @stop

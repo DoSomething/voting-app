@@ -31,13 +31,11 @@
             @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
                 <h4>Hey, beautiful administrator. This candidate
                     has {{ $vote_count }} {{ str_plural('vote', $vote_count)}}.</h4>
+
+                <div class="form-actions">
+                    <a href="{{ route('candidates.edit', [$candidate->slug]) }}">Edit Candidate</a>
+                </div>
             @endif
         </div>
     </div>
-@stop
-
-@section('actions')
-    @if(Auth::user() && Auth::user()->hasRole('admin'))
-        <li><a href="{{ route('candidates.edit', [$candidate->slug]) }}">Edit Candidate</a></li>
-    @endif
 @stop

@@ -22,6 +22,7 @@
     @include('partials.metadata')
 </head>
 <body>
+@include('partials.admin')
 @include('partials.navigation')
 
 <div class="container">
@@ -29,8 +30,6 @@
 </div>
 
 @include('partials.footer')
-
-@include('partials.admin')
 
 <script src="{{ asset('/js/bundle.js') }}" type="text/javascript" charset="utf-8"></script>
 

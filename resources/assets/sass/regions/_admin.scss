@@ -1,0 +1,23 @@
+.admin {
+  @include clearfix;
+  border-bottom: 1px solid $gray;
+
+  .admin__primary {
+    float: left;
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .admin__secondary {
+    float: right;
+    list-style-type: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  li + li {
+    margin-left: $base-spacing;
+  }
+}
