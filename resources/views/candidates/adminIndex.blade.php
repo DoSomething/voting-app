@@ -31,5 +31,9 @@
                 <div class="empty">No users... yet!</div>
             @endforelse
         </table>
+
+        <div class="form-actions">
+            <a class="button" href="{{ route('candidates.create') }}">New Candidate</a>
+        </div>
     </div>
 @stop

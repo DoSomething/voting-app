@@ -11,7 +11,5 @@
         @include('categories.form')
         {!! Form::submit('Create Category') !!}
     {!! Form::close() !!}
-
-    <p><a href="{{ route('categories.index') }}">Go Back</a></p>
 </div>
 @stop

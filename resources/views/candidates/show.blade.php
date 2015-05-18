@@ -39,6 +39,5 @@
 @section('actions')
     @if(Auth::user() && Auth::user()->hasRole('admin'))
         <li><a href="{{ route('candidates.edit', [$candidate->slug]) }}">Edit Candidate</a></li>
-        <li><a href="{{ route('candidates.destroy', [$candidate->slug]) }}" data-method="DELETE" data-confirm="Are you sure you want to delete this candidate, and all their votes?" class="button -danger">Delete Candidate</a></li>
     @endif
 @stop

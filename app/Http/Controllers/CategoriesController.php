@@ -87,4 +87,22 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Category $category)
+    {
+        if($category->candidates()) {
+            return redirect()->back()
+                ->with('message', 'Can\'t delete a category with candidates in it.')
+                ->with('message_type', 'error');
+        }
+
+        $category->delete();
+        return redirect()->route('winners.index')->with('message', 'BAM! That category was removed.');
+    }
+
 }

@@ -34,9 +34,9 @@
                 </tr>
             @endforelse
         </table>
-    </div>
-@stop
 
-@section('actions')
-    <li><a href="{{ route('categories.create') }}">New Category</a></li>
+        <div class="form-actions">
+            <a class="button" href="{{ route('categories.create') }}">New Category</a>
+        </div>
+    </div>
 @stop

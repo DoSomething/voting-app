@@ -11,10 +11,15 @@
         {!! Form::label('rank', 'Rank') !!}
         {!! Form::selectRange('rank', 1, 20) !!}
 
-        {!! Form::submit('Update Winner', ['class' => 'btn']) !!}
+        <div class="form-actions">
+            {!! Form::submit('Update Winner', ['class' => 'btn']) !!}
+        </div>
         {!! Form::close() !!}
     </div>
     <div class="wrapper">
-        <a class="button -danger" href="{{ route('winners.destroy', [$winner->id]) }}" data-confirm="Are you sure you want to remove this candidate from the winners list?" data-method="DELETE">Remove Winner</a>
+        <p>If this candidate was set as a winner by mistake, you may remove it from the winner list.</p>
+        <div class="form-actions">
+            <a class="button -danger" href="{{ route('winners.destroy', [$winner->id]) }}" data-confirm="Are you sure you want to remove this candidate from the winners list?" data-method="DELETE">Remove Winner</a>
+        </div>
     </div>
 @stop

@@ -11,10 +11,8 @@ class PagesController extends Controller
      */
     protected $page;
 
-    public function __construct(Page $page)
+    public function __construct()
     {
-        $this->page = $page;
-
         $this->middleware('admin', ['except' => ['show']]);
     }
 
@@ -26,7 +24,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = $this->page->get();
+        $pages = Page::all();
         return view('pages.index', compact('pages'));
     }
 
@@ -94,6 +92,19 @@ class PagesController extends Controller
         $page->save();
 
         return redirect()->route('pages.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Page $page
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Page $page)
+    {
+        $page->delete();
+
+        return redirect()->home()->with('message', 'BAM! That page was removed!');
     }
 
 }
