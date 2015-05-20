@@ -9,7 +9,7 @@
                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                  data-src="{{{ $candidate->thumbnail() }}}" width="265" height="265"/>
 
-            @if($settings['enable_voting'])
+            @if(setting('enable_voting'))
                 <span class="button -round tile__action">Vote</span>
             @endif
         </a>

@@ -11,10 +11,6 @@ class Setting extends Model
         parent::boot();
 
         static::updating(function ($setting) {
-            if (Cache::has('settings')) {
-                Cache::forget('settings');
-            }
-
             if (Cache::has('settings.' . $setting->key)) {
                 Cache::forget('settings.' . $setting->key);
             }
@@ -32,4 +28,5 @@ class Setting extends Model
      * @var array
      */
     protected $fillable = ['key', 'value'];
+
 }

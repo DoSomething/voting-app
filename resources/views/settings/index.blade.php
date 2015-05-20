@@ -6,6 +6,8 @@
             <h1 class="highlighted">Site Settings</h1>
 
             <p>These settings allow you to customize this instance of Voting App.</p>
+
+            @include('partials.errors')
         </div>
 
         <table>
@@ -16,7 +18,7 @@
                 <td>&nbsp;</td>
             </tr>
             </thead>
-            @forelse($settingsList as $setting)
+            @forelse($settings as $setting)
                 <tr>
                     {!! Form::model($setting, ['method' => 'PUT', 'route'=> ['settings.update', $setting->key]]) !!}
                     @if($setting->description)
