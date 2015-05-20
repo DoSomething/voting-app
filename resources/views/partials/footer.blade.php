@@ -1,5 +1,5 @@
 <footer class="primary">
-    {{ $settings['site_title'] }} is a program of <a href="https://www.dosomething.org">DoSomething.org</a>.
+    {{ setting('site_title') }} is a program of <a href="https://www.dosomething.org">DoSomething.org</a>.
 
     <ul class="footer__links">
         <li><a class="social-icon -facebook js-share-link" href="{{ facebook_intent(url('/')) }}"><span>Facebook</span></a>

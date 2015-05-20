@@ -1,8 +1,8 @@
 {{-- If voting is disabled, show a 'voting is closed' message. --}}
-@if(!$settings['enable_voting'])
-    <p class="heading -alpha">Voting is closed for {{{ $settings['site_title'] }}}.</p>
+@if(!setting('enable_voting'))
+    <p class="heading -alpha">Voting is closed for {{{ setting('site_title') }}}.</p>
     If winners are not being shown...
-    @if(!$settings['show_winners'])
+    @if(!setting('show_winners'))
         <p class="heading -gamma">We'll post the results soon!</p>
         Winners being shown
     @else

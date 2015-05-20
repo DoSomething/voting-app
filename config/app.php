@@ -141,7 +141,6 @@ return [
          */
         'VotingApp\Providers\AppServiceProvider',
         'VotingApp\Providers\BusServiceProvider',
-        'VotingApp\Providers\ComposerServiceProvider',
         'VotingApp\Providers\ConfigServiceProvider',
         'VotingApp\Providers\EventServiceProvider',
         'VotingApp\Providers\RouteServiceProvider',

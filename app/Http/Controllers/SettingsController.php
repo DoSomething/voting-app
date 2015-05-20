@@ -24,8 +24,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settingsList = $this->setting->get();
-        return view('settings.index', compact('settingsList'));
+        $settings = $this->setting->get();
+        return view('settings.index', compact('settings'));
     }
 
     /**

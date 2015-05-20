@@ -2,7 +2,7 @@
 
 @section('title', $candidate->name)
 @section('meta_title', $candidate->name)
-@section('meta_description', 'Vote for ' . $candidate->name . ' in ' . $settings['site_title'] . '.')
+@section('meta_description', 'Vote for ' . $candidate->name . ' in ' . setting('site_title') . '.')
 @section('meta_image', URL::to($candidate->thumbnail()))
 
 @section('content')
