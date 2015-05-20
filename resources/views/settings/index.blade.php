@@ -18,10 +18,29 @@
             </thead>
             @forelse($settingsList as $setting)
                 <tr>
-                    <td><strong>{{ $setting->key }}</strong></td>
-                    <td>{!! $setting->pretty_value() !!}</td>
-                    <td><a href="{{ route('settings.edit', [$setting->key]) }}">edit</a></td>
+                    {!! Form::model($setting, ['method' => 'PUT', 'route'=> ['settings.update', $setting->key]]) !!}
+                    @if($setting->description)
+                        <td><strong><abbr title="{{ $setting->description }}">{{ $setting->key }}</abbr></strong></td>
+                    @else
+                        <td><strong>{{ $setting->key }}</strong></td>
+                    @endif
+                    <td>
+                        @if ($setting->type == 'text')
+                            {!! Form::text('value') !!}
+                        @elseif ($setting->type == 'boolean')
+                            <label class="control checkbox">
+                                {!! Form::checkbox('value', 1) !!}
+                                <span class="control-indicator"></span>
+                                On
+                            </label>
+                        @else
+                            {{ $setting->value }}
+                        @endif
+                    </td>
+                    <td>{!! Form::submit('Save', ['class' => 'button -secondary']) !!}</td>
+                    {!! Form::close() !!}
                 </tr>
+
             @empty
                 <div class="empty">No settings... yet!</div>
             @endforelse

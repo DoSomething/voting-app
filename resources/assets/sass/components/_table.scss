@@ -7,6 +7,31 @@ table {
   .empty {
     color: $gray;
   }
+
+  // Fix control margins & size...
+  input[type="text"] {
+    font-size: $base-font-size;
+    margin-bottom: 0;
+  }
+
+  .control {
+    margin-bottom: 0;
+  }
+
+  abbr[title] {
+    border-bottom: 0;
+
+    &:after {
+      content: '?';
+      display: inline-block;
+      color: $light-gray;
+      background: $gray;
+      font-size: 12px;
+      border-radius: 100%;
+      padding: 0 6px;
+      margin: 0 6px;
+    }
+  }
 }
 
 thead {

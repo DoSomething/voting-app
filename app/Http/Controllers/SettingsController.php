@@ -29,18 +29,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * GET /settings/{id}/edit
-     *
-     * @param Setting $setting
-     * @return \Illuminate\View\View;
-     */
-    public function edit(Setting $setting)
-    {
-        return view('settings.edit', compact('setting'));
-    }
-
-    /**
      * Update the specified resource in storage.
      * PUT /settings/{id}
      *
@@ -57,8 +45,6 @@ class SettingsController extends Controller
 
         $setting->value = $request->get('value');
         $setting->save();
-
-        Cache::forget('settings');
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
     }

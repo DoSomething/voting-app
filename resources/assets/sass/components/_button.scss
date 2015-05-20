@@ -29,6 +29,16 @@ input[type="submit"], button, .button {
     margin: ($base-spacing * 2) auto;
   }
 
+  &.-secondary {
+    background: transparent;
+    font-weight: $weight-normal;
+    color: $cyan;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   &.-danger {
     color: $white;
     background: $error-color;
