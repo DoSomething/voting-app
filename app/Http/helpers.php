@@ -66,11 +66,25 @@ function sort_url($column)
  * @param $column Column to indicate sorting status of
  * @return string
  */
-function sort_class($column) {
+function sort_class($column)
+{
     $sortColumn = Request::get('sort_by');
     $sortClass = (Request::get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
 
     if($column !== $sortColumn) return '';
 
     return $sortClass;
+}
+
+/**
+ * Get a setting value, or use a default if unset.
+ *
+ * @param string $setting - Setting key
+ * @param mixed $fallback - Setting fallback, if unset
+ * @return mixed
+ */
+function setting($setting, $fallback = null)
+{
+    $repository = app()->make('VotingApp\Repositories\SettingsRepository');
+    return $repository->get($setting, $fallback);
 }

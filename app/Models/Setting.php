@@ -10,9 +10,13 @@ class Setting extends Model
     {
         parent::boot();
 
-        static::updating(function ($post) {
+        static::updating(function ($setting) {
             if (Cache::has('settings')) {
-                \Cache::forget('settings');
+                Cache::forget('settings');
+            }
+
+            if (Cache::has('settings.' . $setting->key)) {
+                Cache::forget('settings.' . $setting->key);
             }
         });
     }
