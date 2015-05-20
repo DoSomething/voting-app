@@ -3,7 +3,8 @@
 @include border-box-sizing;
 
 html {
-  background: $base-background-color url('images/bg.gif') no-repeat top center;
+  background: $base-background-color url('../assets/images/background.default.jpg') no-repeat top center;
+  background-size: 100% auto;
 }
 
 body {
