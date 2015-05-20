@@ -15,12 +15,14 @@
 get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
 // User Authentication
-get('auth/login', 'AuthController@getLogin');
-post('auth/login', 'AuthController@postLogin');
+get('login', 'AuthController@getLogin');
+post('login', 'AuthController@postLogin');
+
+get('logout', 'AuthController@getLogout');
 
 // Admin Authentication
-get('auth/admin', 'AuthController@getAdmin');
-post('auth/admin', 'AuthController@postAdmin');
+get('admin', 'AuthController@getAdmin');
+post('admin', 'AuthController@postAdmin');
 
 // Password Reset
 get('password/email', 'PasswordController@getEmail');
@@ -36,8 +38,3 @@ resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update'
 resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
 resource('votes', 'VotesController', ['only' => ['store']]);
 resource('winners', 'WinnersController');
-
-// Convenience routes
-get('admin', function() {
-    return redirect()->to('/auth/admin');
-});

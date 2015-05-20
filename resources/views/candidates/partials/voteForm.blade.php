@@ -29,7 +29,7 @@
 
 {{-- Else, user is not logged in, so show the login/vote form. --}}
 @else
-    <form method="POST" action="{{ url('auth/login') }}" id="sign_in_form">
+    <form method="POST" action="{{ url('login') }}" id="sign_in_form">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         @include('auth.form', [$type])
         <input type="hidden" name="candidate_id" value="{{ $candidate->id or '' }}"/>

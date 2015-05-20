@@ -1,6 +1,7 @@
 <?php namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cache;
 
 class Setting extends Model
 {
@@ -9,9 +10,13 @@ class Setting extends Model
     {
         parent::boot();
 
-        static::updating(function ($post) {
+        static::updating(function ($setting) {
             if (Cache::has('settings')) {
-                \Cache::forget('settings');
+                Cache::forget('settings');
+            }
+
+            if (Cache::has('settings.' . $setting->key)) {
+                Cache::forget('settings.' . $setting->key);
             }
         });
     }
@@ -27,23 +32,4 @@ class Setting extends Model
      * @var array
      */
     protected $fillable = ['key', 'value'];
-
-    /**
-     * Returns a nice human-readable value.
-     */
-    public function pretty_value()
-    {
-        // Display a boolean type:
-        if ($this->type === 'boolean') {
-            return ($this->value ? '✓ on' : '<span class="empty"> ✘ off </span> ');
-        }
-
-        // Display empty strings:
-        if (empty($this->value)) {
-            return '<span class="empty">(empty)</span>';
-        }
-
-        // Anything else:
-        return e($this->value);
-    }
 }

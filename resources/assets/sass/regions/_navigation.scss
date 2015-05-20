@@ -2,14 +2,12 @@
 nav.primary {
   margin: ($base-spacing * 4) 0;
 
+  @include media('medium') {
+    margin: ($base-spacing * 12) 0 ($base-spacing * 8);
+  }
+
   .navigation__logo {
     display: block;
-    text-align: center;
-    margin: ($base-spacing * 2) 0;
-
-    @include media('medium') {
-      padding: $base-spacing * 2;
-    }
 
     img {
       max-width: 100%;
@@ -17,85 +15,10 @@ nav.primary {
   }
 
   .navigation__tagline {
+    max-width: 700px;
     font-size: $medium-font-size;
-    color: $light-gray;
-    text-align: center;
-    padding: $base-spacing;
-
-    @include media('medium') {
-      padding: $base-spacing (8 * $base-spacing);
-    }
+    text-align: left;
+    color: #fff;
   }
-
-  ul {
-    display: block;
-    list-style: none;
-    margin-top: $base-spacing * 4;
-    padding: 0;
-
-    @include clearfix;
-
-    li {
-      text-align: center;
-
-      @include media('medium') {
-        @include gallery(3);
-      }
-
-      &:first-of-type a {
-        &:before, &:after {
-          display: inline-block;
-          color: $yellow;
-          @include icomoon-icon;
-        }
-
-        &:before {
-          content: '\2a';
-          transform: scale(-1, 1);
-        }
-
-        &:after {
-          content: '\2a';
-        }
-      }
-    }
-
-    a {
-      display: block;
-      color: $white;
-      font-weight: $weight-bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: $base-spacing/2;
-
-      @include media('small') {
-        display: block;
-        font-size: $medium-font-size;
-      }
-
-      @include media('medium') {
-        font-size: $base-font-size;
-      }
-
-      @include media('large') {
-        font-size: $medium-font-size;
-        padding: $base-spacing/2 $base-spacing;
-      }
-
-      &:hover {
-        color: $cyan;
-      }
-
-      &.is-active {
-        background: $cyan;
-        color: $black;
-
-        &:hover {
-          color: $black;
-        }
-      }
-    }
-  }
-
 }
 

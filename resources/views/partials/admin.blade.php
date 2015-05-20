@@ -10,7 +10,7 @@
         </ul>
 
         <ul class="admin__secondary">
-            <li><a href="{{ url('/auth/logout') }}">Sign Out</a></li>
+            <li><a href="{{ url('logout') }}">Sign Out</a></li>
         </ul>
     </nav>
 @endif

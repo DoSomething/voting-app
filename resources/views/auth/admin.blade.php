@@ -7,7 +7,7 @@
 
         @include('partials.errors')
 
-        {!! Form::open(['url'=> '/auth/admin', 'id' => 'sign_in_form']) !!}
+        {!! Form::open(['url'=> 'admin', 'id' => 'sign_in_form']) !!}
             {!! Form::label('email', 'Email') !!}
             {!! Form::text('email', null, ['placeholder' => 'you@dosomething.org']) !!}
 
