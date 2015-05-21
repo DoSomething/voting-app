@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use VotingApp\Models\Setting;
 
 class SettingsTableSeeder extends Seeder
 {
@@ -21,7 +22,6 @@ class SettingsTableSeeder extends Seeder
         $tagline = Setting::where('key', 'tagline')->first();
         $tagline->value = 'Vote for the cutest kitten of the year. Vote once per day, and choose wisely!';
         $tagline->save();
-
 
     }
 }

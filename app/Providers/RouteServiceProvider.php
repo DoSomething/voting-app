@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use VotingApp\Models\Background;
 use VotingApp\Models\Category;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
@@ -51,6 +52,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->bind('winners', function ($id) {
             return Winner::where('id', $id)->first();
+        });
+
+        $router->bind('backgrounds', function ($id) {
+            return Background::where('id', $id)->first();
         });
 
         parent::boot($router);

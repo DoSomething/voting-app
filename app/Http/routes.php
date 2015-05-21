@@ -33,6 +33,7 @@ post('password/reset', 'PasswordController@postReset');
 // Restful resources
 resource('candidates', 'CandidatesController');
 resource('categories', 'CategoriesController');
+resource('backgrounds', 'BackgroundsController');
 resource('pages', 'PagesController');
 resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
 resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);

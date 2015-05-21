@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use VotingApp\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -29,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'tops3cret',
         ])->assignRole(1);
 
-        if (App::environment('local')) {
+        if (app()->environment('local')) {
             foreach (range(1, 25) as $index) {
                 User::create([
                     'first_name' => $faker->firstName,

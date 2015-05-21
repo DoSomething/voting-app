@@ -88,3 +88,16 @@ function setting($setting, $fallback = null)
     $repository = app()->make('VotingApp\Repositories\SettingsRepository');
     return $repository->get($setting, $fallback);
 }
+
+/**
+ * Get a random background image from the Backgrounds model.
+ *
+ * @param string $type - 'retina', 'regular', or 'thumbnail'
+ * @param string $fallback - Fallback image, if no custom backgrounds set
+ * @return string
+ */
+function background($type, $fallback)
+{
+    $repository = app()->make('VotingApp\Repositories\BackgroundsRepository');
+    return $repository->random($type, $fallback);
+}

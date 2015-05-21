@@ -6,6 +6,7 @@
             <li><a href="{{ route('winners.index') }}">Winners</a></li>
             <li><a href="{{ route('pages.index') }}">Pages</a></li>
             <li><a href="{{ route('users.index') }}">Users</a></li>
+            <li><a href="{{ route('backgrounds.index') }}">Backgrounds</a></li>
             <li><a href="{{ route('settings.index') }}">Settings</a></li>
         </ul>
 
