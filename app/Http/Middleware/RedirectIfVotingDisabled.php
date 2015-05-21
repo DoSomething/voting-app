@@ -7,14 +7,13 @@ use VotingApp\Repositories\SettingsRepository;
 class RedirectIfVotingDisabled {
 
     /**
-     * Array of site settings.
-     * @var array
+     * @var SettingsRepository
      */
     protected $settings;
 
     public function __construct(SettingsRepository $settings)
     {
-        $this->settings = $settings->all();
+        $this->settings = $settings;
     }
 
 	/**
@@ -26,7 +25,7 @@ class RedirectIfVotingDisabled {
 	 */
 	public function handle($request, Closure $next)
 	{
-        if (!$this->settings['enable_voting']) {
+        if (!$this->settings->get('enable_voting')) {
             return redirect(route('home'))
                 ->with('message', 'Sorry, voting is disabled!')
                 ->with('message_type', 'error');

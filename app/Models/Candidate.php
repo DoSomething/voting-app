@@ -62,9 +62,9 @@ class Candidate extends Model implements SluggableInterface
     public function thumbnail()
     {
         if ($this->photo) {
-            return "/thumbnails/thumb-" . $this->photo;
+            return '/images/thumbnails/thumb-' . $this->photo;
         } else {
-            return "/placeholder.png";
+            return asset('images/placeholder.png');
         }
     }
 
@@ -76,14 +76,19 @@ class Candidate extends Model implements SluggableInterface
      */
     public function savePhoto($photo)
     {
+        // Create directory if it doesn't exist
+        if (!file_exists(public_path('images/thumbnails'))) {
+            mkdir(public_path('images/thumbnails'), 0777, true);
+        }
+
         $filename = $this->sluggify()->slug . '.jpg';
 
         // Save full-size image
-        $photo->encode('jpg', 75)->save(public_path('thumbnails') . '/' . $filename);
+        $photo->encode('jpg', 75)->save(public_path('images/thumbnails') . '/' . $filename);
 
         // Save thumbnail
         $photo->encode('jpg', 75)->fit(400)
-            ->save(public_path('thumbnails') . '/' . 'thumb-' . $filename);
+            ->save(public_path('images/thumbnails') . '/' . 'thumb-' . $filename);
 
         $this->attributes['photo'] = $filename;
     }
