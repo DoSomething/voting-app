@@ -19,6 +19,18 @@
     <script src="{{ asset('/assets/vendor/respond.min.js') }}"></script>
     <![endif]-->
 
+    <style>
+        html {
+            background-image: url('{{ background('regular', 'none') }}');
+        }
+
+        @media (min-width: 1200px) {
+            html {
+                background-image: url('{{ background('retina', 'none') }}');
+            }
+        }
+    </style>
+
     @include('partials.metadata')
 </head>
 <body>

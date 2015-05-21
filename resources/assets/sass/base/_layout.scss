@@ -3,7 +3,8 @@
 @include border-box-sizing;
 
 html {
-  background: $base-background-color url('../assets/images/background.default.jpg') no-repeat top center;
+  // @NOTE: Background image is set in a style tag, by Backgrounds model!
+  background: $base-background-color no-repeat top center;
   background-size: 100% auto;
 }
 
