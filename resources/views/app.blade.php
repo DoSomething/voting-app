@@ -11,8 +11,8 @@
 
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('/assets/images/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset(setting('favicon', 'assets/images/favicon.default.ico')) }}">
+    <link rel="apple-touch-icon" href="{{ asset(setting('touch_icon', 'assets/images/touch_icon.default.png')) }}">
 
     <!--[if lte IE 8]>
     <script src="{{ asset('/assets/vendor/html5shiv.min.js') }}"></script>

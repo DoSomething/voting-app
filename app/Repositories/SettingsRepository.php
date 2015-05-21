@@ -19,7 +19,7 @@ class SettingsRepository
             return $setting = Setting::where('key', $key)->first();
         });
 
-        if(!$setting) return $fallback;
+        if(empty($setting->value)) return $fallback;
 
         return $setting->value;
     }

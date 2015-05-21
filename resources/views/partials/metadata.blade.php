@@ -10,9 +10,9 @@
 <meta name="twitter:title" content="@yield('meta_title', setting('site_title'))"/>
 <meta name="twitter:description"
       content="@yield('meta_description', 'Vote for your favorite ' . setting('candidate_type')  . ' who has done kickass things in the world.')"/>
-<meta name="twitter:image" content="@yield('meta_image', URL::to('/dist/images/twitter-share.jpg'))"/>
+<meta name="twitter:image" content="@yield('meta_image', asset(setting('facebook_share', 'assets/images/facebook_share.default.jpg')))"/>
 
 {{-- Facebook --}}
 <meta property="og:site_name" content="{{ setting('site_title') }}"/>
 <meta property="og:title" content="@yield('meta_title', setting('site_title'))"/>
-<meta property="og:image" content="@yield('meta_image', URL::to('/dist/images/fb-share.jpg'))"/>
+<meta property="og:image" content="@yield('meta_image', asset(setting('twitter_share', 'assets/images/twitter_share.default.jpg')))"/>

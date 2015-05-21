@@ -20,7 +20,7 @@
             </thead>
             @forelse($settings as $setting)
                 <tr>
-                    {!! Form::model($setting, ['method' => 'PUT', 'route'=> ['settings.update', $setting->key]]) !!}
+                    {!! Form::model($setting, ['method' => 'PUT', 'route'=> ['settings.update', $setting->key], 'files' => ($setting->type == 'file')]) !!}
                     @if($setting->description)
                         <td><strong><abbr title="{{ $setting->description }}">{{ $setting->key }}</abbr></strong></td>
                     @else
@@ -29,6 +29,11 @@
                     <td>
                         @if ($setting->type == 'text')
                             {!! Form::text('value') !!}
+                        @elseif ($setting->type == 'file')
+                            {!! Form::file('value') !!}
+                            @if($setting->value)
+                                <a href="{{ $setting->value }}">(view current)</a>
+                            @endif
                         @elseif ($setting->type == 'boolean')
                             <label class="control checkbox">
                                 {!! Form::checkbox('value', 1) !!}
