@@ -2,7 +2,7 @@
 /vendor
 /node_modules
 
-# Configration
+# Configuration
 .env
 
 # OS X
@@ -13,5 +13,7 @@ Thumbs.db
 /public/assets
 /public/css
 /public/js
-/public/thumbnails
+
+# File uploads
+/public/images
 

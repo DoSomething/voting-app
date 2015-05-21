@@ -6,7 +6,6 @@
 
     @include('partials.errors')
 
-    <form method="POST" action="{{ route('categories.store') }}">
     {!! Form::open(['route' => 'categories.store']) !!}
         @include('categories.form')
         {!! Form::submit('Create Category') !!}
