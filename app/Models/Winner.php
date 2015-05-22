@@ -32,9 +32,9 @@ class Winner extends Model
      */
     public static function getCategoryWinners(Category $category)
     {
-        $settings = app()->make('VotingApp\Repositories\SettingsRepository')->all();
+        $settings = app()->make('VotingApp\Repositories\SettingsRepository');
         $secrets = \Request::get('winners');
-        if ($settings['show_winners'] || $secrets == '✓') {
+        if ($settings->get('show_winners') || $secrets == '✓') {
             $winners = DB::table('winners')
                 ->join('candidates', 'winners.candidate_id', '=', 'candidates.id')
                 ->join('categories', 'candidates.category_id', '=', 'categories.id')

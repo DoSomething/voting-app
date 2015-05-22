@@ -1,7 +1,7 @@
 <nav class="primary">
     <a class="navigation__logo" href="{{ route('home') }}">
-        <img src="{{ asset(setting('logo_svg', 'assets/images/logo.default.svg')) }}"
-             onerror="this.onerror=null; this.src='{{ asset(setting('logo_png', 'assets/images/logo.default.png')) }}'"
+        <img src="{{ asset(setting('logo_svg')) }}"
+             onerror="this.onerror=null; this.src='{{ asset(setting('logo_png')) }}'"
              alt="{{ setting('site_title') }}">
     </a>
 

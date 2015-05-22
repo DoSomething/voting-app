@@ -43,7 +43,15 @@ class SettingsController extends Controller
             $this->validate($request, ['value' => 'required']);
         }
 
-        $setting->value = $request->get('value');
+        // If this setting is a file, get & save the uploaded file
+        if($setting->type === 'file') {
+            $this->validate($request, ['value' => ['required']]);
+            $setting->saveFile($request->file('value'));
+        } else {
+            // Otherwise, save the value submitted in the request.
+            $setting->value = $request->get('value');
+        }
+
         $setting->save();
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
