@@ -3,9 +3,30 @@
 use Illuminate\Database\Seeder;
 use Symfony\Component\HttpFoundation\File\File;
 use VotingApp\Models\Setting;
+use Faker\Provider\Uuid;
 
 class SettingsTableSeeder extends Seeder
 {
+
+    /**
+     * Create a temporary file for seeding file uploads.
+     *
+     * @param $path
+     * @return bool|File
+     */
+    public function seedFile($path)
+    {
+        $sourcePath = base_path('database/seeds') . '/' . $path;
+
+        $destinationFile = Uuid::uuid() . '.' . pathinfo($sourcePath, PATHINFO_EXTENSION);
+        $destinationFullPath = '/tmp/' . $destinationFile;
+
+        if (false === copy($sourcePath, $destinationFullPath)) {
+            return false;
+        }
+
+        return new File($destinationFullPath);
+    }
 
     /**
      *
@@ -29,12 +50,12 @@ class SettingsTableSeeder extends Seeder
 
         // Logo SVG
         $logo_svg = Setting::where('key', 'logo_svg')->first();
-        $logo_svg->saveFile(new File(base_path('database/seeds/images/cats-gone-good.svg'), 'cats-gone-good.svg'));
+        $logo_svg->saveFile($this->seedFile('images/cats-gone-good.svg'), 'cats-gone-good.svg');
         $logo_svg->save();
 
         // Logo PNG
         $logo_png = Setting::where('key', 'logo_png')->first();
-        $logo_png->saveFile(new File(base_path('database/seeds/images/cats-gone-good.png'), 'cats-gone-good.png'));
+        $logo_png->saveFile($this->seedFile('images/cats-gone-good.png'), 'cats-gone-good.png');
         $logo_png->save();
 
     }
