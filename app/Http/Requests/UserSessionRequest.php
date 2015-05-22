@@ -1,7 +1,7 @@
 <?php namespace VotingApp\Http\Requests;
 
-use Candidate;
 use Input;
+use VotingApp\Models\Candidate;
 use Auth;
 
 class UserSessionRequest extends Request
