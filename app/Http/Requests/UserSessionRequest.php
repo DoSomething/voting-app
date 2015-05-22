@@ -1,6 +1,5 @@
 <?php namespace VotingApp\Http\Requests;
 
-use Input;
 use VotingApp\Models\Candidate;
 use Auth;
 
@@ -59,8 +58,8 @@ class UserSessionRequest extends Request
      */
     protected function getRedirectUrl()
     {
-        if (Input::has('candidate_id')) {
-            $slug = Candidate::whereId(Input::get('candidate_id'))->first()->slug;
+        if ($this->has('candidate_id')) {
+            $slug = Candidate::whereId($this->get('candidate_id'))->first()->slug;
             return route('candidates.show', [$slug]);
         }
 
