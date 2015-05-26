@@ -1,11 +1,12 @@
 <?php namespace VotingApp\Http\Controllers;
 
-use VotingApp\Http\Requests\UserSessionRequest;
-use VotingApp\Http\Requests\AdminSessionRequest;
+use Illuminate\Http\Request;
+use VotingApp\Http\Requests\LoginRequest;
 use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Events\UserRegistered;
 use VotingApp\Models\User;
 use VotingApp\Models\Candidate;
+use VotingApp\Models\Vote;
 use Auth;
 
 
@@ -31,10 +32,12 @@ class AuthController extends Controller
 
     /**
      * Authentication for a non-admin user.
-     * @param UserSessionRequest $request
+     * POST /login
+     *
+     * @param LoginRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postLogin(UserSessionRequest $request)
+    public function postLogin(LoginRequest $request)
     {
         $input = $request->all();
         $user = User::isCurrentUser($input);
@@ -75,7 +78,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect()->intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
+        return redirect()->intended('/')->with('message', 'Welcome ' . $input['first_name']);
     }
 
     /**
@@ -91,12 +94,20 @@ class AuthController extends Controller
 
     /**
      * Authentication for an admin user.
-     * @param AdminSessionRequest $request
+     * POST /admin
+     *
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postAdmin(AdminSessionRequest $request)
+    public function postAdmin(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
         $credentials = $request->only('email', 'password');
+
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/')->with('message', 'Welcome back!');
         } else {
@@ -115,6 +126,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return redirect()->home()->withFlashMessage('You\'re now signed out.');
+        return redirect()->home()->with('message', 'You\'re now signed out.');
     }
 }

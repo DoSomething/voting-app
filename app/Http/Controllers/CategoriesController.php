@@ -1,11 +1,19 @@
 <?php namespace VotingApp\Http\Controllers;
 
-use VotingApp\Http\Requests\CategoryRequest;
+use Illuminate\Http\Request;
 use VotingApp\Models\Category;
 use VotingApp\Models\Winner;
 
 class CategoriesController extends Controller
 {
+
+    /**
+     * Validation rules
+     * @var array
+     */
+    protected $rules = [
+        'name' => 'required',
+    ];
 
     public function __construct()
     {
@@ -36,11 +44,13 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CategoryRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, $this->rules);
+
         $category = new Category($request->all());
         $category->save();
 
@@ -56,9 +66,8 @@ class CategoriesController extends Controller
     public function show(Category $category)
     {
         $candidates = $category->candidates;
-        $type = get_login_type();
         $winners = Winner::getCategoryWinners($category);
-        return view('categories.show', compact('category', 'candidates', 'type', 'winners'));
+        return view('categories.show', compact('category', 'candidates', 'winners'));
     }
 
     /**
@@ -75,12 +84,14 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param Request $request
      * @param Category $category
-     * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Category $category, CategoryRequest $request)
+    public function update(Request $request, Category $category)
     {
+        $this->validate($request, $this->rules);
+
         $category->fill($request->all());
         $category->save();
 

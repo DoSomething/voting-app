@@ -6,10 +6,12 @@
 {!! Form::label('birthdate', 'Birthdate') !!}
 {!! Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) !!}
 
-@if(get_login_type() == 'email')
+@if(is_international_session())
     {!! Form::label('email', 'Email') !!}
     {!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}
-@else
+@endif
+
+@if(is_domestic_session())
     {!! Form::label('phone', 'Cell Number') !!}
     {!! Form::text('phone', null, ['placeholder' => '555-555-5555']) !!}
 @endif

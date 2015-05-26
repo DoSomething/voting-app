@@ -31,7 +31,7 @@
 @else
     <form method="POST" action="{{ url('login') }}" id="sign_in_form">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-        @include('auth.form', [$type])
+        @include('auth.form')
         <input type="hidden" name="candidate_id" value="{{ $candidate->id or '' }}"/>
         <input type="submit" value="Count My Vote" class="button -primary"/>
         <p id="ctia" class="legal">

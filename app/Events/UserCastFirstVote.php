@@ -1,9 +1,7 @@
 <?php namespace VotingApp\Events;
 
-use VotingApp\Events\Event;
-
 use Illuminate\Queue\SerializesModels;
-use Vote;
+use VotingApp\Models\Vote;
 
 class UserCastFirstVote extends Event
 {
@@ -30,14 +28,14 @@ class UserCastFirstVote extends Event
      */
     public function __construct(Vote $vote)
     {
-        $this->first_name = $vote->user()->first_name;
-        $this->email = $vote->user()->email;
-        $this->phone = $vote->user()->phone;
-        $this->birthdate = $vote->user()->birthdateTimestamp();
-        $this->country_code = $vote->user()->country_code;
+        $this->first_name = $vote->user->first_name;
+        $this->email = $vote->user->email;
+        $this->phone = $vote->user->phone;
+        $this->birthdate = $vote->user->birthdate_timestamp();
+        $this->country_code = $vote->user->country_code;
 
-        $this->candidate_id = $vote->candidate()->id;
-        $this->candidate_name = $vote->candidate()->name;
+        $this->candidate_id = $vote->candidate->id;
+        $this->candidate_name = $vote->candidate->name;
     }
 
 }

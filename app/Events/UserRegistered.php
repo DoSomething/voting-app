@@ -1,8 +1,7 @@
 <?php namespace VotingApp\Events;
 
-use VotingApp\Models\User;
-
 use Illuminate\Queue\SerializesModels;
+use VotingApp\Models\User;
 
 class UserRegistered extends Event
 {
