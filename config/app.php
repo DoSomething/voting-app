@@ -144,6 +144,7 @@ return [
         'VotingApp\Providers\ConfigServiceProvider',
         'VotingApp\Providers\EventServiceProvider',
         'VotingApp\Providers\RouteServiceProvider',
+        'VotingApp\Providers\ValidationServiceProvider',
 
         /*
          *  Third-party Service Providers...
