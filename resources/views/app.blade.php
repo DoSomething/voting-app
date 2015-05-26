@@ -39,6 +39,8 @@
             }
             .button.-round, .button.-round:hover, .button.-round:active { background-color: {{ setting('ui_tint') }} !important; }
 
+            .messages { color: {{ setting('ui_tint') }} !important; }
+
             input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus,
             input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus,
             input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus,
