@@ -13,7 +13,7 @@ function get_country_code()
 /**
  * Return if the user is a domestic (US) session.
  *
- * $return boolean
+ * @return boolean
  */
 function is_domestic_session()
 {
@@ -23,7 +23,7 @@ function is_domestic_session()
 /**
  * Return if the user is an international session.
  *
- * $return boolean
+ * @return boolean
  */
 function is_international_session()
 {
@@ -33,6 +33,8 @@ function is_international_session()
 /**
  * Return if the user's phone should be collected for
  * the current international session's country.
+ *
+ * @return boolean
  */
 function should_collect_international_phone()
 {
