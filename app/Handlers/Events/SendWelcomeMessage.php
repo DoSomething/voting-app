@@ -2,7 +2,6 @@
 
 use VotingApp\Events\UserRegistered;
 use MessageBroker;
-use Config;
 
 class SendWelcomeMessage
 {
@@ -21,8 +20,8 @@ class SendWelcomeMessage
         }
 
         // Configure the message broker connection
-        $credentials = Config::get('services.message_broker.credentials');
-        $config = Config::get('services.message_broker.config');
+        $credentials = config('services.message_broker.credentials');
+        $config = config('services.message_broker.config');
         $config['routingKey'] = env('REGISTER_ROUTING_KEY', 'votingapp.user.registration');
         $broker = new MessageBroker($credentials, $config);
 

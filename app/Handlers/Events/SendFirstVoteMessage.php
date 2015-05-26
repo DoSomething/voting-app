@@ -20,8 +20,8 @@ class SendFirstVoteMessage
         }
 
         // Configure the message broker connection
-        $credentials = Config::get('services.message_broker.credentials');
-        $config = Config::get('services.message_broker.config');
+        $credentials = config('services.message_broker.credentials');
+        $config = config('services.message_broker.config');
         $config['routingKey'] = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
         $broker = new MessageBroker($credentials, $config);
 
