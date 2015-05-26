@@ -28,11 +28,11 @@ class SendWelcomeMessage
         // Sign user up for transaction messages.
         $payload = [
             // User information
-            'first_name' => $event->first_name,
-            'email' => $event->email,
-            'mobile' => $event->phone,
-            'birthdate_timestamp' => $event->birthdate, // Message Broker expects UNIX timestamp
-            'country_code' => $event->country_code,
+            'first_name' => $event->user->first_name,
+            'email' => $event->user->email,
+            'mobile' => $event->user->phone,
+            'birthdate_timestamp' => strtotime($event->user->birthdate), // Message Broker expects UNIX timestamp
+            'country_code' => $event->user->country_code,
 
             // Request specific information
             'activity' => env('REGISTER_ACTIVITY', 'votingapp_signup'),
@@ -46,7 +46,7 @@ class SendWelcomeMessage
             'mailchimp_group_name' => env('MAILCHIMP_GROUP_NAME'),
             'mc_opt_in_path_id' => env('MC_OPT_IN_PATH'),
             'merge_vars' => [
-                'FNAME' => $event->first_name
+                'FNAME' => $event->user->first_name
             ],
             'user_registration_source' => env('REGISTER_MB_SOURCE', 'votingapp')
         ];

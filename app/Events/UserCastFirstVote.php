@@ -8,19 +8,9 @@ class UserCastFirstVote extends Event
 
     use SerializesModels;
 
-    public $first_name;
+    public $candidate;
 
-    public $email;
-
-    public $phone;
-
-    public $birthdate;
-
-    public $country_code;
-
-    public $candidate_id;
-
-    public $candidate_name;
+    public $user;
 
     /**
      * Create a new event instance.
@@ -28,14 +18,8 @@ class UserCastFirstVote extends Event
      */
     public function __construct(Vote $vote)
     {
-        $this->first_name = $vote->user->first_name;
-        $this->email = $vote->user->email;
-        $this->phone = $vote->user->phone;
-        $this->birthdate = $vote->user->birthdate_timestamp();
-        $this->country_code = $vote->user->country_code;
-
-        $this->candidate_id = $vote->candidate->id;
-        $this->candidate_name = $vote->candidate->name;
+        $this->candidate = $vote->candidate;
+        $this->user = $vote->user;
     }
 
 }
