@@ -30,7 +30,7 @@ class VotesController extends Controller
         if (!$vote) {
             return redirect()
                 ->back()
-                ->with('message', 'You can\'t vote on this category yet!');
+                ->with('message', 'You can\'t vote yet!');
         }
 
         $candidate = Candidate::find($candidate_id);
