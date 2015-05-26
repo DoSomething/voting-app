@@ -38,7 +38,7 @@ function is_international_session()
  */
 function should_collect_international_phone()
 {
-    return in_array(get_country_code(), ['UK', 'BR']);
+    return in_array(get_country_code(), ['GB', 'BR']);
 }
 
 /**
