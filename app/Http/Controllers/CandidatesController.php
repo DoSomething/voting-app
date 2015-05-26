@@ -1,6 +1,5 @@
 <?php namespace VotingApp\Http\Controllers;
 
-use VotingApp\Http\Requests\CandidateRequest;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
 use Illuminate\Http\Request;
@@ -10,12 +9,17 @@ use DB;
 class CandidatesController extends Controller
 {
 
-    private $candidate;
+    /**
+     * Validation rules
+     * @var array
+     */
+    protected $rules = [
+        'name' => 'required',
+        'photo_source' => 'url',
+    ];
 
-    public function __construct(Candidate $candidate)
+    public function __construct()
     {
-        $this->candidate = $candidate;
-
         $this->middleware('admin', ['except' => ['index', 'show']]);
     }
 
@@ -86,10 +90,10 @@ class CandidatesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CandidateRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CandidateRequest $request)
+    public function store(Request $request)
     {
         $candidate = new Candidate($request->all());
 
@@ -136,12 +140,14 @@ class CandidatesController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param Request $request
      * @param Candidate $candidate
-     * @param CandidateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Candidate $candidate, CandidateRequest $request)
+    public function update(Request $request, Candidate $candidate)
     {
+        $this->validate($request, $this->rules);
+
         $candidate->fill($request->all());
 
         if ($file = $request->file('photo')) {

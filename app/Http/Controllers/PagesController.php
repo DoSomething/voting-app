@@ -1,15 +1,19 @@
 <?php namespace VotingApp\Http\Controllers;
 
-use VotingApp\Http\Requests\PageRequest;
+use Illuminate\Http\Request;
 use VotingApp\Models\Page;
 
 class PagesController extends Controller
 {
 
     /**
-     * @var Page
+     * Validation rules
+     * @var array
      */
-    protected $page;
+    protected $rules = [
+        'title' => 'required',
+        'content' => 'required',
+    ];
 
     public function __construct()
     {
@@ -43,11 +47,13 @@ class PagesController extends Controller
      * Store a newly created resource in storage.
      * POST /pages
      *
-     * @param PageRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(PageRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, $this->$rules);
+
         $page = new Page($request->all());
         $page->save();
 
@@ -82,12 +88,14 @@ class PagesController extends Controller
      * Update the specified resource in storage.
      * PUT /pages/{id}
      *
+     * @param Request $request
      * @param Page $page
-     * @param PageRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Page $page, PageRequest $request)
+    public function update(Request $request, Page $page)
     {
+        $this->validate($request, $this->$rules);
+
         $page->fill($request->all());
         $page->save();
 

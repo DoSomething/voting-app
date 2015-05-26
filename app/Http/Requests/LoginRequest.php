@@ -3,7 +3,7 @@
 use VotingApp\Models\Candidate;
 use Auth;
 
-class UserSessionRequest extends Request
+class LoginRequest extends Request
 {
 
     /**
@@ -41,12 +41,7 @@ class UserSessionRequest extends Request
     public function messages()
     {
         return [
-            'first_name.required' => 'What\'s your name?!',
-            'phone.required_without' => 'Give us your digits!',
             'phone.regex' => 'That doesn\'t look like a real phone number!',
-            'email.required_without' => 'We need your email',
-            'email.email' => 'We need a valid email',
-            'birthdate.required' => 'When were you born?',
             'birthdate.date' => 'Enter your birthday MM/DD/YYYY!',
         ];
     }
