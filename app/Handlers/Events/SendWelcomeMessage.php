@@ -2,9 +2,8 @@
 
 use VotingApp\Events\UserRegistered;
 use MessageBroker;
-use Config;
 
-class SendWelcomeEmail
+class SendWelcomeMessage
 {
 
     /**
@@ -21,19 +20,19 @@ class SendWelcomeEmail
         }
 
         // Configure the message broker connection
-        $credentials = Config::get('services.message_broker.credentials');
-        $config = Config::get('services.message_broker.config');
+        $credentials = config('services.message_broker.credentials');
+        $config = config('services.message_broker.config');
         $config['routingKey'] = env('REGISTER_ROUTING_KEY', 'votingapp.user.registration');
         $broker = new MessageBroker($credentials, $config);
 
         // Sign user up for transaction messages.
         $payload = [
             // User information
-            'first_name' => $event->first_name,
-            'email' => $event->email,
-            'mobile' => $event->phone,
-            'birthdate_timestamp' => $event->birthdate, // Message Broker expects UNIX timestamp
-            'country_code' => $event->country_code,
+            'first_name' => $event->user->first_name,
+            'email' => $event->user->email,
+            'mobile' => $event->user->phone,
+            'birthdate_timestamp' => strtotime($event->user->birthdate), // Message Broker expects UNIX timestamp
+            'country_code' => $event->user->country_code,
 
             // Request specific information
             'activity' => env('REGISTER_ACTIVITY', 'votingapp_signup'),
@@ -47,7 +46,7 @@ class SendWelcomeEmail
             'mailchimp_group_name' => env('MAILCHIMP_GROUP_NAME'),
             'mc_opt_in_path_id' => env('MC_OPT_IN_PATH'),
             'merge_vars' => [
-                'FNAME' => $event->first_name
+                'FNAME' => $event->user->first_name
             ],
             'user_registration_source' => env('REGISTER_MB_SOURCE', 'votingapp')
         ];

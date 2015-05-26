@@ -69,14 +69,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Get birthdate formatted as a UNIX timestamp.
-     */
-    public function birthdate_timestamp()
-    {
-        return strtotime($this->attributes['birthdate']);
-    }
-
-    /**
      * Check if a user matching the given input exists.
      * @param $input
      * @return User|bool Matching user object or false if nonexistant.
