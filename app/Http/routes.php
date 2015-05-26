@@ -15,9 +15,6 @@
 get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
 // User Authentication
-get('login', 'AuthController@getLogin');
-post('login', 'AuthController@postLogin');
-
 get('logout', 'AuthController@getLogout');
 
 // Admin Authentication

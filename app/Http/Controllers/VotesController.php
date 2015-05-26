@@ -1,16 +1,34 @@
 <?php namespace VotingApp\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Registrar;
+use VotingApp\Events\UserCastFirstVote;
+use VotingApp\Http\Requests\VoteRequest;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Vote;
-use Illuminate\Http\Request;
-use Auth;
 
 class VotesController extends Controller
 {
 
-    public function __construct()
+    /**
+     * The Guard implementation.
+     *
+     * @var \Illuminate\Contracts\Auth\Guard
+     */
+    protected $auth;
+
+    /**
+     * The registrar implementation.
+     *
+     * @var \Illuminate\Contracts\Auth\Registrar
+     */
+    protected $registrar;
+
+    public function __construct(Guard $auth, Registrar $registrar)
     {
-        $this->middleware('auth');
+        $this->auth = $auth;
+        $this->registrar = $registrar;
+
         $this->middleware('voting.enabled');
     }
 
@@ -18,26 +36,36 @@ class VotesController extends Controller
      * Store a newly created resource in storage.
      * POST /votes
      *
-     * @param Request $request
+     * @param VoteRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(VoteRequest $request)
     {
-        $candidate_id = $request->get('candidate_id');
-        $user_id = Auth::user()->id;
+        $user = $this->auth->user();
 
-        $vote = Vote::createIfEligible($candidate_id, $user_id);
-        if (!$vote) {
-            return redirect()
-                ->back()
-                ->with('message', 'You can\'t vote yet!');
+        // If not logged in... authenticate or register a new user.
+        if(!$user) {
+            $user = $this->registrar->create($request->all());
+            $this->auth->login($user);
         }
 
-        $candidate = Candidate::find($candidate_id);
+        $hasVotedBefore = Vote::where('user_id', $user->id)->exists();
+        $vote = Vote::createIfEligible($request->get('candidate_id'), $user->id);
 
-        return redirect()
-            ->route('candidates.show', [$candidate->slug, '#message'])
-            ->with('message', 'We got that vote!');
+        // If we couldn't create a vote, redirect back & let the user know.
+        if(!$vote) {
+            return redirect()->back()->with('message', 'Welcome back ' . $request->get('first_name') . '. You already voted today!');
+        }
+
+        // If this is the user's first vote, trigger an event.
+        if (!$hasVotedBefore) {
+            event(new UserCastFirstVote($vote));
+        }
+
+        $candidate = Candidate::find($request->get('candidate_id'));
+        $url = route('candidates.show', [$candidate->slug, '#message']);
+
+        return redirect()->to($url)->with('message', 'Thanks, we got that vote!');
     }
 
 }
