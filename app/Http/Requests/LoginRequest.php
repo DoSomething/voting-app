@@ -25,7 +25,7 @@ class LoginRequest extends Request
     {
         $rules = [
             'first_name' => 'required',
-            'phone' => 'required_without:email|regex:/^((1)?([\-\s\.]{1})?)?\(?([0-9]{3})\)?(?:[\-\s\.]{1})?([0-9]{3})(?:[\-\s\.]{1})?([0-9]{4})/',
+            'phone' => 'required_without:email|phone',
             'email' => 'required_without:phone|email',
             'birthdate' => 'required|date|before:today',
         ];
@@ -41,7 +41,7 @@ class LoginRequest extends Request
     public function messages()
     {
         return [
-            'phone.regex' => 'That doesn\'t look like a real phone number!',
+            'phone.phone' => 'That doesn\'t look like a real phone number!',
             'birthdate.date' => 'Enter your birthday MM/DD/YYYY!',
         ];
     }
