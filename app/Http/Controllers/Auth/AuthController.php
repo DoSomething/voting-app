@@ -78,7 +78,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect()->intended('/')->withFlashMessage('Welcome ' . $input['first_name']);
+        return redirect()->intended('/')->with('message', 'Welcome ' . $input['first_name']);
     }
 
     /**
@@ -126,6 +126,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return redirect()->home()->withFlashMessage('You\'re now signed out.');
+        return redirect()->home()->with('message', 'You\'re now signed out.');
     }
 }
