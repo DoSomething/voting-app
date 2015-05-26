@@ -70,7 +70,7 @@ function facebook_intent($url)
  */
 function sort_url($column)
 {
-    $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
+    $direction = (app('request')->get('direction') == 'asc') ? 'desc' : 'asc';
     return '?sort_by=' . e($column) . '&direction=' . e($direction);
 }
 
@@ -81,8 +81,8 @@ function sort_url($column)
  */
 function sort_class($column)
 {
-    $sortColumn = Request::get('sort_by');
-    $sortClass = (Request::get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
+    $sortColumn = app('request')->get('sort_by');
+    $sortClass = (app('request')->get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
 
     if($column !== $sortColumn) return '';
 
@@ -98,7 +98,7 @@ function sort_class($column)
  */
 function setting($setting, $fallback = null)
 {
-    $repository = app()->make('VotingApp\Repositories\SettingsRepository');
+    $repository = app('VotingApp\Repositories\SettingsRepository');
     return $repository->get($setting, $fallback);
 }
 
@@ -111,6 +111,6 @@ function setting($setting, $fallback = null)
  */
 function background($type, $fallback)
 {
-    $repository = app()->make('VotingApp\Repositories\BackgroundsRepository');
+    $repository = app('VotingApp\Repositories\BackgroundsRepository');
     return $repository->random($type, $fallback);
 }
