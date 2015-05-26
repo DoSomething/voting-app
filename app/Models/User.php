@@ -124,11 +124,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function canVote()
     {
-        $existing_vote = Vote::whereUserId($this->id)
-            ->withinLastDay()
-            ->first();
-
-        return is_null($existing_vote);
+        $voted = Vote::where('user_id', $this->id)->withinLastDay()->exists();
+        return !$voted;
     }
 
     /**
