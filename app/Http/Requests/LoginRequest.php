@@ -32,6 +32,10 @@ class LoginRequest extends Request
             $rules['email'] = 'required|email';
         }
 
+        if(should_collect_international_phone()) {
+            $rules['phone'] = 'phone';
+        }
+
         if(is_domestic_session()) {
             $rules['phone'] = 'required|phone';
         }

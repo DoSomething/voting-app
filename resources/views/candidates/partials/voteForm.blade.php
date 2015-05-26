@@ -29,14 +29,16 @@
 
 {{-- Else, user is not logged in, so show the login/vote form. --}}
 @else
-    <form method="POST" action="{{ url('login') }}" id="sign_in_form">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-        @include('auth.form')
-        <input type="hidden" name="candidate_id" value="{{ $candidate->id or '' }}"/>
-        <input type="submit" value="Count My Vote" class="button -primary"/>
-        <p id="ctia" class="legal">
+    {!! Form::open(['url' => 'login']) !!}
+    @include('auth.form')
+    <input type="hidden" name="candidate_id" value="{{ $candidate->id or '' }}"/>
+    {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
+
+    @if(is_domestic_session() || should_collect_international_phone())
+        <p class="legal">
             By voting you agree to receive future updates from DoSomething.org. Message &amp; data
             rates may apply. Text STOP to opt-out, HELP for help.
         </p>
-    </form>
+    @endif
+    {!! Form::close() !!}
 @endif

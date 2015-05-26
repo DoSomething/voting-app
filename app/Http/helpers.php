@@ -13,7 +13,7 @@ function get_country_code()
 /**
  * Return if the user is a domestic (US) session.
  *
- * $return boolean
+ * @return boolean
  */
 function is_domestic_session()
 {
@@ -23,11 +23,22 @@ function is_domestic_session()
 /**
  * Return if the user is an international session.
  *
- * $return boolean
+ * @return boolean
  */
 function is_international_session()
 {
     return get_country_code() !== 'US';
+}
+
+/**
+ * Return if the user's phone should be collected for
+ * the current international session's country.
+ *
+ * @return boolean
+ */
+function should_collect_international_phone()
+{
+    return in_array(get_country_code(), ['GB', 'BR']);
 }
 
 /**
@@ -61,7 +72,7 @@ function facebook_intent($url)
  */
 function sort_url($column)
 {
-    $direction = (Request::get('direction') == 'asc') ? 'desc' : 'asc';
+    $direction = (app('request')->get('direction') == 'asc') ? 'desc' : 'asc';
     return '?sort_by=' . e($column) . '&direction=' . e($direction);
 }
 
@@ -72,8 +83,8 @@ function sort_url($column)
  */
 function sort_class($column)
 {
-    $sortColumn = Request::get('sort_by');
-    $sortClass = (Request::get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
+    $sortColumn = app('request')->get('sort_by');
+    $sortClass = (app('request')->get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
 
     if($column !== $sortColumn) return '';
 
@@ -89,7 +100,7 @@ function sort_class($column)
  */
 function setting($setting, $fallback = null)
 {
-    $repository = app()->make('VotingApp\Repositories\SettingsRepository');
+    $repository = app('VotingApp\Repositories\SettingsRepository');
     return $repository->get($setting, $fallback);
 }
 
@@ -102,6 +113,6 @@ function setting($setting, $fallback = null)
  */
 function background($type, $fallback)
 {
-    $repository = app()->make('VotingApp\Repositories\BackgroundsRepository');
+    $repository = app('VotingApp\Repositories\BackgroundsRepository');
     return $repository->random($type, $fallback);
 }
