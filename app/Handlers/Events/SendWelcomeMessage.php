@@ -1,18 +1,19 @@
 <?php namespace VotingApp\Handlers\Events;
 
-use VotingApp\Events\UserCastFirstVote;
+use VotingApp\Events\UserRegistered;
 use MessageBroker;
+use Config;
 
-class SendFirstVoteEmail
+class SendWelcomeMessage
 {
 
     /**
      * Handle the event.
      *
-     * @param  UserCastFirstVote $event
+     * @param  UserRegistered $event
      * @return void
      */
-    public function handle(UserCastFirstVote $event)
+    public function handle(UserRegistered $event)
     {
         // Don't send messages locally.
         if (app()->environment('local')) {
@@ -22,7 +23,7 @@ class SendFirstVoteEmail
         // Configure the message broker connection
         $credentials = Config::get('services.message_broker.credentials');
         $config = Config::get('services.message_broker.config');
-        $config['routingKey'] = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
+        $config['routingKey'] = env('REGISTER_ROUTING_KEY', 'votingapp.user.registration');
         $broker = new MessageBroker($credentials, $config);
 
         // Sign user up for transaction messages.
@@ -34,24 +35,21 @@ class SendFirstVoteEmail
             'birthdate_timestamp' => $event->birthdate, // Message Broker expects UNIX timestamp
             'country_code' => $event->country_code,
 
-            // Candidate information.
-            'candidate_id' => $event->candidate_id,
-            'candidate_name' => $event->candidate_name,
-
             // Request specific information
-            'activity' => env('VOTE_ACTIVITY', 'votingapp_vote'),
+            'activity' => env('REGISTER_ACTIVITY', 'votingapp_signup'),
             'application_id' => 201,
             'activity_timestamp' => time(),
-            'email_template' => env('VOTE_TEMPLATE', 'mb-votingapp-vote'),
+            'email_template' => env('REGISTER_TEMPLATE', 'mb-votingapp-signup'),
             'email_tags' => [
-                0 => env('VOTE_EMAIL_TAG', 'votingapp_signup'),
+                0 => env('REGISTER_EMAIL_TAG', 'votingapp_signup'),
             ],
             'mailchimp_grouping_id' => env('MAILCHIMP_GROUP_ID'),
             'mailchimp_group_name' => env('MAILCHIMP_GROUP_NAME'),
             'mc_opt_in_path_id' => env('MC_OPT_IN_PATH'),
             'merge_vars' => [
                 'FNAME' => $event->first_name
-            ]
+            ],
+            'user_registration_source' => env('REGISTER_MB_SOURCE', 'votingapp')
         ];
 
         $payload = serialize($payload);
