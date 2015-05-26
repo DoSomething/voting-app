@@ -37,7 +37,6 @@ class CandidatesController extends Controller
             return $this->adminIndex($request);
         }
 
-        $type = get_login_type();
         $categories = Category::with('candidates')->get();
 
         return view('candidates.index', compact('categories', 'type'));
@@ -118,9 +117,8 @@ class CandidatesController extends Controller
     {
         $votes = $candidate->votes();
         $vote_count = $candidate->votes()->count();
-        $type = get_login_type();
 
-        return view('candidates.show', compact('candidate', 'votes', 'vote_count', 'type'));
+        return view('candidates.show', compact('candidate', 'votes', 'vote_count'));
     }
 
 

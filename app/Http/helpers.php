@@ -2,28 +2,32 @@
 
 /**
  * Return contents of Fastly's GeoIP country code header.
- * @return string|null Country Code, or null if header is not set.
+ *
+ * @return string - Country Code, or '?' if header is not set.
  */
 function get_country_code()
 {
-    return (Request::server('HTTP_X_FASTLY_COUNTRY_CODE')) ? Request::server('HTTP_X_FASTLY_COUNTRY_CODE') : '?';
+    return app('request')->server('HTTP_X_FASTLY_COUNTRY_CODE', '?');
 }
 
 /**
- * Determine which field to show in user form. Domestic users should
- * see phone field, and international users should see email field.
+ * Return if the user is a domestic (US) session.
+ *
+ * $return boolean
  */
-function get_login_type()
+function is_domestic_session()
 {
-    $type = 'phone';
-    $country_code = get_country_code();
+    return get_country_code() === 'US';
+}
 
-    // If user is not in the US, ask for their email instead.
-    if (isset($country_code) && $country_code != 'US') {
-        $type = 'email';
-    }
-
-    return $type;
+/**
+ * Return if the user is an international session.
+ *
+ * $return boolean
+ */
+function is_international_session()
+{
+    return get_country_code() !== 'US';
 }
 
 /**

@@ -25,10 +25,16 @@ class LoginRequest extends Request
     {
         $rules = [
             'first_name' => 'required',
-            'phone' => 'required_without:email|phone',
-            'email' => 'required_without:phone|email',
             'birthdate' => 'required|date|before:today',
         ];
+
+        if(is_international_session()) {
+            $rules['email'] = 'required|email';
+        }
+
+        if(is_domestic_session()) {
+            $rules['phone'] = 'required|phone';
+        }
 
         return $rules;
     }
