@@ -31,6 +31,15 @@ function is_international_session()
 }
 
 /**
+ * Return if the user's phone should be collected for
+ * the current international session's country.
+ */
+function should_collect_international_phone()
+{
+    return in_array(get_country_code(), ['UK', 'BR']);
+}
+
+/**
  * Generate a Twitter tweet web intent.
  * @param $text    String  Text for tweet, with TWITTER_NAME placeholder for twitter handle
  * @param $url     String  URL to attach to tweet
