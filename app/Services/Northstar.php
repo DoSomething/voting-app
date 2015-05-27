@@ -1,8 +1,10 @@
 <?php namespace VotingApp\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
-use StatHat;
+use Exception;
 
 class Northstar
 {
@@ -31,6 +33,28 @@ class Northstar
             ]
         ]);
     }
+
+    /**
+     * Log any exceptions that occur.
+     * @param \Exception $e
+     */
+    public function logException(Exception $e)
+    {
+        app('stathat')->ezCount(env('STATHAT_APP_NAME', 'votingapp') . ' - Northstar API error', 1);
+
+        $info = [
+            'code' => $e->getCode(),
+            'message' => $e->getMessage(),
+        ];
+
+        if($e instanceof RequestException)
+        {
+            $info['body'] = $e->getResponse()->json();
+        }
+
+        logger('Northstar API Exception', $info);
+    }
+
 
     /**
      * Register a Northstar user for the given VotingApp user.
@@ -63,15 +87,37 @@ class Northstar
             $json = $response->json();
 
             return $json['_id'];
-        } catch(\Exception $e) {
-            StatHat::ezCount(env('STATHAT_APP_NAME', 'votingapp') . ' - Northstar API error', 1);
-
-            logger('Northstar API Exception', [
-                'code' => $e->getCode(),
-                'message' => $e->getMessage(),
-                'body' => $e->getResponse()->json()
-            ]);
+        } catch(Exception $e) {
+            $this->logException($e);
+            return null;
         }
+    }
+
+    /**
+     * Store a candidate's category in the User's interest
+     * field on Northstar.
+     *
+     * @param User $user
+     * @param Candidate $candidate
+     * @return bool - Success or failure
+     */
+    public function storeInterest(User $user, Candidate $candidate)
+    {
+        if(!$user->northstar_id) return false;
+
+        $payload = [
+            '_id' => $user->northstar_id,
+            'interests' => $candidate->category->slug,
+        ];
+
+        try {
+            $response = $this->client->post('users', ['body' => json_encode($payload)]);
+            return $response->getStatusCode() === 200;
+        } catch(Exception $e) {
+            $this->logException($e);
+            return false;
+        }
+
     }
 
 }
