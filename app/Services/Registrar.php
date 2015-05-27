@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use VotingApp\Models\User;
 use VotingApp\Events\UserRegistered;
+use VotingApp\Services\Northstar;
 
 class Registrar implements RegistrarContract
 {
@@ -14,9 +15,17 @@ class Registrar implements RegistrarContract
      */
     protected $validator;
 
-    public function __construct()
+    /**
+     * The Northstar API client.
+     *
+     * @param Northstar $northstar
+     */
+    protected $northstar;
+
+    public function __construct(Northstar $northstar)
     {
         $this->validator = app('validator');
+        $this->northstar = $northstar;
     }
 
     /**
@@ -49,6 +58,9 @@ class Registrar implements RegistrarContract
 
             $user = new User($data);
             $user->country_code = get_country_code();
+            $user->save();
+
+            $user->northstar_id = $this->northstar->register($user);
             $user->save();
 
             event(new UserRegistered($user));

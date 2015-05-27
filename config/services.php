@@ -18,6 +18,12 @@ return [
         'ez_key' => env('STATHAT_EZ_KEY')
     ],
 
+    'northstar' => [
+        'url' => env('NORTHSTAR_URL', 'https://northstar.dosomething.org'),
+        'key' => env('NORTHSTAR_API_KEY'),
+        'id_field' => env('NORTHSTAR_ID_FIELD')
+    ],
+
     'message_broker' => [
         'config' => [
             // Exchange options
