@@ -16,6 +16,7 @@ class Northstar
     public function __construct(Client $client)
     {
         $base_url = config('services.northstar.url');
+        $appId = config('services.northstar.app_id');
         $key = config('services.northstar.key');
 
         $this->client = new Client([
@@ -24,7 +25,7 @@ class Northstar
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-                    'X-DS-Application-Id' => 456,
+                    'X-DS-Application-Id' => $appId,
                     'X-DS-REST-API-Key' => $key,
                 ]
             ]
