@@ -7,7 +7,7 @@
  */
 function get_country_code()
 {
-    return app('request')->server('HTTP_X_FASTLY_COUNTRY_CODE', '?');
+    return app('request')->server('HTTP_X_FASTLY_COUNTRY_CODE', null);
 }
 
 /**

@@ -1,9 +1,8 @@
 <?php namespace VotingApp\Http\Requests;
 
 use VotingApp\Models\Candidate;
-use Auth;
 
-class LoginRequest extends Request
+class VoteRequest extends Request
 {
 
     /**
@@ -13,7 +12,7 @@ class LoginRequest extends Request
      */
     public function authorize()
     {
-        return Auth::guest();
+        return true;
     }
 
     /**
@@ -24,21 +23,26 @@ class LoginRequest extends Request
     public function rules()
     {
         $rules = [
-            'first_name' => 'required',
-            'birthdate' => 'required|date|before:today',
+            'candidate_id' => 'required',
         ];
 
-        if(is_international_session()) {
-            $rules['email'] = 'required|email';
+        if(app('auth')->guest()) {
+            $rules['first_name'] = ['required'];
+            $rules['birthdate'] = ['required', 'date', 'before:today'];
+
+            if(is_international_session()) {
+                $rules['email'] = ['required', 'email'];
+            }
+
+            if(should_collect_international_phone()) {
+                $rules['phone'] = ['phone'];
+            }
+
+            if(is_domestic_session()) {
+                $rules['phone'] = ['required', 'phone'];
+            }
         }
 
-        if(should_collect_international_phone()) {
-            $rules['phone'] = 'phone';
-        }
-
-        if(is_domestic_session()) {
-            $rules['phone'] = 'required|phone';
-        }
 
         return $rules;
     }
@@ -64,7 +68,7 @@ class LoginRequest extends Request
     protected function getRedirectUrl()
     {
         if ($this->has('candidate_id')) {
-            $slug = Candidate::whereId($this->get('candidate_id'))->first()->slug;
+            $slug = Candidate::where('id', $this->get('candidate_id'))->first()->slug;
             return route('candidates.show', [$slug]);
         }
 

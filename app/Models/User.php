@@ -90,18 +90,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Create new user, and fire corresponding event.
-     */
-    public static function createNewUser($attributes)
-    {
-        $user = new User($attributes);
-        $user->country_code = get_country_code();
-        $user->save();
-
-        return $user;
-    }
-
-    /**
      * A user has many votes.
      */
     public function votes()

@@ -29,7 +29,7 @@
 
 {{-- Else, user is not logged in, so show the login/vote form. --}}
 @else
-    {!! Form::open(['url' => 'login']) !!}
+    {!! Form::open(['route' => 'votes.store']) !!}
     @include('auth.form')
     <input type="hidden" name="candidate_id" value="{{ $candidate->id or '' }}"/>
     {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
