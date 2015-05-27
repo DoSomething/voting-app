@@ -54,6 +54,10 @@ class Northstar
             $payload['email'] = $user->email;
         }
 
+        if($user->country_code) {
+            $payload['country'] = $user->country_code;
+        }
+
         try {
             $response = $this->client->post('users', ['body' => json_encode($payload)]);
             $json = $response->json();
