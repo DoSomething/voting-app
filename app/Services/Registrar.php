@@ -18,7 +18,7 @@ class Registrar implements RegistrarContract
     /**
      * The Northstar API client.
      *
-     * @param Northstar $northstar
+     * @var Northstar $northstar
      */
     protected $northstar;
 
