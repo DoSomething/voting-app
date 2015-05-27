@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 use VotingApp\Models\User;
+use StatHat;
 
 class Northstar
 {
@@ -58,6 +59,8 @@ class Northstar
 
             return $json['_id'];
         } catch(\Exception $e) {
+            StatHat::ezCount(env('STATHAT_APP_NAME', 'votingapp') . ' - Northstar API error', 1);
+
             logger('Northstar API Exception', [
                 'code' => $e->getCode(),
                 'message' => $e->getMessage(),
