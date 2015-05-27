@@ -105,13 +105,10 @@ class Northstar
     {
         if(!$user->northstar_id) return false;
 
-        $payload = [
-            '_id' => $user->northstar_id,
-            'interests' => $candidate->category->slug,
-        ];
+        $payload = ['interests' => $candidate->category->slug];
 
         try {
-            $response = $this->client->post('users', ['body' => json_encode($payload)]);
+            $response = $this->client->put('users/' . e($user->northstar_id), ['body' => json_encode($payload)]);
             return $response->getStatusCode() === 200;
         } catch(Exception $e) {
             $this->logException($e);
