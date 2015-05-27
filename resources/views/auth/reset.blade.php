@@ -4,7 +4,7 @@
 
 @section('content')
     <article class="page">
-        <h1>Reset Password</h1>
+        <h1 class="highlighted">Reset Password</h1>
 
         <p>Set a new password for your account.</p>
 

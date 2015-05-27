@@ -17,8 +17,8 @@
             {!! Form::submit('Sign In', ['class' => 'btn']) !!}
         {!! Form::close() !!}
 
-        <p>
+        <div class="form-actions">
             <a href="{{ url('/password/email') }}">Forgot password</a>
-        </p>
+        </div>
     </div>
 @stop

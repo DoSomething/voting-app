@@ -3,7 +3,7 @@
 /**
  * Return contents of Fastly's GeoIP country code header.
  *
- * @return string - Country Code, or '?' if header is not set.
+ * @return string|null - Country Code, or null if header is not set.
  */
 function get_country_code()
 {
@@ -43,9 +43,10 @@ function should_collect_international_phone()
 
 /**
  * Generate a Twitter tweet web intent.
- * @param $text    String  Text for tweet, with TWITTER_NAME placeholder for twitter handle
- * @param $url     String  URL to attach to tweet
- * @param $twitter String  (optional) Text to replace TWITTER_NAME placeholder with.
+ *
+ * @param string $text - Text for tweet, with TWITTER_NAME placeholder for twitter handle
+ * @param string $url - URL to attach to tweet
+ * @param string $twitter - Optional text to replace TWITTER_NAME placeholder with.
  * @return string
  */
 function tweet_intent($text, $url, $twitter = null)
@@ -59,6 +60,9 @@ function tweet_intent($text, $url, $twitter = null)
 
 /**
  * Generate a Facebook web intent.
+ *
+ * @param string $url - URL to attach to post
+ * @return string
  */
 function facebook_intent($url)
 {
@@ -67,7 +71,8 @@ function facebook_intent($url)
 
 /**
  * Generate relative links for sorting tabular data.
- * @param $column string Column to sort by
+ *
+ * @param string $column - Column to sort by
  * @return string
  */
 function sort_url($column)
@@ -78,7 +83,8 @@ function sort_url($column)
 
 /**
  * Return a class to indicate the current sorting method.
- * @param $column Column to indicate sorting status of
+ *
+ * @param string $column - Column to indicate sorting status of
  * @return string
  */
 function sort_class($column)
@@ -111,7 +117,7 @@ function setting($setting, $fallback = null)
  * @param string $fallback - Fallback image, if no custom backgrounds set
  * @return string
  */
-function background($type, $fallback)
+function background($type, $fallback = null)
 {
     $repository = app('VotingApp\Repositories\BackgroundsRepository');
     return $repository->random($type, $fallback);
