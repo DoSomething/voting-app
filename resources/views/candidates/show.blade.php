@@ -26,7 +26,7 @@
         </div>
 
         <div class="candidate__actions">
-            @include('candidates.partials.voteForm', ['category' => $candidate->category, 'id' => $candidate->id])
+            @include('votes.form', ['category' => $candidate->category, 'id' => $candidate->id])
 
             @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
                 <h4>Hey, beautiful administrator. This candidate

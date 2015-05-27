@@ -42,6 +42,6 @@
     </div>
 
     <script type="text/html" id="form-template">
-        @include('candidates.partials.voteForm', ['candidate' => null, 'winner' => null])
+        @include('votes.form', ['candidate' => null, 'winner' => null])
     </script>
 @stop
