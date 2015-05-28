@@ -29,6 +29,34 @@ class Registrar implements RegistrarContract
     }
 
     /**
+     * Get the validation rules to use for an registration or
+     * authorization request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $rules = [
+            'first_name' => ['required'],
+            'birthdate' => ['required', 'date', 'before:today'],
+        ];
+
+        if (is_international_session()) {
+            $rules['email'] = ['required', 'email'];
+        }
+
+        if (should_collect_international_phone()) {
+            $rules['phone'] = ['phone'];
+        }
+
+        if (is_domestic_session()) {
+            $rules['phone'] = ['required', 'phone'];
+        }
+
+        return $rules;
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array $data
@@ -36,10 +64,7 @@ class Registrar implements RegistrarContract
      */
     public function validator(array $data)
     {
-        return $this->validator->make($data, [
-            'phone' => 'unique:users',
-            'email' => 'unique:users',
-        ]);
+        return $this->validator->make($data, $this->rules());
     }
 
     /**
@@ -54,7 +79,10 @@ class Registrar implements RegistrarContract
 
         // If user doesn't exist, attempt to create.
         if (!$user) {
-            $this->validator($data);
+            $this->validator->make($data, [
+                'phone' => 'unique:users',
+                'email' => 'unique:users',
+            ]);
 
             $user = new User($data);
             $user->country_code = get_country_code();

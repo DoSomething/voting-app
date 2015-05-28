@@ -12,11 +12,11 @@
         @endif
     </ul>
 
-    @if($winners)
-        <h1 class="highlighted gallery-heading">All Nominees</h1>
-    @endif
-
     @if(setting('show_candidates'))
+        @if($winners)
+            <h1 class="highlighted gallery-heading">All Nominees</h1>
+        @endif
+
         <h2 class="gallery-heading">{{ $category->name }}</h2>
 
         <ul class="gallery">
@@ -47,4 +47,6 @@
             @include('votes.form', ['candidate' => null, 'winner' => null])
         </script>
     @endif
+
+    @include('users.partials.closed');
 @stop

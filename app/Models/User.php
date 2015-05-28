@@ -60,7 +60,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function setPhoneAttribute($phone)
     {
         // Skip mutator if attribute is null.
-        if (is_null($phone)) {
+        if (empty($phone)) {
             return;
         }
 

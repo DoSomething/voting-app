@@ -1,9 +1,28 @@
 <?php namespace VotingApp\Http\Requests;
 
+use Illuminate\Contracts\Auth\Guard;
 use VotingApp\Models\Candidate;
+use VotingApp\Services\Registrar;
 
 class VoteRequest extends Request
 {
+    /**
+     * The authorization service.
+     * @var Guard
+     */
+    protected $guard;
+
+    /**
+     * The registration service.
+     * @var Registrar
+     */
+    protected $registrar;
+
+    public function __construct(Guard $guard, Registrar $registrar)
+    {
+        $this->guard = $guard;
+        $this->registrar = $registrar;
+    }
 
     /**
      * Determine if the user is authorized to make this request.
@@ -22,27 +41,14 @@ class VoteRequest extends Request
      */
     public function rules()
     {
-        $rules = [
-            'candidate_id' => 'required',
-        ];
+        $rules = [];
 
-        if(app('auth')->guest()) {
-            $rules['first_name'] = ['required'];
-            $rules['birthdate'] = ['required', 'date', 'before:today'];
-
-            if(is_international_session()) {
-                $rules['email'] = ['required', 'email'];
-            }
-
-            if(should_collect_international_phone()) {
-                $rules['phone'] = ['phone'];
-            }
-
-            if(is_domestic_session()) {
-                $rules['phone'] = ['required', 'phone'];
-            }
+        // If user is a guest, make sure they are able to register/login.
+        if($this->guard->guest()) {
+            $rules = $this->registrar->rules();
         }
 
+        $rules['candidate_id'] = ['required'];
 
         return $rules;
     }
