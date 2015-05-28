@@ -1,15 +1,25 @@
 <?php namespace VotingApp\Http\Controllers;
 
+use Illuminate\Http\Request;
 use VotingApp\Models\User;
+use VotingApp\Services\Registrar;
 
 class UsersController extends Controller
 {
 
-    public function __construct(User $user)
+    /**
+     * The registration service.
+     *
+     * @var Registrar
+     */
+    protected $registrar;
+
+    public function __construct(User $user, Registrar $registrar)
     {
         $this->user = $user;
+        $this->registrar = $registrar;
 
-        $this->middleware('admin');
+        $this->middleware('admin', ['except' => 'store']);
     }
 
     /**
@@ -23,6 +33,23 @@ class UsersController extends Controller
         $count = $this->user->count();
 
         return view('users.index', compact('users', 'count'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * POST /users
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, $this->registrar->rules());
+        $this->registrar->create($request->all());
+
+        // @TODO: Add user to transactional bucket through Message Broker!
+
+        return view('users.confirmation');
     }
 
     /**
