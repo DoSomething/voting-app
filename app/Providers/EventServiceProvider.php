@@ -13,7 +13,6 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'VotingApp\Events\UserRegistered' => [
-            'VotingApp\Handlers\Events\SendWelcomeMessage',
             'VotingApp\Handlers\Events\UpdateRegistrationStats',
         ],
         'VotingApp\Events\UserCastVote' => [
