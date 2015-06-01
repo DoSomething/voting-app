@@ -15,7 +15,7 @@ class SendFirstVoteMessage
     public function handle(UserCastFirstVote $event)
     {
         // Don't send messages locally.
-        if (app()->environment('local')) {
+        if (app()->environment('local', 'testing')) {
             return;
         }
 

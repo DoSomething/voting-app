@@ -15,7 +15,7 @@ class SendWelcomeMessage
     public function handle(UserRegistered $event)
     {
         // Don't send messages locally.
-        if (app()->environment('local')) {
+        if (app()->environment('local', 'testing')) {
             return;
         }
 
