@@ -17,3 +17,5 @@ Thumbs.db
 # File uploads
 /public/images
 
+# Test output
+tests/logs
