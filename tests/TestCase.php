@@ -43,4 +43,17 @@ class TestCase extends IntegrationTest
         return $app;
     }
 
+    /**
+     * Mock a class, and register with the IoC container.
+     *
+     * @param $class String - Class name to mock
+     * @return \Mockery\MockInterface
+     */
+    public function mock($class)
+    {
+        $mock = Mockery::mock($class);
+        $this->app->instance($class, $mock);
+        return $mock;
+    }
+
 }
