@@ -97,8 +97,7 @@ class CandidatesController extends Controller
         $candidate = new Candidate($request->all());
 
         if ($file = $request->file('photo')) {
-            $image = Image::make($file->getRealPath());
-            $candidate->savePhoto($image);
+            $candidate->savePhoto($file);
         }
 
         $candidate->save();

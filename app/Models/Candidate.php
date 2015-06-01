@@ -3,13 +3,12 @@
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Image;
 
 class Candidate extends Model implements SluggableInterface
 {
 
     use SluggableTrait;
-
-
 
     /**
      * The attributes which may be mass-assigned.
@@ -62,7 +61,7 @@ class Candidate extends Model implements SluggableInterface
     public function thumbnail()
     {
         if ($this->photo) {
-            return '/images/thumbnails/thumb-' . $this->photo;
+            return asset('images/thumbnails/thumb-' . $this->photo);
         } else {
             return asset('images/placeholder.png');
         }
@@ -71,16 +70,17 @@ class Candidate extends Model implements SluggableInterface
     /**
      * Save a photo, generate thumbnail, and attach it to the model.
      *
-     * @param mixed $photo Input to Intervention\Image::make (such as Input::file)
+     * @param mixed $file Input to Intervention\Image::make (such as Input::file)
      * @see http://image.intervention.io/api/make
      */
-    public function savePhoto($photo)
+    public function savePhoto($file)
     {
         // Create directory if it doesn't exist
         if (!file_exists(public_path('images/thumbnails'))) {
             mkdir(public_path('images/thumbnails'), 0777, true);
         }
 
+        $photo = Image::make($file);
         $filename = $this->sluggify()->slug . '.jpg';
 
         // Save full-size image
