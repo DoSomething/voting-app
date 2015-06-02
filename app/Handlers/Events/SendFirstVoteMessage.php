@@ -43,30 +43,28 @@ class SendFirstVoteMessage
         // Send fields for domestic users
         if($event->user->country_code === 'US') {
             $payload['mobile'] = $event->user->phone;
-            $payload['mobile_tags'] = [
-                // @TODO ????
-            ];
-
-            // @TODO ????
             $payload['mc_opt_in_path_id'] = env('MC_OPT_IN_PATH');
+            $payload['mobile_tags'] = [
+                env('APP_NAME_TAG', 'votingapp'),
+                $event->candidate->id
+            ];
         }
 
         // Send fields for international users
         if($event->user->country_code !== 'US') {
             $payload['email'] = $event->user->email;
             $payload['subscribed'] = 1;
-            $payload['mailchimp_list_id'] = ''; // @TODO ????
+            $payload['mailchimp_grouping_id'] = env('MAILCHIMP_GROUP_ID');
+            $payload['mailchimp_group_name'] = env('MAILCHIMP_GROUP_NAME');
+            $payload['mailchimp_list_id'] = env('MAILCHIMP_LIST_ID');
             $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote');
             $payload['email_tags'] = [
-                0 => env('VOTE_EMAIL_TAG', 'votingapp_signup'),
+                env('APP_NAME_TAG', 'votingapp'),
+                $event->candidate->id
             ];
             $payload['merge_vars'] = [
                 'FNAME' => $event->user->first_name
             ];
-
-            // @TODO ????
-            $payload['mailchimp_grouping_id'] = env('MAILCHIMP_GROUP_ID');
-            $payload['mailchimp_group_name'] = env('MAILCHIMP_GROUP_NAME');
         }
 
         $payload = serialize($payload);
