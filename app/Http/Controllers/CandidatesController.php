@@ -33,7 +33,7 @@ class CandidatesController extends Controller
     {
         // Show admin interface instead for administrators. Admin users can
         // use the `?guest=1` query parameter to bypass the admin view.
-        if(Auth::check() && Auth::user()->hasRole('admin') && !$request->get('guest')) {
+        if(Auth::check() && Auth::user()->admin && !$request->get('guest')) {
             return $this->adminIndex($request);
         }
 

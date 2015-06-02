@@ -28,9 +28,8 @@
         <div class="candidate__actions">
             @include('votes.form', ['category' => $candidate->category, 'id' => $candidate->id])
 
-            @if(Auth::user() && Auth::user()->hasRole('admin') && $vote_count)
-                <h4>Hey, beautiful administrator. This candidate
-                    has {{ $vote_count }} {{ str_plural('vote', $vote_count)}}.</h4>
+            @if(Auth::user() && Auth::user()->admin && $vote_count)
+                <h4>This candidate has {{ $vote_count }} {{ str_plural('vote', $vote_count)}}.</h4>
 
                 <div class="form-actions">
                     <a href="{{ route('candidates.edit', [$candidate->slug]) }}">Edit Candidate</a>

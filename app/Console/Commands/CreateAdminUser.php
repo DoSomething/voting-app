@@ -42,7 +42,8 @@ class CreateAdminUser extends Command {
         ]);
 
         // @TODO: This requires database to be seeded for admin role to exist :(
-        $user->assignRole(1);
+        $user->admin = true;
+        $user->save();
 
         $this->info('Created new administrator!');
 	}
