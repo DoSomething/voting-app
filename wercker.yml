@@ -3,6 +3,12 @@ build:
     # The steps that will be executed on build
     steps:
       - script:
+          name: Update apt
+          code: sudo apt-get update
+      - script:
+          name: Install libnotify
+          code: sudo apt-get install libnotify-bin
+      - script:
           name: Update Composer
           code: sudo composer self-update
       - leipert/composer-install@0.0.1
@@ -16,11 +22,7 @@ build:
       - script:
           name: build assets
           code: gulp
-    after-steps:
-        - hipchat-notify:
-            token: $HIPCHAT_TOKEN
-            room-id: $HIPCHAT_ROOM_ID
-            from-name: wercker
+
 deploy:
   steps:
     - bundle-install
@@ -34,7 +36,8 @@ deploy:
           echo -e $WERCKER_APP_KEY_PRIVATE > $CAP_PRIVATE_KEY
     - cap
   after-steps:
-      - hipchat-notify:
-          token: $HIPCHAT_TOKEN
-          room-id: $HIPCHAT_ROOM_ID
-          from-name: wercker
+    - iansmith9876/pretty-slack-notify:
+        team: dosomething
+        token: $SLACK_TOKEN
+        channel: $SLACK_ROOM
+        username: george
