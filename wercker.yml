@@ -16,6 +16,9 @@ build:
       - script:
           name: build assets
           code: gulp
+      - script:
+          name: is there mysql?
+          code: which mysqladmin
     after-steps:
         - hipchat-notify:
             token: $HIPCHAT_TOKEN
