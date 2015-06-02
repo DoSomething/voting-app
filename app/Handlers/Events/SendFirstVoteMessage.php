@@ -25,12 +25,8 @@ class SendFirstVoteMessage
         $config['routingKey'] = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
         $broker = new MessageBroker($credentials, $config);
 
-        // Sign user up for transaction messages.
         $payload = [
             // User information
-            'first_name' => $event->user->first_name,
-            'email' => $event->user->email,
-            'mobile' => $event->user->phone,
             'birthdate_timestamp' => strtotime($event->user->birthdate), // Message Broker expects UNIX timestamp
             'country_code' => $event->user->country_code,
 
@@ -39,20 +35,39 @@ class SendFirstVoteMessage
             'candidate_name' => $event->candidate->name,
 
             // Request specific information
-            'activity' => env('VOTE_ACTIVITY', 'votingapp_vote'),
-            'application_id' => 201,
+            'activity' => env('VOTE_ACTIVITY', 'vote'),
+            'application_id' => env('MESSAGE_BROKER_APPLICATION_ID'),
             'activity_timestamp' => time(),
-            'email_template' => env('VOTE_TEMPLATE', 'mb-votingapp-vote'),
-            'email_tags' => [
-                0 => env('VOTE_EMAIL_TAG', 'votingapp_signup'),
-            ],
-            'mailchimp_grouping_id' => env('MAILCHIMP_GROUP_ID'),
-            'mailchimp_group_name' => env('MAILCHIMP_GROUP_NAME'),
-            'mc_opt_in_path_id' => env('MC_OPT_IN_PATH'),
-            'merge_vars' => [
-                'FNAME' => $event->user->first_name
-            ]
         ];
+
+        // Send fields for domestic users
+        if($event->user->country_code === 'US') {
+            $payload['mobile'] = $event->user->phone;
+            $payload['mc_opt_in_path_id'] = env('MC_OPT_IN_PATH');
+            $payload['mobile_tags'] = [
+                env('APP_NAME_TAG', 'votingapp'),
+                $event->candidate->id
+            ];
+        }
+
+        // Send fields for international users
+        if($event->user->country_code !== 'US') {
+            $payload['email'] = $event->user->email;
+            $payload['subscribed'] = 1;
+            $payload['mailchimp_grouping_id'] = env('MAILCHIMP_GROUP_ID');
+            $payload['mailchimp_group_name'] = env('MAILCHIMP_GROUP_NAME');
+            $payload['mailchimp_list_id'] = env('MAILCHIMP_LIST_ID');
+            $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote');
+            $payload['email_tags'] = [
+                env('APP_NAME_TAG', 'votingapp'),
+                $event->candidate->id
+            ];
+            $payload['merge_vars'] = [
+                'FNAME' => $event->user->first_name,
+                'CANDIDATE_NAME' => $event->candidate->name,
+                'CANDIDATE_LINK' => route('candidates.show', $event->candidate->slug)
+            ];
+        }
 
         $payload = serialize($payload);
         $broker->publishMessage($payload);
