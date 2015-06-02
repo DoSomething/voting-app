@@ -35,7 +35,7 @@ class SendFirstVoteMessage
             'candidate_name' => $event->candidate->name,
 
             // Request specific information
-            'activity' => env('VOTE_ACTIVITY', 'votingapp_vote'),
+            'activity' => env('VOTE_ACTIVITY', 'vote'),
             'application_id' => env('MESSAGE_BROKER_APPLICATION_ID'),
             'activity_timestamp' => time(),
         ];
