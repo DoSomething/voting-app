@@ -64,7 +64,8 @@ class SendFirstVoteMessage
             ];
             $payload['merge_vars'] = [
                 'FNAME' => $event->user->first_name,
-                'CANDIDATE_NAME' => $event->candidate->name
+                'CANDIDATE_NAME' => $event->candidate->name,
+                'CANDIDATE_LINK' => route('candidates.show', $event->candidate->slug)
             ];
         }
 
