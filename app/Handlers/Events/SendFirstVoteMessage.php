@@ -63,7 +63,8 @@ class SendFirstVoteMessage
                 $event->candidate->id
             ];
             $payload['merge_vars'] = [
-                'FNAME' => $event->user->first_name
+                'FNAME' => $event->user->first_name,
+                'CANDIDATE_NAME' => $event->candidate->name
             ];
         }
 
