@@ -30,21 +30,20 @@ class UsersTableSeeder extends Seeder
             'password' => 'tops3cret',
         ])->assignRole(1);
 
-        if (app()->environment('local')) {
-            foreach (range(1, 25) as $index) {
-                User::create([
-                    'first_name' => $faker->firstName,
-                    'email' => $faker->unique()->safeEmail,
-                    'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
-                ]);
-            }
-            foreach (range(1, 25) as $index) {
-                User::create([
-                    'first_name' => $faker->firstName,
-                    'phone' => $faker->unique()->phoneNumber,
-                    'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
-                ]);
-            }
+        foreach (range(1, 25) as $index) {
+            User::create([
+                'first_name' => $faker->firstName,
+                'email' => $faker->unique()->safeEmail,
+                'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
+            ]);
+        }
+
+        foreach (range(1, 25) as $index) {
+            User::create([
+                'first_name' => $faker->firstName,
+                'phone' => $faker->unique()->phoneNumber,
+                'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
+            ]);
         }
     }
 }
