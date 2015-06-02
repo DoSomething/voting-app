@@ -29,7 +29,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->user->with('roles')->paginate(25);
+        $users = $this->user->paginate(25);
         $count = $this->user->count();
 
         return view('users.index', compact('users', 'count'));

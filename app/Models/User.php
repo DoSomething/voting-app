@@ -108,35 +108,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return !$voted;
     }
 
-    /**
-     * Many-to-many relationship between users and roles.
-     */
-    public function roles()
-    {
-        return $this->belongsToMany('VotingApp\Models\Role');
-    }
-
-    /**
-     * Check to see if User has a Role.
-     * @return boolean
-     */
-    public function hasRole($name)
-    {
-        foreach ($this->roles as $role) {
-            if ($role->name === $name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Assign a specific role to a User.
-     * @param $role
-     */
-    public function assignRole($role)
-    {
-        $this->roles()->attach($role);
-    }
 }

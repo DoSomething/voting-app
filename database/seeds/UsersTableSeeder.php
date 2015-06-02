@@ -12,23 +12,21 @@ class UsersTableSeeder extends Seeder
 
         User::truncate();
 
-        User::create([
+        $dave = User::create([
             'first_name' => 'Dave',
             'email' => 'dfurnes@dosomething.org',
             'password' => 'tops3cret',
-        ])->assignRole(1);
+        ]);
+        $dave->admin = true;
+        $dave->save();
 
-        User::create([
+        $andrea = User::create([
             'first_name' => 'Andrea',
             'email' => 'agaither@dosomething.org',
             'password' => 'tops3cret',
-        ])->assignRole(1);
-
-        User::create([
-            'first_name' => 'Naomi',
-            'email' => 'nhirabayashi@dosomething.org',
-            'password' => 'tops3cret',
-        ])->assignRole(1);
+        ]);
+        $andrea->admin = true;
+        $andrea->save();
 
         foreach (range(1, 25) as $index) {
             User::create([

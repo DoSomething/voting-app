@@ -21,7 +21,8 @@ class AdminTest extends TestCase
             'email' => 'sloth@dosomething.org',
             'password' => 'testing123',
         ]);
-        $this->adminUser->assignRole(1);
+        $this->adminUser->admin = true;
+        $this->adminUser->save();
 
         $this->normalUser = User::create([
             'first_name' => 'Sloth',

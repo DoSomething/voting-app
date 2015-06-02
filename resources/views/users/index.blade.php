@@ -19,7 +19,7 @@
             @forelse($users as $user)
                 <tr>
                     <td>{{ $user->phone or $user->email }}</td>
-                    <td>{{ ($user->hasRole('admin') ? '✓' : '') }}</td>
+                    <td>{{ ($user->admin ? '✓' : '') }}</td>
                     <td><a href="{{ route('users.show', [$user->id]) }}">details</a></td>
                 </tr>
             @empty

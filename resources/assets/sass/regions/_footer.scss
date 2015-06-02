@@ -11,11 +11,15 @@ footer.primary {
 
   a {
     color: $gray;
+    text-decoration: underline;
 
     &:hover {
       color: lighten($gray, 20%);
-      text-decoration: none;
     }
+  }
+
+  .social-icon {
+    text-decoration: none;
   }
 
   .footer__links {
