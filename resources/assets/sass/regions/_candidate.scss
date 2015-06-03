@@ -50,13 +50,3 @@
     }
   }
 }
-
-// Eww! Necessary evil, we want the 'opt-in' checkbox
-// to be visually connected to the contact info field.
-#phone {
-  margin-bottom: $base-spacing / 2;
-}
-
-#ctia {
-  margin-top: $base-spacing * 3;
-}

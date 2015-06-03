@@ -73,7 +73,7 @@ $('.js-drawer-link').on('click', function(e) {
     form: formHTML
   });
 
-  var $details = $('<div class="tile__details"><div class="tile__details__inner">' + details + '</div></div>');
+  var $details = $('<div class="drawer"><div class="wrapper">' + details + '</div></div>');
 
   // Add ID to hidden form input!
   $details.find('input[name="candidate_id"]').val($tile.data('id'));

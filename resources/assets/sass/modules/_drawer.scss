@@ -1,0 +1,55 @@
+.drawer {
+  position: absolute;
+  top: auto;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  background: $base-background-color;
+  transition: opacity 0.5s;
+  z-index: 100;
+
+  @include media('medium') {
+    margin-top: $base-spacing * 2;;
+  }
+
+  .wrapper {
+    position: relative;
+
+    @include container;
+
+    @include media('small') {
+      .tile {
+        // Don't display any nested tile on mobile
+        display: none;
+      }
+
+      .candidate__actions {
+        padding: $base-spacing * 2;
+      }
+    }
+  }
+}
+
+.drawer__close {
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  top: 0;
+  right: $base-spacing;
+  font-size: $large-font-size;
+  font-weight: $weight-bold;
+  color: $gray;
+  z-index: 10;
+
+  &:hover {
+    color: $light-gray;
+    border-color: $light-gray;
+    text-decoration: none;
+  }
+
+  @include media('small') {
+    display: none;
+  }
+}
