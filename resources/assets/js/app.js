@@ -12,14 +12,20 @@
 //                                                                        \__|      \__|
 //
 
-window.jQuery = require("jquery");
+import $ from 'jquery';
 
 // RequestAnimationFrame polyfill
-require('requestanimationframe');
+import 'requestanimationframe';
 
-require('./form-loader');
-require('./lazy-load');
-require('./drawer');
-require('./twitter');
-require('./confirm');
-require('./method-link');
+// Utilities
+import './confirm';
+import './form-loader';
+import './lazy-load';
+import './method-link';
+import './share-link';
+
+// Components
+import './drawer';
+
+// Bind jQuery to the window
+window.jQuery = $;
