@@ -18,14 +18,14 @@ import $ from 'jquery';
 import 'requestanimationframe';
 
 // Utilities
-import './confirm';
-import './form-loader';
-import './lazy-load';
-import './method-link';
-import './share-link';
+import './utilities/confirm';
+import './utilities/form-loader';
+import './utilities/lazy-load';
+import './utilities/method-link';
+import './utilities/share-link';
 
 // Components
-import './drawer';
+import './components/drawer';
 
 // Bind jQuery to the window
 window.jQuery = $;
