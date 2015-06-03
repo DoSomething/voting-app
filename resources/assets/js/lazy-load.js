@@ -1,10 +1,10 @@
-var Layzr = require('layzr.js');
+import Layzr from 'layzr.js';
 
 /**
  * Initialize lazy loading!
  * @type {Layzr}
  */
-var lazyr = new Layzr({
+export default new Layzr({
   selector: '[data-src]',
   attr: 'data-src',
   threshold: 50,
@@ -12,6 +12,3 @@ var lazyr = new Layzr({
     this.style.opacity = 1;
   }
 });
-
-
-module.exports = lazyr;
