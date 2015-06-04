@@ -1,6 +1,8 @@
 <?php namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Cache;
 
 class Setting extends Model
@@ -31,7 +33,7 @@ class Setting extends Model
 
     /**
      * Save a file, and store the path.
-     * @param \Symfony\Component\HttpFoundation\File\File $file
+     * @param File|UploadedFile $file
      */
     public function saveFile($file)
     {
@@ -42,7 +44,14 @@ class Setting extends Model
             mkdir($path, 0777, true);
         }
 
-        $filename = $this->key . '.' . $file->getExtension();
+        // Get extension
+        if ($file instanceof UploadedFile) {
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $extension = $file->getExtension();
+        }
+
+        $filename = $this->key . '.' . $extension;
         $file->move($path, $filename);
 
         $this->value = 'images/settings/' . $filename;
