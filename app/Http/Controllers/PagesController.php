@@ -52,7 +52,7 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->$rules);
+        $this->validate($request, $this->rules);
 
         $page = new Page($request->all());
         $page->save();
