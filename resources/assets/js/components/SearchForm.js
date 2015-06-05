@@ -10,7 +10,7 @@ class SearchForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='search-form'>
         <input type="search" placeholder='Find a candidate...' onChange={this.onChange.bind(this)} />
       </div>
     );
