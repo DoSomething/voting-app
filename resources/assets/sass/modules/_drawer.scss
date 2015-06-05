@@ -1,31 +1,36 @@
 .drawer {
-  position: absolute;
-  top: auto;
-  left: 0;
-  width: 100%;
+  position: relative;
+  clear: both;
   overflow: hidden;
-  background: $base-background-color;
-  transition: opacity 0.5s;
-  z-index: 100;
 
-  @include media('medium') {
-    margin-top: $base-spacing * 2;;
+  // Animation via ReactCSSTransitionGroup
+  // @see: https://facebook.github.io/react/docs/animation.html
+  &.drawer-animation-enter {
+    transition: opacity 0.5s, max-height 0.5s;
+    max-height: 0;
+    opacity: 0;
+
+    &.drawer-animation-enter-active {
+      opacity: 1;
+      max-height: 800px;
+    }
   }
 
-  .wrapper {
-    position: relative;
+  &.drawer-animation-leave {
+    transition: opacity 0.5s, max-height 0.5s;
+    opacity: 1;
+    max-height: 800px;
 
-    @include container;
+    &.drawer-animation-leave-active {
+      max-height: 0;
+      opacity: 0;
+    }
+  }
 
+  .tile {
+    // Don't display any nested tiles on mobile
     @include media('small') {
-      .tile {
-        // Don't display any nested tile on mobile
-        display: none;
-      }
-
-      .candidate__actions {
-        padding: $base-spacing * 2;
-      }
+      display: none;
     }
   }
 }
@@ -53,3 +58,4 @@
     display: none;
   }
 }
+

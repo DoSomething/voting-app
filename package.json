@@ -11,9 +11,12 @@
     ]
   },
   "dependencies": {
+    "classnames": "^2.1.2",
     "html5shiv": "^3.7.2",
     "jquery": "^1.11.0",
     "layzr.js": "^1.1.4",
+    "lodash": "^3.9.3",
+    "react": "^0.13.3",
     "requestanimationframe": "0.0.22",
     "respond.js": "^1.4.2",
     "susy": "^2.2.2",

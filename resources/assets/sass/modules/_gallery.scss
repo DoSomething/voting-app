@@ -7,20 +7,25 @@
 
   @include clearfix;
 
-  > li {
+  .gallery__row {
+    @include clearfix;
+  }
+
+  > li, .gallery__item {
     margin-bottom: gutter();
 
     @include media('medium') {
-      @include gallery(4);
+      @include span(4);
     }
 
     @include media('large') {
-      @include gallery(3);
+      @include span(3);
     }
   }
 }
 
 // Oh, shush.
 .gallery-heading {
-  margin-bottom: $base-spacing * 2;
+  padding: 0 gutter();
+  margin-bottom: $base-spacing;
 }
