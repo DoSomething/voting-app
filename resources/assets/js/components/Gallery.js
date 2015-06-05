@@ -48,6 +48,15 @@ const Gallery = React.createClass({
   render() {
     const _this = this;
 
+    // Show "empty state" if no items
+    if(this.props.items.length === 0) {
+      return (
+        <div className="gallery -empty">
+          <div className="gallery__empty">No matches!</div>
+        </div>
+      )
+    }
+
     const chunkedItems = chunk(this.props.items, this.state.itemsPerRow);
 
     let rows = chunkedItems.map(function(row, index) {

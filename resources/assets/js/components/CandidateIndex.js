@@ -1,38 +1,43 @@
 import React from 'react/addons';
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
+import { cloneDeep } from 'lodash';
 
 const CandidateIndex = React.createClass({
 
   getInitialState() {
     return {
-      query: ''
+      categories: this.props.categories
     }
   },
 
   filterCandidates(query) {
-    console.log(query);
+    query = query.toUpperCase();
 
-    this.setState({ query: query });
-  },
+    // Filter candidates by search query...
+    let categories = this.props.categories.map(function(cat) {
+      let category = cloneDeep(cat);
+      const categoryName = category.name.toUpperCase();
 
-  render() {
-    const query = this.state.query.toUpperCase();
-
-    var galleries = this.props.categories.map(function(category) {
-      // Filter candidates by search query...
-      let candidates = category.candidates;
       if(query !== '') {
-        candidates = candidates.filter(function(candidate) {
+        category.candidates = category.candidates.filter(function(candidate) {
           const name = candidate.name.toUpperCase();
-          return (name.includes(query) ? candidate : null);
+          return (name.includes(query) || categoryName.includes(query) ? candidate : null);
         });
       }
 
+      return category;
+    });
+
+    this.setState({ categories: categories });
+  },
+
+  render() {
+    var galleries = this.state.categories.map(function(category) {
       return (
         <div key={category.id} className='category'>
           <h2 className='gallery-heading'>{category.name}</h2>
-          <Gallery items={candidates} />
+          <Gallery items={category.candidates} />
         </div>
       );
     });
