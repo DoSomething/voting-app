@@ -28,7 +28,14 @@
                     <td><a href="{{ route('winners.store') }}" data-confirm="Mark this candidate as a winner?" data-method="POST" data-form-item="id" data-form-value="{{ $candidate->id }}">mark winner</a></td>
                 </tr>
             @empty
-                <div class="empty">No users... yet!</div>
+                <tr>
+                    <td class="empty">No users... yet!</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
             @endforelse
         </table>
 
