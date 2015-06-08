@@ -6,14 +6,15 @@ import { chunk } from 'lodash';
 import Tile from './Tile';
 import Drawer from './Drawer';
 
-const Gallery = React.createClass({
+class Gallery extends React.Component {
 
-  getInitialState() {
-    return {
-      selected: null,
+  constructor() {
+    super();
+
+    this.state = {
       itemsPerRow: this.tilesPerRow()
-    }
-  },
+    };
+  }
 
   tilesPerRow() {
     const width = window.innerWidth;
@@ -25,7 +26,7 @@ const Gallery = React.createClass({
     } else {
       return 1;
     }
-  },
+  }
 
   componentDidMount() {
     var _this = this;
@@ -38,12 +39,7 @@ const Gallery = React.createClass({
         _this.setState({ itemsPerRow: itemsPerRow });
       }
     });
-  },
-
-  selectItem(item) {
-    this.setState({selectedItem: item.props.candidate});
-  },
-
+  }
 
   render() {
     const _this = this;
@@ -63,26 +59,26 @@ const Gallery = React.createClass({
       // Build each tile in the row
       let hasSelectedTile = false;
       var tiles = row.map(function(candidate) {
-        const selected = candidate === _this.state.selectedItem;
+        const selected = candidate === _this.props.selectedItem;
         if(selected) {
           hasSelectedTile = selected;
         }
 
         return (
           <li key={candidate.id} className='gallery__item'>
-            <Tile candidate={candidate} selected={selected} onClick={_this.selectItem} />
+            <Tile candidate={candidate} selected={selected} onClick={_this.props.selectItem} />
           </li>
         );
       });
 
       // Return the row
       return (
-        <div>
-          <div className='gallery__row' key={index}>
+        <div key={index}>
+          <div className='gallery__row'>
           {tiles}
           </div>
           <CSSTransitionGroup transitionName="drawer-animation" transitionAppear={true} transitionLeave={true}>
-            {hasSelectedTile ? <Drawer candidate={_this.state.selectedItem}/> : null}
+            {hasSelectedTile ? <Drawer candidate={_this.props.selectedItem} selectItem={_this.props.selectItem} /> : null}
           </CSSTransitionGroup>
         </div>
       )
@@ -93,6 +89,6 @@ const Gallery = React.createClass({
     );
   }
 
-});
+}
 
 export default Gallery;
