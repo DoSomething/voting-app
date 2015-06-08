@@ -29,7 +29,11 @@ class Candidate extends Model implements SluggableInterface
         'save_to' => 'slug'
     ];
 
-    protected $appends = array('share_name');
+    /**
+     * Computed attributes to include in array or JSON representation.
+     * @var array
+     */
+    protected $appends = ['share_name', 'url'];
 
     /**
      * Inverse has-many relationship to Categories.
@@ -102,6 +106,15 @@ class Candidate extends Model implements SluggableInterface
     public function getShareNameAttribute()
     {
         return (!empty($this->twitter)) ? $this->twitter : $this->name;
+    }
+
+    /**
+     * URL attribute for JSON object.
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('candidates.show', [$this->slug]);
     }
 
 }
