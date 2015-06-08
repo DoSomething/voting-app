@@ -55,7 +55,7 @@ class CandidatesController extends Controller
 
         $query = DB::table('candidates')
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
-            ->join('votes', 'candidates.id', '=', 'votes.candidate_id')
+            ->leftJoin('votes', 'candidates.id', '=', 'votes.candidate_id')
             ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
             ->groupBy('candidates.name');
 
