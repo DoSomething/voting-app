@@ -1,55 +1,68 @@
 import React from 'react/addons';
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, includes } from 'lodash';
 
-const CandidateIndex = React.createClass({
+class CandidateIndex extends React.Component {
 
-  getInitialState() {
-    return {
-      categories: this.props.categories
+  constructor() {
+    super();
+
+    this.state = {
+      query: '',
+      selectedItem: null
+    };
+
+    this.selectItem = this.selectItem.bind(this);
+    this.setQuery = this.setQuery.bind(this);
+  }
+
+  setQuery(query) {
+    this.setState({ query: query });
+  }
+
+  selectItem(item) {
+    // De-select if trying to select the same item again.
+    if(this.state.selectedItem === item.props.candidate) {
+      this.setState({selectedItem: null});
+      return;
     }
-  },
 
-  filterCandidates(query) {
-    query = query.toUpperCase();
+    this.setState({selectedItem: item.props.candidate});
+  }
+
+  filteredCandidates(candidates, categoryName) {
+    const query = this.state.query.toUpperCase();
+    categoryName = categoryName.toUpperCase();
+
+    if(query === '') return candidates;
 
     // Filter candidates by search query...
-    let categories = this.props.categories.map(function(cat) {
-      let category = cloneDeep(cat);
-      const categoryName = category.name.toUpperCase();
-
-      if(query !== '') {
-        category.candidates = category.candidates.filter(function(candidate) {
-          const name = candidate.name.toUpperCase();
-          return (name.includes(query) || categoryName.includes(query) ? candidate : null);
-        });
-      }
-
-      return category;
+    return candidates.filter(function(candidate) {
+      const name = candidate.name.toUpperCase();
+      return (includes(name, query) || includes(categoryName, query) ? candidate : null);
     });
-
-    this.setState({ categories: categories });
-  },
+  }
 
   render() {
-    var galleries = this.state.categories.map(function(category) {
+    var _this = this;
+    var galleries = this.props.categories.map(function(category) {
       return (
         <div key={category.id} className='category'>
           <h2 className='gallery-heading'>{category.name}</h2>
-          <Gallery items={category.candidates} />
+          <Gallery items={_this.filteredCandidates(category.candidates, category.name)} selectItem={_this.selectItem} selectedItem={_this.state.selectedItem} />
         </div>
       );
     });
 
     return (
       <div>
-        <SearchForm onChange={this.filterCandidates} />
+        <SearchForm onChange={this.setQuery} />
         {galleries}
       </div>
     );
   }
 
-});
+}
 
 export default CandidateIndex;

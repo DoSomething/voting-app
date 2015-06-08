@@ -5,9 +5,9 @@
 
   input[type='search'] {
     width: 100%;
-    background: rgba(#333, 0.8) data-url($data-search-white-svg) ($base-spacing / 2) 48% no-repeat;
+    background: rgba(#222, 0.8) data-url($data-search-white-svg) ($base-spacing / 2) 48% no-repeat;
     background-size: $base-spacing $base-spacing;
-    border: rgba(#333, 0.8);
+    border: rgba(#222, 0.8);
     color: #fff;
     padding-left: 48px;
     box-sizing: border-box;
