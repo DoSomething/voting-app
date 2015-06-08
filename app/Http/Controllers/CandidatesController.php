@@ -15,7 +15,9 @@ class CandidatesController extends Controller
      */
     protected $rules = [
         'name' => 'required',
+        'category_id' => 'required',
         'photo_source' => 'url',
+        'image' => 'image',
     ];
 
     public function __construct()
@@ -94,6 +96,8 @@ class CandidatesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, $this->rules);
+
         $candidate = new Candidate($request->all());
 
         if ($file = $request->file('photo')) {
@@ -148,8 +152,7 @@ class CandidatesController extends Controller
         $candidate->fill($request->all());
 
         if ($file = $request->file('photo')) {
-            $image = Image::make($file->getRealPath());
-            $candidate->savePhoto($image);
+            $candidate->savePhoto($file);
         }
 
         $candidate->save();
