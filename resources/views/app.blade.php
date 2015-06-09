@@ -58,7 +58,6 @@
 @include('partials.navigation')
 
 <div class="container">
-    <div id="test"><h1>TEST TEST TEST</h1></div>
     @yield('content')
 </div>
 
