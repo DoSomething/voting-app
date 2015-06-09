@@ -1,5 +1,4 @@
 import React from 'react/addons';
-const { CSSTransitionGroup } = React.addons;
 import classNames from 'classnames';
 import { chunk } from 'lodash';
 
@@ -77,9 +76,7 @@ class Gallery extends React.Component {
           <div className='gallery__row'>
           {tiles}
           </div>
-          <CSSTransitionGroup transitionName="drawer-animation" transitionAppear={true} transitionLeave={true}>
-            {hasSelectedTile ? <Drawer candidate={_this.props.selectedItem} selectItem={_this.props.selectItem} /> : null}
-          </CSSTransitionGroup>
+          <Drawer isOpen={hasSelectedTile} candidate={_this.props.selectedItem} selectItem={_this.props.selectItem} />
         </div>
       )
     });

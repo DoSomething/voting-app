@@ -1,4 +1,5 @@
 import React from 'react/addons';
+const { CSSTransitionGroup } = React.addons;
 import Tile from './Tile';
 
 class Drawer extends React.Component {
@@ -11,7 +12,10 @@ class Drawer extends React.Component {
   }
 
   render() {
-    return (
+    let drawer;
+
+    if(this.props.isOpen) {
+      drawer = (
         <div className='drawer'>
           <div className='candidate'>
             <div className='wrapper'>
@@ -27,6 +31,13 @@ class Drawer extends React.Component {
           </div>
           <a href="#" className="drawer__close" onClick={this.close.bind(this)}><span>Close</span></a>
         </div>
+      );
+    }
+
+    return (
+      <CSSTransitionGroup transitionName="drawer-animation" transitionAppear={true} transitionLeave={true}>
+        {drawer}
+      </CSSTransitionGroup>
     )
   }
 
