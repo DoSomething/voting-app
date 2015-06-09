@@ -24,16 +24,30 @@ class Tile extends React.Component {
       '-alternate': this.props.alternate
     });
 
+    let content = (
+      <div>
+        <div className='tile__meta'>
+          <h1>{candidate.name}</h1>
+        </div>
+        <img alt={candidate.name} src={photo} />
+      </div>
+    );
+
+    if(this.props.alternate) {
+      return (
+        <article className={classes}>
+          <div className='wrapper'>
+            {content}
+          </div>
+        </article>
+      );
+    }
+
     return (
       <article className={classes}>
         <a className='wrapper' href={candidate.url} onClick={this.onClick}>
-          <div className='tile__meta'>
-            <h1>{candidate.name}</h1>
-          </div>
-          <img alt={candidate.name} src={photo} />
-
-          { /* Hide 'vote' button if using alternate appearance */ }
-          {this.props.alternate ? null : <span className='button -round tile__action'>Vote</span>}
+          {content}
+          <span className='button -round tile__action'>Vote</span>
         </a>
       </article>
     );
