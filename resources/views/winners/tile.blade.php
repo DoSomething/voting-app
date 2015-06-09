@@ -5,9 +5,9 @@
             <div class="tile__meta">
                 <h1>{{ $winner->name }}</h1>
             </div>
-            <img alt="{{{ $winner->name }}}"
+            <img alt="{{ $winner->name }}"
                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                 data-src="/images/thumb-{{{ $winner->photo }}}" width="265" height="265"/>
+                 data-src="{{ $winner->thumbnail }}" width="265" height="265"/>
 
             <span class="button -round tile__action">{{ $winner->rank }}</span>
 

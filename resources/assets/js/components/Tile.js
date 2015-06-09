@@ -20,7 +20,6 @@ class Tile extends React.Component {
 
   render() {
     let candidate = this.props.candidate;
-    let photo = `/images/thumbnails/thumb-${candidate.photo}`;
 
     const classes = classNames('tile', {
       'is-active': this.props.selected,
@@ -32,7 +31,7 @@ class Tile extends React.Component {
         <div className='tile__meta'>
           <h1>{candidate.name}</h1>
         </div>
-        <img alt={candidate.name} src={photo} />
+        <img alt={candidate.name} src={candidate.thumbnail} />
       </div>
     );
 

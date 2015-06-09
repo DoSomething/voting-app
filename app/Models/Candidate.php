@@ -33,7 +33,7 @@ class Candidate extends Model implements SluggableInterface
      * Computed attributes to include in array or JSON representation.
      * @var array
      */
-    protected $appends = ['share_name', 'url'];
+    protected $appends = ['share_name', 'thumbnail', 'url'];
 
     /**
      * Inverse has-many relationship to Categories.
@@ -57,18 +57,6 @@ class Candidate extends Model implements SluggableInterface
     public function winner()
     {
         return $this->hasOne('VotingApp\Models\Winner');
-    }
-
-    /**
-     * @return string
-     */
-    public function thumbnail()
-    {
-        if ($this->photo) {
-            return asset('images/thumbnails/thumb-' . $this->photo);
-        } else {
-            return asset('images/placeholder.png');
-        }
     }
 
     /**
@@ -106,6 +94,19 @@ class Candidate extends Model implements SluggableInterface
     public function getShareNameAttribute()
     {
         return (!empty($this->twitter)) ? $this->twitter : $this->name;
+    }
+
+    /**
+     * Get image URL for the candidate's thumbnail.
+     * @return string
+     */
+    public function getThumbnailAttribute()
+    {
+        if ($this->photo) {
+            return asset('images/thumbnails/thumb-' . $this->photo);
+        } else {
+            return asset('assets/images/placeholder.jpg');
+        }
     }
 
     /**
