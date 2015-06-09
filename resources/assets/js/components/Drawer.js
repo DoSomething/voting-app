@@ -1,6 +1,6 @@
 import React from 'react/addons';
 const { CSSTransitionGroup } = React.addons;
-import Tile from './Tile';
+import CandidateDetailView from './CandidateDetailView';
 
 class Drawer extends React.Component {
 
@@ -17,18 +17,7 @@ class Drawer extends React.Component {
     if(this.props.isOpen) {
       drawer = (
         <div className='drawer'>
-          <div className='candidate'>
-            <div className='wrapper'>
-              <div className="candidate__info">
-                <Tile candidate={this.props.candidate} alternate={true} />
-                <p className="candidate__description">{this.props.candidate.description}</p>
-              </div>
-
-              <div className="candidate__actions">
-                Whatcha gonna do about it.
-              </div>
-            </div>
-          </div>
+          <CandidateDetailView candidate={this.props.candidate} />
           <a href="#" className="drawer__close" onClick={this.close.bind(this)}><span>Close</span></a>
         </div>
       );
