@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import delegate from 'dom-delegate';
 
 const width = 550;
 const height = 420;
@@ -22,4 +22,4 @@ function handleIntent(event) {
   event.preventDefault();
 }
 
-$(document).on('click', '.js-share-link', handleIntent);
+delegate(document.body).on('click', '.js-share-link', handleIntent);

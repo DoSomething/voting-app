@@ -12,7 +12,6 @@
 //                                                                        \__|      \__|
 //
 
-import $ from 'jquery';
 import React from 'react/addons';
 
 // RequestAnimationFrame polyfill
@@ -20,6 +19,7 @@ import 'requestanimationframe';
 
 // Utilities
 import './utilities/confirm';
+import ready from './utilities/dom-ready';
 import './utilities/form-loader';
 import './utilities/lazy-load';
 import './utilities/method-link';
@@ -28,10 +28,7 @@ import './utilities/share-link';
 // Components
 import CandidateIndex from './components/CandidateIndex';
 
-// Bind jQuery to the window
-window.jQuery = $;
-
-$(document).ready(function() {
+ready(function() {
   // Render the gallery if we're on a gallery page
   const gallery = document.getElementById('gallery');
   if(gallery) {

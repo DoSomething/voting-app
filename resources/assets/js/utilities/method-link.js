@@ -1,21 +1,27 @@
-import $ from 'jquery';
+import delegate from 'dom-delegate';
 
-const $body = $('body');
-const csrfToken = $('meta[name=csrf-token]').attr('content');
+let csrfTag = document.querySelectorAll('meta[name=csrf-token]');
+if(csrfTag.length > 0) {
+  var csrfToken = csrfTag[0].getAttribute('content');
+}
 
 /**
  * Allow links to specify a HTTP method using `data-method`
  */
-$(document).on('click', '[data-method]', function(event) {
+delegate(document.body).on('click', '*[data-method]', function(event) {
   event.preventDefault();
 
-  const url = $(this).attr('href');
-  const method = $(this).data('method');
+  const url = this.getAttribute('href');
+  const method = this.getAttribute('data-method');
 
-  const formItem = $(this).data('form-item');
-  const formValue = $(this).data('form-value');
+  const formItem = this.getAttribute('data-form-item');
+  const formValue = this.getAttribute('data-form-value');
 
-  let $form = $(`<form method="post" action="${url}"></form>`);
+  let form = document.createElement('form');
+  form.setAttribute('method', 'post');
+  form.setAttribute('action', url);
+  form.setAttribute('style', 'display: none;');
+
   let metadataInput = `<input name="_method" value="${method}" type="hidden" />`;
 
   if (csrfToken !== undefined) {
@@ -26,8 +32,11 @@ $(document).on('click', '[data-method]', function(event) {
     metadataInput += `<input name="${formItem}" value="${formValue}" type="hidden" />`;
   }
 
-  $form.hide().append(metadataInput);
-  $body.append($form);
+  var e = document.createElement('div');
+  e.innerHTML = metadataInput;
+  form.appendChild(e);
 
-  $form.submit();
+  document.body.appendChild(form);
+
+  form.submit();
 });
