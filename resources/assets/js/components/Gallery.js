@@ -15,6 +15,11 @@ class Gallery extends React.Component {
     };
   }
 
+  /**
+   * Calculate the number of tiles to put in a row, based
+   * on the media queries we use in our stylesheet.
+   * @returns {number}
+   */
   tilesPerRow() {
     const width = window.innerWidth;
 
@@ -27,6 +32,10 @@ class Gallery extends React.Component {
     }
   }
 
+  /**
+   * Add an event listener to re-render the gallery when the
+   * user resizes between breakpoints.
+   */
   componentDidMount() {
     var _this = this;
 
@@ -40,6 +49,10 @@ class Gallery extends React.Component {
     });
   }
 
+  /**
+   * Render component.
+   * @returns {XML}
+   */
   render() {
     const _this = this;
 

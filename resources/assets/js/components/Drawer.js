@@ -4,6 +4,10 @@ import CandidateDetailView from './CandidateDetailView';
 
 class Drawer extends React.Component {
 
+  /**
+   * Send 'close' event to parent component.
+   * @param event
+   */
   close(event) {
     event.preventDefault();
 
@@ -11,6 +15,10 @@ class Drawer extends React.Component {
     this.props.selectItem(this);
   }
 
+  /**
+   * Render component.
+   * @returns {XML}
+   */
   render() {
     let drawer;
 

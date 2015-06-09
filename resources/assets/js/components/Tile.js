@@ -9,6 +9,9 @@ class Tile extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
+  /**
+   * Send click event to parent component.
+   */
   onClick(event) {
     event.preventDefault();
 

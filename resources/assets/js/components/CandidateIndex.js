@@ -17,10 +17,18 @@ class CandidateIndex extends React.Component {
     this.setQuery = this.setQuery.bind(this);
   }
 
+  /**
+   * Set the query to filter galleries by.
+   * @param query
+   */
   setQuery(query) {
     this.setState({ query: query });
   }
 
+  /**
+   * Set or unset the selected item to show details for.
+   * @param query
+   */
   selectItem(item) {
     // De-select if trying to select the same item again.
     if(this.state.selectedItem === item.props.candidate) {
@@ -31,6 +39,12 @@ class CandidateIndex extends React.Component {
     this.setState({selectedItem: item.props.candidate});
   }
 
+  /**
+   * Filter candidates by the current search query.
+   * @param candidates - Object containing candidates to be filtered
+   * @param categoryName - Category name
+   * @returns object - Filtered candidates
+   */
   filteredCandidates(candidates, categoryName) {
     const query = this.state.query.toUpperCase();
     categoryName = categoryName.toUpperCase();
@@ -44,6 +58,10 @@ class CandidateIndex extends React.Component {
     });
   }
 
+  /**
+   * Render component.
+   * @returns {XML}
+   */
   render() {
     var _this = this;
     var galleries = this.props.categories.map(function(category) {
