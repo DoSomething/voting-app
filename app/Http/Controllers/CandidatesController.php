@@ -40,8 +40,9 @@ class CandidatesController extends Controller
         }
 
         $categories = Category::with('candidates')->get();
+        $categories_json = $categories->toJson();
 
-        return view('candidates.index', compact('categories', 'type'));
+        return view('candidates.index', compact('categories', 'categories_json'));
     }
 
     /**

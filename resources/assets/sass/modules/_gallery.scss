@@ -1,26 +1,42 @@
 // Gallery container.
 
 .gallery {
+  @include clearfix;
+  clear: both;
   list-style-type: none;
-  margin: 0;
+  margin: $base-spacing 0;
   padding: 0;
 
-  @include clearfix;
+  &.-empty {
+    margin: 0 0 ($base-spacing * 2);
+  }
 
-  > li {
+
+  .gallery__row {
+    @include clearfix;
+  }
+
+  > li, .gallery__item {
     margin-bottom: gutter();
 
     @include media('medium') {
-      @include gallery(4);
+      @include span(4);
     }
 
     @include media('large') {
-      @include gallery(3);
+      @include span(3);
     }
+  }
+
+  .gallery__empty {
+    @include span(100%);
+    color: $gray;
+    font-size: $base-font-size;
+    padding-top: ($base-spacing / 2);
   }
 }
 
 // Oh, shush.
 .gallery-heading {
-  margin-bottom: $base-spacing * 2;
+  padding: 0 gutter();
 }

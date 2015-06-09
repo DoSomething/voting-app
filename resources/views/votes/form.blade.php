@@ -16,7 +16,7 @@
     @if (Auth::user()->canVote())
         <p class="heading -hero">Hey, {{ Auth::user()->first_name }}! Ready to cast your vote?</p>
         {!! Form::open(['route' => 'votes.store']) !!}
-            <input type="hidden" name="candidate_id" value="{{ $id or '' }}"/>
+            <input type="hidden" name="candidate_id" value="{{ $id or 'CANDIDATE_ID' }}"/>
             {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
         {!! Form::close() !!}
 
@@ -31,7 +31,7 @@
 @else
     {!! Form::open(['route' => 'votes.store']) !!}
     @include('auth.form')
-    <input type="hidden" name="candidate_id" value="{{ $candidate->id or '' }}"/>
+    <input type="hidden" name="candidate_id" value="{{ $candidate->id or 'CANDIDATE_ID' }}"/>
     {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
 
     @if(is_domestic_session() || should_collect_international_phone())

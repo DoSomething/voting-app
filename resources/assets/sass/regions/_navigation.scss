@@ -1,9 +1,10 @@
 // Primary navigation
 nav.primary {
-  margin: ($base-spacing * 4) 0;
+  @include span(100%);
+  margin: ($base-spacing * 2) 0;
 
   @include media('medium') {
-    margin: ($base-spacing * 12) 0 ($base-spacing * 8);
+    margin: ($base-spacing * 5) 0;
   }
 
   .navigation__logo {

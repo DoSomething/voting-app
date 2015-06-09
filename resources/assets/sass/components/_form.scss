@@ -14,13 +14,13 @@ input[type="date"], input[type="datetime"], input[type="datetime-local"],
 input[type="month"], input[type="time"], input[type="week"], textarea {
   background: $white;
   color: $black;
-  border: 1px solid $gray;
+  border: 1px solid $white;
   border-radius: $base-border-radius;
   font-family: $base-font-family;
   font-size: $medium-font-size;
   width: 100%;
-  padding: ($base-spacing / 2) $base-spacing;
-  margin-bottom: $base-spacing * 2;
+  padding: ($base-spacing / 2);
+  margin-bottom: $base-spacing;
 
   &:focus {
     border: 1px solid $cyan;

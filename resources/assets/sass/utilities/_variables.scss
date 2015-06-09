@@ -1,10 +1,14 @@
 // Variables!
 
+$max-width: 1200px;
+
 // Layout (@see: http://susydocs.oddbird.net/en/latest/settings/)
 $susy: (
-  container: 1200px,
+  container: $max-width,
   columns: 12,
-  gutters: (1/4),
+  gutters: (24/64.5),
+  column-width: 64.5px,
+  gutter-position: inside-static,
   debug: (
     // image: show,
     // output: overlay,
@@ -13,12 +17,22 @@ $susy: (
   ),
 );
 
+
 // Breakpoints (see `media` mixin)
 $breakpoints: (
   'small': (max-width: 659px),
   'medium': (min-width: 660px),
   'large': (min-width: 1100px),
 );
+
+$small: "(max-width: 759px)";
+$medium: "(min-width: 760px)";
+$large: "(min-width: 960px)";
+$larger: "(min-width: 1060px)";
+
+$mobile: $small;
+$tablet: $medium;
+$desktop: $larger;
 
 // Font Stacks
 $base-font-family: "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
@@ -55,5 +69,5 @@ $base-line-height: $base-font-size * $unitless-line-height;
 $header-line-height: 1.1;
 
 // Measurements
-$base-spacing: 12px;
-$base-border-radius: ($base-spacing / 4);
+$base-spacing: 24px;
+$base-border-radius: 2px;
