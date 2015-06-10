@@ -33,10 +33,18 @@ class CandidatesController extends Controller
      */
     public function index(Request $request)
     {
+        $showAsGuest = Auth::check() && Auth::user()->admin && $request->get('guest');
+
         // Show admin interface instead for administrators. Admin users can
-        // use the `?guest=1` query parameter to bypass the admin view.
-        if(Auth::check() && Auth::user()->admin && !$request->get('guest')) {
+        // use the `?guest=✓` query parameter to bypass the admin view.
+        if(Auth::check() && Auth::user()->admin && !$showAsGuest) {
             return $this->adminIndex($request);
+        }
+
+        // Hide candidates if `show_candidates` setting is disabled, unless logged
+        // in as an administrator & using "show as guest" override
+        if(!setting('show_candidates') && !$showAsGuest) {
+            return view('candidates.index', ['categories' => [], 'categories_json' => '']);
         }
 
         $categories = Category::with('candidates')->get();

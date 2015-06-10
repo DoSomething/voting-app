@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    @if(setting('show_candidates'))
+    @if($categories)
         <div id="gallery">
             @forelse($categories as $category)
                 <h2 class="gallery-heading">{{ $category->name }}</h2>
