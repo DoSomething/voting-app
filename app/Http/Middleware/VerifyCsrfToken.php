@@ -7,6 +7,15 @@ class VerifyCsrfToken extends BaseVerifier
 {
 
     /**
+     * Paths which should not check CSRF token.
+     * @var array
+     */
+    protected $excludedPaths = [
+        'vote',
+        'admin'
+    ];
+
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
@@ -15,6 +24,21 @@ class VerifyCsrfToken extends BaseVerifier
      */
     public function handle($request, Closure $next)
     {
+        // Skip CSRF verification on excluded paths
+        if($this->shouldSkipVerification($request)) {
+            return $this->addCookieToResponse($request, $next($request));
+        }
+
         return parent::handle($request, $next);
+    }
+
+    /**
+     * Check if CSRF verification should be skipped for this page.
+     * @param \Illuminate\Http\Request $request
+     * @return bool
+     */
+    public function shouldSkipVerification($request)
+    {
+        return in_array($request->path(), $this->excludedPaths);
     }
 }
