@@ -3,7 +3,7 @@
 @section('title', $candidate->name)
 @section('meta_title', $candidate->name)
 @section('meta_description', 'Vote for ' . $candidate->name . ' in ' . setting('site_title') . '.')
-@section('meta_image', URL::to($candidate->thumbnail()))
+@section('meta_image', URL::to($candidate->thumbnail))
 
 @section('content')
     <div class="candidate">
@@ -13,7 +13,7 @@
                     <div class="tile__meta">
                         <h1>{{ $candidate->name }}</h1>
                     </div>
-                    <img alt="{{ $candidate->name }}" src="{{ $candidate->thumbnail() }}"/>
+                    <img alt="{{ $candidate->name }}" src="{{ $candidate->thumbnail }}"/>
                 </a>
             </article>
 

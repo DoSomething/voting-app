@@ -14,11 +14,6 @@
     <link rel="shortcut icon" href="{{ asset(setting('favicon', 'assets/images/favicon.default.ico')) }}">
     <link rel="apple-touch-icon" href="{{ asset(setting('touch_icon', 'assets/images/touch_icon.default.png')) }}">
 
-    <!--[if lte IE 8]>
-    <script src="{{ asset('/assets/vendor/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('/assets/vendor/respond.min.js') }}"></script>
-    <![endif]-->
-
     <style>
         html { background-image: url('{{ background('regular', 'none') }}'); }
         @media (min-width: 1200px) {
@@ -54,6 +49,13 @@
     @include('partials.metadata')
 </head>
 <body>
+<!--[if lte IE 8]>
+    <div class='ie-upgrade'>
+        <p>You're running an older web browser, so we can't guarantee that everything on <strong>{{ setting('site_title') }}</strong> will work correctly.</p>
+        <p><a href="http://whatbrowser.org/">Click here</a> to learn how to upgrade your web browser.</p>
+    </div>
+<![endif]-->
+
 @include('partials.admin')
 @include('partials.navigation')
 

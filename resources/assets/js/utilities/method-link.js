@@ -1,33 +1,46 @@
-import $ from 'jquery';
-
-const $body = $('body');
-const csrfToken = $('meta[name=csrf-token]').attr('content');
+import delegate from 'dom-delegate';
 
 /**
  * Allow links to specify a HTTP method using `data-method`
  */
-$(document).on('click', '[data-method]', function(event) {
-  event.preventDefault();
-
-  const url = $(this).attr('href');
-  const method = $(this).data('method');
-
-  const formItem = $(this).data('form-item');
-  const formValue = $(this).data('form-value');
-
-  let $form = $(`<form method="post" action="${url}"></form>`);
-  let metadataInput = `<input name="_method" value="${method}" type="hidden" />`;
-
-  if (csrfToken !== undefined) {
-    metadataInput += `<input name="_token" value="${csrfToken}" type="hidden" />`;
+function initialize() {
+  let csrfTag = document.querySelectorAll('meta[name=csrf-token]');
+  if(csrfTag.length > 0) {
+    var csrfToken = csrfTag[0].getAttribute('content');
   }
 
-  if (formItem !== undefined && formValue !== undefined) {
-    metadataInput += `<input name="${formItem}" value="${formValue}" type="hidden" />`;
-  }
+  delegate(document.body).on('click', '*[data-method]', function(event) {
+    event.preventDefault();
 
-  $form.hide().append(metadataInput);
-  $body.append($form);
+    const url = this.getAttribute('href');
+    const method = this.getAttribute('data-method');
 
-  $form.submit();
-});
+    const formItem = this.getAttribute('data-form-item');
+    const formValue = this.getAttribute('data-form-value');
+
+    let form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', url);
+    form.setAttribute('style', 'display: none;');
+
+    let metadataInput = `<input name="_method" value="${method}" type="hidden" />`;
+
+    if (csrfToken !== undefined) {
+      metadataInput += `<input name="_token" value="${csrfToken}" type="hidden" />`;
+    }
+
+    if (formItem !== undefined && formValue !== undefined) {
+      metadataInput += `<input name="${formItem}" value="${formValue}" type="hidden" />`;
+    }
+
+    var e = document.createElement('div');
+    e.innerHTML = metadataInput;
+    form.appendChild(e);
+
+    document.body.appendChild(form);
+
+    form.submit();
+  });
+}
+
+export default { initialize };
