@@ -17,6 +17,7 @@ class Kernel extends HttpKernel
         'Illuminate\Session\Middleware\StartSession',
         'Illuminate\View\Middleware\ShareErrorsFromSession',
         'VotingApp\Http\Middleware\VerifyCsrfToken',
+        'VotingApp\Http\Middleware\SetCountryCodeFromHeader',
         'VotingApp\Http\Middleware\SetLanguageFromHeader',
     ];
 

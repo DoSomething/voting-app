@@ -7,12 +7,7 @@
  */
 function get_country_code()
 {
-    // Allow overriding country via query string, for debugging
-    if($queryOverride = app('request')->get('country')) {
-        return $queryOverride;
-    }
-
-    return app('request')->server('HTTP_X_FASTLY_COUNTRY_CODE', null);
+    return session('country_code');
 }
 
 /**
