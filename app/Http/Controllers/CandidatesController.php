@@ -44,13 +44,12 @@ class CandidatesController extends Controller
         // Hide candidates if `show_candidates` setting is disabled, unless logged
         // in as an administrator & using "show as guest" override
         if(!setting('show_candidates') && !$showAsGuest) {
-            return view('candidates.index', ['categories' => [], 'categories_json' => '']);
+            return view('candidates.index', ['categories' => []]);
         }
 
         $categories = Category::with('candidates')->get();
-        $categories_json = $categories->toJson();
 
-        return view('candidates.index', compact('categories', 'categories_json'));
+        return view('candidates.index', compact('categories'));
     }
 
     /**
@@ -107,7 +106,7 @@ class CandidatesController extends Controller
     {
         $this->validate($request, $this->rules);
 
-        $candidate = new Candidate($request->all());
+        $candidate = Candidate::create($request->all());
 
         if ($file = $request->file('photo')) {
             $candidate->savePhoto($file);

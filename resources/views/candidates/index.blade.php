@@ -20,7 +20,7 @@
             @endforelse
 
             <script type="application/json" id="gallery-json">
-                {!! $categories_json !!}
+                {!! $categories->toJson() !!}
             </script>
         </div>
 
