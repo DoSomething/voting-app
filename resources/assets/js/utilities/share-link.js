@@ -8,18 +8,20 @@ const winWidth = screen.width;
 /**
  * Open Facebook and Twitter share dialogs.
  */
-function handleIntent(event) {
-  const left = Math.round((winWidth / 2) - (width / 2));
-  let top = 0;
+function initialize() {
+  delegate(document.body).on('click', '.js-share-link', function() {
+    event.preventDefault();
 
-  if (winHeight > height) {
-    top = Math.round((winHeight / 2) - (height / 2));
-  }
+    const left = Math.round((winWidth / 2) - (width / 2));
+    let top = 0;
 
-  window.open(this.href, 'intent', `scrollbars=yes,resizable=yes,toolbar=no,
-  location=yes,width=${width},height=${height},left=${left},top=${top}`);
+    if (winHeight > height) {
+      top = Math.round((winHeight / 2) - (height / 2));
+    }
 
-  event.preventDefault();
+    window.open(this.href, 'intent', `scrollbars=yes,resizable=yes,toolbar=no,
+      location=yes,width=${width},height=${height},left=${left},top=${top}`);
+  });
 }
 
-delegate(document.body).on('click', '.js-share-link', handleIntent);
+export default { initialize };

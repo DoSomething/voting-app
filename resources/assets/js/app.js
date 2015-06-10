@@ -1,39 +1,44 @@
-//
-//  $$\    $$\  $$$$$$\ $$$$$$$$\ $$$$$$\ $$\   $$\  $$$$$$\
-//  $$ |   $$ |$$  __$$\\__$$  __|\_$$  _|$$$\  $$ |$$  __$$\
-//  $$ |   $$ |$$ /  $$ |  $$ |     $$ |  $$$$\ $$ |$$ /  \__|    $$$$$$\   $$$$$$\   $$$$$$\
-//  \$$\  $$  |$$ |  $$ |  $$ |     $$ |  $$ $$\$$ |$$ |$$$$\     \____$$\ $$  __$$\ $$  __$$\
-//   \$$\$$  / $$ |  $$ |  $$ |     $$ |  $$ \$$$$ |$$ |\_$$ |    $$$$$$$ |$$ /  $$ |$$ /  $$ |
-//    \$$$  /  $$ |  $$ |  $$ |     $$ |  $$ |\$$$ |$$ |  $$ |   $$  __$$ |$$ |  $$ |$$ |  $$ |
-//     \$  /    $$$$$$  |  $$ |   $$$$$$\ $$ | \$$ |\$$$$$$  |$$\\$$$$$$$ |$$$$$$$  |$$$$$$$  |
-//      \_/     \______/   \__|   \______|\__|  \__| \______/ \__|\_______|$$  ____/ $$  ____/
-//                                                                        $$ |      $$ |
-//                                                                        $$ |      $$ |
-//                                                                        \__|      \__|
-//
-
 import React from 'react/addons';
 
-// RequestAnimationFrame polyfill
-import 'requestanimationframe';
-
 // Utilities
-import './utilities/confirm';
 import ready from './utilities/dom-ready';
-import './utilities/form-loader';
-import './utilities/lazy-load';
-import './utilities/method-link';
-import './utilities/share-link';
+import confirm from './utilities/confirm';
+import formLoader from './utilities/form-loader';
+import methodLink from './utilities/method-link';
+import cutTheMustard from './utilities/mustard';
+import shareLink from './utilities/share-link';
 
 // Components
 import CandidateIndex from './components/CandidateIndex';
 
-ready(function() {
-  // Render the gallery if we're on a gallery page
-  const gallery = document.getElementById('gallery');
-  if(gallery) {
-    const categories= JSON.parse(document.getElementById('gallery-json').innerHTML);
-    React.render(<CandidateIndex categories={categories} />, gallery);
-  }
-});
+/**
+ * Cut the mustard, wait for DOM load, & start the application.
+ *
+ * We do not initialize the client-side application if the user is running
+ * an older browser (such as IE8), instead defaulting to the classic
+ * server-rendered view.
+ */
+cutTheMustard(function() {
+  ready(function() {
 
+    // Initialize popups for social sharing links.
+    shareLink.initialize();
+
+    // Initialize `data-confirm` link handler.
+    confirm.initialize();
+
+    // Prevent form double submission.
+    formLoader.initialize();
+
+    // Initialize `data-method` link handler.
+    methodLink.initialize();
+
+    // Render the gallery if we're on a gallery page
+    const gallery = document.getElementById('gallery');
+    if(gallery) {
+      const categories= JSON.parse(document.getElementById('gallery-json').innerHTML);
+      React.render(<CandidateIndex categories={categories} />, gallery);
+    }
+
+  });
+});
