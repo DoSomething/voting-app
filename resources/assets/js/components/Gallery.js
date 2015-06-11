@@ -21,6 +21,7 @@ class Gallery extends React.Component {
    * @returns {number}
    */
   tilesPerRow() {
+    // Assume a desktop view for pre-rendering on the server
     if(typeof window === 'undefined') return 4;
 
     if(window.innerWidth > 1100) {
