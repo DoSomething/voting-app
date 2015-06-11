@@ -39,7 +39,7 @@ class ReactService
         $response = $this->client->post($component, ['body' => json_encode($props)]);
         $renderedComponent = $response->getBody()->getContents();
 
-        $markup = '<div id="' . $id . '"">' . $renderedComponent . '</div>';
+        $markup = '<div data-rendered-component="' . $component .'" id="' . $id . '"">' . $renderedComponent . '</div>';
         $markup = $markup . '<script id="' . $id . '-props" type="application/json">' . json_encode($props) . '</script>';
 
         return $markup;

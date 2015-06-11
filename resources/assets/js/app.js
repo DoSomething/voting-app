@@ -33,12 +33,23 @@ cutTheMustard(function() {
     // Initialize `data-method` link handler.
     methodLink.initialize();
 
-    // Render the gallery if we're on a gallery page
-    const gallery = document.getElementById('gallery');
-    if(gallery) {
-      const props = JSON.parse(document.getElementById('gallery-props').innerHTML);
-      React.render(React.createElement(CandidateIndex, props), gallery);
-    }
+    const components = {
+      'CandidateIndex': CandidateIndex,
+      'Gallery': Gallery
+    };
+
+    // Re-hydrate any rendered React components
+    const reactElements = document.querySelectorAll('*[data-rendered-component]');
+    Array.prototype.forEach.call(reactElements, function(el) {
+      const id = el.getAttribute('id');
+      const props = JSON.parse(document.getElementById(`${id}-props`).innerHTML);
+
+      const component = el.getAttribute('data-rendered-component');
+      if(components[component]) {
+        React.render(React.createElement(components[component], props), el);
+      }
+
+    });
 
   });
 });
