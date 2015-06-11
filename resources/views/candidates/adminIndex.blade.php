@@ -12,6 +12,7 @@
             <tr>
                 <td><a class="{{ sort_class('name') }}" href="{{ sort_url('name') }}">Name</a></td>
                 <td><a class="{{ sort_class('category') }}" href="{{ sort_url('category') }}">Category</a></td>
+                <td><a class="{{ sort_class('gender') }}" href="{{ sort_url('gender') }}">Gender</a></td>
                 <td><a class="{{ sort_class('votes') }}" href="{{ sort_url('votes') }}">Votes</a></td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -22,6 +23,7 @@
                 <tr>
                     <td>{{ $candidate->name }}</td>
                     <td>{{ $candidate->category }}</td>
+                    <td>{{ $candidate->gender }}</td>
                     <td>{{ $candidate->votes }}</td>
                     <td><a href="{{ route('candidates.show', [$candidate->slug]) }}">view</a></td>
                     <td><a href="{{ route('candidates.edit', [$candidate->slug]) }}">edit</a></td>

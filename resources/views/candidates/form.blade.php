@@ -13,5 +13,8 @@
 {!! Form::label('description') !!}
 {!! Form::textarea('description', null, ['rows' => '2']) !!}
 
+{!! Form::label('gender') !!}
+{!! Form::select('gender', ['M' => 'Male', 'F' => 'Female', 'X' => 'Neutral']) !!}
+
 {!! Form::label('twitter') !!}
 {!! Form::text('twitter', null, ['placeholder' => '@handle']) !!}

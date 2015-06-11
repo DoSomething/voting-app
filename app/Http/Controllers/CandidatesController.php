@@ -60,13 +60,13 @@ class CandidatesController extends Controller
      */
     public function adminIndex(Request $request){
         // Get optional request params.
-        $sort_by = $request->get('sort_by');
-        $direction = $request->get('direction');
+        $sort_by = $request->get('sort_by', 'name');
+        $direction = $request->get('direction', 'ASC');
 
         $query = DB::table('candidates')
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
             ->leftJoin('votes', 'candidates.id', '=', 'votes.candidate_id')
-            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'candidates.gender', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
             ->groupBy('candidates.name');
 
         // If a sorting method & direction are provided, order by them.

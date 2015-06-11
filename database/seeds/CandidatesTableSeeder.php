@@ -19,6 +19,7 @@ class CandidatesTableSeeder extends Seeder
                     'name' => $faker->name(),
                     'description' => $faker->paragraph(2),
                     'category_id' => $category_id,
+                    'gender' => $faker->randomElement(['M', 'F', 'X'])
                 ]);
 
                 $image = $faker->file(base_path('database/seeds/images/candidates'), '/tmp');

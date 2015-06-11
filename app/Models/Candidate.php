@@ -16,7 +16,7 @@ class Candidate extends Model implements SluggableInterface
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'category_id', 'twitter', 'photo_source'
+        'name', 'description', 'category_id', 'gender', 'twitter', 'photo_source'
     ];
 
     /**
