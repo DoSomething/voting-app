@@ -60,8 +60,8 @@ class CandidatesController extends Controller
      */
     public function adminIndex(Request $request){
         // Get optional request params.
-        $sort_by = $request->get('sort_by');
-        $direction = $request->get('direction');
+        $sort_by = $request->get('sort_by', 'name');
+        $direction = $request->get('direction', 'ASC');
 
         $query = DB::table('candidates')
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
