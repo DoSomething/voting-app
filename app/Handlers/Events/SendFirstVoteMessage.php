@@ -47,7 +47,7 @@ class SendFirstVoteMessage
             $payload['mobile_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
-                $event->candidate->gender,
+                'GENDER_' . $event->candidate->gender,
             ];
         }
 
@@ -62,7 +62,7 @@ class SendFirstVoteMessage
             $payload['email_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
-                $event->candidate->gender,
+                'GENDER_' . $event->candidate->gender,
             ];
             $payload['merge_vars'] = [
                 'FNAME' => $event->user->first_name,
