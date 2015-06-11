@@ -6,6 +6,7 @@ import confirm from './utilities/confirm';
 import formLoader from './utilities/form-loader';
 import methodLink from './utilities/method-link';
 import cutTheMustard from './utilities/mustard';
+import rehydrate from './utilities/rehydrate';
 import shareLink from './utilities/share-link';
 
 // Components
@@ -34,22 +35,10 @@ cutTheMustard(function() {
     // Initialize `data-method` link handler.
     methodLink.initialize();
 
-    const components = {
+    // Rehydrate any pre-rendered React components on the page
+    rehydrate({
       'CandidateIndex': CandidateIndex,
       'CategoryIndex': CategoryIndex
-    };
-
-    // Re-hydrate any rendered React components
-    const reactElements = document.querySelectorAll('*[data-rendered-component]');
-    Array.prototype.forEach.call(reactElements, function(el) {
-      const id = el.getAttribute('id');
-      const props = JSON.parse(document.getElementById(`${id}-props`).innerHTML);
-
-      const component = el.getAttribute('data-rendered-component');
-      if(components[component]) {
-        React.render(React.createElement(components[component], props), el);
-      }
-
     });
 
   });
