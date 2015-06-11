@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use VotingApp\Models\Category;
 use VotingApp\Models\Winner;
+use VotingApp\Services\ReactService;
 
 class CategoriesController extends Controller
 {
@@ -15,8 +16,10 @@ class CategoriesController extends Controller
         'name' => 'required',
     ];
 
-    public function __construct()
+    public function __construct(ReactService $react)
     {
+        $this->react = $react;
+
         $this->middleware('admin', ['except' => ['show']]);
     }
 
@@ -65,9 +68,13 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        $candidates = $category->candidates;
         $winners = Winner::getCategoryWinners($category);
-        return view('categories.show', compact('category', 'candidates', 'winners'));
+        $name = $category->name;
+        $candidates = $category->candidates;
+
+        $gallery = $this->react->render('gallery', 'CategoryIndex', compact('name', 'candidates'));
+
+        return view('categories.show', compact('category', 'gallery', 'winners'));
     }
 
     /**

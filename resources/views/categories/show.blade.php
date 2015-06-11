@@ -3,31 +3,12 @@
 @section('title', $category->name)
 
 @section('content')
-    {{-- If there are winners, put them first. --}}
-    <ul class="gallery">
-        @if($winners)
-            @foreach($winners as $winner)
-                @include('winners.tile', ['winner' => $winner, 'drawer' => true])
-            @endforeach
-        @endif
-    </ul>
-
     @if(setting('show_candidates'))
         @if($winners)
             <h1 class="highlighted gallery-heading">All Nominees</h1>
         @endif
 
-        <h2 class="gallery-heading">{{ $category->name }}</h2>
-
-        <ul class="gallery">
-            @if($category->candidates)
-                @foreach($category->candidates as $candidate)
-                    @include('candidates.partials.tile', ['candidate' => $candidate, 'drawer' => true])
-                @endforeach
-            @else
-                <li class="empty">No candidates in this category... yet!</li>
-            @endif
-        </ul>
+        {!! $gallery !!}
 
         <div class="wrapper -narrow">
             <p class="messages -inline">Want to see more candidates? <a href="{{ route('home') }}">View all</a></p>
@@ -48,5 +29,5 @@
         </script>
     @endif
 
-    @include('users.partials.closed');
+    @include('users.partials.closed')
 @stop

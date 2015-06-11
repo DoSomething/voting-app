@@ -10,6 +10,7 @@ import shareLink from './utilities/share-link';
 
 // Components
 import CandidateIndex from './components/CandidateIndex';
+import CategoryIndex from './components/CategoryIndex';
 
 /**
  * Cut the mustard, wait for DOM load, & start the application.
@@ -35,7 +36,7 @@ cutTheMustard(function() {
 
     const components = {
       'CandidateIndex': CandidateIndex,
-      'Gallery': Gallery
+      'CategoryIndex': CategoryIndex
     };
 
     // Re-hydrate any rendered React components
