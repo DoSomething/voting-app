@@ -45,7 +45,7 @@ class SetCountryCodeFromHeader {
      */
     public function saveCountryCodeToSession($request, $countryCode)
     {
-        $request->session()->put('country_code', $queryOverride);
+        $request->session()->put('country_code', $countryCode);
         $request->session()->save();
     }
 
