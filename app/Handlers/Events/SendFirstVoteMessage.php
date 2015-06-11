@@ -46,7 +46,8 @@ class SendFirstVoteMessage
             $payload['mc_opt_in_path_id'] = env('MC_OPT_IN_PATH');
             $payload['mobile_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
-                $event->candidate->id
+                $event->candidate->id,
+                $event->candidate->gender,
             ];
         }
 
@@ -60,7 +61,8 @@ class SendFirstVoteMessage
             $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote');
             $payload['email_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
-                $event->candidate->id
+                $event->candidate->id,
+                $event->candidate->gender,
             ];
             $payload['merge_vars'] = [
                 'FNAME' => $event->user->first_name,
