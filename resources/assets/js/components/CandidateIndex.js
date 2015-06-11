@@ -5,11 +5,11 @@ import { cloneDeep, includes } from 'lodash';
 
 class CandidateIndex extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      query: '',
+      query: props.query || '',
       selectedItem: null
     };
 
@@ -75,7 +75,7 @@ class CandidateIndex extends React.Component {
 
     return (
       <div>
-        <SearchForm onChange={this.setQuery} />
+        <SearchForm onChange={this.setQuery} query={this.state.query} />
         {galleries}
       </div>
     );

@@ -2,27 +2,7 @@
 
 @section('content')
     @if($categories)
-        <div id="gallery">
-            @forelse($categories as $category)
-                <h2 class="gallery-heading">{{ $category->name }}</h2>
-
-                <ul class="gallery">
-                    @if($category->candidates)
-                        @foreach($category->candidates as $candidate)
-                            @include('candidates.partials.tile', ['candidate' => $candidate, 'drawer' => true])
-                        @endforeach
-                    @else
-                        <li class="empty">No candidates in this category... yet!</li>
-                    @endif
-                </ul>
-            @empty
-                <div class="empty">No categories... yet!</div>
-            @endforelse
-
-            <script type="application/json" id="gallery-json">
-                {!! $categories->toJson() !!}
-            </script>
-        </div>
+        {!! $gallery !!}
 
         <div class="wrapper -narrow">
             <h4>Was there a {{ setting('candidate_type') }} we missed?</h4>

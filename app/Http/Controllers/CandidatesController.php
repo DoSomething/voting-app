@@ -2,6 +2,7 @@
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
+use VotingApp\Services\ReactService;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -31,7 +32,7 @@ class CandidatesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, ReactService $react)
     {
         $showAsGuest = Auth::check() && Auth::user()->admin && $request->get('guest');
 
@@ -47,9 +48,12 @@ class CandidatesController extends Controller
             return view('candidates.index', ['categories' => []]);
         }
 
+        $query = $request->get('query', '');
         $categories = Category::with('candidates')->get();
 
-        return view('candidates.index', compact('categories'));
+        $gallery = $react->render('gallery', 'CandidateIndex', compact('categories', 'query'));
+
+        return view('candidates.index', compact('gallery', 'categories'));
     }
 
     /**

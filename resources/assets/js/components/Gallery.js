@@ -21,11 +21,11 @@ class Gallery extends React.Component {
    * @returns {number}
    */
   tilesPerRow() {
-    const width = window.innerWidth;
+    if(typeof window === 'undefined') return 4;
 
-    if(width > 1100) {
+    if(window.innerWidth > 1100) {
       return 4;
-    } else if(width > 660) {
+    } else if(window.innerWidth > 660) {
       return 3;
     } else {
       return 1;
@@ -40,13 +40,15 @@ class Gallery extends React.Component {
     var _this = this;
 
     // Update state whenever window width changes
-    window.addEventListener('resize', function() {
-      var itemsPerRow = _this.tilesPerRow();
+    if(window) {
+      window.addEventListener('resize', function() {
+        var itemsPerRow = _this.tilesPerRow();
 
-      if(_this.state.itemsPerRow !== itemsPerRow) {
-        _this.setState({ itemsPerRow: itemsPerRow });
-      }
-    });
+        if(_this.state.itemsPerRow !== itemsPerRow) {
+          _this.setState({ itemsPerRow: itemsPerRow });
+        }
+      });
+    }
   }
 
   /**

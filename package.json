@@ -6,8 +6,11 @@
     "laravel-elixir": "1.0.1"
   },
   "dependencies": {
+    "babel": "^5.5.6",
+    "body-parser": "^1.12.4",
     "classnames": "^2.1.2",
     "dom-delegate": "^2.0.3",
+    "express": "^4.12.4",
     "html5shiv": "^3.7.2",
     "layzr.js": "^1.1.4",
     "lodash": "^3.9.3",

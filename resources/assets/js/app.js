@@ -36,8 +36,8 @@ cutTheMustard(function() {
     // Render the gallery if we're on a gallery page
     const gallery = document.getElementById('gallery');
     if(gallery) {
-      const categories= JSON.parse(document.getElementById('gallery-json').innerHTML);
-      React.render(<CandidateIndex categories={categories} />, gallery);
+      const props = JSON.parse(document.getElementById('gallery-props').innerHTML);
+      React.render(React.createElement(CandidateIndex, props), gallery);
     }
 
   });

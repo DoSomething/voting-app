@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'react' => [
+        'url' => env('REACT_SERVER_URL', 'http://localhost:3000')
+    ],
+
     'stathat' => [
         'debug' => env('APP_DEBUG', false),
         'ez_key' => env('STATHAT_EZ_KEY')
