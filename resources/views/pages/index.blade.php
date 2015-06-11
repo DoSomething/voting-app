@@ -3,7 +3,7 @@
 @section('content')
     <div class="wrapper">
         <div class="row">
-            <h1 class="highlighted">All Categories</h1>
+            <h1 class="highlighted">All Pages</h1>
 
             <p>
                 These are all pages in the database. Pages are visible to any users with a link. The FAQ link in the

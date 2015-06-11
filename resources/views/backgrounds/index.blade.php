@@ -3,15 +3,17 @@
 @section('content')
     <div class="wrapper">
         <div class="row">
-            <h1 class="highlighted">Backgrounds</h1>
+            <h1 class="highlighted">All Backgrounds</h1>
         </div>
 
         <div class="gallery">
 
             @forelse($backgrounds as $background)
-                <li class="thumbnail">
-                    <img src="{{ $background->url('thumbnail') }}" alt=""/>
-                    <a class="thumbnail__delete" href="{{ route('backgrounds.destroy', [$background->id]) }}" data-confirm="Are you sure you want to permanently delete this background?" data-method="DELETE"><span>delete</span></a>
+                <li>
+                    <div class="thumbnail">
+                        <img src="{{ $background->url('thumbnail') }}" alt=""/>
+                        <a class="thumbnail__delete" href="{{ route('backgrounds.destroy', [$background->id]) }}" data-confirm="Are you sure you want to permanently delete this background?" data-method="DELETE"><span>delete</span></a>
+                    </div>
                 </li>
             @empty
                 <div class="empty">No background images... yet!</div>
