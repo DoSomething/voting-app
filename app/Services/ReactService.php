@@ -13,10 +13,10 @@ class ReactService
      */
     protected $client;
 
-    public function __construct(Client $client)
+    public function __construct($url)
     {
         $this->client = new Client([
-            'base_url' => config('services.react.url'),
+            'base_url' => $url,
             'defaults' => [
                 'headers' => [
                     'Content-Type' => 'application/json',
@@ -29,18 +29,20 @@ class ReactService
     /**
      * Render a given React component with props.
      *
-     * @param $id
      * @param $component
      * @param $props
      * @return string - HTML
      */
-    public function render($id, $component, $props)
+    public function render($component, $props)
     {
-        $response = $this->client->post($component, ['body' => json_encode($props)]);
+        $propsJSON = json_encode($props);
+        $id = $component . md5($component . $propsJSON);
+
+        $response = $this->client->post($component, ['body' => $propsJSON]);
         $renderedComponent = $response->getBody()->getContents();
 
-        $markup = '<div data-rendered-component="' . $component .'" id="' . $id . '"">' . $renderedComponent . '</div>';
-        $markup = $markup . '<script id="' . $id . '-props" type="application/json">' . json_encode($props) . '</script>';
+        $markup = '<div data-rendered-component="' . $component .'" id="' . $id . '">' . $renderedComponent . '</div>';
+        $markup = $markup . '<script id="' . $id . '-props" type="application/json">' . $propsJSON . '</script>';
 
         return $markup;
     }

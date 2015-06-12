@@ -21,11 +21,9 @@ class CandidatesController extends Controller
         'image' => 'image',
     ];
 
-    public function __construct(ReactService $react)
+    public function __construct()
     {
         $this->middleware('admin', ['except' => ['index', 'show']]);
-
-        $this->react = $react;
     }
 
     /**
@@ -53,9 +51,9 @@ class CandidatesController extends Controller
         $query = $request->get('query', '');
         $categories = Category::with('candidates')->get();
 
-        $gallery = $this->react->render('gallery', 'CandidateIndex', compact('categories', 'query'));
+//        $gallery = app('react')->render('gallery', 'CandidateIndex', compact('categories', 'query'));
 
-        return view('candidates.index', compact('gallery', 'categories'));
+        return view('candidates.index', compact('categories', 'query'));
     }
 
     /**

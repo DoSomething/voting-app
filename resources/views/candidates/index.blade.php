@@ -2,7 +2,8 @@
 
 @section('content')
     @if($categories)
-        {!! $gallery !!}
+
+        @react('CandidateIndex', compact('categories', 'query'))
 
         <div class="wrapper -narrow">
             <h4>Was there a {{ setting('candidate_type') }} we missed?</h4>

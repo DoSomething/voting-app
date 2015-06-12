@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', $category->name)
+@section('title', $name)
 
 @section('content')
     @if(setting('show_candidates'))
@@ -8,7 +8,7 @@
             <h1 class="highlighted gallery-heading">All Nominees</h1>
         @endif
 
-        {!! $gallery !!}
+        @react('CategoryIndex', compact('name', 'candidates'))
 
         <div class="wrapper -narrow">
             <p class="messages -inline">Want to see more candidates? <a href="{{ route('home') }}">View all</a></p>
