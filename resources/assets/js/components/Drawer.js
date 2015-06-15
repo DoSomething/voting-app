@@ -1,6 +1,6 @@
 import React from 'react/addons';
-const { CSSTransitionGroup } = React.addons;
 import CandidateDetailView from './CandidateDetailView';
+const { CSSTransitionGroup } = React.addons;
 
 class Drawer extends React.Component {
 
@@ -32,7 +32,7 @@ class Drawer extends React.Component {
     }
 
     return (
-      <CSSTransitionGroup transitionName="drawer-animation" transitionAppear={true} transitionLeave={true}>
+      <CSSTransitionGroup transitionName="drawer-animation">
         {drawer}
       </CSSTransitionGroup>
     )

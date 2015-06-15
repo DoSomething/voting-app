@@ -1,15 +1,22 @@
 .search-form {
-  @include span(9);
   @include clearfix;
   position: relative;
 
+  @include media('medium') {
+    @include span(8);
+  }
+
+  @include media('large') {
+    @include span(9);
+  }
+
   input[type='search'] {
+    box-sizing: border-box;
     width: 100%;
+    color: #fff;
+    border: rgba(#222, 0.8);
     background: rgba(#222, 0.8) data-url($data-search-white-svg) ($base-spacing / 2) 48% no-repeat;
     background-size: $base-spacing $base-spacing;
-    border: rgba(#222, 0.8);
-    color: #fff;
-    padding-left: 48px;
-    box-sizing: border-box;
+    padding-left: ($base-spacing * 2);
   }
 }

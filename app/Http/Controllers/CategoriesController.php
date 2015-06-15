@@ -65,9 +65,11 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        $candidates = $category->candidates;
         $winners = Winner::getCategoryWinners($category);
-        return view('categories.show', compact('category', 'candidates', 'winners'));
+        $name = $category->name;
+        $candidates = $category->candidates;
+
+        return view('categories.show', compact('name', 'candidates', 'winners'));
     }
 
     /**

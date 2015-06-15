@@ -6,24 +6,24 @@
   // Animation via ReactCSSTransitionGroup
   // @see: https://facebook.github.io/react/docs/animation.html
   &.drawer-animation-enter {
-    transition: opacity 0.5s, max-height 0.5s;
     max-height: 0;
     opacity: 0;
 
     &.drawer-animation-enter-active {
       opacity: 1;
       max-height: 800px;
+      transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
     }
   }
 
   &.drawer-animation-leave {
-    transition: opacity 0.5s, max-height 0.5s;
     opacity: 1;
     max-height: 800px;
 
     &.drawer-animation-leave-active {
       max-height: 0;
       opacity: 0;
+      transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
     }
   }
 

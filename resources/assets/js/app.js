@@ -6,10 +6,12 @@ import confirm from './utilities/confirm';
 import formLoader from './utilities/form-loader';
 import methodLink from './utilities/method-link';
 import cutTheMustard from './utilities/mustard';
+import rehydrate from './utilities/rehydrate';
 import shareLink from './utilities/share-link';
 
 // Components
 import CandidateIndex from './components/CandidateIndex';
+import CategoryIndex from './components/CategoryIndex';
 
 /**
  * Cut the mustard, wait for DOM load, & start the application.
@@ -33,12 +35,11 @@ cutTheMustard(function() {
     // Initialize `data-method` link handler.
     methodLink.initialize();
 
-    // Render the gallery if we're on a gallery page
-    const gallery = document.getElementById('gallery');
-    if(gallery) {
-      const categories= JSON.parse(document.getElementById('gallery-json').innerHTML);
-      React.render(<CandidateIndex categories={categories} />, gallery);
-    }
+    // Rehydrate any pre-rendered React components on the page
+    rehydrate({
+      'CandidateIndex': CandidateIndex,
+      'CategoryIndex': CategoryIndex
+    });
 
   });
 });

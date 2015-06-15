@@ -1,15 +1,15 @@
 import React from 'react/addons';
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
-import { cloneDeep, includes } from 'lodash';
+import includes from 'lodash/collection/includes';
 
 class CandidateIndex extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      query: '',
+      query: props.query || '',
       selectedItem: null
     };
 
@@ -65,18 +65,21 @@ class CandidateIndex extends React.Component {
   render() {
     var _this = this;
     var galleries = this.props.categories.map(function(category) {
+      var candidates = _this.filteredCandidates(category.candidates, category.name);
+      if(candidates.length == 0) return;
+
       return (
-        <div key={category.id} className='category'>
-          <h2 className='gallery-heading'>{category.name}</h2>
-          <Gallery items={_this.filteredCandidates(category.candidates, category.name)} selectItem={_this.selectItem} selectedItem={_this.state.selectedItem} />
-        </div>
+        <Gallery key={category.id} name={category.name} items={candidates} selectItem={_this.selectItem} selectedItem={_this.state.selectedItem} />
       );
     });
 
+    // Remove any null entries from the array
+    galleries = galleries.filter(function(gallery) { return typeof gallery != 'undefined' });
+
     return (
       <div>
-        <SearchForm onChange={this.setQuery} />
-        {galleries}
+        <SearchForm onChange={this.setQuery} query={this.state.query} />
+        {galleries.length ? galleries : <Gallery />}
       </div>
     );
   }

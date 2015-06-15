@@ -143,6 +143,7 @@ return [
         'VotingApp\Providers\BusServiceProvider',
         'VotingApp\Providers\ConfigServiceProvider',
         'VotingApp\Providers\EventServiceProvider',
+        'VotingApp\Providers\ReactServiceProvider',
         'VotingApp\Providers\RouteServiceProvider',
         'VotingApp\Providers\ValidationServiceProvider',
 

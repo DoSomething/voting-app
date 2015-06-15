@@ -22,6 +22,9 @@ input[type="month"], input[type="time"], input[type="week"], textarea {
   padding: ($base-spacing / 2);
   margin-bottom: $base-spacing;
 
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
   &:focus {
     border: 1px solid $cyan;
     outline: none;
