@@ -51,8 +51,6 @@ class CandidatesController extends Controller
         $query = $request->get('query', '');
         $categories = Category::with('candidates')->get();
 
-//        $gallery = app('react')->render('gallery', 'CandidateIndex', compact('categories', 'query'));
-
         return view('candidates.index', compact('categories', 'query'));
     }
 
