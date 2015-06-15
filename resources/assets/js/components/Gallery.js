@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import classNames from 'classnames';
-import { chunk } from 'lodash';
+import chunk from 'lodash/array/chunk';
 
 import GalleryRow from './GalleryRow';
 

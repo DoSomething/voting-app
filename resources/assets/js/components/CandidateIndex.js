@@ -1,7 +1,7 @@
 import React from 'react/addons';
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
-import { cloneDeep, includes } from 'lodash';
+import includes from 'lodash/collection/includes';
 
 class CandidateIndex extends React.Component {
 
