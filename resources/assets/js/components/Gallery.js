@@ -2,8 +2,7 @@ import React from 'react/addons';
 import classNames from 'classnames';
 import { chunk } from 'lodash';
 
-import Tile from './Tile';
-import Drawer from './Drawer';
+import GalleryRow from './GalleryRow';
 
 class Gallery extends React.Component {
 
@@ -71,30 +70,7 @@ class Gallery extends React.Component {
     const chunkedItems = chunk(this.props.items, this.state.itemsPerRow);
 
     let rows = chunkedItems.map(function(row, index) {
-      // Build each tile in the row
-      let hasSelectedTile = false;
-      var tiles = row.map(function(candidate) {
-        const selected = candidate === _this.props.selectedItem;
-        if(selected) {
-          hasSelectedTile = selected;
-        }
-
-        return (
-          <li key={candidate.id} className='gallery__item'>
-            <Tile candidate={candidate} selected={selected} onClick={_this.props.selectItem} />
-          </li>
-        );
-      });
-
-      // Return the row
-      return (
-        <div key={index}>
-          <div className='gallery__row'>
-          {tiles}
-          </div>
-          <Drawer isOpen={hasSelectedTile} candidate={_this.props.selectedItem} selectItem={_this.props.selectItem} />
-        </div>
-      )
+      return <GalleryRow key={index} row={row} selectedItem={_this.props.selectedItem} selectItem={_this.props.selectItem} />;
     });
 
     return (
