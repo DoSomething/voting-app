@@ -27,6 +27,7 @@ class SendFirstVoteMessage
 
         $payload = [
             // User information
+            'first_name' => $event->user->first_name,
             'birthdate_timestamp' => strtotime($event->user->birthdate), // Message Broker expects UNIX timestamp
             'country_code' => $event->user->country_code,
 
