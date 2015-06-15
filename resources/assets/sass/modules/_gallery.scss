@@ -7,10 +7,9 @@
   margin: $base-spacing 0;
   padding: 0;
 
-  &.-empty {
-    margin: 0 0 ($base-spacing * 2);
+  .gallery__heading {
+    padding: 0 gutter() $base-spacing;
   }
-
 
   .gallery__row {
     @include clearfix;
@@ -27,16 +26,4 @@
       @include span(3);
     }
   }
-
-  .gallery__empty {
-    @include span(100%);
-    color: $gray;
-    font-size: $base-font-size;
-    padding-top: ($base-spacing / 2);
-  }
-}
-
-// Oh, shush.
-.gallery-heading {
-  padding: 0 gutter();
 }

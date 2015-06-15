@@ -65,24 +65,21 @@ class CandidateIndex extends React.Component {
   render() {
     var _this = this;
     var galleries = this.props.categories.map(function(category) {
-      var candidates = _this.filteredCandidates(category.candidates, category.name)
+      var candidates = _this.filteredCandidates(category.candidates, category.name);
       if(candidates.length == 0) return;
 
       return (
-        <div key={category.id} className='category'>
-          <h2 className='gallery-heading'>{category.name}</h2>
-          <Gallery items={candidates} selectItem={_this.selectItem} selectedItem={_this.state.selectedItem} />
-        </div>
+        <Gallery key={category.id} name={category.name} items={candidates} selectItem={_this.selectItem} selectedItem={_this.state.selectedItem} />
       );
     });
 
-    // Remove any empty galleries from the array
+    // Remove any null entries from the array
     galleries = galleries.filter(function(gallery) { return typeof gallery != 'undefined' });
 
     return (
       <div>
         <SearchForm onChange={this.setQuery} query={this.state.query} />
-        {galleries.length ? galleries : <div className='gallery'><div className='empty'>No results!</div></div>}
+        {galleries.length ? galleries : <Gallery />}
       </div>
     );
   }
