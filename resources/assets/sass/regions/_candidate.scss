@@ -41,7 +41,11 @@
   }
 
   .candidate__description {
-    padding: $base-spacing;
+    padding-bottom: $base-spacing;
+
+    @include media('medium') {
+      padding: $base-spacing;
+    }
   }
 
   .candidate__actions {
