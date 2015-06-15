@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import classNames from 'classnames';
+import shallowCompare from '../vendor/shallowCompare';
 
 class Tile extends React.Component {
 
@@ -18,6 +19,21 @@ class Tile extends React.Component {
     this.props.onClick(this);
   }
 
+
+  /**
+   * Only re-render this component if props or state change.
+   * @param nextProps
+   * @param nextState
+   * @returns {boolean}
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
+  }
+
+  /**
+   * Render component.
+   * @returns {XML}
+   */
   render() {
     let candidate = this.props.candidate;
 
