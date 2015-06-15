@@ -12,7 +12,7 @@
     &.drawer-animation-enter-active {
       opacity: 1;
       max-height: 800px;
-      transition: opacity 0.5s, max-height 0.5s;
+      transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
     }
   }
 
@@ -23,7 +23,7 @@
     &.drawer-animation-leave-active {
       max-height: 0;
       opacity: 0;
-      transition: opacity 0.5s, max-height 0.5s;
+      transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
     }
   }
 
