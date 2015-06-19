@@ -14,9 +14,15 @@
     box-sizing: border-box;
     width: 100%;
     color: #fff;
-    border: rgba(#222, 0.8);
-    background: rgba(#222, 0.8) data-url($data-search-white-svg) ($base-spacing / 2) 48% no-repeat;
     background-size: $base-spacing $base-spacing;
     padding-left: ($base-spacing * 2);
+
+    // Add search icon & transparent background with graceful fallbacks.
+    // `linear-gradient()` is used as a trick to discard SVG image in older browsers.
+    background: #222 url('/assets/images/search_fallback.png') ($base-spacing / 2) 48% no-repeat;
+    background-color: rgba(#222, 0.8);
+    background-image: linear-gradient(transparent, transparent), data-url($data-search-white-svg);
+    border: #222;
+    border: rgba(#222, 0.8);
   }
 }
