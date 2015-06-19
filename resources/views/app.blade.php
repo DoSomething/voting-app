@@ -45,6 +45,7 @@
             }
         @endif
     </style>
+    @include('partials.scripts')
 
     @include('partials.metadata')
 </head>
@@ -65,7 +66,6 @@
 
 @include('partials.footer')
 
-<script src="{{ asset('/js/bundle.js') }}" type="text/javascript" charset="utf-8"></script>
 
 @include('partials.analytics')
 </body>
