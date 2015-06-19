@@ -2,6 +2,7 @@
 
 .container {
   @include clearfix;
+  clear: both;
 
   .row {
     margin-bottom: $base-spacing * 4;
