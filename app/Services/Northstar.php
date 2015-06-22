@@ -86,7 +86,7 @@ class Northstar
             $response = $this->client->post('users', ['body' => json_encode($payload)]);
             $json = $response->json();
 
-            return $json['_id'];
+            return $json['data']['_id'];
         } catch(Exception $e) {
             $this->logException($e);
             return null;
