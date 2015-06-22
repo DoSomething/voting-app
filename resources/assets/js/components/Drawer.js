@@ -2,6 +2,23 @@ import React from 'react/addons';
 import CandidateDetailView from './CandidateDetailView';
 const { CSSTransitionGroup } = React.addons;
 
+class DrawerContents extends React.Component {
+
+  /**
+   * Render component.
+   * @returns {XML}
+   */
+  render() {
+    return (
+      <div className='drawer'>
+        <CandidateDetailView candidate={this.props.candidate} />
+        <a href="#" className="drawer__close" onClick={this.props.close}><span>Close</span></a>
+      </div>
+    );
+  }
+
+}
+
 class Drawer extends React.Component {
 
   /**
@@ -20,20 +37,9 @@ class Drawer extends React.Component {
    * @returns {XML}
    */
   render() {
-    let drawer;
-
-    if(this.props.isOpen) {
-      drawer = (
-        <div className='drawer'>
-          <CandidateDetailView candidate={this.props.candidate} />
-          <a href="#" className="drawer__close" onClick={this.close.bind(this)}><span>Close</span></a>
-        </div>
-      );
-    }
-
     return (
       <CSSTransitionGroup transitionName="drawer-animation">
-        {drawer}
+        {this.props.isOpen ? <DrawerContents candidate={this.props.candidate} close={this.close.bind(this)} /> : null}
       </CSSTransitionGroup>
     )
   }
