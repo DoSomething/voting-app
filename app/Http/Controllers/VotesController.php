@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
+use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Http\Requests\VoteRequest;
 use VotingApp\Models\Candidate;
@@ -54,8 +55,14 @@ class VotesController extends Controller
 
         // If not logged in... authenticate or register a new user.
         if(!$user) {
-            $user = $this->registrar->create($request->all());
-            $this->auth->login($user);
+            try {
+                $user = $this->registrar->create($request->all());
+                $this->auth->login($user);
+            } catch(ValidationException $e) {
+                $slug = Candidate::where('id', $request->get('candidate_id'))->first()->slug;
+                return redirect()->route('candidates.show', $slug)
+                    ->withErrors($e->errors())->withInput($request->input());
+            }
         }
 
         $hasVotedBefore = Vote::where('user_id', $user->id)->exists();

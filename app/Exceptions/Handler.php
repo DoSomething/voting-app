@@ -1,6 +1,7 @@
 <?php namespace VotingApp\Exceptions;
 
 use Exception;
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -37,6 +38,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if($e instanceof ValidationException) {
+            return redirect()->back()->withErrors($e->errors());
+        }
+
         return parent::render($request, $e);
     }
 }
