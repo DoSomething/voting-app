@@ -1,0 +1,23 @@
+.alert.-error {
+  font-size: $small-font-size;
+  margin-bottom: $base-spacing;
+
+  ul {
+    list-style-type: none;
+
+    li {
+      position: relative;
+      margin-bottom: ($base-spacing / 4);
+    }
+
+    li:before {
+      content: '\00D7';
+      position: absolute;
+      left: -18px;
+      top: -8px;
+      font-size: 24px;
+      color: $error-color;
+    }
+  }
+
+}
