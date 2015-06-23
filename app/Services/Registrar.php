@@ -1,9 +1,9 @@
 <?php namespace VotingApp\Services;
 
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
 use VotingApp\Events\UserRegistered;
-use VotingApp\Services\Northstar;
 
 class Registrar implements RegistrarContract
 {
@@ -13,7 +13,7 @@ class Registrar implements RegistrarContract
      *
      * @var \Illuminate\Validation\Factory
      */
-    protected $validator;
+    protected $validation;
 
     /**
      * The Northstar API client.
@@ -24,7 +24,7 @@ class Registrar implements RegistrarContract
 
     public function __construct(Northstar $northstar)
     {
-        $this->validator = app('validator');
+        $this->validation = app('validator');
         $this->northstar = $northstar;
     }
 
@@ -64,7 +64,7 @@ class Registrar implements RegistrarContract
      */
     public function validator(array $data)
     {
-        return $this->validator->make($data, $this->rules());
+        return $this->validation->make($data, $this->rules());
     }
 
     /**
@@ -79,16 +79,20 @@ class Registrar implements RegistrarContract
 
         // If user doesn't exist, attempt to create.
         if (!$user) {
-            $this->validator->make($data, [
+            $user = new User($data);
+
+            $validator = $this->validation->make($user->toArray(), [
                 'phone' => 'unique:users',
                 'email' => 'unique:users',
             ]);
 
-            $user = new User($data);
-            $user->country_code = get_country_code();
-            $user->save();
+            if($validator->fails()) {
+                throw new ValidationException($validator);
+            }
 
+            $user->country_code = get_country_code();
             $user->northstar_id = $this->northstar->register($user);
+
             $user->save();
 
             event(new UserRegistered($user));
