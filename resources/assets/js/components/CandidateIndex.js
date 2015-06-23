@@ -8,9 +8,21 @@ class CandidateIndex extends React.Component {
   constructor(props) {
     super(props);
 
+    // Assign incremental key to candidates
+    let i = 1;
+    const categories = props.categories.map(function(category) {
+      category.candidates.map(function(candidate) {
+        candidate.key = i++;
+        return candidate;
+      });
+
+      return category;
+    });
+
     this.state = {
       query: props.query || '',
-      selectedItem: null
+      selectedItem: null,
+      categories: categories
     };
 
     this.selectItem = this.selectItem.bind(this);
@@ -64,7 +76,7 @@ class CandidateIndex extends React.Component {
    */
   render() {
     var _this = this;
-    var galleries = this.props.categories.map(function(category) {
+    var galleries = this.state.categories.map(function(category) {
       var candidates = _this.filteredCandidates(category.candidates, category.name);
       if(candidates.length == 0) return;
 
