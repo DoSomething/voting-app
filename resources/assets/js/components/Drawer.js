@@ -46,4 +46,8 @@ class Drawer extends React.Component {
 
 }
 
+Drawer.defaultProps = {
+  isOpen: false
+};
+
 export default Drawer;

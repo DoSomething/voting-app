@@ -73,14 +73,9 @@ class Gallery extends React.Component {
       return <GalleryRow key={index} row={row} selectedItem={_this.props.selectedItem} selectItem={_this.props.selectItem} />;
     });
 
-    let heading;
-    if(this.props.name) {
-      heading = <h2 className='gallery__heading'>{this.props.name}</h2>;
-    }
-
     return (
       <div className='gallery'>
-        {heading}
+        {this.props.name ? <h2 className='gallery__heading'>{this.props.name}</h2> : null}
         {rows}
       </div>
     );
