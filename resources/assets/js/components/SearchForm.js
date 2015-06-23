@@ -22,13 +22,26 @@ class SearchForm extends React.Component {
   }
 
   /**
+   * If enter key is pressed, blur the field to close
+   * keyboard on touch devices.
+   * @param event
+   */
+  onKeyDown(event) {
+    if(event.keyCode === 13) {
+      event.preventDefault();
+      document.activeElement.blur();
+    }
+  }
+
+  /**
    * Render component.
    * @returns {XML}
    */
   render() {
     return (
       <form method='GET' action='/candidates' className='search-form' onSubmit={this.onChange}>
-        <input type='search' name='query' id='query' value={this.props.query} placeholder='Find a candidate...' onChange={this.onChange} />
+        <input type='search' name='query' id='query' value={this.props.query} placeholder='Find a candidate...'
+          onChange={this.onChange} onKeyDown={this.onKeyDown} />
       </form>
     );
   }
