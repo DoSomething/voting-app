@@ -6,8 +6,16 @@ class CategoryIndex extends React.Component {
   constructor(props) {
     super(props);
 
+    // Assign incremental key to candidates
+    let i = 1;
+    const candidates = props.candidates.map(function(candidate) {
+      candidate.key = i++;
+      return candidate;
+    });
+
     this.state = {
-      selectedItem: null
+      selectedItem: null,
+      candidates: candidates
     };
 
     this.selectItem = this.selectItem.bind(this);
@@ -15,7 +23,7 @@ class CategoryIndex extends React.Component {
 
   /**
    * Set or unset the selected item to show details for.
-   * @param query
+   * @param item
    */
   selectItem(item) {
     // De-select if trying to select the same item again.
@@ -33,10 +41,7 @@ class CategoryIndex extends React.Component {
    */
   render() {
     return (
-      <div className='category'>
-        <h2 className='gallery-heading'>{this.props.name}</h2>
-        <Gallery items={this.props.candidates} selectItem={this.selectItem} selectedItem={this.state.selectedItem} />
-      </div>
+      <Gallery name={this.props.name} items={this.props.candidates} selectItem={this.selectItem} selectedItem={this.state.selectedItem} />
     );
   }
 
