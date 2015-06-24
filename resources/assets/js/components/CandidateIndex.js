@@ -34,7 +34,10 @@ class CandidateIndex extends React.Component {
    * @param query
    */
   setQuery(query) {
-    this.setState({ query: query });
+    this.setState({
+      query: query,
+      selectedItem: null
+    });
   }
 
   /**
