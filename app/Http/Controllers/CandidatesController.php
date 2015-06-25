@@ -50,8 +50,9 @@ class CandidatesController extends Controller
 
         $query = $request->get('query', '');
         $categories = Category::with('candidates')->get();
+        $title = setting('site_title');
 
-        return view('candidates.index', compact('categories', 'query'));
+        return view('candidates.index', compact('categories', 'query', 'title'));
     }
 
     /**

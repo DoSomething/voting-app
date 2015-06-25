@@ -10,6 +10,8 @@ class SearchForm extends React.Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
 
   /**
@@ -34,6 +36,14 @@ class SearchForm extends React.Component {
   }
 
   /**
+   * Persist the search query when user blurs the text field.
+   * @param event
+   */
+  onBlur(event) {
+    this.props.onChange(event.target.value, true);
+  }
+
+  /**
    * Render component.
    * @returns {XML}
    */
@@ -41,7 +51,7 @@ class SearchForm extends React.Component {
     return (
       <form method='GET' action='/candidates' className='search-form' onSubmit={this.onChange}>
         <input type='search' name='query' id='query' value={this.props.query} placeholder='Find a candidate...'
-          onChange={this.onChange} onKeyDown={this.onKeyDown} />
+          onChange={this.onChange} onKeyDown={this.onKeyDown} onBlur={this.onBlur} />
       </form>
     );
   }
