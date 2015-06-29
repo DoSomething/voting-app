@@ -1,6 +1,7 @@
 <?php
 
 use Laracasts\Integrated\Extensions\Laravel as IntegrationTest;
+use Symfony\Component\DomCrawler\Crawler;
 
 class TestCase extends IntegrationTest
 {
@@ -54,6 +55,31 @@ class TestCase extends IntegrationTest
         $mock = Mockery::mock($class);
         $this->app->instance($class, $mock);
         return $mock;
+    }
+
+    /**
+     * Make a request simulated from a given Fastly country code.
+     * @see Laracasts\Integrated\Extensions\Traits\LaravelTestCase makeRequest()
+     *
+     * @param $url - URL to visit
+     * @param $country_code - Country code
+     * @param string $method - HTTP method (e.g. 'GET', or 'POST')
+     * @param null $body - Body of post request
+     * @return static
+     */
+    public function visitFromCountry($url, $country_code, $method = 'GET', $body = null)
+    {
+        $this->refreshApplication();
+
+        $this->call($method, $url, [], [], [], ['HTTP_X_FASTLY_COUNTRY_CODE' => $country_code], $body);
+
+        $this->clearInputs()->followRedirects()->assertPageLoaded($url);
+
+        $this->currentPage = $this->app['request']->fullUrl();
+
+        $this->crawler = new Crawler($this->response(), $this->currentPage());
+
+        return $this;
     }
 
 }
