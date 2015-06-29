@@ -43,9 +43,14 @@ namespace :deploy do
     run "cd #{release_path} && php artisan cache:clear"
   end
 
+  task :react_render do
+    run "forever stopall && forever start #{release_path}/bootstrap/react_server.js"
+  end
+
 end
 
 after "deploy:update", "deploy:cleanup"
 after "deploy:symlink", "deploy:link_folders"
 after "deploy:link_folders", "deploy:artisan_migrate"
+after "deploy:artisan_migrate", "deploy:react_render"
 after "deploy:artisan_migrate", "deploy:artisan_cache_clear"
