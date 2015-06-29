@@ -22,7 +22,7 @@ class ValidationServiceProvider extends ServiceProvider {
 
         $this->validator->extend('phone', function($attribute, $value, $parameters)
         {
-            $phoneRegex = '/^((1)?([\-\s\.]{1})?)?\(?([0-9]{3})\)?(?:[\-\s\.]{1})?([0-9]{3})(?:[\-\s\.]{1})?([0-9]{4})/';
+            $phoneRegex = '/^(?:\+?([0-9]{1,3})([\-\s\.]{1})?)?\(?([0-9]{3})\)?(?:[\-\s\.]{1})?([0-9]{3})(?:[\-\s\.]{1})?([0-9]{4})/';
 
             return preg_match($phoneRegex, $value);
         }, 'The :attribute must be a valid phone number.');
