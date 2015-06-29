@@ -44,7 +44,7 @@ namespace :deploy do
   end
 
   task :react_render do
-    run "forever stopall && forever start ../bootstrap/react_server.js"
+    run "forever stopall && forever start #{release_path}/bootstrap/react_server.js"
   end
 
 end
