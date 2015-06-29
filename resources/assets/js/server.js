@@ -18,7 +18,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.use('/:component', function(request, response) {
-  const component = require(path.resolve('./resources/assets/js/components/' + request.params.component));
+  const component = require(`./components/${request.params.component}`);
   const props = request.body || null;
 
   response.status(200).send(
