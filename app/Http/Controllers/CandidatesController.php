@@ -48,7 +48,7 @@ class CandidatesController extends Controller
         }
 
         $query = $request->get('query', '');
-        $categories = Category::with('candidates')->get();
+        $categories = Category::orderBy('name', 'asc')->with('candidates')->get();
         $title = setting('site_title');
 
         return view('candidates.index', compact('categories', 'query', 'title'));
