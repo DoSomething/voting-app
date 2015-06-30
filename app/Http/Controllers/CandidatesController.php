@@ -2,7 +2,6 @@
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
-use VotingApp\Services\ReactService;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
