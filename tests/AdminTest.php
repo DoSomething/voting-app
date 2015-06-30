@@ -1,6 +1,7 @@
 <?php
 
 use VotingApp\Models\User;
+use VotingApp\Models\Page;
 
 class AdminTest extends TestCase
 {
@@ -51,6 +52,50 @@ class AdminTest extends TestCase
     }
 
 
-    // Could add more here in the future!
+    /**
+     * Verify that pages can be created.
+     */
+    public function testPageCreate()
+    {
+        $this->be($this->adminUser);
+
+        // Check that creating a page is successful
+        $this->visit(route('pages.create'))
+            ->fill('Test Page', '#title')
+            ->fill('Lorem ipsum dolor sit amet.', '#content')
+            ->press('Create Page');
+
+        $this->seeInDatabase('pages', [
+            'title' => 'Test Page'
+        ]);
+    }
+
+    /**
+     * Verify that pages can be updated.
+     */
+    public function testPageUpdate(){
+        $this->be($this->adminUser);
+
+        $page = Page::create([
+            'title' => 'Test Edit Page',
+            'content' => 'Lorem ipsum'
+        ]);
+
+        $page->save();
+
+        $this->visit(route('pages.edit', [$page->slug]))
+            ->fill('Updated Test Page', '#title')
+            ->fill('Industry standard dummy text.', '#content')
+            ->press('Update Page');
+
+        $this->seeInDatabase('pages', [
+            'title' => 'Updated Test Page'
+        ]);
+
+        $this->notSeeInDatabase('pages', [
+            'title' => 'Test Edit Page'
+        ]);
+
+    }
 
 }

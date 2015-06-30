@@ -94,7 +94,7 @@ class PagesController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        $this->validate($request, $this->$rules);
+        $this->validate($request, $this->rules);
 
         $page->fill($request->all());
         $page->save();
