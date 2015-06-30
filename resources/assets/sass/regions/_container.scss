@@ -18,8 +18,8 @@
       &.-narrow {
         text-align: center;
 
-        @include span(6);
-        @include pre(3);
+        @include span(4);
+        @include pre(4);
       }
     }
   }

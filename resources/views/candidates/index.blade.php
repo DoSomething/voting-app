@@ -10,8 +10,7 @@
 
             <p>
                 If you know a {{ setting('candidate_type') }} who's done kickass things in the world, but don't see them
-                on our list, let us know by emailing <a href="mailto:{{ setting('writein_email') }}">{{ setting('writein_email') }}</a>.
-                Make sure to include the work they've done in the past year for social good (in 140 characters or less). Thank you!
+                on our list, <a href="{{ setting('writein_link') }}">let us know</a>.
             </p>
         </div>
 
