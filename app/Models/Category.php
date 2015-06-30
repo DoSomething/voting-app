@@ -9,16 +9,6 @@ class Category extends Model implements SluggableInterface
 
     use SluggableTrait;
 
-    public static function boot()
-    {
-        parent::boot();
-
-        Category::saved(function ($category) {
-            // Clear categories cache whenever model is updated
-            \Cache::forget('categories');
-        });
-    }
-
     /**
      * The attributes which may be mass-assigned.
      *
@@ -38,6 +28,10 @@ class Category extends Model implements SluggableInterface
         'save_to' => 'slug'
     ];
 
+    /**
+     * A category has many candidates.
+     * @return mixed
+     */
     public function candidates()
     {
         return $this->hasMany('VotingApp\Models\Candidate')->orderBy('name', 'asc');
