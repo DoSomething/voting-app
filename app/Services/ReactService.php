@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Cache;
 use Exception;
 
 class ReactService
@@ -39,8 +40,11 @@ class ReactService
         $id = $component . md5($component . $propsJSON);
 
         try {
-            $response = $this->client->post($component, ['body' => $propsJSON]);
-            $renderedComponent = $response->getBody()->getContents();
+            // Render component, and cache for one minute for the given component & props combo.
+            $renderedComponent = Cache::remember($id, 1, function() use($component, $propsJSON, $id) {
+                $response = $this->client->post($component, ['body' => $propsJSON]);
+                return $response->getBody()->getContents();
+            });
         } catch(RequestException $e) {
             app('log')->error('Unable to pre-render React view.', [$e]);
             $renderedComponent = '';
