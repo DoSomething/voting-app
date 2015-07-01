@@ -28,19 +28,21 @@ class UsersTableSeeder extends Seeder
         $andrea->admin = true;
         $andrea->save();
 
-        foreach (range(1, 25) as $index) {
+        foreach (range(1, 250) as $index) {
             User::create([
                 'first_name' => $faker->firstName,
                 'email' => $faker->unique()->safeEmail,
                 'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
+                'country_code' => $faker->countryCode,
             ]);
         }
 
-        foreach (range(1, 25) as $index) {
+        foreach (range(1, 250) as $index) {
             User::create([
                 'first_name' => $faker->firstName,
                 'phone' => $faker->unique()->phoneNumber,
                 'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
+                'country_code' => 'US',
             ]);
         }
     }
