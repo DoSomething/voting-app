@@ -12,9 +12,9 @@ class CandidatesTableSeeder extends Seeder
 
         Candidate::truncate();
 
-        // Basketball
+        // Add 40 candidates to each of the 5 seeded categories.
         foreach(range(1, 5) as $category_id) {
-            foreach (range(1, 12) as $index) {
+            foreach (range(1, 40) as $index) {
                 $candidate = Candidate::create([
                     'name' => $faker->name(),
                     'description' => $faker->paragraph(2),
