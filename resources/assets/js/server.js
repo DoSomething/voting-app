@@ -7,7 +7,7 @@ import path from 'path';
  * Set up Express.
  */
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
 
 /**
  * Simple error handler.
@@ -17,6 +17,12 @@ app.use(function(err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 
+/**
+ * Request pre-rendered markup for a given component
+ * with JSON props data.
+ *
+ * POST /:component
+ */
 app.use('/:component', function(request, response) {
   const component = require(`./components/${request.params.component}`);
   const props = request.body || null;
