@@ -2,6 +2,7 @@ import React from 'react/addons';
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
 import includes from 'lodash/collection/includes';
+import debounce from 'lodash/function/debounce';
 
 class CandidateIndex extends React.Component {
 
@@ -12,6 +13,7 @@ class CandidateIndex extends React.Component {
 
     this.selectItem = this.selectItem.bind(this);
     this.setQuery = this.setQuery.bind(this);
+    this.setQuery = debounce(this.setQuery, 20, { leading: true });
 
     // Set HTML5 history event listener
     if(typeof window !== 'undefined') {
