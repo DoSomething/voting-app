@@ -1,8 +1,37 @@
-import React from 'react/addons';
+import React, { Component } from 'react/addons';
 import CandidateDetailView from './CandidateDetailView';
-const { CSSTransitionGroup } = React.addons;
+import { slideUp, slideDown } from '../utilities/scroll';
+const { TransitionGroup } = React.addons;
 
-class DrawerContents extends React.Component {
+class DrawerTransitionGroupChild extends Component {
+
+  componentWillEnter(done) {
+    const node = React.findDOMNode(this);
+    slideDown(node, done);
+  }
+
+  componentWillLeave(done) {
+    const node = React.findDOMNode(this);
+    slideUp(node, done);
+  }
+
+  render() {
+    return React.Children.only(this.props.children);
+  }
+
+}
+
+class DrawerTransitionGroup extends Component {
+  _wrapChild(child) {
+    return <DrawerTransitionGroupChild>{child}</DrawerTransitionGroupChild>;
+  }
+
+  render() {
+    return <TransitionGroup {...this.props} childFactory={this._wrapChild} />;
+  }
+}
+
+class DrawerContents extends Component {
 
   /**
    * Render component.
@@ -19,7 +48,7 @@ class DrawerContents extends React.Component {
 
 }
 
-class Drawer extends React.Component {
+class Drawer extends Component {
 
   /**
    * Send 'close' event to parent component.
@@ -38,9 +67,9 @@ class Drawer extends React.Component {
    */
   render() {
     return (
-      <CSSTransitionGroup transitionName="drawer-animation">
+      <DrawerTransitionGroup>
         {this.props.isOpen ? <DrawerContents candidate={this.props.candidate} close={this.close.bind(this)} /> : null}
-      </CSSTransitionGroup>
+      </DrawerTransitionGroup>
     )
   }
 
