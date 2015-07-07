@@ -1,8 +1,6 @@
 // Tile!
 
 .tile {
-  transform: translateZ(0);
-
   // Selected state (i.e. drawer is open)
   &.is-active {
     > .wrapper {
