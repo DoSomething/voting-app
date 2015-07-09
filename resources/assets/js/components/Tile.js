@@ -35,36 +35,17 @@ class Tile extends React.Component {
    * @returns {XML}
    */
   render() {
-    let candidate = this.props.candidate;
-
     const classes = classNames('tile', {
-      'is-active': this.props.selected,
-      '-alternate': this.props.alternate
+      'is-active': this.props.selected
     });
-
-    let content = (
-      <div>
-        <div className='tile__meta'>
-          <h1>{candidate.name}</h1>
-        </div>
-        <img alt={candidate.name} src={candidate.thumbnail} />
-      </div>
-    );
-
-    if(this.props.alternate) {
-      return (
-        <article className={classes}>
-          <div className='wrapper'>
-            {content}
-          </div>
-        </article>
-      );
-    }
 
     return (
       <article className={classes}>
-        <a className='wrapper' href={candidate.url} onClick={this.onClick}>
-          {content}
+        <a className='wrapper' href={this.props.candidate.url} onClick={this.onClick}>
+          <div className='tile__meta'>
+            <h1>{this.props.candidate.name}</h1>
+          </div>
+          <img alt={this.props.candidate.name} src={this.props.candidate.thumbnail} />
           <span className='button -round tile__action'>Vote</span>
         </a>
       </article>

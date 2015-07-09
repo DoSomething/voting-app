@@ -3,6 +3,7 @@ import React from 'react/addons';
 import Tile from './Tile';
 import Drawer from './Drawer';
 import { getOffset, scrollToY } from '../utilities/scroll';
+import shallowCompare from '../vendor/shallowCompare';
 
 class GalleryRow extends React.Component {
 
@@ -51,6 +52,17 @@ class GalleryRow extends React.Component {
       this.scrollTop();
     }
   }
+
+  /**
+   * Only re-render this component if props or state change.
+   * @param nextProps
+   * @param nextState
+   * @returns {boolean}
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
+  }
+
 
   /**
    * Render component.
