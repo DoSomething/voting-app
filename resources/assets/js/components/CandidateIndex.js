@@ -59,12 +59,12 @@ class CandidateIndex extends React.Component {
 
   handleInfiniteScroll() {
     const paginator = document.getElementById('pagination');
+    const offset = 500;
 
     if(paginator) {
-      const scrollY = window.scrollY;
-      const endOfPage = getOffset(paginator);
+      const endOfPage = getOffset(paginator) - offset;
 
-      if ((scrollY + window.innerHeight) > endOfPage) {
+      if ((window.scrollY + window.innerHeight) > endOfPage) {
         this.setState({ limit: this.state.limit + 25 });
       }
     }
