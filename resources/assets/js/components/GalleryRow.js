@@ -39,6 +39,8 @@ class GalleryRow extends React.Component {
    * @param nextProps
    */
   componentWillReceiveProps(nextProps) {
+    if(this.props.selectedItem == nextProps.selectedItem) return;
+
     const hadSelectedTile = this.props.row.some((candidate) => candidate === this.props.selectedItem);
     const hasSelectedTile = nextProps.row.some((candidate) => candidate === nextProps.selectedItem);
 
