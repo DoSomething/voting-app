@@ -43,7 +43,7 @@ class CandidateIndex extends React.Component {
 
     return {
       query: props.query || '',
-      limit: props.limit,
+      limit: parseInt(props.limit),
       totalItemCount: count,
       selectedItem: null,
       categories: categories
@@ -148,7 +148,7 @@ class CandidateIndex extends React.Component {
       <div>
         <SearchForm onChange={this.setQuery} query={this.state.query} />
         {galleries.length ? galleries : <Gallery />}
-        {shouldShowPagination ? <a className='pagination-link' href={`?limit=${this.state.limit + 25}`} onClick={this.showMore}>Show More</a> : null }
+        {shouldShowPagination ? <a id='pagination' className='pagination-link' href={`?limit=${this.state.limit + 25}#pagination`} onClick={this.showMore}>Show More</a> : null }
       </div>
     );
   }
