@@ -14,7 +14,7 @@ class CandidatesController extends Controller
      * @var array
      */
     protected $rules = [
-        'name' => 'required',
+        'name' => 'required|unique:candidates',
         'category_id' => 'required',
         'photo_source' => 'url',
         'image' => 'image',
