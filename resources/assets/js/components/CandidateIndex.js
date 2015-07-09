@@ -1,15 +1,16 @@
 import React from 'react/addons';
+import classNames from 'classnames';
+import debounce from 'lodash/function/debounce';
+import includes from 'lodash/collection/includes';
+import { getOffset } from '../utilities/scroll';
+
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
-import includes from 'lodash/collection/includes';
-import debounce from 'lodash/function/debounce';
 
 class CandidateIndex extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.totalItemsCount = 0;
 
     this.state = this.initialState(props);
 
@@ -17,10 +18,16 @@ class CandidateIndex extends React.Component {
     this.showMore = this.showMore.bind(this);
     this.setQuery = this.setQuery.bind(this);
     this.setQuery = debounce(this.setQuery, 20, { leading: true });
+    this.handleInfiniteScroll = this.handleInfiniteScroll.bind(this);
+    this.handleInfiniteScroll = debounce(this.handleInfiniteScroll, 100, { leading: true });
 
-    // Set HTML5 history event listener
     if(typeof window !== 'undefined') {
+      // Set HTML5 history event listener
       window.addEventListener('popstate', (event) => this.setState(event.state || this.initialState()));
+
+      // Set infinite scroll handler
+      window.addEventListener('scroll', this.handleInfiniteScroll);
+      this.state.autoload = true;
     }
   }
 
@@ -47,6 +54,19 @@ class CandidateIndex extends React.Component {
       totalItemCount: count,
       selectedItem: null,
       categories: categories
+    }
+  }
+
+  handleInfiniteScroll() {
+    const paginator = document.getElementById('pagination');
+
+    if(paginator) {
+      const scrollY = window.scrollY;
+      const endOfPage = getOffset(paginator);
+
+      if ((scrollY + window.innerHeight) > endOfPage) {
+        this.setState({ limit: this.state.limit + 25 });
+      }
     }
   }
 
@@ -142,13 +162,13 @@ class CandidateIndex extends React.Component {
     });
 
     const shouldShowPagination = this.state.limit < filtered.count;
-    console.log(shouldShowPagination);
+    const paginatorClasses = classNames('pagination-link', { 'is-autoloading': this.state.autoload });
 
     return (
       <div>
         <SearchForm onChange={this.setQuery} query={this.state.query} />
         {galleries.length ? galleries : <Gallery />}
-        {shouldShowPagination ? <a id='pagination' className='pagination-link' href={`?limit=${this.state.limit + 25}#pagination`} onClick={this.showMore}>Show More</a> : null }
+        {shouldShowPagination ? <a id='pagination' className={paginatorClasses} href={`?limit=${this.state.limit + 25}#pagination`} onClick={this.showMore}><span>Show More</span></a> : null }
       </div>
     );
   }

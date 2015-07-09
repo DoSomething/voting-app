@@ -16,4 +16,20 @@
   display: block;
   text-align: center;
   margin: $base-spacing;
+
+  &.is-autoloading {
+    &:before {
+      content: '';
+      display: block;
+      background: transparent data-url($data-spinner-svg) no-repeat center center;
+      background-size: 32px;
+      height: 32px;
+      width: 32px;
+      margin: 0 auto;
+    }
+
+    span {
+      display: none;
+    }
+  }
 }
