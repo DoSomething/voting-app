@@ -11,3 +11,9 @@
     color: $gray;
   }
 }
+
+.pagination-link {
+  display: block;
+  text-align: center;
+  margin: $base-spacing;
+}
