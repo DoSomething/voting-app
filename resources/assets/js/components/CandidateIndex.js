@@ -145,8 +145,6 @@ class CandidateIndex extends React.Component {
     // Finally, remove any any empty categories from the array
     categories = categories.filter(function(category) { return category.candidates && category.candidates.length !== 0 });
 
-    console.log(count);
-
     return { count, categories };
   }
 
