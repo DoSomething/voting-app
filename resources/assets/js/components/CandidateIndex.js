@@ -1,7 +1,11 @@
 import React from 'react/addons';
+import classNames from 'classnames';
+import debounce from 'lodash/function/debounce';
+import includes from 'lodash/collection/includes';
+import { getOffset } from '../utilities/scroll';
+
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
-import includes from 'lodash/collection/includes';
 
 class CandidateIndex extends React.Component {
 
@@ -11,11 +15,19 @@ class CandidateIndex extends React.Component {
     this.state = this.initialState(props);
 
     this.selectItem = this.selectItem.bind(this);
+    this.showMore = this.showMore.bind(this);
     this.setQuery = this.setQuery.bind(this);
+    this.setQuery = debounce(this.setQuery, 20, { leading: true });
+    this.handleInfiniteScroll = this.handleInfiniteScroll.bind(this);
+    this.handleInfiniteScroll = debounce(this.handleInfiniteScroll, 100, { leading: true });
 
-    // Set HTML5 history event listener
     if(typeof window !== 'undefined') {
+      // Set HTML5 history event listener
       window.addEventListener('popstate', (event) => this.setState(event.state || this.initialState()));
+
+      // Set infinite scroll handler
+      window.addEventListener('scroll', this.handleInfiniteScroll);
+      this.state.autoload = true;
     }
   }
 
@@ -26,10 +38,10 @@ class CandidateIndex extends React.Component {
    */
   initialState(props = this.props) {
     // Assign incremental key to candidates
-    let i = 1;
+    let count = 1;
     const categories = props.categories.map(function(category) {
       category.candidates.map(function(candidate) {
-        candidate.key = i++;
+        candidate.key = count++;
         return candidate;
       });
 
@@ -38,9 +50,33 @@ class CandidateIndex extends React.Component {
 
     return {
       query: props.query || '',
+      limit: parseInt(props.limit),
+      totalItemCount: count,
       selectedItem: null,
       categories: categories
     }
+  }
+
+  handleInfiniteScroll() {
+    const paginator = document.getElementById('pagination');
+    const offset = 500;
+
+    if(paginator) {
+      const endOfPage = getOffset(paginator) - offset;
+
+      if ((window.scrollY + window.innerHeight) > endOfPage) {
+        this.setState({ limit: this.state.limit + 25 });
+      }
+    }
+  }
+
+  /**
+   * Increase number of tiles shown as user scrolls.
+   */
+  showMore(event) {
+    event.preventDefault();
+
+    this.setState({ limit: this.state.limit + 25 });
   }
 
   /**
@@ -51,7 +87,8 @@ class CandidateIndex extends React.Component {
   setQuery(query, save = false) {
     this.setState({
       query: query,
-      selectedItem: null
+      selectedItem: null,
+      limit: this.props.limit
     });
 
     if(save) {
@@ -76,21 +113,39 @@ class CandidateIndex extends React.Component {
 
   /**
    * Filter candidates by the current search query.
-   * @param candidates - Object containing candidates to be filtered
-   * @param categoryName - Category name
-   * @returns object - Filtered candidates
+   * @returns {object} - Filtered candidates
    */
-  filteredCandidates(candidates, categoryName) {
-    const query = this.state.query.toUpperCase();
-    categoryName = categoryName.toUpperCase();
+  filteredCandidates() {
+    let count = 0;
+    let categories = this.props.categories.map((category) => {
+      const query = this.state.query.toUpperCase();
+      const categoryName = category.name.toUpperCase();
 
-    if(query === '') return candidates;
+      const filteredCandidates = category.candidates.filter((candidate) => {
+        const name = candidate.name.toUpperCase();
 
-    // Filter candidates by search query...
-    return candidates.filter(function(candidate) {
-      const name = candidate.name.toUpperCase();
-      return (includes(name, query) || includes(categoryName, query) ? candidate : null);
+        // Only include candidates up until the given limit
+        if (count > this.state.limit) return null;
+
+        if (includes(name, query) || includes(categoryName, query) || query === '') {
+          count++;
+          return candidate;
+        }
+      });
+
+
+      // Filter candidates by search query...
+      return {
+        id: category.id,
+        name: category.name,
+        candidates: filteredCandidates
+      }
     });
+
+    // Finally, remove any any empty categories from the array
+    categories = categories.filter(function(category) { return category.candidates && category.candidates.length !== 0 });
+
+    return { count, categories };
   }
 
   /**
@@ -98,23 +153,20 @@ class CandidateIndex extends React.Component {
    * @returns {XML}
    */
   render() {
-    var _this = this;
-    var galleries = this.state.categories.map(function(category) {
-      var candidates = _this.filteredCandidates(category.candidates, category.name);
-      if(candidates.length == 0) return;
+    const filtered = this.filteredCandidates();
 
-      return (
-        <Gallery key={category.id} name={category.name} items={candidates} selectItem={_this.selectItem} selectedItem={_this.state.selectedItem} />
-      );
+    let galleries = filtered.categories.map((category) => {
+      return <Gallery key={category.id} name={category.name} items={category.candidates} selectItem={this.selectItem} selectedItem={this.state.selectedItem} />;
     });
 
-    // Remove any null entries from the array
-    galleries = galleries.filter(function(gallery) { return typeof gallery != 'undefined' });
+    const shouldShowPagination = this.state.limit < filtered.count;
+    const paginatorClasses = classNames('pagination-link', { 'is-autoloading': this.state.autoload });
 
     return (
       <div>
         <SearchForm onChange={this.setQuery} query={this.state.query} />
         {galleries.length ? galleries : <Gallery />}
+        {shouldShowPagination ? <a id='pagination' className={paginatorClasses} href={`?limit=${this.state.limit + 25}#pagination`} onClick={this.showMore}><span>Show More</span></a> : null }
       </div>
     );
   }
@@ -122,7 +174,8 @@ class CandidateIndex extends React.Component {
 }
 
 CandidateIndex.defaultProps = {
-  title: 'Voting App'
+  title: 'Voting App',
+  limit: 16
 };
 
 export default CandidateIndex;

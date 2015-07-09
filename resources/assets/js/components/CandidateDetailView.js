@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import Tile from './Tile';
+import AlternateTile from './AlternateTile';
 
 class CandidateDetailView extends React.Component {
 
@@ -34,7 +34,7 @@ class CandidateDetailView extends React.Component {
       <div className='candidate'>
         <div className='wrapper'>
           <div className="candidate__info">
-            <Tile candidate={this.props.candidate} alternate={true}/>
+            <AlternateTile candidate={this.props.candidate} />
             <p className="candidate__description">{this.props.candidate.description}</p>
           </div>
 

@@ -3,7 +3,7 @@
 @section('content')
     @if($categories)
 
-        @react('CandidateIndex', compact('categories', 'query'))
+        @react('CandidateIndex', compact('categories', 'query', 'limit'))
 
         <div class="wrapper -narrow">
             <h4>Was there a {{ setting('candidate_type') }} we missed?</h4>

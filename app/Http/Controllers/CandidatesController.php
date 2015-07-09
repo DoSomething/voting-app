@@ -48,10 +48,11 @@ class CandidatesController extends Controller
         }
 
         $query = $request->get('query', '');
+        $limit = $request->get('limit', '16');
         $categories = Category::orderBy('name', 'asc')->with('candidates')->get();
         $title = setting('site_title');
 
-        return view('candidates.index', compact('categories', 'query', 'title'));
+        return view('candidates.index', compact('categories', 'query', 'limit', 'title'));
     }
 
     /**
