@@ -14,6 +14,7 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', '{{ setting('google_analytics') }}', 'auto');
+        ga('require', 'linkid', 'linkid.js');
         ga('send', 'pageview');
     </script>
 @endif
