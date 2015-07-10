@@ -14,7 +14,7 @@ class CandidatesController extends Controller
      * @var array
      */
     protected $rules = [
-        'name' => 'required',
+        'name' => 'required|unique:candidates',
         'category_id' => 'required',
         'photo_source' => 'url',
         'image' => 'image',
@@ -70,7 +70,7 @@ class CandidatesController extends Controller
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
             ->leftJoin('votes', 'candidates.id', '=', 'votes.candidate_id')
             ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'candidates.gender', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
-            ->groupBy('candidates.name');
+            ->groupBy('candidates.id');
 
         // If a sorting method & direction are provided, order by them.
         if ($sort_by && $direction) {
