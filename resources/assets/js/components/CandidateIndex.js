@@ -2,7 +2,7 @@ import React from 'react/addons';
 import classNames from 'classnames';
 import debounce from 'lodash/function/debounce';
 import includes from 'lodash/collection/includes';
-import { getOffset } from '../utilities/scroll';
+import { getOffset } from '../utilities/dom';
 
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
