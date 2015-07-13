@@ -88,7 +88,7 @@ class CandidateIndex extends React.Component {
     this.setState({
       query: query,
       selectedItem: null,
-      limit: this.props.limit
+      limit: parseInt(this.props.limit)
     });
 
     if(save) {
