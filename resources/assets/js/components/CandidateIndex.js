@@ -15,7 +15,6 @@ class CandidateIndex extends React.Component {
     this.state = this.initialState(props);
 
     this.selectItem = this.selectItem.bind(this);
-    this.showMore = this.showMore.bind(this);
     this.setQuery = this.setQuery.bind(this);
     this.setQuery = debounce(this.setQuery, 20, { leading: true });
     this.handleInfiniteScroll = this.handleInfiniteScroll.bind(this);
@@ -68,15 +67,6 @@ class CandidateIndex extends React.Component {
         this.setState({ limit: this.state.limit + 25 });
       }
     }
-  }
-
-  /**
-   * Increase number of tiles shown as user scrolls.
-   */
-  showMore(event) {
-    event.preventDefault();
-
-    this.setState({ limit: this.state.limit + 25 });
   }
 
   /**
@@ -166,7 +156,7 @@ class CandidateIndex extends React.Component {
       <div>
         <SearchForm onChange={this.setQuery} query={this.state.query} />
         {galleries.length ? galleries : <Gallery />}
-        {shouldShowPagination ? <a id='pagination' className={paginatorClasses} href={`?limit=${this.state.limit + 25}#pagination`} onClick={this.showMore}><span>Show More</span></a> : null }
+        {shouldShowPagination ? <a id='pagination' className={paginatorClasses} href={`?limit=${this.state.limit + 25}#pagination`}><span>Show More</span></a> : null }
       </div>
     );
   }
