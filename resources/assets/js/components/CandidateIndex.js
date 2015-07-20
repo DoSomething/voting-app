@@ -2,7 +2,7 @@ import React from 'react/addons';
 import classNames from 'classnames';
 import debounce from 'lodash/function/debounce';
 import includes from 'lodash/collection/includes';
-import { getOffset } from '../utilities/scroll';
+import { getOffset } from '../utilities/dom';
 
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
@@ -15,7 +15,6 @@ class CandidateIndex extends React.Component {
     this.state = this.initialState(props);
 
     this.selectItem = this.selectItem.bind(this);
-    this.showMore = this.showMore.bind(this);
     this.setQuery = this.setQuery.bind(this);
     this.setQuery = debounce(this.setQuery, 20, { leading: true });
     this.handleInfiniteScroll = this.handleInfiniteScroll.bind(this);
@@ -71,15 +70,6 @@ class CandidateIndex extends React.Component {
   }
 
   /**
-   * Increase number of tiles shown as user scrolls.
-   */
-  showMore(event) {
-    event.preventDefault();
-
-    this.setState({ limit: this.state.limit + 25 });
-  }
-
-  /**
    * Set the query to filter galleries by.
    * @param query - Search query
    * @param save - Should query be persisted in browser history?
@@ -88,7 +78,7 @@ class CandidateIndex extends React.Component {
     this.setState({
       query: query,
       selectedItem: null,
-      limit: this.props.limit
+      limit: parseInt(this.props.limit)
     });
 
     if(save) {
@@ -166,7 +156,7 @@ class CandidateIndex extends React.Component {
       <div>
         <SearchForm onChange={this.setQuery} query={this.state.query} />
         {galleries.length ? galleries : <Gallery />}
-        {shouldShowPagination ? <a id='pagination' className={paginatorClasses} href={`?limit=${this.state.limit + 25}#pagination`} onClick={this.showMore}><span>Show More</span></a> : null }
+        {shouldShowPagination ? <a id='pagination' className={paginatorClasses} href={`?limit=${this.state.limit + 25}#pagination`}><span>Show More</span></a> : null }
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react/addons';
 
 import Tile from './Tile';
 import Drawer from './Drawer';
-import { getOffset, scrollToY } from '../utilities/scroll';
+import { getOffset, scrollToY } from '../utilities/dom';
 import shallowCompare from '../vendor/shallowCompare';
 
 class GalleryRow extends React.Component {

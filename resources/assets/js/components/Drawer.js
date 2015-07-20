@@ -1,6 +1,6 @@
 import React, { Component } from 'react/addons';
 import CandidateDetailView from './CandidateDetailView';
-import { slideUp, slideDown } from '../utilities/scroll';
+import { slideUp, slideDown } from '../utilities/dom';
 const { TransitionGroup } = React.addons;
 
 class DrawerTransitionGroupChild extends Component {
