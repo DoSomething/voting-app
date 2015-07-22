@@ -1,4 +1,6 @@
+var gulp = require('gulp');
 var elixir = require('laravel-elixir');
+var eslint = require('gulp-eslint');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +13,13 @@ var elixir = require('laravel-elixir');
  |
  */
 
+gulp.task('lint', function() {
+  gulp.src(['resources/assets/js/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
 elixir(function(mix) {
 
   // Styles
@@ -18,6 +27,9 @@ elixir(function(mix) {
 
   // Scripts
   mix.browserify('app.js');
+
+  // Linting
+  mix.task('lint');
 
   // Copy assets
   mix.copy('resources/assets/fonts', 'public/assets/fonts');
