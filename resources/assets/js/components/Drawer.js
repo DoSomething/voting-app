@@ -1,60 +1,30 @@
-import React, { Component } from 'react/addons';
+import React, { Component, PropTypes } from 'react/addons';
+import DrawerTransitionGroup from './DrawerTransitionGroup';
 import CandidateDetailView from './CandidateDetailView';
-import { slideUp, slideDown } from '../utilities/dom';
-const { TransitionGroup } = React.addons;
-
-class DrawerTransitionGroupChild extends Component {
-
-  componentWillEnter(done) {
-    const node = React.findDOMNode(this);
-    slideDown(node, done);
-  }
-
-  componentWillLeave(done) {
-    const node = React.findDOMNode(this);
-    slideUp(node, done);
-  }
-
-  render() {
-    return React.Children.only(this.props.children);
-  }
-
-}
-
-class DrawerTransitionGroup extends Component {
-  _wrapChild(child) {
-    return <DrawerTransitionGroupChild>{child}</DrawerTransitionGroupChild>;
-  }
-
-  render() {
-    return <TransitionGroup {...this.props} childFactory={this._wrapChild} />;
-  }
-}
-
-class DrawerContents extends Component {
-
-  /**
-   * Render component.
-   * @returns {XML}
-   */
-  render() {
-    return (
-      <div className='drawer'>
-        <CandidateDetailView candidate={this.props.candidate} />
-        <a href="#" className="drawer__close" onClick={this.props.close}><span>Close</span></a>
-      </div>
-    );
-  }
-
-}
 
 class Drawer extends Component {
 
+  static propTypes = {
+    candidate: PropTypes.object,
+    selectItem: PropTypes.fn,
+    isOpen: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    isOpen: false,
+  };
+
+  constructor() {
+    super();
+
+    this.onClose = this.onClose.bind(this);
+  }
+
   /**
    * Send 'close' event to parent component.
-   * @param event
+   * @param {MouseEvent} event - 'click'
    */
-  close(event) {
+  onClose(event) {
     event.preventDefault();
 
     // De-select this item.
@@ -66,17 +36,23 @@ class Drawer extends Component {
    * @returns {XML}
    */
   render() {
+    let contents = null;
+
+    if (this.props.isOpen) {
+      contents = (
+        <div className="drawer">
+          <CandidateDetailView candidate={this.props.candidate} />
+          <a href="#" className="drawer__close" onClick={this.onClose}><span>Close</span></a>
+        </div>
+      );
+    }
+
     return (
       <DrawerTransitionGroup>
-        {this.props.isOpen ? <DrawerContents candidate={this.props.candidate} close={this.close.bind(this)} /> : null}
+        {contents}
       </DrawerTransitionGroup>
-    )
+    );
   }
-
 }
-
-Drawer.defaultProps = {
-  isOpen: false
-};
 
 export default Drawer;

@@ -1,45 +1,27 @@
-import React from 'react/addons';
+import React, { Component, PropTypes } from 'react/addons';
 
 import Tile from './Tile';
 import Drawer from './Drawer';
 import { getOffset, scrollToY } from '../utilities/dom';
 import shallowCompare from '../vendor/shallowCompare';
 
-class GalleryRow extends React.Component {
+class GalleryRow extends Component {
 
-  /**
-   * Scroll viewport to the top of this row.
-   * @param drawerWasAbove - Whether a drawer was open "above" this row
-   */
-  scrollTop(drawerWasAbove = false) {
-    // Get vertical offset of the first tile in this row.
-    // We check the tile, because row container is a span and
-    // doesn't clear, so it's position might be misleading.
-    const el = React.findDOMNode(this).firstChild;
-    var elementTop = getOffset(el);
-
-    // We find the height of the currently open drawer, if there is
-    // one, and use it to offset the scroll position if necessary.
-    let existingDrawer = document.getElementsByClassName('drawer')[0];
-    let offset = existingDrawer ? existingDrawer.offsetHeight : 0;
-
-    // Scroll to the top of row. If the previously open drawer
-    // was above (determined by boolean parameter sent from
-    // `componentWillReceiveProps`), then adjust offset accordingly
-    if(drawerWasAbove) {
-      scrollToY(elementTop - offset);
-    } else {
-      scrollToY(elementTop);
-    }
-  }
+  static propTypes = {
+    row: PropTypes.arrayOf(PropTypes.shape({
+      key: PropTypes.number,
+    })),
+    selectedItem: PropTypes.object,
+    selectItem: PropTypes.fn,
+  };
 
   /**
    * When component receives new props, determine whether we should
    * scroll viewport to the top of this row.
-   * @param nextProps
+   * @param {object} nextProps - Props that the component will receive
    */
   componentWillReceiveProps(nextProps) {
-    if(this.props.selectedItem == nextProps.selectedItem) return;
+    if (this.props.selectedItem === nextProps.selectedItem) return;
 
     const hadSelectedTile = this.props.row.some((candidate) => candidate === this.props.selectedItem);
     const hasSelectedTile = nextProps.row.some((candidate) => candidate === nextProps.selectedItem);
@@ -48,42 +30,65 @@ class GalleryRow extends React.Component {
     const nextKey = nextProps.selectedItem ? nextProps.selectedItem.key : -1;
     const previousTileWasAbove = prevKey < nextKey;
 
-    if(!hadSelectedTile && hasSelectedTile) {
-      this.scrollTop(previousTileWasAbove);
+    if (!hadSelectedTile && hasSelectedTile) {
+      this.onChangedSelection(previousTileWasAbove);
     } else if (hasSelectedTile) {
-      this.scrollTop();
+      this.onChangedSelection();
     }
   }
 
   /**
    * Only re-render this component if props or state change.
-   * @param nextProps
-   * @param nextState
+   * @param {object} nextProps - Props that the component will receive
+   * @param {object} nextState - State that the component will receive
    * @returns {boolean}
    */
   shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
   }
 
+  /**
+   * Scroll viewport to the top of this row when selection changes.
+   * @param {boolean} drawerWasAbove - Whether a drawer was open "above" this row
+   */
+  onChangedSelection(drawerWasAbove = false) {
+    // Get vertical offset of the first tile in this row.
+    // We check the tile, because row container is a span and
+    // doesn't clear, so it's position might be misleading.
+    const el = React.findDOMNode(this).firstChild;
+    const elementTop = getOffset(el);
+
+    // We find the height of the currently open drawer, if there is
+    // one, and use it to offset the scroll position if necessary.
+    const existingDrawer = document.getElementsByClassName('drawer')[0];
+    const offset = existingDrawer ? existingDrawer.offsetHeight : 0;
+
+    // Scroll to the top of row. If the previously open drawer
+    // was above (determined by boolean parameter sent from
+    // `componentWillReceiveProps`), then adjust offset accordingly
+    if (drawerWasAbove) {
+      scrollToY(elementTop - offset);
+    } else {
+      scrollToY(elementTop);
+    }
+  }
 
   /**
    * Render component.
    * @returns {XML}
    */
   render() {
-    const _this = this;
-
     // Build each tile in the row
     let hasSelectedTile = false;
-    var tiles = this.props.row.map(function(candidate) {
-      const selected = candidate === _this.props.selectedItem;
-      if(selected) {
+    const tiles = this.props.row.map((candidate) => {
+      const selected = candidate === this.props.selectedItem;
+      if (selected) {
         hasSelectedTile = selected;
       }
 
       return (
-        <li key={candidate.key} className='gallery__item'>
-          <Tile candidate={candidate} selected={selected} onClick={_this.props.selectItem} />
+        <li key={candidate.key} className="gallery__item">
+          <Tile candidate={candidate} selected={selected} onClick={this.props.selectItem} />
         </li>
       );
     });
@@ -92,9 +97,9 @@ class GalleryRow extends React.Component {
     return (
       <div>
         {tiles}
-        <Drawer isOpen={hasSelectedTile} candidate={_this.props.selectedItem} selectItem={_this.props.selectItem} />
+        <Drawer isOpen={hasSelectedTile} candidate={this.props.selectedItem} selectItem={this.props.selectItem} />
       </div>
-    )
+    );
   }
 
 }

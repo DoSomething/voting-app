@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Performs equality by iterating through keys on an object and returning
  * false when any key has values which are not strictly equal between

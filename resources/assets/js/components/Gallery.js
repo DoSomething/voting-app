@@ -1,35 +1,27 @@
-import React from 'react/addons';
-import classNames from 'classnames';
+import React, { Component, PropTypes } from 'react/addons';
 import chunk from 'lodash/array/chunk';
 
 import GalleryRow from './GalleryRow';
 
-class Gallery extends React.Component {
+class Gallery extends Component {
+
+  static propTypes = {
+    name: PropTypes.string,
+    items: PropTypes.array,
+    selectedItem: PropTypes.object,
+    selectItem: PropTypes.fn,
+  };
+
+  static defaultProps = {
+    items: [],
+  };
 
   constructor() {
     super();
 
     this.state = {
-      itemsPerRow: this.tilesPerRow()
+      itemsPerRow: this.getTilesPerRow(),
     };
-  }
-
-  /**
-   * Calculate the number of tiles to put in a row, based
-   * on the media queries we use in our stylesheet.
-   * @returns {number}
-   */
-  tilesPerRow() {
-    // Assume a desktop view for pre-rendering on the server
-    if(typeof window === 'undefined') return 4;
-
-    if(window.innerWidth > 1100) {
-      return 4;
-    } else if(window.innerWidth > 660) {
-      return 3;
-    } else {
-      return 1;
-    }
   }
 
   /**
@@ -37,18 +29,34 @@ class Gallery extends React.Component {
    * user resizes between breakpoints.
    */
   componentDidMount() {
-    var _this = this;
-
     // Update state whenever window width changes
-    if(window) {
-      window.addEventListener('resize', function() {
-        var itemsPerRow = _this.tilesPerRow();
+    if (window) {
+      window.addEventListener('resize', () => {
+        const itemsPerRow = this.getTilesPerRow();
 
-        if(_this.state.itemsPerRow !== itemsPerRow) {
-          _this.setState({ itemsPerRow: itemsPerRow });
+        if (this.state.itemsPerRow !== itemsPerRow) {
+          this.setState({ itemsPerRow: itemsPerRow });
         }
       });
     }
+  }
+
+  /**
+   * Calculate the number of tiles to put in a row, based
+   * on the media queries we use in our stylesheet.
+   * @returns {number}
+   */
+  getTilesPerRow() {
+    // Assume a desktop view for pre-rendering on the server
+    if (typeof window === 'undefined') return 4;
+
+    if (window.innerWidth > 1100) {
+      return 4;
+    } else if (window.innerWidth > 660) {
+      return 3;
+    }
+
+    return 1;
   }
 
   /**
@@ -56,10 +64,8 @@ class Gallery extends React.Component {
    * @returns {XML}
    */
   render() {
-    const _this = this;
-
     // Show "empty state" if no items
-    if(this.props.items.length === 0) {
+    if (this.props.items.length === 0) {
       return (
         <div className="gallery">
           <div className="empty">No matches!</div>
@@ -69,22 +75,18 @@ class Gallery extends React.Component {
 
     const chunkedItems = chunk(this.props.items, this.state.itemsPerRow);
 
-    let rows = chunkedItems.map(function(row, index) {
-      return <GalleryRow key={index} row={row} selectedItem={_this.props.selectedItem} selectItem={_this.props.selectItem} />;
+    const rows = chunkedItems.map((row, index) => {
+      return <GalleryRow key={index} row={row} selectedItem={this.props.selectedItem} selectItem={this.props.selectItem} />;
     });
 
     return (
-      <div className='gallery'>
-        {this.props.name ? <h2 className='gallery__heading'>{this.props.name}</h2> : null}
+      <div className="gallery">
+        {this.props.name ? <h2 className="gallery__heading">{this.props.name}</h2> : null}
         {rows}
       </div>
     );
   }
 
 }
-
-Gallery.defaultProps = {
-  items: []
-};
 
 export default Gallery;

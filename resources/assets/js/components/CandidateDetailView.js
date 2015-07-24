@@ -1,14 +1,24 @@
-import React from 'react/addons';
+import React, { Component, PropTypes } from 'react/addons';
 import AlternateTile from './AlternateTile';
 
-class CandidateDetailView extends React.Component {
+class CandidateDetailView extends Component {
+
+  static propTypes = {
+    candidate: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      url: PropTypes.string,
+      share_name: PropTypes.string,
+    }),
+  };
 
   /**
    * Return escaped server-rendered HTML to use for voting form.
    * @see resources/views/votes/form.blade.php
    * @returns {{__html: string}}
    */
-  formMarkup() {
+  getFormMarkup() {
     // Nasty! We render the form markup on the server, and
     // then grab that pre-rendered markup here. This code
     // snippet is escaped server-side.
@@ -21,8 +31,8 @@ class CandidateDetailView extends React.Component {
                            .replace(/TWITTER_NAME/g, this.props.candidate.share_name);
 
     return {
-      __html: formMarkup
-    }
+      __html: formMarkup,
+    };
   }
 
   /**
@@ -31,14 +41,14 @@ class CandidateDetailView extends React.Component {
    */
   render() {
     return (
-      <div className='candidate'>
-        <div className='wrapper'>
+      <div className="candidate">
+        <div className="wrapper">
           <div className="candidate__info">
             <AlternateTile candidate={this.props.candidate} />
             <p className="candidate__description">{this.props.candidate.description}</p>
           </div>
 
-          <div className="candidate__actions" dangerouslySetInnerHTML={this.formMarkup()} />
+          <div className="candidate__actions" dangerouslySetInnerHTML={this.getFormMarkup()} />
         </div>
       </div>
     );

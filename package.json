@@ -5,6 +5,12 @@
       ["babelify", { "optional": ["es7.classProperties"] }]
     ]
   },
+  "scripts": {
+    "watch": "gulp watch",
+    "build": "gulp --production",
+    "lint": "eslint resources/assets/js --config .eslintrc",
+    "test": "npm run lint"
+  },
   "devDependencies": {
     "babel-eslint": "^3.1.23",
     "babelify": "^6.1.3",

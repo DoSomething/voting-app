@@ -4,10 +4,8 @@ import delegate from 'dom-delegate';
  * Allow links to specify a HTTP method using `data-method`
  */
 function initialize() {
-  let csrfTag = document.querySelectorAll('meta[name=csrf-token]');
-  if(csrfTag.length > 0) {
-    var csrfToken = csrfTag[0].getAttribute('content');
-  }
+  const csrfTag = document.querySelectorAll('meta[name=csrf-token]');
+  const csrfToken = csrfTag.length > 0 ? csrfTag[0].getAttribute('content') : null;
 
   delegate(document.body).on('click', '*[data-method]', function(event) {
     event.preventDefault();
@@ -18,7 +16,7 @@ function initialize() {
     const formItem = this.getAttribute('data-form-item');
     const formValue = this.getAttribute('data-form-value');
 
-    let form = document.createElement('form');
+    const form = document.createElement('form');
     form.setAttribute('method', 'post');
     form.setAttribute('action', url);
     form.setAttribute('style', 'display: none;');
@@ -33,9 +31,9 @@ function initialize() {
       metadataInput += `<input name="${formItem}" value="${formValue}" type="hidden" />`;
     }
 
-    var e = document.createElement('div');
-    e.innerHTML = metadataInput;
-    form.appendChild(e);
+    const el = document.createElement('div');
+    el.innerHTML = metadataInput;
+    form.appendChild(el);
 
     document.body.appendChild(form);
 

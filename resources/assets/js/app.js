@@ -21,8 +21,6 @@
  *
  */
 
-import React from 'react/addons';
-
 // Utilities
 import ready from './utilities/dom-ready';
 import confirm from './utilities/confirm';
@@ -39,7 +37,6 @@ import CategoryIndex from './components/CategoryIndex';
  * Let's go!
  */
 ready(function() {
-
   // Initialize popups for social sharing links.
   shareLink.initialize();
 
@@ -55,7 +52,6 @@ ready(function() {
   // Rehydrate any pre-rendered React components on the page
   rehydrate({
     'CandidateIndex': CandidateIndex,
-    'CategoryIndex': CategoryIndex
+    'CategoryIndex': CategoryIndex,
   });
-
 });
