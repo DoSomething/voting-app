@@ -14,10 +14,10 @@ class CandidatesController extends Controller
      * @var array
      */
     protected $rules = [
-        'name' => 'required|unique:candidates',
-        'category_id' => 'required',
-        'photo_source' => 'url',
-        'image' => 'image',
+        'name' => ['required'],
+        'category_id' => ['required'],
+        'photo_source' => ['url'],
+        'image' => ['image'],
     ];
 
     public function __construct()
@@ -107,7 +107,10 @@ class CandidatesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $rules = $this->rules;
+        $rules['name'][] = 'unique:candidates';
+
+        $this->validate($request, $rules);
 
         $candidate = Candidate::create($request->all());
 
@@ -158,7 +161,10 @@ class CandidatesController extends Controller
      */
     public function update(Request $request, Candidate $candidate)
     {
-        $this->validate($request, $this->rules);
+        $rules = $this->rules;
+        $rules['name'][] = 'unique:candidates,name,' . $candidate->id;
+
+        $this->validate($request, $rules);
 
         $candidate->fill($request->all());
 
