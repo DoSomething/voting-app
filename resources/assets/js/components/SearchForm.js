@@ -1,12 +1,17 @@
-import React from 'react/addons';
+import React, { Component, PropTypes } from 'react/addons';
 
-class SearchForm extends React.Component {
+class SearchForm extends Component {
+
+  static propTypes = {
+    query: PropTypes.string,
+    onChange: PropTypes.fn,
+  };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      query: props.query || ''
+      query: props.query || '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -16,7 +21,7 @@ class SearchForm extends React.Component {
 
   /**
    * Send search query to parent component on text input.
-   * @param event
+   * @param {Event} event - 'change'
    */
   onChange(event) {
     event.preventDefault();
@@ -26,10 +31,10 @@ class SearchForm extends React.Component {
   /**
    * If enter key is pressed, blur the field to close
    * keyboard on touch devices.
-   * @param event
+   * @param {KeyboardEvent} event - 'keydown'
    */
   onKeyDown(event) {
-    if(event.keyCode === 13) {
+    if (event.keyCode === 13) {
       event.preventDefault();
       document.activeElement.blur();
     }
@@ -37,7 +42,7 @@ class SearchForm extends React.Component {
 
   /**
    * Persist the search query when user blurs the text field.
-   * @param event
+   * @param {FocusEvent} event - 'blur'
    */
   onBlur(event) {
     this.props.onChange(event.target.value, true);
@@ -49,8 +54,8 @@ class SearchForm extends React.Component {
    */
   render() {
     return (
-      <form method='GET' action='/candidates' className='search-form' onSubmit={this.onChange}>
-        <input type='search' name='query' id='query' value={this.props.query} placeholder='Find a candidate...'
+      <form method="GET" action="/candidates" className="search-form" onSubmit={this.onChange}>
+        <input type="search" name="query" id="query" value={this.props.query} placeholder="Find a candidate..."
           onChange={this.onChange} onKeyDown={this.onKeyDown} onBlur={this.onBlur} />
       </form>
     );

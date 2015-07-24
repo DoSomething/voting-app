@@ -1,16 +1,11 @@
+var gulp = require('gulp');
 var elixir = require('laravel-elixir');
+var eslint = require('gulp-eslint');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Less
- | file for our application, as well as publishing vendor resources.
- |
+/**
+ * Configure build pipeline using Laravel Elixir.
+ * @see http://laravel.com/docs/5.0/elixir
  */
-
 elixir(function(mix) {
 
   // Styles
@@ -18,6 +13,9 @@ elixir(function(mix) {
 
   // Scripts
   mix.browserify('app.js');
+
+  // Linting
+  mix.task('lint', mix.assetsDir + 'js/**/*.js');
 
   // Copy assets
   mix.copy('resources/assets/fonts', 'public/assets/fonts');
@@ -27,4 +25,15 @@ elixir(function(mix) {
   mix.copy('node_modules/html5shiv/dist/html5shiv.min.js', 'public/assets/vendor/html5shiv.min.js');
   mix.copy('node_modules/respond.js/dest/respond.min.js', 'public/assets/vendor/respond.min.js');
 
+});
+
+/**
+ * Custom task to lint scripts using ESLint.
+ * @see `.eslintrc`
+ */
+gulp.task('lint', function() {
+  gulp.src(['resources/assets/js/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });

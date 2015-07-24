@@ -1,3 +1,5 @@
+/* eslint no-alert:0 */
+
 import delegate from 'dom-delegate';
 
 /**
@@ -7,7 +9,7 @@ function initialize() {
   delegate(document.body).on('click', '*[data-confirm]', function(event) {
     const response = confirm(this.getAttribute('data-confirm'));
 
-    if(!response) {
+    if (!response) {
       event.stopImmediatePropagation();
       return false;
     }
