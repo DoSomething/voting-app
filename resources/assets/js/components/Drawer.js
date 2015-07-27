@@ -6,7 +6,7 @@ class Drawer extends Component {
 
   static propTypes = {
     candidate: PropTypes.object,
-    selectItem: PropTypes.fn,
+    selectItem: PropTypes.func,
     isOpen: PropTypes.bool,
   };
 

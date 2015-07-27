@@ -48,7 +48,7 @@ class CandidatesController extends Controller
         }
 
         $query = $request->get('query', '');
-        $limit = $request->get('limit', '16');
+        $limit = (int) $request->get('limit', 16);
         $categories = Category::orderBy('name', 'asc')->with('candidates')->get();
         $title = setting('site_title');
 

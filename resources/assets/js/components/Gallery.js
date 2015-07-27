@@ -9,7 +9,7 @@ class Gallery extends Component {
     name: PropTypes.string,
     items: PropTypes.array,
     selectedItem: PropTypes.object,
-    selectItem: PropTypes.fn,
+    selectItem: PropTypes.func,
   };
 
   static defaultProps = {

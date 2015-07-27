@@ -22,7 +22,7 @@ class CandidateIndex extends Component {
   constructor(props) {
     super(props);
 
-    this.state = this.getInitialState(props);
+    this.state = this.getState(props);
 
     this.onSelectItem = this.onSelectItem.bind(this);
     this.onSetQuery = this.onSetQuery.bind(this);
@@ -32,38 +32,12 @@ class CandidateIndex extends Component {
 
     if (typeof window !== 'undefined') {
       // Set HTML5 history event listener
-      window.addEventListener('popstate', (event) => this.setState(event.state || this.getInitialState()));
+      window.addEventListener('popstate', (event) => this.setState(event.state || this.getState()));
 
       // Set infinite scroll handler
       window.addEventListener('scroll', this.onInfiniteScroll);
       this.state.autoload = true;
     }
-  }
-
-  /**
-   * Function which returns initial state of this component.
-   * @param {object} props - Component props
-   * @returns {object}
-   */
-  getInitialState(props = this.props) {
-    // Assign incremental key to candidates
-    let count = 1;
-    const categories = props.categories.map(function(category) {
-      category.candidates.map(function(candidate) {
-        candidate.key = count++;
-        return candidate;
-      });
-
-      return category;
-    });
-
-    return {
-      query: props.query || '',
-      limit: parseInt(props.limit, 10),
-      totalItemCount: count,
-      selectedItem: null,
-      categories: categories,
-    };
   }
 
   /**
@@ -91,7 +65,7 @@ class CandidateIndex extends Component {
     this.setState({
       query: query,
       selectedItem: null,
-      limit: parseInt(this.props.limit, 10),
+      limit: this.props.limit,
     });
 
     if (save) {
@@ -113,6 +87,33 @@ class CandidateIndex extends Component {
 
     this.setState({selectedItem: item.props.candidate});
   }
+
+  /**
+   * Function which returns initial state of this component.
+   * @param {object} props - Component props
+   * @returns {object}
+   */
+  getState(props = this.props) {
+    // Assign incremental key to candidates
+    let count = 1;
+    const categories = props.categories.map(function(category) {
+      category.candidates.map(function(candidate) {
+        candidate.key = count++;
+        return candidate;
+      });
+
+      return category;
+    });
+
+    return {
+      query: props.query || '',
+      limit: props.limit,
+      totalItemCount: count,
+      selectedItem: null,
+      categories: categories,
+    };
+  }
+
 
   /**
    * Filter candidates by the current search query.

@@ -4,7 +4,7 @@ class SearchForm extends Component {
 
   static propTypes = {
     query: PropTypes.string,
-    onChange: PropTypes.fn,
+    onChange: PropTypes.func,
   };
 
   constructor(props) {

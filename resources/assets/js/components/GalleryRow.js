@@ -12,7 +12,7 @@ class GalleryRow extends Component {
       key: PropTypes.number,
     })),
     selectedItem: PropTypes.object,
-    selectItem: PropTypes.fn,
+    selectItem: PropTypes.func,
   };
 
   /**
