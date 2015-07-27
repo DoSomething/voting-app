@@ -49,7 +49,10 @@ class Northstar
 
         if($e instanceof RequestException)
         {
-            $info['body'] = $e->getResponse()->json();
+            $response = $e->getResponse();
+            if($response) {
+                $info['body'] = $response->json();
+            }
         }
 
         logger('Northstar API Exception', $info);
@@ -87,7 +90,7 @@ class Northstar
             $json = $response->json();
 
             return $json['data']['_id'];
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->logException($e);
             return null;
         }
