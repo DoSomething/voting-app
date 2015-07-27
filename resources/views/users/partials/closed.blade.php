@@ -2,8 +2,6 @@
     <div class="wrapper">
         <h1 class="highlighted">Sign up for updates!</h1>
         <p>Voting is closed, but sign up to be notified when we're ready!</p>
-    </div>
-    <div class="wrapper">
         {!! Form::open(['route' => 'users.store']) !!}
         @include('auth.form')
         {!! Form::submit('Send me updates!', ['class' => 'button -primary']) !!}

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use VotingApp\Models\User;
+use VotingApp\Services\MessageBroker;
 use VotingApp\Services\Registrar;
 
 class UsersController extends Controller
@@ -14,10 +15,11 @@ class UsersController extends Controller
      */
     protected $registrar;
 
-    public function __construct(User $user, Registrar $registrar)
+    public function __construct(User $user, Registrar $registrar, MessageBroker $broker)
     {
         $this->user = $user;
         $this->registrar = $registrar;
+        $this->broker = $broker;
 
         $this->middleware('admin', ['except' => 'store']);
     }
@@ -45,10 +47,41 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->registrar->rules());
-        $this->registrar->create($request->all());
+        $user = $this->registrar->create($request->all());
 
-        // @TODO: Add user to transactional bucket through Message Broker!
+        // Now that we've registered a user, add them to the transactional bucket.
+        $payload = [
+            // User information
+            'first_name' => $user->first_name,
+            'birthdate_timestamp' => strtotime($user->birthdate), // Message Broker expects UNIX timestamp
+            'country_code' => $user->country_code,
+        ];
 
+        // Send fields for domestic users
+        if($user->country_code === 'US') {
+            $payload['mobile'] = $user->phone;
+            $payload['mobile_tags'] = [
+                env('APP_NAME_TAG', 'votingapp'),
+            ];
+        }
+
+        // Send fields for international users
+        if($user->country_code !== 'US') {
+            $payload['email'] = $user->email;
+            $payload['subscribed'] = 1;
+            $payload['email_template'] = env('CLOSED_TEMPLATE', 'mb-votingapp-closed');
+            $payload['email_tags'] = [
+                env('APP_NAME_TAG', 'votingapp'),
+            ];
+            $payload['merge_vars'] = [
+                'FNAME' => $user->first_name,
+            ];
+        }
+
+        $routingKey = env('CLOSED_FORM_ROUTING_KEY', 'votingapp.event.closed');
+        $this->broker->publish('closed', $payload, $routingKey);
+
+        // And show confirmation message.
         return view('users.confirmation');
     }
 
