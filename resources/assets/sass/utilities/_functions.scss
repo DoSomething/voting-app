@@ -40,7 +40,7 @@
     $string: str-replace($string, $entity, $replacement);
   }
 
-  @return quote($string);
+  @return $string;
 }
 
 

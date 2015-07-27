@@ -11,7 +11,7 @@ class Tile extends Component {
       thumbnail: PropTypes.string,
     }),
     selected: PropTypes.bool,
-    onClick: PropTypes.fn,
+    onClick: PropTypes.func,
   };
 
   constructor() {
