@@ -83,7 +83,6 @@ class CandidatesController extends Controller
         $candidates = $query->get();
 
         return view('candidates.adminIndex', compact('candidates'));
-
     }
 
 
