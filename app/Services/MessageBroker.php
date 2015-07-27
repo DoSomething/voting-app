@@ -13,7 +13,6 @@ class MessageBroker
      * @param string $routingKey
      */
     public function publishRaw($payload, $routingKey) {
-        dd('sending!');
         // Don't send messages locally.
         if (app()->environment('local', 'testing')) {
             return;
