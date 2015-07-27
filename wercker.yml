@@ -23,7 +23,9 @@ build:
       - wercker/bundle-install@1.1.1
       - script:
           name: build assets
-          code: gulp --production
+          code: |-
+            export NODE_ENV=production
+            gulp --production
 
 deploy:
   steps:
