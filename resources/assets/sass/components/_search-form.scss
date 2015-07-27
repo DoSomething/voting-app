@@ -19,7 +19,7 @@
 
     // Add search icon & transparent background with graceful fallbacks.
     // `linear-gradient()` is used as a trick to discard SVG image in older browsers.
-    background: #222 url('/assets/images/search_fallback.png') ($base-spacing / 2) 48% no-repeat;
+    background: #222 url('/assets/images/search_fallback.png') 20px 48% no-repeat;
     background-color: rgba(#222, 0.8);
     background-image: linear-gradient(transparent, transparent), data-url($data-search-white-svg);
     border: #222;
