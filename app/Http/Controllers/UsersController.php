@@ -38,54 +38,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     * POST /users
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, $this->registrar->rules());
-        $user = $this->registrar->create($request->all());
-
-        // Now that we've registered a user, add them to the transactional bucket.
-        $payload = [
-            // User information
-            'first_name' => $user->first_name,
-            'birthdate_timestamp' => strtotime($user->birthdate), // Message Broker expects UNIX timestamp
-            'country_code' => $user->country_code,
-        ];
-
-        // Send fields for domestic users
-        if($user->country_code === 'US') {
-            $payload['mobile'] = $user->phone;
-            $payload['mobile_tags'] = [
-                env('APP_NAME_TAG', 'votingapp'),
-            ];
-        }
-
-        // Send fields for international users
-        if($user->country_code !== 'US') {
-            $payload['email'] = $user->email;
-            $payload['subscribed'] = 1;
-            $payload['email_template'] = env('CLOSED_TEMPLATE', 'mb-votingapp-closed');
-            $payload['email_tags'] = [
-                env('APP_NAME_TAG', 'votingapp'),
-            ];
-            $payload['merge_vars'] = [
-                'FNAME' => $user->first_name,
-            ];
-        }
-
-        $routingKey = env('CLOSED_FORM_ROUTING_KEY', 'votingapp.event.closed');
-        $this->broker->publish('closed', $payload, $routingKey);
-
-        // And show confirmation message.
-        return view('users.confirmation');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param User $user

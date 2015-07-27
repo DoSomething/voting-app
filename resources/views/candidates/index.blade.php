@@ -18,6 +18,4 @@
             @include('votes.form', ['candidate' => null, 'winner' => null])
         </script>
     @endif
-
-    @include('users.partials.closed')
 @stop
