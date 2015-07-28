@@ -5,7 +5,8 @@ import shallowCompare from '../vendor/shallowCompare';
 class Tile extends Component {
 
   static propTypes = {
-    candidate: PropTypes.shape({
+    id: PropTypes.number,
+    item: PropTypes.shape({
       name: PropTypes.string,
       url: PropTypes.string,
       thumbnail: PropTypes.string,
@@ -36,7 +37,7 @@ class Tile extends Component {
    */
   onClick(event) {
     event.preventDefault();
-    this.props.onClick(this);
+    this.props.onClick(this.props.item);
   }
 
   /**
@@ -50,11 +51,11 @@ class Tile extends Component {
 
     return (
       <article className={classes}>
-        <a className="wrapper" href={this.props.candidate.url} onClick={this.onClick}>
+        <a className="wrapper" href={this.props.item.url} onClick={this.onClick}>
           <div className="tile__meta">
-            <h1>{this.props.candidate.name}</h1>
+            <h1>{this.props.item.name}</h1>
           </div>
-          <img alt={this.props.candidate.name} src={this.props.candidate.thumbnail} />
+          <img alt={this.props.item.name} src={this.props.item.thumbnail} />
           <span className="button -round tile__action">Vote</span>
         </a>
       </article>

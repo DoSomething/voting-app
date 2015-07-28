@@ -8,8 +8,9 @@ class Gallery extends Component {
   static propTypes = {
     name: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.element),
+    detailView: PropTypes.instanceOf(Component),
     selectedItem: PropTypes.object,
-    selectItem: PropTypes.func,
+    onSelect: PropTypes.func,
   };
 
   static defaultProps = {
@@ -77,7 +78,7 @@ class Gallery extends Component {
 
     const rows = chunkedChildren.map((row, index) => {
       return (
-        <GalleryRow key={index} selectedItem={this.props.selectedItem} selectItem={this.props.selectItem}>
+        <GalleryRow key={index} detailView={this.props.detailView} selectedItem={this.props.selectedItem} onSelect={this.props.onSelect}>
           {row}
         </GalleryRow>
       );

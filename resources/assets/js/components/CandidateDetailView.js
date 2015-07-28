@@ -4,7 +4,7 @@ import AlternateTile from './AlternateTile';
 class CandidateDetailView extends Component {
 
   static propTypes = {
-    candidate: PropTypes.shape({
+    item: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
       description: PropTypes.string,
@@ -25,10 +25,10 @@ class CandidateDetailView extends Component {
     let formMarkup = document.getElementById('form-template').innerHTML;
 
     // Replace token values for this particular candidate
-    formMarkup = formMarkup.replace(/CANDIDATE_ID/g, this.props.candidate.id)
-                           .replace(/CANDIDATE_NAME/g, this.props.candidate.name)
-                           .replace(/CANDIDATE_LINK/g, this.props.candidate.url)
-                           .replace(/TWITTER_NAME/g, this.props.candidate.share_name);
+    formMarkup = formMarkup.replace(/CANDIDATE_ID/g, this.props.item.id)
+                           .replace(/CANDIDATE_NAME/g, this.props.item.name)
+                           .replace(/CANDIDATE_LINK/g, this.props.item.url)
+                           .replace(/TWITTER_NAME/g, this.props.item.share_name);
 
     return {
       __html: formMarkup,
@@ -44,8 +44,8 @@ class CandidateDetailView extends Component {
       <div className="candidate">
         <div className="wrapper">
           <div className="candidate__info">
-            <AlternateTile candidate={this.props.candidate} />
-            <p className="candidate__description">{this.props.candidate.description}</p>
+            <AlternateTile candidate={this.props.item} />
+            <p className="candidate__description">{this.props.item.description}</p>
           </div>
 
           <div className="candidate__actions" dangerouslySetInnerHTML={this.getFormMarkup()} />
