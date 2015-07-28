@@ -6,6 +6,7 @@ import { getOffset } from '../utilities/dom';
 
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
+import Tile from './Tile';
 
 class CandidateIndex extends Component {
 
@@ -160,7 +161,11 @@ class CandidateIndex extends Component {
     const filtered = this.getFilteredCandidates();
 
     const galleries = filtered.categories.map((category) => {
-      return <Gallery key={category.id} name={category.name} items={category.candidates} selectItem={this.onSelectItem} selectedItem={this.state.selectedItem} />;
+      return (
+        <Gallery key={category.id} name={category.name} selectItem={this.onSelectItem} selectedItem={this.state.selectedItem}>
+          {category.candidates.map((candidate) => <Tile candidate={candidate} />)}
+        </Gallery>
+      );
     });
 
     const shouldShowPagination = this.state.limit < filtered.count;

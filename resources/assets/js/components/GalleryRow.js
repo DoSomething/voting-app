@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react/addons';
+const { cloneWithProps } = React.addons;
 
-import Tile from './Tile';
 import Drawer from './Drawer';
 import { getOffset, scrollToY } from '../utilities/dom';
 import shallowCompare from '../vendor/shallowCompare';
@@ -8,9 +8,7 @@ import shallowCompare from '../vendor/shallowCompare';
 class GalleryRow extends Component {
 
   static propTypes = {
-    row: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.number,
-    })),
+    children: PropTypes.arrayOf(PropTypes.element),
     selectedItem: PropTypes.object,
     selectItem: PropTypes.func,
   };
@@ -23,8 +21,8 @@ class GalleryRow extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.selectedItem === nextProps.selectedItem) return;
 
-    const hadSelectedTile = this.props.row.some((candidate) => candidate === this.props.selectedItem);
-    const hasSelectedTile = nextProps.row.some((candidate) => candidate === nextProps.selectedItem);
+    const hadSelectedTile = this.props.children.some((child) => child.props.candidate === this.props.selectedItem);
+    const hasSelectedTile = nextProps.children.some((child) => child.props.candidate === nextProps.selectedItem);
 
     const prevKey = this.props.selectedItem ? this.props.selectedItem.key : 0;
     const nextKey = nextProps.selectedItem ? nextProps.selectedItem.key : -1;
@@ -78,17 +76,18 @@ class GalleryRow extends Component {
    * @returns {XML}
    */
   render() {
-    // Build each tile in the row
     let hasSelectedTile = false;
-    const tiles = this.props.row.map((candidate) => {
-      const selected = candidate === this.props.selectedItem;
+
+    // Build each tile in the row
+    const tiles = this.props.children.map((child) => {
+      const selected = child.props.candidate === this.props.selectedItem;
       if (selected) {
         hasSelectedTile = selected;
       }
 
       return (
-        <li key={candidate.key} className="gallery__item">
-          <Tile candidate={candidate} selected={selected} onClick={this.props.selectItem} />
+        <li key={child.props.candidate.key} className="gallery__item">
+          {cloneWithProps(child, {selected: selected, onClick: this.props.selectItem})}
         </li>
       );
     });

@@ -36,7 +36,6 @@ class Tile extends Component {
    */
   onClick(event) {
     event.preventDefault();
-
     this.props.onClick(this);
   }
 
