@@ -1,11 +1,11 @@
 {{-- If voting is disabled, show a 'voting is closed' message. --}}
 @if(!setting('enable_voting'))
     <p class="heading -alpha">Voting is closed for {{{ setting('site_title') }}}.</p>
-    If winners are not being shown...
+    {{-- If winners are not being shown... --}}
     @if(!setting('show_winners'))
         <p class="heading -gamma">We'll post the results soon!</p>
-        Winners being shown
     @else
+        {{-- Winners being shown --}}
         <p>{{ $winner->description or "WINNER_DESCRIPTION" }}</p>
     @endif
 
