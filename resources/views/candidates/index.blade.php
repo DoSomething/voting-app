@@ -1,7 +1,11 @@
 @extends('app')
 
 @section('content')
-    @if($categories)
+    @if(setting('show_winners'))
+        @react('WinnerIndex', ['winners' => $winners, 'name' => 'Winners'])
+    @endif
+
+    @if(!setting('show_winners') && $categories)
 
         @react('CandidateIndex', compact('categories', 'query', 'limit'))
 

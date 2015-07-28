@@ -32,6 +32,7 @@ import shareLink from './utilities/share-link';
 // Components
 import CandidateIndex from './components/CandidateIndex';
 import CategoryIndex from './components/CategoryIndex';
+import WinnerIndex from './components/WinnerIndex';
 
 /**
  * Let's go!
@@ -53,5 +54,6 @@ ready(function() {
   rehydrate({
     'CandidateIndex': CandidateIndex,
     'CategoryIndex': CategoryIndex,
+    'WinnerIndex': WinnerIndex,
   });
 });
