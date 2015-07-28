@@ -2,9 +2,9 @@
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
+use VotingApp\Models\Winner;
 use Illuminate\Http\Request;
 use Auth;
-use DB;
 
 class CandidatesController extends Controller
 {
@@ -41,18 +41,19 @@ class CandidatesController extends Controller
             return $this->adminIndex($request);
         }
 
-        // Hide candidates if `show_candidates` setting is disabled, unless logged
-        // in as an administrator & using "show as guest" override
-        if(!setting('show_candidates') && !$showAsGuest) {
-            return view('candidates.index', ['categories' => []]);
-        }
-
         $query = $request->get('query', '');
         $limit = (int) $request->get('limit', 16);
         $categories = Category::orderBy('name', 'asc')->with('candidates')->get();
+        $winners = Winner::with('candidate')->get();
         $title = setting('site_title');
 
-        return view('candidates.index', compact('categories', 'query', 'limit', 'title'));
+        // Hide candidates if `show_candidates` setting is disabled, unless logged
+        // in as an administrator & using "show as guest" override
+        if(!setting('show_candidates') && !$showAsGuest) {
+            $categories = [];
+        }
+
+        return view('candidates.index', compact('categories', 'winners', 'query', 'limit', 'title'));
     }
 
     /**
@@ -66,10 +67,10 @@ class CandidatesController extends Controller
         $sort_by = $request->get('sort_by', 'name');
         $direction = $request->get('direction', 'ASC');
 
-        $query = DB::table('candidates')
+        $query = app('db')->table('candidates')
             ->join('categories', 'categories.id', '=', 'candidates.category_id')
             ->leftJoin('votes', 'candidates.id', '=', 'votes.candidate_id')
-            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'candidates.gender', 'categories.name as category', DB::raw('COUNT(votes.id) as votes'))
+            ->select('candidates.name as name', 'candidates.slug', 'candidates.id', 'candidates.gender', 'categories.name as category', app('db')->raw('COUNT(votes.id) as votes'))
             ->groupBy('candidates.id');
 
         // If a sorting method & direction are provided, order by them.

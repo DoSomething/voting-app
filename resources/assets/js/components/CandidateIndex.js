@@ -4,8 +4,10 @@ import debounce from 'lodash/function/debounce';
 import includes from 'lodash/collection/includes';
 import { getOffset } from '../utilities/dom';
 
+import CandidateDetailView from './CandidateDetailView';
 import Gallery from './Gallery';
 import SearchForm from './SearchForm';
+import Tile from './Tile';
 
 class CandidateIndex extends Component {
 
@@ -24,7 +26,7 @@ class CandidateIndex extends Component {
 
     this.state = this.getState(props);
 
-    this.onSelectItem = this.onSelectItem.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.onSetQuery = this.onSetQuery.bind(this);
     this.onSetQuery = debounce(this.onSetQuery, 20, { leading: true });
     this.onInfiniteScroll = this.onInfiniteScroll.bind(this);
@@ -78,14 +80,14 @@ class CandidateIndex extends Component {
    * Set or unset the selected item to show details for.
    * @param {object} item - Selected item
    */
-  onSelectItem(item) {
+  onSelect(item) {
     // De-select if trying to select the same item again.
-    if (this.state.selectedItem === item.props.candidate) {
+    if (this.state.selectedItem === item) {
       this.setState({selectedItem: null});
       return;
     }
 
-    this.setState({selectedItem: item.props.candidate});
+    this.setState({selectedItem: item});
   }
 
   /**
@@ -160,7 +162,11 @@ class CandidateIndex extends Component {
     const filtered = this.getFilteredCandidates();
 
     const galleries = filtered.categories.map((category) => {
-      return <Gallery key={category.id} name={category.name} items={category.candidates} selectItem={this.onSelectItem} selectedItem={this.state.selectedItem} />;
+      return (
+        <Gallery key={category.id} name={category.name} onSelect={this.onSelect} selectedItem={this.state.selectedItem} detailView={CandidateDetailView}>
+          {category.candidates.map((candidate) => <Tile key={candidate.key} id={candidate.key} item={candidate} />)}
+        </Gallery>
+      );
     });
 
     const shouldShowPagination = this.state.limit < filtered.count;

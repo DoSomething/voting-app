@@ -7,9 +7,10 @@ class Gallery extends Component {
 
   static propTypes = {
     name: PropTypes.string,
-    items: PropTypes.array,
+    children: PropTypes.arrayOf(PropTypes.element),
+    detailView: PropTypes.instanceOf(Component),
     selectedItem: PropTypes.object,
-    selectItem: PropTypes.func,
+    onSelect: PropTypes.func,
   };
 
   static defaultProps = {
@@ -65,7 +66,7 @@ class Gallery extends Component {
    */
   render() {
     // Show "empty state" if no items
-    if (this.props.items.length === 0) {
+    if (this.props.children.length === 0) {
       return (
         <div className="gallery">
           <div className="empty">No matches!</div>
@@ -73,10 +74,14 @@ class Gallery extends Component {
       );
     }
 
-    const chunkedItems = chunk(this.props.items, this.state.itemsPerRow);
+    const chunkedChildren = chunk(this.props.children, this.state.itemsPerRow);
 
-    const rows = chunkedItems.map((row, index) => {
-      return <GalleryRow key={index} row={row} selectedItem={this.props.selectedItem} selectItem={this.props.selectItem} />;
+    const rows = chunkedChildren.map((row, index) => {
+      return (
+        <GalleryRow key={index} detailView={this.props.detailView} selectedItem={this.props.selectedItem} onSelect={this.props.onSelect}>
+          {row}
+        </GalleryRow>
+      );
     });
 
     return (

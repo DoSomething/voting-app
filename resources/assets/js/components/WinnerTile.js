@@ -2,14 +2,18 @@ import React, { Component, PropTypes } from 'react/addons';
 import classNames from 'classnames';
 import shallowCompare from '../vendor/shallowCompare';
 
-class Tile extends Component {
+class WinnerTile extends Component {
 
   static propTypes = {
     id: PropTypes.number,
     item: PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-      thumbnail: PropTypes.string,
+      rank: PropTypes.number,
+      description: PropTypes.string,
+      candidate: PropTypes.shape({
+        name: PropTypes.string,
+        url: PropTypes.string,
+        thumbnail: PropTypes.string,
+      }),
     }),
     selected: PropTypes.bool,
     onClick: PropTypes.func,
@@ -51,12 +55,12 @@ class Tile extends Component {
 
     return (
       <article className={classes}>
-        <a className="wrapper" href={this.props.item.url} onClick={this.onClick}>
+        <a className="wrapper" href={this.props.item.candidate.url} onClick={this.onClick}>
           <div className="tile__meta">
-            <h1>{this.props.item.name}</h1>
+            <h1>{this.props.item.candidate.name}</h1>
           </div>
-          <img alt={this.props.item.name} src={this.props.item.thumbnail} />
-          <span className="button -round tile__action">Vote</span>
+          <img alt={this.props.item.candidate.name} src={this.props.item.candidate.thumbnail} />
+          <span className="button -round tile__action">{this.props.item.rank}</span>
         </a>
       </article>
     );
@@ -64,4 +68,4 @@ class Tile extends Component {
 
 }
 
-export default Tile;
+export default WinnerTile;

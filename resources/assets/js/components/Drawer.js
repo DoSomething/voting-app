@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react/addons';
 import DrawerTransitionGroup from './DrawerTransitionGroup';
-import CandidateDetailView from './CandidateDetailView';
 
 class Drawer extends Component {
 
   static propTypes = {
     candidate: PropTypes.object,
-    selectItem: PropTypes.func,
+    onSelect: PropTypes.func,
     isOpen: PropTypes.bool,
+    children: PropTypes.element.isRequired,
   };
 
   static defaultProps = {
@@ -28,7 +28,7 @@ class Drawer extends Component {
     event.preventDefault();
 
     // De-select this item.
-    this.props.selectItem(this);
+    this.props.onSelect(this);
   }
 
   /**
@@ -41,7 +41,7 @@ class Drawer extends Component {
     if (this.props.isOpen) {
       contents = (
         <div className="drawer">
-          <CandidateDetailView candidate={this.props.candidate} />
+          {this.props.children}
           <a href="#" className="drawer__close" onClick={this.onClose}><span>Close</span></a>
         </div>
       );

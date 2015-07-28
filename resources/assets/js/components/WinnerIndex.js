@@ -1,13 +1,18 @@
 import React, { Component, PropTypes } from 'react/addons';
 import Gallery from './Gallery';
-import CandidateDetailView from './CandidateDetailView';
-import Tile from './Tile';
+import WinnerDetailView from './WinnerDetailView';
+import WinnerTile from './WinnerTile';
 
-class CategoryIndex extends Component {
+class WinnerIndex extends Component {
 
   static propTypes = {
     name: PropTypes.string,
-    candidates: PropTypes.array,
+    winners: PropTypes.array,
+  };
+
+  static defaultProps = {
+    name: 'Winners',
+    winners: [],
   };
 
   constructor(props) {
@@ -15,13 +20,13 @@ class CategoryIndex extends Component {
 
     // Assign incremental key to candidates
     let i = 1;
-    const candidates = props.candidates.map(function(candidate) {
+    const winners = props.winners.map(function(candidate) {
       candidate.key = i++;
       return candidate;
     });
 
     this.state = {
-      candidates: candidates,
+      winners: winners,
       selectedItem: null,
     };
 
@@ -48,12 +53,13 @@ class CategoryIndex extends Component {
    */
   render() {
     return (
-      <Gallery name={this.props.name} onSelect={this.onSelect} selectedItem={this.state.selectedItem} detailView={CandidateDetailView}>
-        {this.props.candidates.map((candidate) => <Tile key={candidate.key} id={candidate.key} item={candidate} />)}
+      <Gallery name={this.props.name} onSelect={this.onSelect} selectedItem={this.state.selectedItem} detailView={WinnerDetailView}>
+        {this.state.winners.map((winner) => <WinnerTile key={winner.key} id={winner.key} item={winner} />)}
       </Gallery>
     );
   }
 
 }
 
-export default CategoryIndex;
+export default WinnerIndex;
+
