@@ -33,6 +33,7 @@ import shareLink from './utilities/share-link';
 import CandidateIndex from './components/CandidateIndex';
 import CategoryIndex from './components/CategoryIndex';
 import WinnerIndex from './components/WinnerIndex';
+import WinnerDetailView from './components/WinnerDetailView';
 
 /**
  * Let's go!
@@ -55,5 +56,6 @@ ready(function() {
     'CandidateIndex': CandidateIndex,
     'CategoryIndex': CategoryIndex,
     'WinnerIndex': WinnerIndex,
+    'WinnerDetailView': WinnerDetailView,
   });
 });
