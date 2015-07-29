@@ -13,9 +13,11 @@ app.use(bodyParser.json({ limit: '10mb' }));
 /**
  * Simple error handler.
  */
-app.use(function(err, req, res) {
+app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
+
+  next();
 });
 
 /**

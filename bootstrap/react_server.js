@@ -6,7 +6,9 @@
  *
  * @see https://babeljs.io/docs/usage/require/
  */
-require('babel/register');
+require('babel/register')({
+  optional: ["es7.classProperties"]
+});
 
 /**
  * Bootstrap our server process. This is responsible for
