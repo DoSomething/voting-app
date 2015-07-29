@@ -1,7 +1,7 @@
 <?php namespace VotingApp\Repositories;
 
 use VotingApp\Models\Setting;
-use Cache;
+use Parsedown;
 
 class SettingsRepository
 {
@@ -15,13 +15,18 @@ class SettingsRepository
      */
     public function get($key, $fallback = '')
     {
-        $setting = Cache::rememberForever('settings.' . $key, function() use($key) {
-            return $setting = Setting::where('key', $key)->first();
+        $value = app('cache')->rememberForever('settings.' . $key, function() use($key, $fallback) {
+            $setting = Setting::where('key', $key)->first();
+            $value = isset($setting->value) ? $setting->value : $fallback;
+
+            if(isset($setting->type) && $setting->type === 'markdown') {
+                return Parsedown::instance()->text($value);
+            }
+
+            return $value;
         });
 
-        if(empty($setting->value)) return $fallback;
-
-        return $setting->value;
+        return $value;
     }
 
 }

@@ -3,4 +3,9 @@
 .legal {
   color: $gray;
   font-size: $small-font-size;
+
+  a {
+    color: $gray;
+    text-decoration: underline;
+  }
 }

@@ -9,6 +9,6 @@
         <div id="message"
              class="messages {{ Session::get('message_type', '') }}">{{ Session::get('message') }}</div>
     @else
-        <p class="navigation__tagline">{{ setting('tagline') }}</p>
+        <div class="navigation__tagline">{!! setting('tagline') !!}</div>
     @endif
 </nav>

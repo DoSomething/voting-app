@@ -29,6 +29,9 @@
                     <td>
                         @if ($setting->type == 'text')
                             {!! Form::text('value') !!}
+                        @elseif ($setting->type == 'markdown')
+                            {!! Form::textarea('value', null, ['rows' => 3]) !!}
+                            <span class="legal">This setting uses <a href="http://daringfireball.net/projects/markdown/">Markdown</a>.</span>
                         @elseif ($setting->type == 'file')
                             {!! Form::file('value') !!}
                             @if($setting->value)
