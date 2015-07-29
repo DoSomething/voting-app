@@ -17,7 +17,7 @@ class SettingsRepository
     {
         $value = app('cache')->rememberForever('settings.' . $key, function() use($key, $fallback) {
             $setting = Setting::where('key', $key)->first();
-            $value = isset($setting->value) ? $setting->value : $fallback;
+            $value = !empty($setting->value) ? $setting->value : $fallback;
 
             if(isset($setting->type) && $setting->type === 'markdown') {
                 return Parsedown::instance()->text($value);
