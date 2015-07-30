@@ -134,6 +134,11 @@ class CandidatesController extends Controller
     {
         $votes = $candidate->votes();
         $vote_count = $candidate->votes()->count();
+        $winner = Winner::with('candidate')->where('candidate_id', $candidate->id)->first();
+
+        if(setting('show_winners') && $winner) {
+            return view('candidates.show', compact('candidate', 'winner'));
+        }
 
         return view('candidates.show', compact('candidate', 'votes', 'vote_count'));
     }
