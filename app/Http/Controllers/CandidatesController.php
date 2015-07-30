@@ -44,7 +44,7 @@ class CandidatesController extends Controller
         $query = $request->get('query', '');
         $limit = (int) $request->get('limit', 16);
         $categories = Category::orderBy('name', 'asc')->with('candidates')->get();
-        $winners = Winner::with('candidate')->get();
+        $winners = Winner::orderBy('rank', 'asc')->with('candidate')->get();
         $title = setting('site_title');
 
         // Hide candidates if `show_candidates` setting is disabled, unless logged
