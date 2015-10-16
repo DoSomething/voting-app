@@ -20,6 +20,7 @@ build:
             mkdir -p $WERCKER_CACHE_DIR/wercker/npm
             npm config set cache $WERCKER_CACHE_DIR/wercker/npm
             sudo npm install
+      - npm-test
       - wercker/bundle-install@1.1.1
       - script:
           name: build assets
