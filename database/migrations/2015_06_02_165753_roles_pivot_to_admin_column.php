@@ -3,30 +3,30 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RolesPivotToAdminColumn extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+class RolesPivotToAdminColumn extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::drop('role_user');
         Schema::drop('roles');
 
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('admin');
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
@@ -43,6 +43,5 @@ class RolesPivotToAdminColumn extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('admin');
         });
-	}
-
+    }
 }

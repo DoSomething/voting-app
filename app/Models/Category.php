@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
@@ -6,7 +8,6 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class Category extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
 
     /**
@@ -15,7 +16,7 @@ class Category extends Model implements SluggableInterface
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
@@ -25,7 +26,7 @@ class Category extends Model implements SluggableInterface
      */
     protected $sluggable = [
         'build_from' => 'name',
-        'save_to' => 'slug'
+        'save_to' => 'slug',
     ];
 
     /**
@@ -36,5 +37,4 @@ class Category extends Model implements SluggableInterface
     {
         return $this->hasMany('VotingApp\Models\Candidate')->orderBy('name', 'asc');
     }
-
 }

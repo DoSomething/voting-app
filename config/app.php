@@ -153,7 +153,7 @@ return [
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
         'Collective\Html\HtmlServiceProvider',
         'Intervention\Image\ImageServiceProvider',
-        'DoSomething\StatHat\StatHatServiceProvider'
+        'DoSomething\StatHat\StatHatServiceProvider',
 
     ],
 
@@ -208,7 +208,7 @@ return [
         'Clockwork' => 'Clockwork\Support\Laravel\Facade',
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-        'StatHat' => 'DoSomething\StatHat\Facade'
+        'StatHat' => 'DoSomething\StatHat\Facade',
 
     ],
 

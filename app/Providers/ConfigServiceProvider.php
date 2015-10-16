@@ -1,10 +1,11 @@
-<?php namespace VotingApp\Providers;
+<?php
+
+namespace VotingApp\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 class ConfigServiceProvider extends ServiceProvider
 {
-
     /**
      * Overwrite any vendor / package configuration.
      *

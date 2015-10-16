@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 
 class AddTwitterLanguageToSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,10 +13,9 @@ class AddTwitterLanguageToSettings extends Migration
     {
         DB::table('settings')->insert([
             'key' => 'twitter_language',
-            'value' => 'Vote for TWITTER_NAME for #VotingApp with @dosomething!'
+            'value' => 'Vote for TWITTER_NAME for #VotingApp with @dosomething!',
         ]);
     }
-
 
     /**
      * Reverse the migrations.

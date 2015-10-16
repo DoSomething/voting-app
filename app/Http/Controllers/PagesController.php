@@ -1,13 +1,14 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use VotingApp\Models\Page;
 
 class PagesController extends Controller
 {
-
     /**
-     * Validation rules
+     * Validation rules.
      * @var array
      */
     protected $rules = [
@@ -22,19 +23,20 @@ class PagesController extends Controller
 
     /**
      * Display a listing of the resource.
-     * GET /pages
+     * GET /pages.
      *
      * @return \Illuminate\View\View;
      */
     public function index()
     {
         $pages = Page::all();
+
         return view('pages.index', compact('pages'));
     }
 
     /**
      * Show the form for creating a new resource.
-     * GET /pages/create
+     * GET /pages/create.
      *
      * @return \Illuminate\View\View;
      */
@@ -45,7 +47,7 @@ class PagesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * POST /pages
+     * POST /pages.
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -62,7 +64,7 @@ class PagesController extends Controller
 
     /**
      * Display the specified resource.
-     * GET /pages/{id}
+     * GET /pages/{id}.
      *
      * @param Page $page
      * @return \Illuminate\View\View;
@@ -74,7 +76,7 @@ class PagesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * GET /pages/{id}/edit
+     * GET /pages/{id}/edit.
      *
      * @param Page $page
      * @return \Illuminate\Http\RedirectResponse
@@ -86,7 +88,7 @@ class PagesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * PUT /pages/{id}
+     * PUT /pages/{id}.
      *
      * @param Request $request
      * @param Page $page
@@ -114,5 +116,4 @@ class PagesController extends Controller
 
         return redirect()->home()->with('message', 'BAM! That page was removed!');
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Providers;
+<?php
+
+namespace VotingApp\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +14,6 @@ use VotingApp\Models\Winner;
 
 class RouteServiceProvider extends ServiceProvider
 {
-
     /**
      * This namespace is applied to the controller routes in your routes file.
      *

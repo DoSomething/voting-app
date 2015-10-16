@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Services;
+<?php
+
+namespace VotingApp\Services;
 
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Contracts\Validation\ValidationException;
@@ -7,7 +9,6 @@ use VotingApp\Events\UserRegistered;
 
 class Registrar implements RegistrarContract
 {
-
     /**
      * The validation factory.
      *
@@ -18,7 +19,7 @@ class Registrar implements RegistrarContract
     /**
      * The Northstar API client.
      *
-     * @var Northstar $northstar
+     * @var Northstar
      */
     protected $northstar;
 
@@ -78,7 +79,7 @@ class Registrar implements RegistrarContract
         $user = User::isCurrentUser($data);
 
         // If user doesn't exist, attempt to create.
-        if (!$user) {
+        if (! $user) {
             $user = new User($data);
 
             $validator = $this->validation->make($user->toArray(), [
@@ -86,7 +87,7 @@ class Registrar implements RegistrarContract
                 'email' => 'unique:users',
             ]);
 
-            if($validator->fails()) {
+            if ($validator->fails()) {
                 throw new ValidationException($validator);
             }
 

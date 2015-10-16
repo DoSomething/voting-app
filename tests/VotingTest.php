@@ -5,7 +5,6 @@ use VotingApp\Models\User;
 
 class VotingTest extends TestCase
 {
-
     protected $candidate;
 
     protected $userEmail;
@@ -35,7 +34,7 @@ class VotingTest extends TestCase
         $user = User::where('email', 'test-example-user@example.com')->first();
         $this->seeInDatabase('votes', [
             'user_id' => $user->id,
-            'candidate_id' => $this->candidate->id
+            'candidate_id' => $this->candidate->id,
         ]);
 
         // If the user tries to vote again, they should see an error
@@ -86,5 +85,4 @@ class VotingTest extends TestCase
         $this->see('The birthdate field is required.');
         $this->see('The phone field is required.');
     }
-
 }

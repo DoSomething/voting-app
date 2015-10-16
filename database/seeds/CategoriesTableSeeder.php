@@ -5,7 +5,6 @@ use VotingApp\Models\Category;
 
 class CategoriesTableSeeder extends Seeder
 {
-
     public function run()
     {
         Category::truncate();

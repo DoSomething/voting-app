@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Providers;
+<?php
+
+namespace VotingApp\Providers;
 
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 
 class BusServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *

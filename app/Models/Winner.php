@@ -1,18 +1,19 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
 class Winner extends Model
 {
-
     /**
      * The attributes which may be mass-assigned.
      *
      * @var array
      */
     protected $fillable = [
-        'candidate_id', 'rank', 'description'
+        'candidate_id', 'rank', 'description',
     ];
 
     // No timestamps on the winners table.
@@ -48,5 +49,4 @@ class Winner extends Model
 
         return;
     }
-
 }

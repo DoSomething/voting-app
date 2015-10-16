@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Http\Middleware;
+<?php
+
+namespace VotingApp\Http\Middleware;
 
 use Auth;
 use Closure;
 
 class Administrator
 {
-
     /**
      * Handle an incoming request.
      *
@@ -15,7 +16,7 @@ class Administrator
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user() || !Auth::user()->admin) {
+        if (! Auth::user() || ! Auth::user()->admin) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
@@ -25,5 +26,4 @@ class Administrator
 
         return $next($request);
     }
-
 }

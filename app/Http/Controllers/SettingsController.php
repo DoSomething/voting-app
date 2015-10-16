@@ -1,12 +1,12 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use VotingApp\Models\Setting;
-use Cache;
 
 class SettingsController extends Controller
 {
-
     protected $setting;
 
     public function __construct(Setting $setting)
@@ -18,19 +18,20 @@ class SettingsController extends Controller
 
     /**
      * Display a listing of the resource.
-     * GET /settings
+     * GET /settings.
      *
      * @return \Illuminate\View\View;
      */
     public function index()
     {
         $settings = $this->setting->get();
+
         return view('settings.index', compact('settings'));
     }
 
     /**
      * Update the specified resource in storage.
-     * PUT /settings/{id}
+     * PUT /settings/{id}.
      *
      * @param Request $request
      * @param Setting $setting
@@ -39,12 +40,12 @@ class SettingsController extends Controller
     public function update(Request $request, Setting $setting)
     {
         // If this is a text field, ensure it is not blank
-        if($setting->type === 'text') {
+        if ($setting->type === 'text') {
             $this->validate($request, ['value' => 'required']);
         }
 
         // If this setting is a file, get & save the uploaded file
-        if($setting->type === 'file') {
+        if ($setting->type === 'file') {
             $this->validate($request, ['value' => ['required']]);
             $setting->saveFile($request->file('value'));
         } else {
@@ -56,5 +57,4 @@ class SettingsController extends Controller
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
     }
-
 }

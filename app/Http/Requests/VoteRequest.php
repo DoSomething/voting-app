@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Http\Requests;
+<?php
+
+namespace VotingApp\Http\Requests;
 
 use Illuminate\Contracts\Auth\Guard;
 use VotingApp\Models\Candidate;
@@ -44,7 +46,7 @@ class VoteRequest extends Request
         $rules = [];
 
         // If user is a guest, make sure they are able to register/login.
-        if($this->guard->guest()) {
+        if ($this->guard->guest()) {
             $rules = $this->registrar->rules();
         }
 
@@ -75,6 +77,7 @@ class VoteRequest extends Request
     {
         if ($this->has('candidate_id')) {
             $slug = Candidate::where('id', $this->get('candidate_id'))->first()->slug;
+
             return route('candidates.show', [$slug]);
         }
 

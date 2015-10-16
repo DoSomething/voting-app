@@ -5,7 +5,6 @@ use VotingApp\Models\Category;
 
 class ContentTest extends TestCase
 {
-
     /**
      * Verify that the homepage loads correctly.
      * @test
@@ -51,6 +50,4 @@ class ContentTest extends TestCase
         $this->visit('/pages/faq')
             ->andSee('What is Lorem Ipsum?');
     }
-
-
 }

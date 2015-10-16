@@ -1,17 +1,13 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
-use VotingApp\Http\Requests\LoginRequest;
-use VotingApp\Events\UserCastFirstVote;
-use VotingApp\Models\Candidate;
-use VotingApp\Models\Vote;
 use VotingApp\Services\Registrar;
-
 
 class AuthController extends Controller
 {
-
     /**
      * The Guard implementation.
      *
@@ -37,7 +33,7 @@ class AuthController extends Controller
 
     /**
      * Show the form for admin login.
-     * GET /admin
+     * GET /admin.
      *
      * @return \Illuminate\View\View
      */
@@ -48,7 +44,7 @@ class AuthController extends Controller
 
     /**
      * Authentication for an admin user.
-     * POST /admin
+     * POST /admin.
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -57,7 +53,7 @@ class AuthController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -69,10 +65,9 @@ class AuthController extends Controller
         }
     }
 
-
     /**
      * Log the current user out of the site.
-     * GET /logout
+     * GET /logout.
      *
      * @return Response
      */

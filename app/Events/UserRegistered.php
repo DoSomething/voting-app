@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Events;
+<?php
+
+namespace VotingApp\Events;
 
 use Illuminate\Queue\SerializesModels;
 use VotingApp\Models\User;
 
 class UserRegistered extends Event
 {
-
     use SerializesModels;
 
     public $user;
@@ -18,5 +19,4 @@ class UserRegistered extends Event
     {
         $this->user = $user;
     }
-
 }

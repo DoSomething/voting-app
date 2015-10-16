@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use VotingApp\Models\Category;
@@ -6,9 +8,8 @@ use VotingApp\Models\Winner;
 
 class CategoriesController extends Controller
 {
-
     /**
-     * Validation rules
+     * Validation rules.
      * @var array
      */
     protected $rules = [
@@ -28,6 +29,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::orderBy('name', 'asc')->get();
+
         return view('categories.index', compact('categories'));
     }
 
@@ -108,14 +110,14 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        if(count($category->candidates)) {
+        if (count($category->candidates)) {
             return redirect()->back()
                 ->with('message', 'Can\'t delete a category with candidates in it.')
                 ->with('message_type', 'error');
         }
 
         $category->delete();
+
         return redirect()->route('categories.index')->with('message', 'BAM! That category was removed.');
     }
-
 }

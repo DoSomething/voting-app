@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Repositories;
+<?php
+
+namespace VotingApp\Repositories;
 
 use VotingApp\Models\Setting;
 use Parsedown;
 
 class SettingsRepository
 {
-
     /**
      * Get a cached value of a particular setting, or a
      * fallback if setting is not set.
@@ -15,11 +16,11 @@ class SettingsRepository
      */
     public function get($key, $fallback = '')
     {
-        $value = app('cache')->rememberForever('settings.' . $key, function() use($key, $fallback) {
+        $value = app('cache')->rememberForever('settings.'.$key, function () use ($key, $fallback) {
             $setting = Setting::where('key', $key)->first();
-            $value = !empty($setting->value) ? $setting->value : $fallback;
+            $value = ! empty($setting->value) ? $setting->value : $fallback;
 
-            if(isset($setting->type) && $setting->type === 'markdown') {
+            if (isset($setting->type) && $setting->type === 'markdown') {
                 return Parsedown::instance()->text($value);
             }
 
@@ -28,5 +29,4 @@ class SettingsRepository
 
         return $value;
     }
-
 }

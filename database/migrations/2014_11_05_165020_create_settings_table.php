@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateSettingsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -19,7 +18,6 @@ class CreateSettingsTable extends Migration
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

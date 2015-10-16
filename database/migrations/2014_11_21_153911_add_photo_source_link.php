@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddPhotoSourceLink extends Migration
 {
-
     /**
      * Run the migrations.
      *

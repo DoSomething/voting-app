@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Exceptions;
+<?php
+
+namespace VotingApp\Exceptions;
 
 use Exception;
 use Illuminate\Contracts\Validation\ValidationException;
@@ -6,14 +8,13 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-
     /**
      * A list of the exception types that should not be reported.
      *
      * @var array
      */
     protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException'
+        'Symfony\Component\HttpKernel\Exception\HttpException',
     ];
 
     /**
@@ -38,7 +39,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if($e instanceof ValidationException) {
+        if ($e instanceof ValidationException) {
             return redirect()->back()->withErrors($e->errors());
         }
 

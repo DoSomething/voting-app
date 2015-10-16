@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCandidatesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *

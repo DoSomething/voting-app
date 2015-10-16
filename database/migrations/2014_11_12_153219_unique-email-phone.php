@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class UniqueEmailPhone extends Migration
 {
-
     /**
      * Run the migrations.
      *

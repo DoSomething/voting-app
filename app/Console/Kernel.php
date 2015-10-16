@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Console;
+<?php
+
+namespace VotingApp\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-
     /**
      * The Artisan commands provided by your application.
      *
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\VotingApp\Console\Commands\CreateAdminUser',
-        '\VotingApp\Console\Commands\ResetApp'
+        '\VotingApp\Console\Commands\ResetApp',
     ];
 
     /**

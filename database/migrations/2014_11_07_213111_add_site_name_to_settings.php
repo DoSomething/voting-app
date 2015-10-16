@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 
 class AddSiteNameToSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,10 +13,9 @@ class AddSiteNameToSettings extends Migration
     {
         DB::table('settings')->insert([
             'key' => 'site_title',
-            'value' => 'Voting App'
+            'value' => 'Voting App',
         ]);
     }
-
 
     /**
      * Reverse the migrations.

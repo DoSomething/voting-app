@@ -13,7 +13,7 @@ function get_country_code()
 /**
  * Return if the user is a domestic (US) session.
  *
- * @return boolean
+ * @return bool
  */
 function is_domestic_session()
 {
@@ -23,7 +23,7 @@ function is_domestic_session()
 /**
  * Return if the user is an international session.
  *
- * @return boolean
+ * @return bool
  */
 function is_international_session()
 {
@@ -34,7 +34,7 @@ function is_international_session()
  * Return if the user's phone should be collected for
  * the current international session's country.
  *
- * @return boolean
+ * @return bool
  */
 function should_collect_international_phone()
 {
@@ -51,11 +51,11 @@ function should_collect_international_phone()
  */
 function tweet_intent($text, $url, $twitter = null)
 {
-    if (!is_null($twitter)) {
+    if (! is_null($twitter)) {
         $text = str_replace('TWITTER_NAME', $twitter, $text);
     }
 
-    return 'https://twitter.com/intent/tweet?text=' . urlencode($text) . '&url=' . urlencode($url);
+    return 'https://twitter.com/intent/tweet?text='.urlencode($text).'&url='.urlencode($url);
 }
 
 /**
@@ -66,7 +66,7 @@ function tweet_intent($text, $url, $twitter = null)
  */
 function facebook_intent($url)
 {
-    return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
+    return 'https://www.facebook.com/sharer/sharer.php?u='.urlencode($url);
 }
 
 /**
@@ -78,7 +78,8 @@ function facebook_intent($url)
 function sort_url($column)
 {
     $direction = (app('request')->get('direction') == 'asc') ? 'desc' : 'asc';
-    return '?sort_by=' . e($column) . '&direction=' . e($direction);
+
+    return '?sort_by='.e($column).'&direction='.e($direction);
 }
 
 /**
@@ -92,7 +93,9 @@ function sort_class($column)
     $sortColumn = app('request')->get('sort_by');
     $sortClass = (app('request')->get('direction') == 'asc') ? 'is-sorted-asc' : 'is-sorted-desc';
 
-    if($column !== $sortColumn) return '';
+    if ($column !== $sortColumn) {
+        return '';
+    }
 
     return $sortClass;
 }
@@ -107,6 +110,7 @@ function sort_class($column)
 function setting($setting, $fallback = null)
 {
     $repository = app('VotingApp\Repositories\SettingsRepository');
+
     return $repository->get($setting, $fallback);
 }
 
@@ -120,5 +124,6 @@ function setting($setting, $fallback = null)
 function background($type, $fallback = null)
 {
     $repository = app('VotingApp\Repositories\BackgroundsRepository');
+
     return $repository->random($type, $fallback);
 }

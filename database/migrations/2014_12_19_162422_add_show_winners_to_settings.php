@@ -1,11 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddShowWinnersToSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -17,7 +15,7 @@ class AddShowWinnersToSettings extends Migration
             'key' => 'show_winners',
             'type' => 'boolean',
             'description' => 'Enable this setting to display winners in each category. This will only work if voting is disabled.',
-            'value' => ''
+            'value' => '',
         ]);
     }
 

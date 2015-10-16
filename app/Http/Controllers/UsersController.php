@@ -1,13 +1,13 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
 
-use Illuminate\Http\Request;
+namespace VotingApp\Http\Controllers;
+
 use VotingApp\Models\User;
 use VotingApp\Services\MessageBroker;
 use VotingApp\Services\Registrar;
 
 class UsersController extends Controller
 {
-
     /**
      * The registration service.
      *
@@ -50,5 +50,4 @@ class UsersController extends Controller
 
         return view('users.show', compact('user', 'votes', 'vote_count'));
     }
-
 }

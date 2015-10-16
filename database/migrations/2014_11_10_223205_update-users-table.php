@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class UpdateUsersTable extends Migration
 {
-
     /**
      * Run the migrations.
      *

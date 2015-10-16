@@ -1,10 +1,11 @@
-<?php namespace VotingApp\Http;
+<?php
+
+namespace VotingApp\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
-
     /**
      * The application's global HTTP middleware stack.
      *

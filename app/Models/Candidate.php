@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
@@ -7,7 +9,6 @@ use Image;
 
 class Candidate extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
 
     /**
@@ -16,7 +17,7 @@ class Candidate extends Model implements SluggableInterface
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'category_id', 'gender', 'twitter', 'photo_source'
+        'name', 'description', 'category_id', 'gender', 'twitter', 'photo_source',
     ];
 
     /**
@@ -26,7 +27,7 @@ class Candidate extends Model implements SluggableInterface
      */
     protected $sluggable = [
         'build_from' => 'name',
-        'save_to' => 'slug'
+        'save_to' => 'slug',
     ];
 
     /**
@@ -68,32 +69,32 @@ class Candidate extends Model implements SluggableInterface
     public function savePhoto($file)
     {
         // Create directory if it doesn't exist
-        if (!file_exists(public_path('images/thumbnails'))) {
+        if (! file_exists(public_path('images/thumbnails'))) {
             mkdir(public_path('images/thumbnails'), 0777, true);
         }
 
         $photo = Image::make($file);
-        $filename = $this->sluggify()->slug . '.jpg';
+        $filename = $this->sluggify()->slug.'.jpg';
 
         // Save full-size image
-        $photo->encode('jpg', 75)->save(public_path('images/thumbnails') . '/' . $filename);
+        $photo->encode('jpg', 75)->save(public_path('images/thumbnails').'/'.$filename);
 
         // Save thumbnail
         $photo->encode('jpg', 75)->fit(400)
-            ->save(public_path('images/thumbnails') . '/' . 'thumb-' . $filename);
+            ->save(public_path('images/thumbnails').'/'.'thumb-'.$filename);
 
         $this->attributes['photo'] = $filename;
     }
 
     /**
-     * Custom share name attribute
+     * Custom share name attribute.
      *
      * @return string twitter handle, or candidate name
      * @see $appends array
      */
     public function getShareNameAttribute()
     {
-        return (!empty($this->twitter)) ? $this->twitter : $this->name;
+        return (! empty($this->twitter)) ? $this->twitter : $this->name;
     }
 
     /**
@@ -103,7 +104,7 @@ class Candidate extends Model implements SluggableInterface
     public function getThumbnailAttribute()
     {
         if ($this->photo) {
-            return asset('images/thumbnails/thumb-' . $this->photo);
+            return asset('images/thumbnails/thumb-'.$this->photo);
         } else {
             return asset('assets/images/placeholder.jpg');
         }
@@ -117,5 +118,4 @@ class Candidate extends Model implements SluggableInterface
     {
         return route('candidates.show', [$this->slug]);
     }
-
 }

@@ -1,7 +1,8 @@
-<?php namespace VotingApp\Events;
+<?php
+
+namespace VotingApp\Events;
 
 abstract class Event
 {
-
     //
 }
