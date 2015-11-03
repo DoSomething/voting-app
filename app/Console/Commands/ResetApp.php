@@ -45,28 +45,4 @@ class ResetApp extends Command {
 		DB::table('winners')->delete();
 	}
 
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
-		return [
-			['example', InputArgument::OPTIONAL, 'An example argument.'],
-		];
-	}
-
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return [
-			['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-		];
-	}
-
 }
