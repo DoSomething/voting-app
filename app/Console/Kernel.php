@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\VotingApp\Console\Commands\CreateAdminUser',
-        '\VotingApp\Console\Commands\ResetAppCommand'
+        '\VotingApp\Console\Commands\ResetApp'
     ];
 
     /**

@@ -3,8 +3,9 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use DB;
 
-class ResetAppCommand extends Command {
+class ResetApp extends Command {
 
 	/**
 	 * The console command name.
@@ -38,10 +39,10 @@ class ResetAppCommand extends Command {
 	public function fire()
 	{
 		//remove non-admin users, password reminders, votes, and winners
-		\DB::table('votes')->delete();
-		\DB::table('users')->where('admin', '=', 0)->delete();
-		\DB::table('password_reminders')->delete();
-		\DB::table('winners')->delete();
+		DB::table('votes')->delete();
+		DB::table('users')->where('admin', '=', 0)->delete();
+		DB::table('password_reminders')->delete();
+		DB::table('winners')->delete();
 	}
 
 	/**
