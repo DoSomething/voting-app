@@ -38,6 +38,11 @@ class ResetApp extends Command {
 	 */
 	public function fire()
 	{
+		if (! $this->confirm('Are you sure you want to delete all votes, users, and winners? [y|N]')) 
+		{
+			return;
+		}
+
 		//remove non-admin users, password reminders, votes, and winners
 		DB::table('votes')->delete();
 		DB::table('users')->where('admin', '=', 0)->delete();
