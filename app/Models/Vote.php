@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use VotingApp\Events\UserCastVote;
 use Illuminate\Database\Eloquent\Model;
@@ -6,7 +8,6 @@ use Carbon\Carbon;
 
 class Vote extends Model
 {
-
     /**
      * The attributes which may be mass-assigned.
      *
@@ -31,7 +32,7 @@ class Vote extends Model
     }
 
     /**
-     * Assuming a user is eligible to vote, save the vote
+     * Assuming a user is eligible to vote, save the vote.
      * @param $candidate_id
      * @param $user_id
      * @return Vote
@@ -42,14 +43,14 @@ class Vote extends Model
         $user = User::find($user_id);
 
         // Can the user vote?
-        if (!$user->canVote()) {
+        if (! $user->canVote()) {
             return false;
         }
 
         // Create the vote.
-        $vote = Vote::create([
+        $vote = self::create([
             'candidate_id' => $candidate_id,
-            'user_id' => $user_id
+            'user_id' => $user_id,
         ]);
 
         event(new UserCastVote($vote));
@@ -73,5 +74,4 @@ class Vote extends Model
         return $query->join('candidates', 'candidate_id', '=', 'candidates.id')
             ->where('candidates.category_id', $category->id);
     }
-
 }

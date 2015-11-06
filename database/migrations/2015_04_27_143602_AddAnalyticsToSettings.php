@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAnalyticsToSettings extends Migration {
-
+class AddAnalyticsToSettings extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -15,10 +14,9 @@ class AddAnalyticsToSettings extends Migration {
         DB::table('settings')->insert([
             'key' => 'google_analytics',
             'type' => 'text',
-            'value' => ''
+            'value' => '',
         ]);
     }
-
 
     /**
      * Reverse the migrations.
@@ -30,4 +28,3 @@ class AddAnalyticsToSettings extends Migration {
         DB::table('settings')->delete(['key' => 'google_analytics']);
     }
 }
-

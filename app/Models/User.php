@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +10,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-
     use Authenticatable, CanResetPassword;
 
     /**
@@ -75,9 +76,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function isCurrentUser($input)
     {
-        $searchQuery = new User($input);
+        $searchQuery = new self($input);
 
-        $user = User::where('email', $searchQuery->email)
+        $user = self::where('email', $searchQuery->email)
             ->where('phone', $searchQuery->phone)
             ->where('birthdate', $searchQuery->birthdate)
             ->first();
@@ -105,7 +106,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function canVote()
     {
         $voted = Vote::where('user_id', $this->id)->withinLastDay()->exists();
-        return !$voted;
-    }
 
+        return ! $voted;
+    }
 }

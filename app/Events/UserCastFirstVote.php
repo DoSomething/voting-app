@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Events;
+<?php
+
+namespace VotingApp\Events;
 
 use Illuminate\Queue\SerializesModels;
 use VotingApp\Models\Vote;
 
 class UserCastFirstVote extends Event
 {
-
     use SerializesModels;
 
     public $candidate;
@@ -21,5 +22,4 @@ class UserCastFirstVote extends Event
         $this->candidate = $vote->candidate;
         $this->user = $vote->user;
     }
-
 }

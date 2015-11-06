@@ -1,27 +1,28 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cache;
 use Image;
 
-class Background extends Model {
-
+class Background extends Model
+{
     public static function boot()
     {
         parent::boot();
 
-        static::created(function() {
+        static::created(function () {
             if (Cache::has('backgrounds')) {
                 Cache::forget('backgrounds');
             }
         });
 
-        static::deleted(function() {
+        static::deleted(function () {
             if (Cache::has('backgrounds')) {
                 Cache::forget('backgrounds');
             }
         });
-
     }
 
     /**
@@ -32,7 +33,7 @@ class Background extends Model {
     public function saveImage($file)
     {
         // Create directory if it doesn't exist
-        if (!file_exists(public_path('images/backgrounds'))) {
+        if (! file_exists(public_path('images/backgrounds'))) {
             mkdir(public_path('images/backgrounds'), 0777, true);
         }
 
@@ -45,19 +46,19 @@ class Background extends Model {
         $image->encode('jpg', 50)->resize(1400, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save(public_path('images/backgrounds') . '/' . $filename. '_retina.jpg');
+        })->save(public_path('images/backgrounds').'/'.$filename.'_retina.jpg');
 
         // Save medium-size image
         $image->encode('jpg', 50)->resize(800, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save(public_path('images/backgrounds') . '/' . $filename . '_regular.jpg');
+        })->save(public_path('images/backgrounds').'/'.$filename.'_regular.jpg');
 
         // Save thumbnail
         $image->encode('jpg', 50)->resize(400, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save(public_path('images/backgrounds') . '/' . $filename . '_thumbnail.jpg');
+        })->save(public_path('images/backgrounds').'/'.$filename.'_thumbnail.jpg');
     }
 
     /**
@@ -78,7 +79,6 @@ class Background extends Model {
                 throw new \Exception('Invalid image type provided.');
         }
 
-        return '/images/backgrounds/' . $this->path . '_' . $type . '.jpg';
+        return '/images/backgrounds/'.$this->path.'_'.$type.'.jpg';
     }
-
 }

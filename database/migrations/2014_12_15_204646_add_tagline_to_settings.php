@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 
 class AddTaglineToSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,10 +13,9 @@ class AddTaglineToSettings extends Migration
     {
         DB::table('settings')->insert([
             'key' => 'tagline',
-            'value' => 'Vote for your favorite celeb who has done kickass things in the world. Vote once per day in each category, and don\'t forget voting ends December 24th!'
+            'value' => 'Vote for your favorite celeb who has done kickass things in the world. Vote once per day in each category, and don\'t forget voting ends December 24th!',
         ]);
     }
-
 
     /**
      * Reverse the migrations.

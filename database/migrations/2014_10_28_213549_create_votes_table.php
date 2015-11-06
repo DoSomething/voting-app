@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateVotesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -25,7 +24,6 @@ class CreateVotesTable extends Migration
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

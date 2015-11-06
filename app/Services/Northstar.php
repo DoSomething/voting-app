@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Services;
+<?php
+
+namespace VotingApp\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -8,9 +10,8 @@ use Exception;
 
 class Northstar
 {
-
     /**
-     * The HTTP client
+     * The HTTP client.
      * @var \GuzzleHttp\Client
      */
     protected $client;
@@ -22,15 +23,15 @@ class Northstar
         $key = config('services.northstar.key');
 
         $this->client = new Client([
-            'base_url' => $base_url . '/v1/',
+            'base_url' => $base_url.'/v1/',
             'defaults' => [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
                     'X-DS-Application-Id' => $appId,
                     'X-DS-REST-API-Key' => $key,
-                ]
-            ]
+                ],
+            ],
         ]);
     }
 
@@ -40,24 +41,22 @@ class Northstar
      */
     public function logException(Exception $e)
     {
-        app('stathat')->ezCount(env('STATHAT_APP_NAME', 'votingapp') . ' - Northstar API error', 1);
+        app('stathat')->ezCount(env('STATHAT_APP_NAME', 'votingapp').' - Northstar API error', 1);
 
         $info = [
             'code' => $e->getCode(),
             'message' => $e->getMessage(),
         ];
 
-        if($e instanceof RequestException)
-        {
+        if ($e instanceof RequestException) {
             $response = $e->getResponse();
-            if($response) {
+            if ($response) {
                 $info['body'] = $response->json();
             }
         }
 
         logger('Northstar API Exception', $info);
     }
-
 
     /**
      * Register a Northstar user for the given VotingApp user.
@@ -70,18 +69,18 @@ class Northstar
         $payload = [
             'first_name' => $user->first_name,
             'birthdate' => $user->birthdate,
-            config('services.northstar.id_field') => $user->id
+            config('services.northstar.id_field') => $user->id,
         ];
 
-        if($user->phone) {
+        if ($user->phone) {
             $payload['mobile'] = $user->phone;
         }
 
-        if($user->email) {
+        if ($user->email) {
             $payload['email'] = $user->email;
         }
 
-        if($user->country_code) {
+        if ($user->country_code) {
             $payload['country'] = $user->country_code;
         }
 
@@ -92,7 +91,8 @@ class Northstar
             return $json['data']['_id'];
         } catch (Exception $e) {
             $this->logException($e);
-            return null;
+
+            return;
         }
     }
 
@@ -106,18 +106,20 @@ class Northstar
      */
     public function storeInterest(User $user, Candidate $candidate)
     {
-        if(!$user->northstar_id) return false;
+        if (! $user->northstar_id) {
+            return false;
+        }
 
         $payload = ['interests' => $candidate->category->slug];
 
         try {
-            $response = $this->client->put('users/' . e($user->northstar_id), ['body' => json_encode($payload)]);
+            $response = $this->client->put('users/'.e($user->northstar_id), ['body' => json_encode($payload)]);
+
             return $response->getStatusCode() === 200;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->logException($e);
+
             return false;
         }
-
     }
-
 }

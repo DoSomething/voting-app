@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
@@ -6,7 +8,6 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller

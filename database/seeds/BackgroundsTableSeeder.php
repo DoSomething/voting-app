@@ -5,7 +5,6 @@ use VotingApp\Models\Background;
 
 class BackgroundsTableSeeder extends Seeder
 {
-
     public function run()
     {
         Background::truncate();
@@ -21,6 +20,5 @@ class BackgroundsTableSeeder extends Seeder
         $three = new Background();
         $three->saveImage(base_path('database/seeds/images/tabby3.jpg'));
         $three->save();
-
     }
 }

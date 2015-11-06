@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 
 class AddFaqLinkToSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,15 +13,14 @@ class AddFaqLinkToSettings extends Migration
     {
         DB::table('settings')->insert([
             'key' => 'faq_link_text',
-            'value' => 'FAQs'
+            'value' => 'FAQs',
         ]);
 
         DB::table('settings')->insert([
             'key' => 'faq_link_url',
-            'value' => '/pages/faq'
+            'value' => '/pages/faq',
         ]);
     }
-
 
     /**
      * Reverse the migrations.

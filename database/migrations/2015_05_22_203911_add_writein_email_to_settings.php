@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddWriteinEmailToSettings extends Migration {
-
+class AddWriteinEmailToSettings extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class AddWriteinEmailToSettings extends Migration {
             'key' => 'writein_email',
             'type' => 'text',
             'description' => 'Email provided for write-in candidates.',
-            'value' => 'writein@voting.app'
+            'value' => 'writein@voting.app',
         ]);
     }
 
@@ -29,5 +28,4 @@ class AddWriteinEmailToSettings extends Migration {
     {
         DB::table('settings')->delete(['key' => 'ui_tint']);
     }
-
 }

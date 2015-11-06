@@ -51,7 +51,6 @@ class AdminTest extends TestCase
              ->see('Create Candidate');
     }
 
-
     /**
      * Verify that pages can be created.
      */
@@ -66,19 +65,20 @@ class AdminTest extends TestCase
             ->press('Create Page');
 
         $this->seeInDatabase('pages', [
-            'title' => 'Test Page'
+            'title' => 'Test Page',
         ]);
     }
 
     /**
      * Verify that pages can be updated.
      */
-    public function testPageUpdate(){
+    public function testPageUpdate()
+    {
         $this->be($this->adminUser);
 
         $page = Page::create([
             'title' => 'Test Edit Page',
-            'content' => 'Lorem ipsum'
+            'content' => 'Lorem ipsum',
         ]);
 
         $page->save();
@@ -89,13 +89,11 @@ class AdminTest extends TestCase
             ->press('Update Page');
 
         $this->seeInDatabase('pages', [
-            'title' => 'Updated Test Page'
+            'title' => 'Updated Test Page',
         ]);
 
         $this->notSeeInDatabase('pages', [
-            'title' => 'Test Edit Page'
+            'title' => 'Test Edit Page',
         ]);
-
     }
-
 }

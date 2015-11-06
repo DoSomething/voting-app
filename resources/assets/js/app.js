@@ -53,9 +53,9 @@ ready(function() {
 
   // Rehydrate any pre-rendered React components on the page
   rehydrate({
-    'CandidateIndex': CandidateIndex,
-    'CategoryIndex': CategoryIndex,
-    'WinnerIndex': WinnerIndex,
-    'WinnerDetailView': WinnerDetailView,
+    CandidateIndex: CandidateIndex,
+    CategoryIndex: CategoryIndex,
+    WinnerIndex: WinnerIndex,
+    WinnerDetailView: WinnerDetailView,
   });
 });

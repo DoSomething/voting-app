@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Repositories;
+<?php
+
+namespace VotingApp\Repositories;
 
 use DB;
 use Cache;
 
 class BackgroundsRepository
 {
-
     /**
      * Get a cached array of all custom backgrounds.
      *
@@ -13,7 +14,7 @@ class BackgroundsRepository
      */
     public function all()
     {
-        $backgrounds = Cache::rememberForever('backgrounds', function() {
+        $backgrounds = Cache::rememberForever('backgrounds', function () {
             return DB::table('backgrounds')->lists('path');
         });
 
@@ -23,11 +24,12 @@ class BackgroundsRepository
     public function random($type, $fallback = '')
     {
         $all = $this->all();
-        if(empty($all)) return $fallback;
+        if (empty($all)) {
+            return $fallback;
+        }
 
         $path = $all[mt_rand(0, count($all) - 1)];
 
-        return '/images/backgrounds/'. $path . '_' . $type . '.jpg';
+        return '/images/backgrounds/'.$path.'_'.$type.'.jpg';
     }
-
 }

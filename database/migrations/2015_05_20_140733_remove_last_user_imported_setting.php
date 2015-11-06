@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveLastUserImportedSetting extends Migration {
-
+class RemoveLastUserImportedSetting extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -24,8 +23,7 @@ class RemoveLastUserImportedSetting extends Migration {
     {
         DB::table('settings')->insert([
             'key' => 'last_user_imported',
-            'value' => -1
+            'value' => -1,
         ]);
     }
-
 }

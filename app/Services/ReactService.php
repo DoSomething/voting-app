@@ -1,15 +1,15 @@
-<?php namespace VotingApp\Services;
+<?php
+
+namespace VotingApp\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Cache;
-use Exception;
 
 class ReactService
 {
-
     /**
-     * The HTTP client
+     * The HTTP client.
      * @var \GuzzleHttp\Client
      */
     protected $client;
@@ -22,8 +22,8 @@ class ReactService
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'text/html',
-                ]
-            ]
+                ],
+            ],
         ]);
     }
 
@@ -37,23 +37,23 @@ class ReactService
     public function render($component, $props)
     {
         $propsJSON = json_encode($props);
-        $id = $component . md5($component . $propsJSON);
+        $id = $component.md5($component.$propsJSON);
 
         try {
             // Render component, and cache for one minute for the given component & props combo.
-            $renderedComponent = Cache::remember($id, 1, function() use($component, $propsJSON, $id) {
+            $renderedComponent = Cache::remember($id, 1, function () use ($component, $propsJSON, $id) {
                 $response = $this->client->post($component, ['body' => $propsJSON]);
+
                 return $response->getBody()->getContents();
             });
-        } catch(RequestException $e) {
+        } catch (RequestException $e) {
             app('log')->error('Unable to pre-render React view.', [$e]);
             $renderedComponent = '';
         }
 
-        $markup = '<div data-rendered-component="' . $component .'" id="' . $id . '">' . $renderedComponent . '</div>';
-        $markup = $markup . '<script id="' . $id . '-props" type="application/json">' . $propsJSON . '</script>';
+        $markup = '<div data-rendered-component="'.$component.'" id="'.$id.'">'.$renderedComponent.'</div>';
+        $markup = $markup.'<script id="'.$id.'-props" type="application/json">'.$propsJSON.'</script>';
 
         return $markup;
     }
-
 }

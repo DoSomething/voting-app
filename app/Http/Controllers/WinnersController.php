@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use VotingApp\Models\Winner;
 use Illuminate\Http\Request;
 
 class WinnersController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('admin');
@@ -19,9 +20,9 @@ class WinnersController extends Controller
     public function index()
     {
         $winners = Winner::with('candidate.category')->orderBy('rank')->get();
+
         return view('winners.index', compact('winners', 'categories'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -32,9 +33,9 @@ class WinnersController extends Controller
     public function store(Request $request)
     {
         $winner = Winner::firstOrCreate(['candidate_id' => $request->get('id')]);
+
         return redirect()->route('winners.edit', ['id' => $winner->id]);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -46,7 +47,6 @@ class WinnersController extends Controller
     {
         return view('winners.edit', compact('winner'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -63,7 +63,6 @@ class WinnersController extends Controller
         return redirect()->route('winners.index')->with('message', 'Cool, we saved that person as a winner.');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -73,6 +72,7 @@ class WinnersController extends Controller
     public function destroy(Winner $winner)
     {
         $winner->delete();
+
         return redirect()->route('winners.index')->with('message', 'BAM! that winner was removed.');
     }
 }

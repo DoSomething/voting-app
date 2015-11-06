@@ -1,10 +1,11 @@
-<?php namespace VotingApp\Handlers\Events;
+<?php
+
+namespace VotingApp\Handlers\Events;
 
 use StatHat;
 
 class UpdateVotingStats
 {
-
     /**
      * Handle the event.
      *
@@ -12,7 +13,6 @@ class UpdateVotingStats
      */
     public function handle()
     {
-        StatHat::ezCount(env('STATHAT_APP_NAME', 'votingapp') . ' - vote');
+        StatHat::ezCount(env('STATHAT_APP_NAME', 'votingapp').' - vote');
     }
-
 }

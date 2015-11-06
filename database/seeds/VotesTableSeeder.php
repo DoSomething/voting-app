@@ -7,7 +7,6 @@ use VotingApp\Models\Candidate;
 
 class VotesTableSeeder extends Seeder
 {
-
     public function run()
     {
         DB::table('votes')->truncate();
@@ -18,7 +17,7 @@ class VotesTableSeeder extends Seeder
 
             $vote = Vote::create([
                 'candidate_id' => $candidate->id,
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]);
 
             $vote->save();

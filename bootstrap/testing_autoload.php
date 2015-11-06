@@ -10,4 +10,4 @@ passthru("php artisan --env='testing' migrate --seed");
 /**
  * Pass control to the standard autoload script.
  */
-require __DIR__ . '/autoload.php';
+require __DIR__.'/autoload.php';

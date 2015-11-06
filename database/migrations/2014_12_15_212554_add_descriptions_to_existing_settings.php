@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddDescriptionsToExistingSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -31,7 +30,6 @@ class AddDescriptionsToExistingSettings extends Migration
 
         });
     }
-
 
     /**
      * Reverse the migrations.

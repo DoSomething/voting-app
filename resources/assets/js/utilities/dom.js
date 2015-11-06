@@ -23,8 +23,9 @@ export function getOffset(element) {
   do {
     if (!isNaN(el.offsetTop)) {
       offsetTop += el.offsetTop;
+      el = el.offsetParent;
     }
-  } while (el = el.offsetParent);
+  } while (el.offsetParent);
 
   return offsetTop;
 }

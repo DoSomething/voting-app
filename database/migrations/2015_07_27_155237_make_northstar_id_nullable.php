@@ -3,15 +3,15 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MakeNorthstarIdNullable extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+class MakeNorthstarIdNullable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::table('users', function (Blueprint $table) {
             $table->string('northstar_id')->nullable()->change();
         });
@@ -25,6 +25,5 @@ class MakeNorthstarIdNullable extends Migration {
     public function down()
     {
         // ...
-	}
-
+    }
 }

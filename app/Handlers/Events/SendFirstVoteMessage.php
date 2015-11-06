@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Handlers\Events;
+<?php
+
+namespace VotingApp\Handlers\Events;
 
 use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Services\MessageBroker;
 
 class SendFirstVoteMessage
 {
-
     /**
      * The Message Broker handles sending messages.
      *
@@ -35,24 +36,24 @@ class SendFirstVoteMessage
         ];
 
         // Send fields for domestic users
-        if($event->user->country_code === 'US') {
+        if ($event->user->country_code === 'US') {
             $payload['mobile'] = $event->user->phone;
             $payload['mobile_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
-                'GENDER_' . $event->candidate->gender,
+                'GENDER_'.$event->candidate->gender,
             ];
         }
 
         // Send fields for international users
-        if($event->user->country_code !== 'US') {
+        if ($event->user->country_code !== 'US') {
             $payload['email'] = $event->user->email;
             $payload['subscribed'] = 1;
             $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote');
             $payload['email_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
-                'GENDER_' . $event->candidate->gender,
+                'GENDER_'.$event->candidate->gender,
             ];
             $payload['merge_vars'] = [
                 'FNAME' => $event->user->first_name,
@@ -65,5 +66,4 @@ class SendFirstVoteMessage
         $routingKey = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
         $this->broker->publish('vote', $payload, $routingKey);
     }
-
 }

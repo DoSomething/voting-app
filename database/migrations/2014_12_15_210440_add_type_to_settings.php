@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddTypeToSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -18,7 +17,6 @@ class AddTypeToSettings extends Migration
             $table->text('description')->nullable();
         });
     }
-
 
     /**
      * Reverse the migrations.

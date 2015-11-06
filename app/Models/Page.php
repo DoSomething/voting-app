@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
@@ -7,7 +9,6 @@ use Parsedown;
 
 class Page extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
 
     /**
@@ -16,7 +17,7 @@ class Page extends Model implements SluggableInterface
      * @var array
      */
     protected $fillable = [
-        'title', 'content'
+        'title', 'content',
     ];
 
     /**
@@ -26,7 +27,7 @@ class Page extends Model implements SluggableInterface
      */
     protected $sluggable = [
         'build_from' => 'title',
-        'save_to' => 'slug'
+        'save_to' => 'slug',
     ];
 
     public function setContentAttribute($content)
@@ -34,5 +35,4 @@ class Page extends Model implements SluggableInterface
         $this->attributes['content'] = $content;
         $this->attributes['content_html'] = Parsedown::instance()->text($content);
     }
-
 }

@@ -5,7 +5,6 @@ use VotingApp\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
-
     public function run()
     {
         $faker = Faker\Factory::create();

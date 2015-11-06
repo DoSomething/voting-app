@@ -7,7 +7,6 @@ use Faker\Provider\Uuid;
 
 class SettingsTableSeeder extends Seeder
 {
-
     /**
      * Create a temporary file for seeding file uploads.
      *
@@ -16,10 +15,10 @@ class SettingsTableSeeder extends Seeder
      */
     public function seedFile($path)
     {
-        $sourcePath = base_path('database/seeds') . '/' . $path;
+        $sourcePath = base_path('database/seeds').'/'.$path;
 
-        $destinationFile = Uuid::uuid() . '.' . pathinfo($sourcePath, PATHINFO_EXTENSION);
-        $destinationFullPath = '/tmp/' . $destinationFile;
+        $destinationFile = Uuid::uuid().'.'.pathinfo($sourcePath, PATHINFO_EXTENSION);
+        $destinationFullPath = '/tmp/'.$destinationFile;
 
         if (false === copy($sourcePath, $destinationFullPath)) {
             return false;
@@ -57,6 +56,5 @@ class SettingsTableSeeder extends Seeder
         $logo_png = Setting::where('key', 'logo_png')->first();
         $logo_png->saveFile($this->seedFile('images/cats-gone-good.png'), 'cats-gone-good.png');
         $logo_png->save();
-
     }
 }

@@ -1,7 +1,8 @@
-<?php namespace VotingApp\Commands;
+<?php
+
+namespace VotingApp\Commands;
 
 abstract class Command
 {
-
     //
 }

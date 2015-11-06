@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class RememberToken extends Migration
 {
-
     /**
      * Run the migrations.
      *

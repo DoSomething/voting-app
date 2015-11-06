@@ -1,10 +1,11 @@
-<?php namespace VotingApp\Services;
+<?php
+
+namespace VotingApp\Services;
 
 use MessageBroker as MessageBrokerConnection;
 
 class MessageBroker
 {
-
     /**
      * Serialize and send payload to the Message Broker using a
      * given routing key.
@@ -12,7 +13,8 @@ class MessageBroker
      * @param array $payload
      * @param string $routingKey
      */
-    public function publishRaw($payload, $routingKey) {
+    public function publishRaw($payload, $routingKey)
+    {
         // Don't send messages locally.
         if (app()->environment('local', 'testing')) {
             return;
@@ -51,5 +53,4 @@ class MessageBroker
 
         $this->publishRaw($payload, $routingKey);
     }
-
 }

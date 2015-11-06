@@ -5,9 +5,8 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class TestCase extends IntegrationTest
 {
-
     /**
-     * Migrate database and set up HTTP headers
+     * Migrate database and set up HTTP headers.
      *
      * @return void
      */
@@ -37,7 +36,7 @@ class TestCase extends IntegrationTest
      */
     public function createApplication()
     {
-        $app = require __DIR__ . '/../bootstrap/app.php';
+        $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
@@ -54,6 +53,7 @@ class TestCase extends IntegrationTest
     {
         $mock = Mockery::mock($class);
         $this->app->instance($class, $mock);
+
         return $mock;
     }
 
@@ -81,5 +81,4 @@ class TestCase extends IntegrationTest
 
         return $this;
     }
-
 }

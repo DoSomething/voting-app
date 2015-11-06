@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\File;
@@ -7,14 +9,13 @@ use Cache;
 
 class Setting extends Model
 {
-
     public static function boot()
     {
         parent::boot();
 
         static::updating(function ($setting) {
-            if (Cache::has('settings.' . $setting->key)) {
-                Cache::forget('settings.' . $setting->key);
+            if (Cache::has('settings.'.$setting->key)) {
+                Cache::forget('settings.'.$setting->key);
             }
         });
     }
@@ -40,7 +41,7 @@ class Setting extends Model
         $path = public_path('images/settings');
 
         // Create directory if it doesn't exist
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             mkdir($path, 0777, true);
         }
 
@@ -51,10 +52,9 @@ class Setting extends Model
             $extension = $file->getExtension();
         }
 
-        $filename = $this->key . '.' . $extension;
+        $filename = $this->key.'.'.$extension;
         $file->move($path, $filename);
 
-        $this->value = 'images/settings/' . $filename;
+        $this->value = 'images/settings/'.$filename;
     }
-
 }

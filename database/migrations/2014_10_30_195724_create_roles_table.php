@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateRolesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -18,7 +17,6 @@ class CreateRolesTable extends Migration
             $table->string('name')->unique();
         });
     }
-
 
     /**
      * Reverse the migrations.

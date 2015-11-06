@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCandidateTypeToSettings extends Migration {
-
+class AddCandidateTypeToSettings extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -20,7 +19,6 @@ class AddCandidateTypeToSettings extends Migration {
         ]);
     }
 
-
     /**
      * Reverse the migrations.
      *
@@ -30,5 +28,4 @@ class AddCandidateTypeToSettings extends Migration {
     {
         DB::table('settings')->delete(['key' => 'candidate_type']);
     }
-
 }

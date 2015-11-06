@@ -1,10 +1,11 @@
-<?php namespace VotingApp\Models;
+<?php
+
+namespace VotingApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-
     /**
      * @var array
      */

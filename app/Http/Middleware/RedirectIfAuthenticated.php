@@ -1,11 +1,12 @@
-<?php namespace VotingApp\Http\Middleware;
+<?php
+
+namespace VotingApp\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
 class RedirectIfAuthenticated
 {
-
     /**
      * The Guard implementation.
      *

@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreatePagesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -22,7 +21,6 @@ class CreatePagesTable extends Migration
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUiTintToSettings extends Migration {
-
+class AddUiTintToSettings extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class AddUiTintToSettings extends Migration {
             'key' => 'ui_tint',
             'type' => 'text',
             'description' => 'A valid CSS color to use for interface items.',
-            'value' => ''
+            'value' => '',
         ]);
     }
 
@@ -29,5 +28,4 @@ class AddUiTintToSettings extends Migration {
     {
         DB::table('settings')->delete(['key' => 'ui_tint']);
     }
-
 }

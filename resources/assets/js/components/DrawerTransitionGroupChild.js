@@ -3,6 +3,10 @@ import { slideUp, slideDown } from '../utilities/dom';
 
 class DrawerTransitionGroupChild extends Component {
 
+  static propTypes = {
+    children: React.PropTypes.node,
+  };
+
   componentWillEnter(done) {
     const node = React.findDOMNode(this);
     slideDown(node, done);

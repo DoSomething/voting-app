@@ -1,4 +1,6 @@
-<?php namespace VotingApp\Http\Controllers;
+<?php
+
+namespace VotingApp\Http\Controllers;
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
@@ -8,9 +10,8 @@ use Auth;
 
 class CandidatesController extends Controller
 {
-
     /**
-     * Validation rules
+     * Validation rules.
      * @var array
      */
     protected $rules = [
@@ -37,7 +38,7 @@ class CandidatesController extends Controller
 
         // Show admin interface instead for administrators. Admin users can
         // use the `?guest=✓` query parameter to bypass the admin view.
-        if(Auth::check() && Auth::user()->admin && !$showAsGuest) {
+        if (Auth::check() && Auth::user()->admin && ! $showAsGuest) {
             return $this->adminIndex($request);
         }
 
@@ -49,7 +50,7 @@ class CandidatesController extends Controller
 
         // Hide candidates if `show_candidates` setting is disabled, unless logged
         // in as an administrator & using "show as guest" override
-        if(!setting('show_candidates') && !$showAsGuest) {
+        if (! setting('show_candidates') && ! $showAsGuest) {
             $categories = [];
         }
 
@@ -62,7 +63,8 @@ class CandidatesController extends Controller
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function adminIndex(Request $request){
+    public function adminIndex(Request $request)
+    {
         // Get optional request params.
         $sort_by = $request->get('sort_by', 'name');
         $direction = $request->get('direction', 'ASC');
@@ -86,7 +88,6 @@ class CandidatesController extends Controller
         return view('candidates.adminIndex', compact('candidates'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -95,9 +96,9 @@ class CandidatesController extends Controller
     public function create()
     {
         $categories = Category::lists('name', 'id');
+
         return view('candidates.create', compact('categories'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -123,7 +124,6 @@ class CandidatesController extends Controller
         return redirect()->route('candidates.show', [$candidate->slug]);
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -136,13 +136,12 @@ class CandidatesController extends Controller
         $vote_count = $candidate->votes()->count();
         $winner = Winner::with('candidate')->where('candidate_id', $candidate->id)->first();
 
-        if(setting('show_winners') && $winner) {
+        if (setting('show_winners') && $winner) {
             return view('candidates.show', compact('candidate', 'winner'));
         }
 
         return view('candidates.show', compact('candidate', 'votes', 'vote_count'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -153,9 +152,9 @@ class CandidatesController extends Controller
     public function edit(Candidate $candidate)
     {
         $categories = Category::lists('name', 'id');
+
         return view('candidates.edit', compact('candidate', 'categories'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -167,7 +166,7 @@ class CandidatesController extends Controller
     public function update(Request $request, Candidate $candidate)
     {
         $rules = $this->rules;
-        $rules['name'][] = 'unique:candidates,name,' . $candidate->id;
+        $rules['name'][] = 'unique:candidates,name,'.$candidate->id;
 
         $this->validate($request, $rules);
 
@@ -181,7 +180,6 @@ class CandidatesController extends Controller
 
         return redirect()->route('candidates.show', [$candidate->slug]);
     }
-
 
     /**
      * Remove the specified resource from storage.

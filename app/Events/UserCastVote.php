@@ -1,10 +1,11 @@
-<?php namespace VotingApp\Events;
+<?php
+
+namespace VotingApp\Events;
 
 use Illuminate\Queue\SerializesModels;
 
 class UserCastVote extends Event
 {
-
     use SerializesModels;
 
     /**
@@ -14,5 +15,4 @@ class UserCastVote extends Event
     {
         //
     }
-
 }
