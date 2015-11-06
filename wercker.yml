@@ -3,16 +3,29 @@ build:
     # The steps that will be executed on build
     steps:
       - script:
-          name: update node
-          code: |-
-            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-      - script:
           name: Update apt
           code: sudo apt-get update
       - script:
           name: Install libnotify
           code: sudo apt-get install libnotify-bin
+      - script:
+          name: update node
+          code: |-
+            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+      - script:
+          name: install mysql
+          code: |-
+            export DEBIAN_FRONTEND=noninteractive
+            sudo -E apt-get -q -y install mysql-server
+            mysqladmin -u root password root
+            mysql -u root -proot -e "CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret';"
+            mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'homestead'@'localhost' WITH GRANT OPTION;"
+      - script:
+          name: install php extensions
+          code: |-
+            sudo apt-get install php5-mysql
+            sudo apt-get install php5-gd
       - script:
           name: Update Composer
           code: sudo composer self-update
@@ -24,6 +37,12 @@ build:
             npm config set cache $WERCKER_CACHE_DIR/wercker/npm
             sudo npm install
       - npm-test
+      - script:
+          name: phpunit
+          code: |-
+              cp .env.example .env
+              mysql -u homestead -psecret -e "CREATE DATABASE voting_testing;"
+              vendor/bin/phpunit
       - wercker/bundle-install@1.1.1
       - script:
           name: build assets
