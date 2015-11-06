@@ -3,6 +3,11 @@ build:
     # The steps that will be executed on build
     steps:
       - script:
+          name: update node
+          code: |-
+            curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+      - script:
           name: Update apt
           code: sudo apt-get update
       - script:
@@ -15,8 +20,6 @@ build:
       - script:
           name: npm install
           code: |-
-            sudo npm install -g npm@2
-            npm -v
             mkdir -p $WERCKER_CACHE_DIR/wercker/npm
             npm config set cache $WERCKER_CACHE_DIR/wercker/npm
             sudo npm install
