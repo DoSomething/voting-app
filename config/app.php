@@ -154,6 +154,8 @@ return [
         'Collective\Html\HtmlServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'DoSomething\StatHat\StatHatServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
+        'Aws\Laravel\AwsServiceProvider',
 
     ],
 

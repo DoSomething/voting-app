@@ -26,6 +26,11 @@ default_run_options[:shell] = '/bin/bash'
 namespace :deploy do
   folders = %w{logs dumps system}
 
+  task :backup_db, :on_error => :continue do
+    bucket = ENV["S3_BUCKET"]
+    run "cd #{release_path} && php artisan db:backup --upload-s3 #{bucket}"
+  end
+
   task :link_folders do
     run "ln -nfs #{shared_path}/.env #{release_path}/"
     run "ln -nfs #{shared_path}/images #{release_path}/public"
@@ -51,6 +56,7 @@ end
 
 after "deploy:update", "deploy:cleanup"
 after "deploy:symlink", "deploy:link_folders"
+before "deploy:artisan_migrate", "deploy:backup_db"
 after "deploy:link_folders", "deploy:artisan_migrate"
 after "deploy:artisan_migrate", "deploy:react_render"
 after "deploy:artisan_migrate", "deploy:artisan_cache_clear"
