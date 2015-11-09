@@ -43,7 +43,6 @@ build:
               cp .env.example .env
               mysql -u homestead -psecret -e "CREATE DATABASE voting_testing;"
               vendor/bin/phpunit
-      - wercker/bundle-install@1.1.1
       - script:
           name: build assets
           code: |-
