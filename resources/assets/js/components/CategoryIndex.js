@@ -5,11 +5,6 @@ import Tile from './Tile';
 
 class CategoryIndex extends Component {
 
-  static propTypes = {
-    name: PropTypes.string,
-    candidates: PropTypes.array,
-  };
-
   constructor(props) {
     super(props);
 
@@ -55,5 +50,10 @@ class CategoryIndex extends Component {
   }
 
 }
+
+CategoryIndex.propTypes = {
+  name: PropTypes.string,
+  candidates: PropTypes.array,
+};
 
 export default CategoryIndex;

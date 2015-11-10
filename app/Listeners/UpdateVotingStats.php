@@ -1,6 +1,6 @@
 <?php
 
-namespace VotingApp\Handlers\Events;
+namespace VotingApp\Listeners;
 
 use StatHat;
 

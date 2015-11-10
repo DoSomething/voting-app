@@ -11,10 +11,8 @@ class ReactServiceProvider extends ServiceProvider
     public function boot()
     {
         // Register blade `@react` helper function
-        Blade::extend(function ($view, $compiler) {
-            $pattern = $compiler->createMatcher('react');
-
-            return preg_replace($pattern, '<?php echo app("react")->render$2; ?>', $view);
+        Blade::directive('react', function ($expression) {
+            return '<?php echo app("VotingApp\Services\ReactService")->render'.$expression.'; ?>';
         });
     }
 
@@ -25,8 +23,7 @@ class ReactServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $app = $this->app;
-        $app['react'] = $app->share(function ($app) {
+        $this->app->singleton('VotingApp\Services\ReactService', function ($app) {
             return new ReactService($app['config']->get('services.react.url'));
         });
     }

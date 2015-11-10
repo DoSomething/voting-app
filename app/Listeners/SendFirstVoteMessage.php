@@ -1,6 +1,6 @@
 <?php
 
-namespace VotingApp\Handlers\Events;
+namespace VotingApp\Listeners;
 
 use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Services\MessageBroker;

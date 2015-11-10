@@ -26,7 +26,7 @@ class ContentTest extends TestCase
         $category = Category::all()->first();
 
         $this->visit(route('categories.show', [$category->slug]))
-             ->andSee($category->name);
+             ->see($category->name);
     }
 
     /**
@@ -38,7 +38,7 @@ class ContentTest extends TestCase
         $candidate = Candidate::all()->first();
 
         $this->visit(route('candidates.show', [$candidate->slug]))
-             ->andSee($candidate->name);
+             ->see($candidate->name);
     }
 
     /**
@@ -48,6 +48,6 @@ class ContentTest extends TestCase
     public function testViewFaqPage()
     {
         $this->visit('/pages/faq')
-            ->andSee('What is Lorem Ipsum?');
+            ->see('What is Lorem Ipsum?');
     }
 }

@@ -5,16 +5,6 @@ import WinnerTile from './WinnerTile';
 
 class WinnerIndex extends Component {
 
-  static propTypes = {
-    name: PropTypes.string,
-    winners: PropTypes.array,
-  };
-
-  static defaultProps = {
-    name: 'Winners',
-    winners: [],
-  };
-
   constructor(props) {
     super(props);
 
@@ -60,6 +50,17 @@ class WinnerIndex extends Component {
   }
 
 }
+
+WinnerIndex.propTypes = {
+  name: PropTypes.string,
+  winners: PropTypes.array,
+};
+
+WinnerIndex.defaultProps = {
+  name: 'Winners',
+  winners: [],
+};
+
 
 export default WinnerIndex;
 

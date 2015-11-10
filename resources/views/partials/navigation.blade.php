@@ -5,9 +5,9 @@
              alt="{{ setting('site_title') }}">
     </a>
 
-    @if(Session::has('message'))
+    @if(session('message'))
         <div id="message"
-             class="messages {{ Session::get('message_type', '') }}">{{ Session::get('message') }}</div>
+             class="messages {{ session('message_type', '') }}">{{ session('message') }}</div>
     @else
         <div class="navigation__tagline">{!! setting('tagline') !!}</div>
     @endif

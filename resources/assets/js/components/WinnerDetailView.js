@@ -4,19 +4,6 @@ import ordinalize from '../utilities/ordinalize';
 
 class WinnerDetailView extends Component {
 
-  static propTypes = {
-    item: PropTypes.shape({
-      rank: PropTypes.number,
-      description: PropTypes.string,
-      candidate: PropTypes.shape({
-        name: PropTypes.string,
-        description: PropTypes.string,
-        url: PropTypes.string,
-        thumbnail: PropTypes.string,
-      }),
-    }),
-  };
-
   /**
    * Render component.
    * @returns {XML}
@@ -40,5 +27,19 @@ class WinnerDetailView extends Component {
   }
 
 }
+
+WinnerDetailView.propTypes = {
+  item: PropTypes.shape({
+    rank: PropTypes.number,
+    description: PropTypes.string,
+    candidate: PropTypes.shape({
+      name: PropTypes.string,
+      description: PropTypes.string,
+      url: PropTypes.string,
+      thumbnail: PropTypes.string,
+    }),
+  }),
+};
+
 
 export default WinnerDetailView;

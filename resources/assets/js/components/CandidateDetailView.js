@@ -3,16 +3,6 @@ import AlternateTile from './AlternateTile';
 
 class CandidateDetailView extends Component {
 
-  static propTypes = {
-    item: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      description: PropTypes.string,
-      url: PropTypes.string,
-      share_name: PropTypes.string,
-    }),
-  };
-
   /**
    * Return escaped server-rendered HTML to use for voting form.
    * @see resources/views/votes/form.blade.php
@@ -55,5 +45,15 @@ class CandidateDetailView extends Component {
   }
 
 }
+
+CandidateDetailView.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    url: PropTypes.string,
+    share_name: PropTypes.string,
+  }),
+};
 
 export default CandidateDetailView;

@@ -3,17 +3,6 @@ import DrawerTransitionGroup from './DrawerTransitionGroup';
 
 class Drawer extends Component {
 
-  static propTypes = {
-    candidate: PropTypes.object,
-    onSelect: PropTypes.func,
-    isOpen: PropTypes.bool,
-    children: PropTypes.element.isRequired,
-  };
-
-  static defaultProps = {
-    isOpen: false,
-  };
-
   constructor() {
     super();
 
@@ -54,5 +43,16 @@ class Drawer extends Component {
     );
   }
 }
+
+Drawer.propTypes = {
+  candidate: PropTypes.object,
+  onSelect: PropTypes.func,
+  isOpen: PropTypes.bool,
+  children: PropTypes.element.isRequired,
+};
+
+Drawer.defaultProps = {
+  isOpen: false,
+};
 
 export default Drawer;
