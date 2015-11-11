@@ -17,12 +17,12 @@ class SetCountryCodeFromHeader
     {
         // Save country code in session if not set
         if (! $request->session()->has('country_code')) {
-            $this->saveCountryCodeToSession($request, $this->getCountryCode($request));
+            $request->session()->put('country_code', $this->getCountryCode($request));
         };
 
         // Allow overriding country via query string, for debugging
         if ($queryOverride = $request->get('country_code')) {
-            $this->saveCountryCodeToSession($request, $queryOverride);
+            $request->session()->put('country_code', $queryOverride);
         }
 
         return $next($request);
@@ -37,17 +37,5 @@ class SetCountryCodeFromHeader
     public function getCountryCode($request)
     {
         return $request->server('HTTP_X_FASTLY_COUNTRY_CODE', null);
-    }
-
-    /**
-     * Save the country code to the session.
-     *
-     * @param $request
-     * @param $countryCode
-     */
-    public function saveCountryCodeToSession($request, $countryCode)
-    {
-        $request->session()->put('country_code', $countryCode);
-        $request->session()->save();
     }
 }

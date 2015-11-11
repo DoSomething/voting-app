@@ -11,16 +11,6 @@ import Tile from './Tile';
 
 class CandidateIndex extends Component {
 
-  static propTypes = {
-    categories: PropTypes.array,
-    limit: PropTypes.number,
-  };
-
-  static defaultProps = {
-    title: 'Voting App',
-    limit: 16,
-  };
-
   constructor(props) {
     super(props);
 
@@ -183,5 +173,15 @@ class CandidateIndex extends Component {
   }
 
 }
+
+CandidateIndex.propTypes = {
+  categories: PropTypes.array,
+  limit: PropTypes.number,
+};
+
+CandidateIndex.defaultProps = {
+  title: 'Voting App',
+  limit: 16,
+};
 
 export default CandidateIndex;

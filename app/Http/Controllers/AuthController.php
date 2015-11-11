@@ -69,7 +69,7 @@ class AuthController extends Controller
      * Log the current user out of the site.
      * GET /logout.
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getLogout()
     {

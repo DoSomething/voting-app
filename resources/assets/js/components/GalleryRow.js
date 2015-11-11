@@ -9,13 +9,6 @@ import Drawer from './Drawer';
 
 class GalleryRow extends Component {
 
-  static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element),
-    detailView: PropTypes.instanceOf(Component),
-    selectedItem: PropTypes.object,
-    onSelect: PropTypes.func,
-  };
-
   /**
    * When component receives new props, determine whether we should
    * scroll viewport to the top of this row.
@@ -108,5 +101,12 @@ class GalleryRow extends Component {
   }
 
 }
+
+GalleryRow.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element),
+  detailView: PropTypes.instanceOf(Component),
+  selectedItem: PropTypes.object,
+  onSelect: PropTypes.func,
+};
 
 export default GalleryRow;

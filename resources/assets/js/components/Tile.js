@@ -4,17 +4,6 @@ import shallowCompare from '../vendor/shallowCompare';
 
 class Tile extends Component {
 
-  static propTypes = {
-    id: PropTypes.number,
-    item: PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-      thumbnail: PropTypes.string,
-    }),
-    selected: PropTypes.bool,
-    onClick: PropTypes.func,
-  };
-
   constructor() {
     super();
 
@@ -63,5 +52,17 @@ class Tile extends Component {
   }
 
 }
+
+Tile.propTypes = {
+  id: PropTypes.number,
+  item: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    thumbnail: PropTypes.string,
+  }),
+  selected: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
 
 export default Tile;

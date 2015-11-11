@@ -60,8 +60,8 @@ class AdminTest extends TestCase
 
         // Check that creating a page is successful
         $this->visit(route('pages.create'))
-            ->fill('Test Page', '#title')
-            ->fill('Lorem ipsum dolor sit amet.', '#content')
+            ->type('Test Page', '#title')
+            ->type('Lorem ipsum dolor sit amet.', '#content')
             ->press('Create Page');
 
         $this->seeInDatabase('pages', [
@@ -84,8 +84,8 @@ class AdminTest extends TestCase
         $page->save();
 
         $this->visit(route('pages.edit', [$page->slug]))
-            ->fill('Updated Test Page', '#title')
-            ->fill('Industry standard dummy text.', '#content')
+            ->type('Updated Test Page', '#title')
+            ->type('Industry standard dummy text.', '#content')
             ->press('Update Page');
 
         $this->seeInDatabase('pages', [
@@ -95,5 +95,19 @@ class AdminTest extends TestCase
         $this->notSeeInDatabase('pages', [
             'title' => 'Test Edit Page',
         ]);
+    }
+
+
+    /**
+     * Verify that users can end their session.
+     * @test
+     */
+    public function testLogout()
+    {
+        $this->be($this->adminUser);
+
+        $this->visit('/logout');
+
+        $this->see('You\'re now signed out.');
     }
 }

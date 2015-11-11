@@ -7,7 +7,7 @@
  */
 function get_country_code()
 {
-    return session('country_code');
+    return session()->get('country_code');
 }
 
 /**

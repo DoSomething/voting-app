@@ -95,7 +95,7 @@ class CandidatesController extends Controller
      */
     public function create()
     {
-        $categories = Category::lists('name', 'id');
+        $categories = Category::lists('name', 'id')->all();
 
         return view('candidates.create', compact('categories'));
     }
@@ -151,7 +151,7 @@ class CandidatesController extends Controller
      */
     public function edit(Candidate $candidate)
     {
-        $categories = Category::lists('name', 'id');
+        $categories = Category::lists('name', 'id')->all();
 
         return view('candidates.edit', compact('candidate', 'categories'));
     }

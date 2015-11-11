@@ -4,21 +4,6 @@ import shallowCompare from '../vendor/shallowCompare';
 
 class WinnerTile extends Component {
 
-  static propTypes = {
-    id: PropTypes.number,
-    item: PropTypes.shape({
-      rank: PropTypes.number,
-      description: PropTypes.string,
-      candidate: PropTypes.shape({
-        name: PropTypes.string,
-        url: PropTypes.string,
-        thumbnail: PropTypes.string,
-      }),
-    }),
-    selected: PropTypes.bool,
-    onClick: PropTypes.func,
-  };
-
   constructor() {
     super();
 
@@ -67,5 +52,20 @@ class WinnerTile extends Component {
   }
 
 }
+
+WinnerTile.propTypes = {
+  id: PropTypes.number,
+  item: PropTypes.shape({
+    rank: PropTypes.number,
+    description: PropTypes.string,
+    candidate: PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+      thumbnail: PropTypes.string,
+    }),
+  }),
+  selected: PropTypes.bool,
+  onClick: PropTypes.func,
+};
 
 export default WinnerTile;

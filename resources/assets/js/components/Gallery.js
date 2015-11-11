@@ -5,18 +5,6 @@ import GalleryRow from './GalleryRow';
 
 class Gallery extends Component {
 
-  static propTypes = {
-    name: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.element),
-    detailView: PropTypes.instanceOf(Component),
-    selectedItem: PropTypes.object,
-    onSelect: PropTypes.func,
-  };
-
-  static defaultProps = {
-    items: [],
-  };
-
   constructor() {
     super();
 
@@ -93,5 +81,17 @@ class Gallery extends Component {
   }
 
 }
+
+Gallery.propTypes = {
+  name: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element),
+  detailView: PropTypes.instanceOf(Component),
+  selectedItem: PropTypes.object,
+  onSelect: PropTypes.func,
+};
+
+Gallery.defaultProps = {
+  items: [],
+};
 
 export default Gallery;

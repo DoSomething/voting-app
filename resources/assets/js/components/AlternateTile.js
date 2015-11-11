@@ -3,13 +3,6 @@ import shallowCompare from '../vendor/shallowCompare';
 
 class AlternateTile extends Component {
 
-  static propTypes = {
-    candidate: PropTypes.shape({
-      name: PropTypes.string,
-      thumbnail: PropTypes.string,
-    }),
-  };
-
   /**
    * Only re-render this component if props or state change.
    * @param {object} nextProps - Props that the component will receive
@@ -38,5 +31,12 @@ class AlternateTile extends Component {
   }
 
 }
+
+AlternateTile.propTypes = {
+  candidate: PropTypes.shape({
+    name: PropTypes.string,
+    thumbnail: PropTypes.string,
+  }),
+};
 
 export default AlternateTile;

@@ -2,11 +2,6 @@ import React, { Component, PropTypes } from 'react/addons';
 
 class SearchForm extends Component {
 
-  static propTypes = {
-    query: PropTypes.string,
-    onChange: PropTypes.func,
-  };
-
   constructor(props) {
     super(props);
 
@@ -62,5 +57,11 @@ class SearchForm extends Component {
   }
 
 }
+
+SearchForm.propTypes = {
+  query: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
 
 export default SearchForm;

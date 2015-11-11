@@ -4,7 +4,7 @@ var eslint = require('gulp-eslint');
 
 /**
  * Configure build pipeline using Laravel Elixir.
- * @see http://laravel.com/docs/5.0/elixir
+ * @see http://laravel.com/docs/5.1/elixir
  */
 elixir(function(mix) {
 

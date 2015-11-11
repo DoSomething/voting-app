@@ -1,17 +1,5 @@
 {
   "private": true,
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "optional": [
-            "es7.classProperties"
-          ]
-        }
-      ]
-    ]
-  },
   "scripts": {
     "watch": "gulp watch",
     "build": "gulp --production",
@@ -20,13 +8,12 @@
   },
   "devDependencies": {
     "babel-eslint": "^3.1.30",
-    "babelify": "^6.4.0",
-    "eslint": "^1.8.0",
+    "eslint": "^1.9.0",
     "eslint-config-airbnb": "^0.1.0",
     "eslint-plugin-react": "^3.7.1",
     "gulp": "^3.8.8",
-    "gulp-eslint": "^1.0.0",
-    "laravel-elixir": "2.3.13"
+    "gulp-eslint": "^1.1.0",
+    "laravel-elixir": "3.4.2"
   },
   "dependencies": {
     "babel": "^5.8.29",
@@ -34,10 +21,11 @@
     "classnames": "^2.1.2",
     "dom-delegate": "^2.0.3",
     "express": "^4.12.4",
-    "html5shiv": "aFarkas/html5shiv.git#3.7.2",
+    "html5shiv": "^3.7.3",
     "layzr.js": "^1.1.4",
     "lodash": "^3.9.3",
-    "react": "^0.13.3",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
     "requestanimationframe": "0.0.22",
     "respond.js": "^1.4.2",
     "susy": "^2.2.2"

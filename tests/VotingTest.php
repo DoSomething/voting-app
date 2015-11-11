@@ -23,9 +23,9 @@ class VotingTest extends TestCase
     public function testSubmitVote()
     {
         $this->visit(route('candidates.show', [$this->candidate->slug]))
-            ->fill('Puppet', '#first_name')
-            ->fill('1/1/1990', '#birthdate')
-            ->fill('test-example-user@example.com', '#email')
+            ->type('Puppet', 'first_name')
+            ->type('1/1/1990', 'birthdate')
+            ->type('test-example-user@example.com', 'email')
             ->press('Count My Vote');
 
         $this->see('Thanks, we got that vote!');
@@ -41,9 +41,9 @@ class VotingTest extends TestCase
         $this->visit('logout');
 
         $this->visit(route('candidates.show', [$this->candidate->slug]))
-            ->fill('Puppet', '#first_name')
-            ->fill('1/1/1990', '#birthdate')
-            ->fill('test-example-user@example.com', '#email')
+            ->type('Puppet', 'first_name')
+            ->type('1/1/1990', 'birthdate')
+            ->type('test-example-user@example.com', 'email')
             ->press('Count My Vote');
 
         $this->see('You already voted today!');
@@ -56,29 +56,45 @@ class VotingTest extends TestCase
     {
         $url = route('candidates.show', [$this->candidate->slug]);
 
-        $this->visitFromCountry($url, 'US')
-            ->fill('Puppet', '#first_name')
-            ->fill('1/1/1992', '#birthdate')
-            ->fill('(123) 456-5555', '#phone')
+        $this->inCountry('US')
+            ->visit($url)
+            ->type('Puppet', 'first_name')
+            ->type('1/1/1992', 'birthdate')
+            ->type('(123) 456-5555', 'phone')
             ->press('Count My Vote');
 
         $this->see('Thanks, we got that vote!');
     }
 
     /**
-     * Verify that required fields are validating.
+     * Verify that required fields are displayed & validated
+     * for international users.
      */
-    public function testValidation()
+    public function testInternationalForm()
     {
         $url = route('candidates.show', [$this->candidate->slug]);
-        $this->visitFromCountry($url, 'ES')
+
+        $this->inCountry('ES')
+            ->visit($url)
             ->press('Count My Vote');
+
 
         $this->see('The first name field is required.');
         $this->see('The birthdate field is required.');
         $this->see('The email field is required.');
+    }
 
-        $this->visitFromCountry($url, 'US')
+
+    /**
+     * Verify that required fields are displayed & validated
+     * for domestic users.
+     */
+    public function testDomesticForm()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('US')
+            ->visit($url)
             ->press('Count My Vote');
 
         $this->see('The first name field is required.');
