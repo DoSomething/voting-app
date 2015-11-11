@@ -43,6 +43,7 @@ build:
               cp .env.example .env
               mysql -u homestead -psecret -e "CREATE DATABASE voting_testing;"
               vendor/bin/phpunit
+              rm -rf public/images
       - script:
           name: build assets
           code: |-
