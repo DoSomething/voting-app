@@ -43,8 +43,6 @@ class MessageBroker
         // Set common configuration values:
         $payload['application_id'] = env('MESSAGE_BROKER_APPLICATION_ID');
         $payload['mc_opt_in_path_id'] = env('MC_OPT_IN_PATH');
-        $payload['mailchimp_grouping_id'] = env('MAILCHIMP_GROUP_ID');
-        $payload['mailchimp_group_name'] = env('MAILCHIMP_GROUP_NAME');
         $payload['mailchimp_list_id'] = env('MAILCHIMP_LIST_ID');
 
         // Add activity type and timestamp
