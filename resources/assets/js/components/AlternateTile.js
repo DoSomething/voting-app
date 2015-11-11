@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react/addons';
-import shallowCompare from '../vendor/shallowCompare';
+import React, { Component, PropTypes } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 
 class AlternateTile extends Component {
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import Gallery from './Gallery';
 import CandidateDetailView from './CandidateDetailView';
 import Tile from './Tile';

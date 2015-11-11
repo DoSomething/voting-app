@@ -14,7 +14,7 @@
     }
 
     if ('querySelector' in document && 'addEventListener' in window) {
-        loadScript('{{ asset('js/bundle.js') }}');
+        loadScript('{{ asset('js/app.js') }}');
     }
 </script>
 

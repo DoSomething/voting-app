@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import shallowCompare from '../vendor/shallowCompare';
+import shallowCompare from 'react-addons-shallow-compare';
 
 class Tile extends Component {
 

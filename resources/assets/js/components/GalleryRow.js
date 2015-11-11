@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from 'react/addons';
-const { cloneWithProps } = React.addons;
+import React, { Component, PropTypes } from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import { getOffset, scrollToY } from '../utilities/dom';
-import shallowCompare from '../vendor/shallowCompare';
 
 import Drawer from './Drawer';
 // import CandidateDetailView from './CandidateDetailView';
@@ -84,7 +83,7 @@ class GalleryRow extends Component {
 
       return (
         <li key={child.key} className="gallery__item">
-          {cloneWithProps(child, {selected: selected, onClick: this.props.onSelect})}
+          {React.cloneElement(child, {selected: selected, onClick: this.props.onSelect})}
         </li>
       );
     });

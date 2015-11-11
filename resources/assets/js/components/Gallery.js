@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import chunk from 'lodash/array/chunk';
 
 import GalleryRow from './GalleryRow';
@@ -54,7 +54,7 @@ class Gallery extends Component {
    */
   render() {
     // Show "empty state" if no items
-    if (this.props.children.length === 0) {
+    if (!this.props.children) {
       return (
         <div className="gallery">
           <div className="empty">No matches!</div>

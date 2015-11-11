@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import Gallery from './Gallery';
 import WinnerDetailView from './WinnerDetailView';
 import WinnerTile from './WinnerTile';
