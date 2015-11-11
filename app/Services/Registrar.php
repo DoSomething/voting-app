@@ -40,18 +40,11 @@ class Registrar implements RegistrarContract
         $rules = [
             'first_name' => ['required'],
             'birthdate' => ['required', 'date', 'before:today'],
+            'email' => ['required', 'email'],
         ];
 
-        if (is_international_session()) {
-            $rules['email'] = ['required', 'email'];
-        }
-
-        if (should_collect_international_phone()) {
+        if (should_collect_phone()) {
             $rules['phone'] = ['phone'];
-        }
-
-        if (is_domestic_session()) {
-            $rules['phone'] = ['required', 'phone'];
         }
 
         return $rules;

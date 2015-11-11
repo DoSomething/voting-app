@@ -34,7 +34,7 @@
     <input type="hidden" name="candidate_id" value="{{ $candidate->id or 'CANDIDATE_ID' }}"/>
     {!! Form::submit('Count My Vote', ['class' => 'button -primary']) !!}
 
-    @if(is_domestic_session() || should_collect_international_phone())
+    @if(should_collect_phone())
         <p class="legal">
             By voting you agree to receive future updates from DoSomething.org. Message &amp; data
             rates may apply. Text STOP to opt-out, HELP for help.
