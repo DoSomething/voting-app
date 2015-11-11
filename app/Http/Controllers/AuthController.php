@@ -69,10 +69,12 @@ class AuthController extends Controller
      * Log the current user out of the site.
      * GET /logout.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getLogout()
     {
         $this->auth->logout();
+
+        return redirect()->home()->with('message', 'You\'re now signed out.');
     }
 }

@@ -96,4 +96,18 @@ class AdminTest extends TestCase
             'title' => 'Test Edit Page',
         ]);
     }
+
+
+    /**
+     * Verify that users can end their session.
+     * @test
+     */
+    public function testLogout()
+    {
+        $this->be($this->adminUser);
+
+        $this->visit('/logout');
+
+        $this->see('You\'re now signed out.');
+    }
 }
