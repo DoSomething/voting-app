@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'phone' => 'Mobile Number (optional)',
+    'phone' => 'Mobile Number',
     'phone_placeholder' => '55 55555-5555',
 
 ];

@@ -6,12 +6,10 @@
 {!! Form::label('birthdate', 'Birthdate') !!}
 {!! Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) !!}
 
-@if(is_international_session())
-    {!! Form::label('email', 'Email') !!}
-    {!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}
-@endif
+{!! Form::label('email', 'Email') !!}
+{!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}
 
-@if(is_domestic_session() || should_collect_international_phone())
-    {!! Form::label('phone', trans('forms.phone')) !!}
+@if(should_collect_phone())
+    {!! Form::label('phone', trans('forms.phone') . ' (optional)') !!}
     {!! Form::text('phone', null, ['placeholder' => trans('forms.phone_placeholder')]) !!}
 @endif

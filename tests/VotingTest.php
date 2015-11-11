@@ -50,9 +50,34 @@ class VotingTest extends TestCase
     }
 
     /**
-     * Test voting as a US user, where phone number is required.
+     * Test voting as a US user, where phone number is optional.
+     * Should cast vote without a phone number.
+     * @test
      */
-    public function testDomesticVote()
+    public function testUSVoteWithoutPhone()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('US')
+            ->visit($url);
+
+        // The cell phone field should be displayed
+        $this->see('Cell Number');
+
+        $this->type('Puppet', 'first_name')
+            ->type('1/1/1992', 'birthdate')
+            ->type('puppet.sloth@example.com', 'email')
+            ->press('Count My Vote');
+
+        $this->see('Thanks, we got that vote!');
+    }
+
+    /**
+     * Test voting as a US user, where phone number is optional.
+     * Should accept the users phone number and cast vote.
+     * @test
+     */
+    public function testUSVoteWithPhone()
     {
         $url = route('candidates.show', [$this->candidate->slug]);
 
@@ -60,6 +85,7 @@ class VotingTest extends TestCase
             ->visit($url)
             ->type('Puppet', 'first_name')
             ->type('1/1/1992', 'birthdate')
+            ->type('puppet.sloth@example.com', 'email')
             ->type('(123) 456-5555', 'phone')
             ->press('Count My Vote');
 
@@ -69,36 +95,23 @@ class VotingTest extends TestCase
     /**
      * Verify that required fields are displayed & validated
      * for international users.
+     * @test
      */
-    public function testInternationalForm()
+    public function testInternationalValidation()
     {
         $url = route('candidates.show', [$this->candidate->slug]);
 
         $this->inCountry('ES')
-            ->visit($url)
-            ->press('Count My Vote');
+            ->visit($url);
 
+        // The "phone" field should not be present.
+        $this->dontSee('Cell Number');
+        $this->dontSee('Mobile Number');
+
+        $this->press('Count My Vote');
 
         $this->see('The first name field is required.');
         $this->see('The birthdate field is required.');
         $this->see('The email field is required.');
-    }
-
-
-    /**
-     * Verify that required fields are displayed & validated
-     * for domestic users.
-     */
-    public function testDomesticForm()
-    {
-        $url = route('candidates.show', [$this->candidate->slug]);
-
-        $this->inCountry('US')
-            ->visit($url)
-            ->press('Count My Vote');
-
-        $this->see('The first name field is required.');
-        $this->see('The birthdate field is required.');
-        $this->see('The phone field is required.');
     }
 }

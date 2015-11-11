@@ -32,13 +32,13 @@ function is_international_session()
 
 /**
  * Return if the user's phone should be collected for
- * the current international session's country.
+ * the current session's country.
  *
  * @return bool
  */
-function should_collect_international_phone()
+function should_collect_phone()
 {
-    return in_array(get_country_code(), ['GB', 'BR']);
+    return in_array(get_country_code(), ['MX', 'BR', 'US']);
 }
 
 /**
