@@ -25,6 +25,8 @@
     "layzr.js": "^1.1.4",
     "lodash": "^3.9.3",
     "react": "^0.14.2",
+    "react-addons-shallow-compare": "^0.14.2",
+    "react-addons-transition-group": "^0.14.2",
     "react-dom": "^0.14.2",
     "requestanimationframe": "0.0.22",
     "respond.js": "^1.4.2",

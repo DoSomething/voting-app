@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import AlternateTile from './AlternateTile';
 import ordinalize from '../utilities/ordinalize';
 

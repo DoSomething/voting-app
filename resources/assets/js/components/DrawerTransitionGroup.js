@@ -1,6 +1,6 @@
-import React, { Component } from 'react/addons';
+import React, { Component } from 'react';
+import TransitionGroup from 'react-addons-transition-group';
 import DrawerTransitionGroupChild from './DrawerTransitionGroupChild';
-const { TransitionGroup } = React.addons;
 
 class DrawerTransitionGroup extends Component {
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import DrawerTransitionGroup from './DrawerTransitionGroup';
 
 class Drawer extends Component {

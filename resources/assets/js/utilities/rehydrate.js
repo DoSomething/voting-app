@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 /**
  * Re-hydrate any rendered React components
@@ -15,7 +16,7 @@ function rehydrate(components) {
 
     const component = el.getAttribute('data-rendered-component');
     if (components[component]) {
-      React.render(React.createElement(components[component], props), el);
+      ReactDOM.render(React.createElement(components[component], props), el);
     }
   });
 }

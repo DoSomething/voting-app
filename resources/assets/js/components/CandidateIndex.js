@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react/addons';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import debounce from 'lodash/function/debounce';
 import includes from 'lodash/collection/includes';

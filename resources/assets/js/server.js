@@ -1,6 +1,7 @@
 /* eslint no-console:0 */
 
 import React from 'react';
+import ReactDOM from 'react-dom/server';
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -31,7 +32,7 @@ app.use('/:component', function(request, response) {
   const props = request.body || null;
 
   response.status(200).send(
-    React.renderToString(
+    ReactDOM.renderToString(
       React.createElement(component, props)
     )
   );

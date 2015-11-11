@@ -1,15 +1,16 @@
-import React, { Component } from 'react/addons';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { slideUp, slideDown } from '../utilities/dom';
 
 class DrawerTransitionGroupChild extends Component {
 
   componentWillEnter(done) {
-    const node = React.findDOMNode(this);
+    const node = ReactDOM.findDOMNode(this);
     slideDown(node, done);
   }
 
   componentWillLeave(done) {
-    const node = React.findDOMNode(this);
+    const node = ReactDOM.findDOMNode(this);
     slideUp(node, done);
   }
 
