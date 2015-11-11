@@ -23,11 +23,10 @@ class MessageBroker
         // Configure the message broker connection
         $credentials = config('services.message_broker.credentials');
         $config = config('services.message_broker.config');
-        $config['routingKey'] = $routingKey;
         $broker = new MessageBrokerConnection($credentials, $config);
 
         $serializedPayload = serialize($payload);
-        $broker->publishMessage($serializedPayload);
+        $broker->publish($serializedPayload, $routingKey);
     }
 
     /**
