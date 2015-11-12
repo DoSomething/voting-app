@@ -31,6 +31,13 @@ return [
     ],
 
     'message_broker' => [
+        'lists' => [
+            'US' => env('MAILCHIMP_LIST_US'),
+            'BR' => env('MAILCHIMP_LIST_BR'),
+            'MX' => env('MAILCHIMP_LIST_MX'),
+            'global' => env('MAILCHIMP_LIST_GLOBAL'),
+        ],
+
         'config' => [
             // Exchange options
             'exchange' => [

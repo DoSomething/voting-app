@@ -47,6 +47,9 @@ class SendFirstVoteMessage
                 $event->candidate->id,
                 'GENDER_'.$event->candidate->gender,
             ];
+
+            // Send Mobile Commons opt-in path for US users, and MGage ID for international users.
+            $payload['opt_in_path_id'] = $event->user->country_code === 'US' ? env('MC_OPT_IN_PATH') : env('MGAGE_ID');
         } else {
             // Or, send fields for email communications.
             $payload['email'] = $event->user->email;
@@ -63,13 +66,14 @@ class SendFirstVoteMessage
                 'CANDIDATE_LINK' => route('candidates.show', $event->candidate->slug),
                 'GENDER' => $event->candidate->gender,
             ];
-        }
 
-        // Send Mobile Commons opt-in path for US users, and MGage ID for international users.
-        if($event->user->country_code === 'US') {
-            $payload['opt_in_path_id'] = env('MC_OPT_IN_PATH');
-        } else {
-            $payload['opt_in_path_id'] = env('MGAGE_ID');
+            // Provide correct MailChimp list ID by country code
+            $mailchimpLists = config('services.message_broker.lists');
+            if(array_key_exists($event->user->country_code, $mailchimpLists)) {
+                $payload['mailchimp_list_id'] = $mailchimpLists[$event->user->country_code];
+            } else {
+                $payload['mailchimp_list_id'] = $mailchimpLists['global'];
+            }
         }
 
         $routingKey = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
