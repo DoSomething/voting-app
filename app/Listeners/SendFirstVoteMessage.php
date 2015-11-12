@@ -69,7 +69,7 @@ class SendFirstVoteMessage
 
             // Provide correct MailChimp list ID by country code
             $mailchimpLists = config('services.message_broker.lists');
-            if(array_key_exists($event->user->country_code, $mailchimpLists)) {
+            if (array_key_exists($event->user->country_code, $mailchimpLists)) {
                 $payload['mailchimp_list_id'] = $mailchimpLists[$event->user->country_code];
             } else {
                 $payload['mailchimp_list_id'] = $mailchimpLists['global'];

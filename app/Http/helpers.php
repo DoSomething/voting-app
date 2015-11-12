@@ -61,7 +61,7 @@ function should_collect_phone()
  */
 function normalize_country_code($countryCode)
 {
-    if(in_array($countryCode, dosomething_global_countries())) {
+    if (in_array($countryCode, dosomething_global_countries())) {
         return $countryCode;
     }
 
