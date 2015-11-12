@@ -31,6 +31,17 @@ function is_international_session()
 }
 
 /**
+ * Return a list of countries that we have a localized
+ * presence in. See also `normalize_country_code`.
+ *
+ * @return array
+ */
+function dosomething_global_countries()
+{
+    return ['MX', 'BR', 'US'];
+}
+
+/**
  * Return if the user's phone should be collected for
  * the current session's country.
  *
@@ -38,7 +49,23 @@ function is_international_session()
  */
 function should_collect_phone()
 {
-    return in_array(get_country_code(), ['MX', 'BR', 'US']);
+    return in_array(get_country_code(), dosomething_global_countries());
+}
+
+/**
+ * Return the given country code if it is a country where we have
+ * a localized presence. Otherwise, return the catchall "global".
+ *
+ * @param $countryCode
+ * @return string 'US', 'BR', ..., 'global'
+ */
+function normalize_country_code($countryCode)
+{
+    if(in_array($countryCode, dosomething_global_countries())) {
+        return $countryCode;
+    }
+
+    return 'global';
 }
 
 /**
