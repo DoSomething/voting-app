@@ -63,7 +63,7 @@ class SendFirstVoteMessage
         if ($event->user->email) {
             $payload['email'] = $event->user->email;
             $payload['subscribed'] = 1;
-            $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote').'-'.normalize_country_code($event->user->country_code);
+            $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote').'-'.$event->user->country_code;
             $payload['email_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
