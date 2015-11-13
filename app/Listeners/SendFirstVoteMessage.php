@@ -34,13 +34,20 @@ class SendFirstVoteMessage
             'candidate_id' => $event->candidate->id,
             'candidate_name' => $event->candidate->name,
 
+            'merge_vars' => [
+                'FNAME' => $event->user->first_name,
+                'CANDIDATE_NAME' => $event->candidate->name,
+                'CANDIDATE_LINK' => route('candidates.show', $event->candidate->slug),
+                'GENDER' => $event->candidate->gender,
+            ],
+
             // This is always `en` because we don't translate Voting App & the
             // experience should be consistent between app and messaging.
             'user_language' => 'en',
         ];
 
+        // Send fields for SMS communication if provided.
         if ($event->user->phone) {
-            // Send fields for SMS communication if provided.
             $payload['mobile'] = $event->user->phone;
             $payload['mobile_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
@@ -50,8 +57,10 @@ class SendFirstVoteMessage
 
             // Send Mobile Commons opt-in path for US users, and MGage ID for international users.
             $payload['opt_in_path_id'] = $event->user->country_code === 'US' ? env('MC_OPT_IN_PATH') : env('MGAGE_ID');
-        } else {
-            // Or, send fields for email communications.
+        }
+
+        // Send fields for email communications if provided:
+        if ($event->user->email) {
             $payload['email'] = $event->user->email;
             $payload['subscribed'] = 1;
             $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote').'-'.normalize_country_code($event->user->country_code);
@@ -59,12 +68,6 @@ class SendFirstVoteMessage
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
                 'GENDER_'.$event->candidate->gender,
-            ];
-            $payload['merge_vars'] = [
-                'FNAME' => $event->user->first_name,
-                'CANDIDATE_NAME' => $event->candidate->name,
-                'CANDIDATE_LINK' => route('candidates.show', $event->candidate->slug),
-                'GENDER' => $event->candidate->gender,
             ];
 
             // Provide correct MailChimp list ID by country code
