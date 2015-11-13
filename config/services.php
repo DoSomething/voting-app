@@ -31,11 +31,20 @@ return [
     ],
 
     'message_broker' => [
+        // MailChimp List IDs
         'lists' => [
             'US' => env('MAILCHIMP_LIST_US'),
             'BR' => env('MAILCHIMP_LIST_BR'),
             'MX' => env('MAILCHIMP_LIST_MX'),
             'global' => env('MAILCHIMP_LIST_GLOBAL'),
+        ],
+
+        // Mobile Commons/MGage Opt-In Paths
+        'opt_in_paths' => [
+            'US' => env('MOBILE_OPT_IN_PATH_US'),
+            'BR' => env('MOBILE_OPT_IN_PATH_BR'),
+            'MX' => env('MOBILE_OPT_IN_PATH_MX'),
+            'global' => env('MOBILE_OPT_IN_PATH_GLOBAL'),
         ],
 
         'config' => [
