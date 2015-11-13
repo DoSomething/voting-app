@@ -56,7 +56,7 @@ class SendFirstVoteMessage
             ];
 
             // Send Mobile Commons opt-in path for US users, and MGage ID for international users.
-            $payload['opt_in_path_id'] = $event->user->country_code === 'US' ? env('MC_OPT_IN_PATH') : env('MGAGE_ID');
+            $payload['mobile_opt_in_path_id'] = $event->user->country_code === 'US' ? env('MC_OPT_IN_PATH') : env('MGAGE_ID');
         }
 
         // Send fields for email communications if provided:
