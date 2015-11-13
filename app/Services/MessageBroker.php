@@ -23,11 +23,10 @@ class MessageBroker
         // Configure the message broker connection
         $credentials = config('services.message_broker.credentials');
         $config = config('services.message_broker.config');
-        $config['routingKey'] = $routingKey;
         $broker = new MessageBrokerConnection($credentials, $config);
 
         $serializedPayload = serialize($payload);
-        $broker->publishMessage($serializedPayload);
+        $broker->publish($serializedPayload, $routingKey);
     }
 
     /**
@@ -42,10 +41,6 @@ class MessageBroker
     {
         // Set common configuration values:
         $payload['application_id'] = env('MESSAGE_BROKER_APPLICATION_ID');
-        $payload['mc_opt_in_path_id'] = env('MC_OPT_IN_PATH');
-        $payload['mailchimp_grouping_id'] = env('MAILCHIMP_GROUP_ID');
-        $payload['mailchimp_group_name'] = env('MAILCHIMP_GROUP_NAME');
-        $payload['mailchimp_list_id'] = env('MAILCHIMP_LIST_ID');
 
         // Add activity type and timestamp
         $payload['activity'] = $activity;
