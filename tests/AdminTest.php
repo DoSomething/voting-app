@@ -97,7 +97,6 @@ class AdminTest extends TestCase
         ]);
     }
 
-
     /**
      * Verify that users can end their session.
      * @test

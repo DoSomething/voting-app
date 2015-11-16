@@ -1,6 +1,5 @@
 <?php
 
-use Symfony\Component\DomCrawler\Crawler;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
