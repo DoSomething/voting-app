@@ -2,7 +2,7 @@
 
 @section('content')
     @if(setting('show_winners'))
-        @react('WinnerIndex', ['winners' => $winners, 'name' => 'Winners'])
+        @react('WinnerIndex', compact('winnerCategories'))
     @endif
 
     @if(!setting('show_winners') && $categories)

@@ -4,7 +4,7 @@ namespace VotingApp\Http\Controllers;
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
-use VotingApp\Models\Winner;
+use VotingApp\Models\WinnerCategory;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -45,7 +45,7 @@ class CandidatesController extends Controller
         $query = $request->get('query', '');
         $limit = (int) $request->get('limit', 16);
         $categories = Category::orderBy('name', 'asc')->with('candidates')->get();
-        $winners = Winner::orderBy('rank', 'asc')->with('candidate')->get();
+        $winnerCategories = WinnerCategory::orderBy('name', 'desc')->with('winners', 'winners.candidate')->get();
         $title = setting('site_title');
 
         // Hide candidates if `show_candidates` setting is disabled, unless logged
@@ -54,7 +54,7 @@ class CandidatesController extends Controller
             $categories = [];
         }
 
-        return view('candidates.index', compact('categories', 'winners', 'query', 'limit', 'title'));
+        return view('candidates.index', compact('categories', 'winnerCategories', 'query', 'limit', 'title'));
     }
 
     /**
