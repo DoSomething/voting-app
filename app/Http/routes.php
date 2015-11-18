@@ -36,3 +36,4 @@ resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update'
 resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
 resource('votes', 'VotesController', ['only' => ['store']]);
 resource('winners', 'WinnersController');
+resource('winner-categories', 'WinnerCategoriesController');

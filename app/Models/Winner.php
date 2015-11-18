@@ -13,7 +13,7 @@ class Winner extends Model
      * @var array
      */
     protected $fillable = [
-        'candidate_id', 'rank', 'description',
+        'candidate_id', 'rank', 'description', 'winner_category_id'
     ];
 
     // No timestamps on the winners table.
@@ -25,6 +25,14 @@ class Winner extends Model
     public function candidate()
     {
         return $this->belongsTo('VotingApp\Models\Candidate');
+    }
+
+    /**
+     * Inverse has-many relationship to Winner Categories.
+     */
+    public function winnerCategory()
+    {
+        return $this->belongsTo('VotingApp\Models\WinnerCategory');
     }
 
     /**
