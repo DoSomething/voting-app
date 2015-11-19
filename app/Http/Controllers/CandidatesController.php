@@ -4,6 +4,7 @@ namespace VotingApp\Http\Controllers;
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
+use VotingApp\Models\Winner;
 use VotingApp\Models\WinnerCategory;
 use Illuminate\Http\Request;
 use Auth;
