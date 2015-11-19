@@ -4,19 +4,22 @@ import WinnerDetailView from './WinnerDetailView';
 import WinnerTile from './WinnerTile';
 
 class WinnerIndex extends Component {
-
   constructor(props) {
     super(props);
 
     // Assign incremental key to candidates
-    let i = 1;
-    const winners = props.winners.map(function(candidate) {
-      candidate.key = i++;
-      return candidate;
+    let count = 1;
+    const winnerCategories = props.winnerCategories.map(function(category) {
+      category.winners.map(function(winner) {
+        winner.key = count++;
+        return winner;
+      });
+
+      return category;
     });
 
     this.state = {
-      winners: winners,
+      winnerCategories: winnerCategories,
       selectedItem: null,
     };
 
@@ -42,23 +45,26 @@ class WinnerIndex extends Component {
    * @returns {XML}
    */
   render() {
-    return (
-      <Gallery name={this.props.name} onSelect={this.onSelect} selectedItem={this.state.selectedItem} detailView={WinnerDetailView}>
-        {this.state.winners.map((winner) => <WinnerTile key={winner.key} id={winner.key} item={winner} />)}
+    const galleries = this.state.winnerCategories.map((category) => (
+      <Gallery key={category.id} name={category.name} onSelect={this.onSelect} selectedItem={this.state.selectedItem} detailView={WinnerDetailView}>
+        {category.winners.map((winner) => <WinnerTile key={winner.key} id={winner.key} item={winner} />)}
       </Gallery>
+    ));
+
+    return (
+      <div>
+        {galleries}
+      </div>
     );
   }
-
 }
 
 WinnerIndex.propTypes = {
-  name: PropTypes.string,
-  winners: PropTypes.array,
+  winnerCategories: PropTypes.array,
 };
 
 WinnerIndex.defaultProps = {
-  name: 'Winners',
-  winners: [],
+  winnerCategories: [],
 };
 
 

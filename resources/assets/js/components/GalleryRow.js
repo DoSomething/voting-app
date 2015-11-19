@@ -103,7 +103,7 @@ class GalleryRow extends Component {
 
 GalleryRow.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
-  detailView: PropTypes.instanceOf(Component),
+  detailView: PropTypes.func,
   selectedItem: PropTypes.object,
   onSelect: PropTypes.func,
 };

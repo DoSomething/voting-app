@@ -1,13 +1,18 @@
 @extends('app')
 
+@section('title', $name)
+
 @section('content')
-    @if(setting('show_winners'))
-        @react('WinnerIndex', compact('winnerCategories'))
-    @endif
+    @if(setting('show_candidates'))
+        @if($winners)
+            <h1 class="highlighted gallery-heading">All Nominees</h1>
+        @endif
 
-    @if(!setting('show_winners') && $categories)
+        @react('CategoryIndex', compact('name', 'candidates'))
 
-        @react('CandidateIndex', compact('categories', 'query', 'limit'))
+        <div class="wrapper -narrow">
+            <p class="messages -inline">Want to see more candidates? <a href="{{ route('home') }}">View all</a></p>
+        </div>
 
         <div class="wrapper -narrow">
             <h4>Was there a {{ setting('candidate_type') }} we missed?</h4>

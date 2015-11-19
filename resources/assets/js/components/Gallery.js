@@ -85,7 +85,7 @@ class Gallery extends Component {
 Gallery.propTypes = {
   name: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
-  detailView: PropTypes.instanceOf(Component),
+  detailView: PropTypes.func,
   selectedItem: PropTypes.object,
   onSelect: PropTypes.func,
 };

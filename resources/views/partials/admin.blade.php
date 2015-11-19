@@ -4,6 +4,7 @@
             <li><a href="{{ route('candidates.index') }}">Candidates</a></li>
             <li><a href="{{ route('categories.index') }}">Categories</a></li>
             <li><a href="{{ route('winners.index') }}">Winners</a></li>
+            <li><a href="{{ route('winner-categories.index') }}">Winner Categories</a></li>
             <li><a href="{{ route('pages.index') }}">Pages</a></li>
             <li><a href="{{ route('users.index') }}">Users</a></li>
             <li><a href="{{ route('backgrounds.index') }}">Backgrounds</a></li>

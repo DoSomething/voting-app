@@ -11,6 +11,7 @@ use VotingApp\Models\User;
 use VotingApp\Models\Page;
 use VotingApp\Models\Setting;
 use VotingApp\Models\Winner;
+use VotingApp\Models\WinnerCategory;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -53,6 +54,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->bind('winners', function ($id) {
             return Winner::where('id', $id)->first();
+        });
+
+        $router->bind('winnerCategories', function ($slug) {
+            return WinnerCategory::where('slug', $slug)->first();
         });
 
         $router->bind('backgrounds', function ($id) {

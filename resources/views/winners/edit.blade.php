@@ -8,6 +8,9 @@
         {!! Form::label('description', 'Winner description') !!}
         {!! Form::textarea('description') !!}
 
+        {!! Form::label('winner_category_id', 'Winner Category') !!}
+        {!! Form::select('winner_category_id', $winnerCategories) !!}
+
         {!! Form::label('rank', 'Rank') !!}
         {!! Form::selectRange('rank', 1, 20) !!}
 

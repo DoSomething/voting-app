@@ -4,6 +4,7 @@ namespace VotingApp\Http\Controllers;
 
 use VotingApp\Models\Winner;
 use Illuminate\Http\Request;
+use VotingApp\Models\WinnerCategory;
 
 class WinnersController extends Controller
 {
@@ -45,7 +46,9 @@ class WinnersController extends Controller
      */
     public function edit(Winner $winner)
     {
-        return view('winners.edit', compact('winner'));
+        $winnerCategories = WinnerCategory::lists('name', 'id')->all();
+
+        return view('winners.edit', compact('winner', 'winnerCategories'));
     }
 
     /**
