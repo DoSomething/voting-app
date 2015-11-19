@@ -47,6 +47,7 @@ class WinnersController extends Controller
     public function edit(Winner $winner)
     {
         $winnerCategories = WinnerCategory::lists('name', 'id')->all();
+
         return view('winners.edit', compact('winner', 'winnerCategories'));
     }
 

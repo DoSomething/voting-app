@@ -31,7 +31,7 @@ class WinnerCategory extends Model implements SluggableInterface
 
     /**
      * A winner category has many winners. (Well, sort of. There's still
-     * one *real winner* but there's like a lot of runner-ups.)
+     * one *real winner* but there's like a lot of runner-ups).
      *
      * @return mixed
      */
