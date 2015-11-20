@@ -21,6 +21,7 @@
     "classnames": "^2.1.2",
     "dom-delegate": "^2.0.3",
     "express": "^4.12.4",
+    "escope": "3.2.0",
     "html5shiv": "^3.7.3",
     "layzr.js": "^1.1.4",
     "lodash": "^3.9.3",
