@@ -1,10 +1,12 @@
 <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
 <style>
-    html { background-image: url('{{ background('regular', 'none') }}'); }
+    @if(background('regular'))
+    html { background-image: url('{{ background('regular') }}'); }
     @media (min-width: 1200px) {
-        html { background-image: url('{{ background('retina', 'none') }}'); }
+        html { background-image: url('{{ background('retina') }}'); }
     }
+    @endif
 
     @if(setting('ui_tint'))
     h1.highlighted, h2.highlighted, h3.highlighted { background-color: {{ setting('ui_tint') }} !important; }
