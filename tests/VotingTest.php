@@ -24,7 +24,7 @@ class VotingTest extends TestCase
     {
         $this->visit(route('candidates.show', [$this->candidate->slug]))
             ->type('Puppet', 'first_name')
-            ->type('1/1/1990', 'birthdate')
+            ->type('1/2/1990', 'birthdate')
             ->type('test-example-user@example.com', 'email')
             ->press('Count My Vote');
 
@@ -32,6 +32,13 @@ class VotingTest extends TestCase
 
         // Check the user & vote were created in the database
         $user = User::where('email', 'test-example-user@example.com')->first();
+
+        $this->seeInDatabase('users', [
+            'id' => $user->id,
+            'first_name' => 'Puppet',
+            'birthdate' => '1990-01-02',
+        ]);
+
         $this->seeInDatabase('votes', [
             'user_id' => $user->id,
             'candidate_id' => $this->candidate->id,
@@ -42,7 +49,7 @@ class VotingTest extends TestCase
 
         $this->visit(route('candidates.show', [$this->candidate->slug]))
             ->type('Puppet', 'first_name')
-            ->type('1/1/1990', 'birthdate')
+            ->type('1/2/1990', 'birthdate')
             ->type('test-example-user@example.com', 'email')
             ->press('Count My Vote');
 
@@ -65,9 +72,22 @@ class VotingTest extends TestCase
         $this->see('Cell Number');
 
         $this->type('Puppet', 'first_name')
-            ->type('1/1/1992', 'birthdate')
+            ->type('1/2/1992', 'birthdate')
             ->type('puppet.sloth@example.com', 'email')
             ->press('Count My Vote');
+
+        // Check the user & vote were created in the database
+        $user = User::where('email', 'puppet.sloth@example.com')->first();
+        $this->seeInDatabase('users', [
+            'id' => $user->id,
+            'first_name' => 'Puppet',
+            'birthdate' => '1992-01-02',
+        ]);
+
+        $this->seeInDatabase('votes', [
+            'user_id' => $user->id,
+            'candidate_id' => $this->candidate->id,
+        ]);
 
         $this->see('Thanks, we got that vote!');
     }
@@ -84,10 +104,19 @@ class VotingTest extends TestCase
         $this->inCountry('US')
             ->visit($url)
             ->type('Puppet', 'first_name')
-            ->type('1/1/1992', 'birthdate')
+            ->type('1/2/1992', 'birthdate')
             ->type('puppet.sloth@example.com', 'email')
             ->type('(123) 456-5555', 'phone')
             ->press('Count My Vote');
+
+        // Check the user was created in the database
+        $user = User::where('email', 'puppet.sloth@example.com')->first();
+        $this->seeInDatabase('users', [
+            'id' => $user->id,
+            'first_name' => 'Puppet',
+            'phone' => '1234565555',
+            'birthdate' => '1992-01-02',
+        ]);
 
         $this->see('Thanks, we got that vote!');
     }
@@ -113,5 +142,54 @@ class VotingTest extends TestCase
         $this->see('The first name field is required.');
         $this->see('The birthdate field is required.');
         $this->see('The email field is required.');
+    }
+
+    /**
+     * Verify that required fields are displayed & validated for
+     * international users in countries where we collect phones.
+     * @test
+     */
+    public function testInternationalValidationWithPhone()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('BR')
+            ->visit($url);
+
+        // The "phone" field should be present.
+        $this->see('Mobile Number');
+        $this->dontSee('Cell Number');
+
+        $this->type('not a phone number', 'phone')
+            ->press('Count My Vote');
+
+        $this->see('That doesn\'t look like a real phone number!');
+    }
+
+    /**
+     * Test voting as an international user, where phone number is not
+     * accepted. Should accept the users details and cast vote.
+     * @test
+     */
+    public function testInternationalVoteWithEmail()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('ES')
+            ->visit($url)
+            ->type('Puppet', 'first_name')
+            ->type('02-01-1990', 'birthdate')
+            ->type('marioneta.pereza@example.com', 'email')
+            ->press('Count My Vote');
+
+        // Check the user was created in the database
+        $user = User::where('email', 'marioneta.pereza@example.com')->first();
+        $this->seeInDatabase('users', [
+            'id' => $user->id,
+            'first_name' => 'Puppet',
+            'birthdate' => '1990-01-02',
+        ]);
+
+        $this->see('Thanks, we got that vote!');
     }
 }
