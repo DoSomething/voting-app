@@ -34,6 +34,7 @@ return [
         // MailChimp List IDs
         'lists' => [
             'US' => env('MAILCHIMP_LIST_US'),
+            'GB' => env('MAILCHIMP_LIST_GB'),
             'BR' => env('MAILCHIMP_LIST_BR'),
             'MX' => env('MAILCHIMP_LIST_MX'),
             'global' => env('MAILCHIMP_LIST_GLOBAL'),
