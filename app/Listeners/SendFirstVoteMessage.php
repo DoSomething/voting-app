@@ -75,7 +75,7 @@ class SendFirstVoteMessage
             // Provide correct MailChimp list ID by country code
             $mailchimpLists = config('services.message_broker.lists');
             $globalList = config('services.message_broker.opt_in_paths.global');
-            $payload['mobile_opt_in_path_id'] = array_get($mailchimpLists, $event->user->country_code, $globalList);
+            $payload['mailchimp_list_id'] = array_get($mailchimpLists, $event->user->country_code, $globalList);
         }
 
         $routingKey = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
