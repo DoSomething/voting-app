@@ -4,11 +4,11 @@ namespace VotingApp;
 
 use Carbon\Carbon;
 
-class LocalizedDate extends Carbon {
-
+class LocalizedDate extends Carbon
+{
     public function __construct($time = null, $timezone = null)
     {
-        if(get_country_code() !== 'US') {
+        if (get_country_code() !== 'US') {
             $time = str_replace('/', '-', $time);
         }
 
@@ -32,12 +32,13 @@ class LocalizedDate extends Carbon {
      * @param $value
      * @return bool
      */
-    public static function validate($value) {
+    public static function validate($value)
+    {
         if ($value instanceof DateTime) {
             return true;
         }
 
-        if(get_country_code() !== 'US') {
+        if (get_country_code() !== 'US') {
             $value = str_replace('/', '-', $value);
         }
 
@@ -49,5 +50,4 @@ class LocalizedDate extends Carbon {
 
         return checkdate($date['month'], $date['day'], $date['year']);
     }
-
 }
