@@ -3,6 +3,7 @@
 namespace VotingApp\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use VotingApp\LocalizedDate;
 
 class ValidationServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,10 @@ class ValidationServiceProvider extends ServiceProvider
 
             return preg_match($phoneRegex, $value);
         }, 'The :attribute must be a valid phone number.');
+
+        $this->validator->extend('localized_date', function ($attribute, $value, $parameters) {
+            return LocalizedDate::validate($value);
+        }, 'Enter your :attribute '.LocalizedDate::getExpectedFormat().'.');
     }
 
     /**

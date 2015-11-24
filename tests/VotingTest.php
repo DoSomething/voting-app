@@ -22,7 +22,8 @@ class VotingTest extends TestCase
      */
     public function testSubmitVote()
     {
-        $this->visit(route('candidates.show', [$this->candidate->slug]))
+        $this->inCountry('US')
+            ->visit(route('candidates.show', [$this->candidate->slug]))
             ->type('Puppet', 'first_name')
             ->type('1/2/1990', 'birthdate')
             ->type('test-example-user@example.com', 'email')
@@ -178,7 +179,7 @@ class VotingTest extends TestCase
         $this->inCountry('ES')
             ->visit($url)
             ->type('Puppet', 'first_name')
-            ->type('02-01-1990', 'birthdate')
+            ->type('25/01/1990', 'birthdate') // DD/MM/YYYY
             ->type('marioneta.pereza@example.com', 'email')
             ->press('Count My Vote');
 
@@ -187,7 +188,7 @@ class VotingTest extends TestCase
         $this->seeInDatabase('users', [
             'id' => $user->id,
             'first_name' => 'Puppet',
-            'birthdate' => '1990-01-02',
+            'birthdate' => '1990-01-25',
         ]);
 
         $this->see('Thanks, we got that vote!');

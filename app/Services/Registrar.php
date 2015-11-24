@@ -39,7 +39,7 @@ class Registrar implements RegistrarContract
     {
         $rules = [
             'first_name' => ['required'],
-            'birthdate' => ['required', 'date', 'before:today'],
+            'birthdate' => ['required', 'localized_date', 'before:today'],
             'email' => ['required', 'email'],
         ];
 

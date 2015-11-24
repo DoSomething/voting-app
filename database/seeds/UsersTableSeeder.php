@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             User::create([
                 'first_name' => $faker->firstName,
                 'email' => $faker->unique()->safeEmail,
-                'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
+                'birthdate' => $faker->date($format = 'd-m-Y', $max = 'now'),
                 'country_code' => $faker->countryCode,
             ]);
         }
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
             User::create([
                 'first_name' => $faker->firstName,
                 'phone' => $faker->unique()->phoneNumber,
-                'birthdate' => $faker->date($format = 'm/d/Y', $max = 'now'),
+                'birthdate' => $faker->date($format = 'd-m-Y', $max = 'now'),
                 'country_code' => 'US',
             ]);
         }
