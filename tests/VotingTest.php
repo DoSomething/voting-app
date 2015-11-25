@@ -123,8 +123,59 @@ class VotingTest extends TestCase
     }
 
     /**
+     * Verify basic form validation.
+     * @test
+     */
+    public function testSharedValidationRules()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('US')
+            ->visit($url)
+            ->press('Count My Vote');
+
+        // Required fields should throw errors if blank.
+        $this->see('The first name field is required.');
+        $this->see('The birthdate field is required.');
+        $this->see('The email field is required.');
+    }
+
+    /**
+     * Verify localized date validation rules for domestic
+     * users (e.g. expected `MM/DD/YYYY`).
+     */
+    public function testUSLocalizedDateValidationRules()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('US')
+            ->visit($url)
+            ->type('30/1/1990', 'birthdate') // Incorrectly DD/MM/YYYY date
+            ->press('Count My Vote');
+
+        $this->see('Enter your birthdate in MM/DD/YYYY.');
+    }
+
+    /**
+     * Verify localized date validation rules for international
+     * users (e.g. expected `DD/MM/YYYY`).
+     */
+    public function testInternationalLocalizedDateValidationRules()
+    {
+        $url = route('candidates.show', [$this->candidate->slug]);
+
+        $this->inCountry('ES')
+            ->visit($url)
+            ->type('1/30/1990', 'birthdate') // Incorrectly MM/DD/YYYY date
+            ->press('Count My Vote');
+
+        $this->see('Enter your birthdate in DD/MM/YYYY.');
+    }
+
+    /**
      * Verify that required fields are displayed & validated
-     * for international users.
+     * for international users in countries where we don't
+     * collect phone numbers.
      * @test
      */
     public function testInternationalValidation()
@@ -140,9 +191,11 @@ class VotingTest extends TestCase
 
         $this->press('Count My Vote');
 
-        $this->see('The first name field is required.');
-        $this->see('The birthdate field is required.');
-        $this->see('The email field is required.');
+        // Date field should require `DD/MM/YYYY` format.
+        $this->type('lol', 'birthdate');
+        $this->press('Count My Vote');
+
+        $this->see('Enter your birthdate in DD/MM/YYYY');
     }
 
     /**
