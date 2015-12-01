@@ -4,7 +4,7 @@
 {!! Form::text('first_name', null, ['placeholder' => 'What\'s your name?']) !!}
 
 {!! Form::label('birthdate', 'Birthdate') !!}
-{!! Form::text('birthdate',  null, ['placeholder' => 'MM/DD/YYYY']) !!}
+{!! Form::text('birthdate',  null, ['placeholder' => \VotingApp\LocalizedDate::getExpectedFormat()]) !!}
 
 {!! Form::label('email', 'Email') !!}
 {!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}

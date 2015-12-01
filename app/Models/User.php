@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use VotingApp\LocalizedDate;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -50,7 +51,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function setBirthdateAttribute($birthdate)
     {
-        $this->attributes['birthdate'] = date('Y-m-d', (strtotime($birthdate)));
+        $formatted = LocalizedDate::parse($birthdate)->format('Y-m-d');
+        $this->attributes['birthdate'] = $formatted;
     }
 
     /**
