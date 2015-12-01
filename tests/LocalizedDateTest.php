@@ -4,7 +4,6 @@ use VotingApp\LocalizedDate;
 
 class LocalizedDateTest extends TestCase
 {
-
     /**
      * Verify that US-style MM/DD/YYYY dates can be parsed.
      * @test
@@ -68,5 +67,4 @@ class LocalizedDateTest extends TestCase
 
         $this->assertTrue(LocalizedDate::validate('January 2nd 1990', 'US'));
     }
-
 }

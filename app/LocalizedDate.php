@@ -21,7 +21,7 @@ class LocalizedDate extends Carbon
     public static function getExpectedFormat($countryCode = null)
     {
         // Get country code from current session if not provided
-        if($countryCode === null) {
+        if ($countryCode === null) {
             $countryCode = get_country_code();
         }
 
@@ -40,7 +40,7 @@ class LocalizedDate extends Carbon
     public static function normalize($time, $countryCode = null)
     {
         // Get country code from current session if not provided
-        if($countryCode === null) {
+        if ($countryCode === null) {
             $countryCode = get_country_code();
         }
 
