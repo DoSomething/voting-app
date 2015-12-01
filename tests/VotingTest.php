@@ -102,7 +102,9 @@ class VotingTest extends TestCase
     {
         $url = route('candidates.show', [$this->candidate->slug]);
 
-        $this->inCountry('US')
+        $this->inCountry('GB')
+            ->visit($url)
+            ->inCountry('US')
             ->visit($url)
             ->type('Puppet', 'first_name')
             ->type('1/2/1992', 'birthdate')

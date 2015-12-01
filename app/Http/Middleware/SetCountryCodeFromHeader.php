@@ -15,15 +15,19 @@ class SetCountryCodeFromHeader
      */
     public function handle($request, Closure $next)
     {
-        // Save country code in session if not set
-        if (! $request->session()->has('country_code')) {
-            $request->session()->put('country_code', $this->getCountryCode($request));
-        };
+        $countryCode = $this->getCountryCode($request);
 
         // Allow overriding country via query string, for debugging
         if ($queryOverride = $request->get('country_code')) {
             $request->session()->put('country_code', $queryOverride);
         }
+
+        if ($request->hasSession() && $request->session()->has('country_code')) {
+            $countryCode = $request->session()->get('country_code');
+        }
+
+        // Set country code for this request
+        config()->set('app.country_code', $countryCode);
 
         return $next($request);
     }
