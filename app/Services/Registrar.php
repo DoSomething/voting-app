@@ -44,7 +44,7 @@ class Registrar implements RegistrarContract
         ];
 
         if (should_collect_phone()) {
-            $rules['phone'] = ['phone:'.get_country_code()];
+            $rules['phone'] = ['phone:'.get_country_code().',mobile'];
         }
 
         return $rules;
