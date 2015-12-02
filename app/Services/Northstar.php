@@ -70,6 +70,7 @@ class Northstar
             'first_name' => $user->first_name,
             'birthdate' => $user->birthdate,
             config('services.northstar.id_field') => $user->id,
+            'source' => env('NORTHSTAR_SOURCE', 'votingapp'),
         ];
 
         if ($user->phone) {
