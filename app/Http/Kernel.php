@@ -20,6 +20,7 @@ class Kernel extends HttpKernel
         'VotingApp\Http\Middleware\VerifyCsrfToken',
         'VotingApp\Http\Middleware\SetCountryCodeFromHeader',
         'VotingApp\Http\Middleware\SetLanguageFromHeader',
+        'VotingApp\Http\Middleware\LogRequestDetails',
     ];
 
     /**
