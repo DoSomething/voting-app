@@ -91,8 +91,6 @@ class Northstar
             return $json['data']['_id'];
         } catch (Exception $e) {
             $this->logException($e);
-
-            return;
         }
     }
 
