@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Return contents of Fastly's GeoIP country code header.
+ * Return current country code by Fastly header or session override.
+ * @see: \VotingApp\Http\Middleware\SetCountryCodeFromHeader
  *
  * @return string|null - Country Code, or null if header is not set.
  */
 function get_country_code()
 {
-    return session()->get('country_code');
+    return config('app.country_code');
 }
 
 /**

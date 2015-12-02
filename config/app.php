@@ -43,6 +43,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Country Code Configuration
+    |--------------------------------------------------------------------------
+    |
+    | We store the current request's country code as a config setting, since it
+    | is stored in memory, rather than writing to the session.
+    |
+    | We set a default "catchall" country code of "XX" if nothing else is set.
+    |
+    */
+    'country_code' => 'XX',
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |
