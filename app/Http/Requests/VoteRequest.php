@@ -63,8 +63,7 @@ class VoteRequest extends Request
     public function messages()
     {
         return [
-            'phone.phone' => 'That doesn\'t look like a real phone number!',
-            'birthdate.date' => 'Enter your birthday MM/DD/YYYY!',
+            'phone.phone' => 'That doesn\'t look like a valid phone number.',
         ];
     }
 

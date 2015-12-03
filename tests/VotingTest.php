@@ -109,15 +109,16 @@ class VotingTest extends TestCase
             ->type('Puppet', 'first_name')
             ->type('1/2/1992', 'birthdate')
             ->type('puppet.sloth@example.com', 'email')
-            ->type('(123) 456-5555', 'phone')
+            ->type('(650) 253-0000', 'phone')
             ->press('Count My Vote');
 
         // Check the user was created in the database
         $user = User::where('email', 'puppet.sloth@example.com')->first();
+        $this->assertNotEmpty($user);
         $this->seeInDatabase('users', [
             'id' => $user->id,
             'first_name' => 'Puppet',
-            'phone' => '1234565555',
+            'phone' => '6502530000',
             'birthdate' => '1992-01-02',
         ]);
 
@@ -219,7 +220,7 @@ class VotingTest extends TestCase
         $this->type('not a phone number', 'phone')
             ->press('Count My Vote');
 
-        $this->see('That doesn\'t look like a real phone number!');
+        $this->see('That doesn\'t look like a valid phone number.');
     }
 
     /**

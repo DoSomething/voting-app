@@ -19,6 +19,7 @@
     "intervention/image": "~2.3.2",
     "laravelcollective/html": "~5.1.7",
     "predis/predis": "~1.0",
+    "propaganistas/laravel-phone": "~2.0",
     "squizlabs/php_codesniffer": "2.*"
   },
   "require-dev": {
