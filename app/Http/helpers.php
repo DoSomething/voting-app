@@ -66,7 +66,7 @@ function tweet_intent($text, $url, $twitter = null)
         $text = str_replace('TWITTER_NAME', $twitter, $text);
     }
 
-    return 'https://twitter.com/intent/tweet?text='.urlencode($text).'&url='.urlencode($url);
+    return 'https://twitter.com/intent/tweet?text='.rawurlencode($text).'&url='.rawurlencode($url);
 }
 
 /**
