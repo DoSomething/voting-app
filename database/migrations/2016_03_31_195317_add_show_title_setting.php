@@ -17,7 +17,8 @@ class AddShowTitleSetting extends Migration
             'type' => 'boolean',
             'value' => '1',
             'description' => 'True if the title is to be shown on the tiles',
-        ]);    }
+        ]);
+    }
 
     /**
      * Reverse the migrations.
