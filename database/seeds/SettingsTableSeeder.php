@@ -27,9 +27,6 @@ class SettingsTableSeeder extends Seeder
         return new File($destinationFullPath);
     }
 
-    /**
-     *
-     */
     public function run()
     {
         // Site Title

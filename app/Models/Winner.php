@@ -54,7 +54,5 @@ class Winner extends Model
 
             return $winners;
         }
-
-        return;
     }
 }
