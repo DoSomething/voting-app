@@ -70,6 +70,7 @@ class Northstar
             'first_name' => $user->first_name,
             'birthdate' => $user->birthdate,
             config('services.northstar.id_field') => $user->id,
+            'source' => env('NORTHSTAR_SOURCE', 'votingapp'),
         ];
 
         if ($user->phone) {
@@ -91,8 +92,6 @@ class Northstar
             return $json['data']['_id'];
         } catch (Exception $e) {
             $this->logException($e);
-
-            return;
         }
     }
 
@@ -113,7 +112,7 @@ class Northstar
         $payload = ['interests' => $candidate->category->slug];
 
         try {
-            $response = $this->client->put('users/'.e($user->northstar_id), ['body' => json_encode($payload)]);
+            $response = $this->client->put('users/_id/'.e($user->northstar_id), ['body' => json_encode($payload)]);
 
             return $response->getStatusCode() === 200;
         } catch (Exception $e) {
