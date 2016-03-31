@@ -18,14 +18,12 @@
                     <td>Name</td>
                     <td>Winners</td>
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
                 </tr>
                 </thead>
                 @foreach($winnerCategories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->winners->count() }} </td>
-                        <td><a href="{{ route('winner-categories.show', [$category->slug]) }}">view</a></td>
                         <td><a href="{{ route('winner-categories.edit', [$category->slug]) }}">edit</a></td>
                     </tr>
                 @endforeach

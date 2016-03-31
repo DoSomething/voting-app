@@ -56,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
             return Winner::where('id', $id)->first();
         });
 
-        $router->bind('winnerCategories', function ($slug) {
+        $router->bind('winner-categories', function ($slug) {
             return WinnerCategory::where('slug', $slug)->first();
         });
 
