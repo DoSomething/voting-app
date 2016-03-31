@@ -32,4 +32,8 @@
         border-color: {{ setting('ui_tint') }} !important;
     }
     @endif
+
+    @if(!setting('enable_voting') || !setting('vote_button'))
+    .tile__action { display: none !important; }
+    @endif
 </style>
