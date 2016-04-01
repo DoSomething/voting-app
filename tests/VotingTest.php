@@ -208,7 +208,7 @@ class VotingTest extends TestCase
      */
     public function testInternationalValidationWithPhone()
     {
-        $force_brazil = DB::update('update settings set value = "BR" where key = phone_countries');
+        $force_brazil = DB::update('update settings set value = "BR" where key = ?', ['phone_countries']);
 
         // update(setting('phone_countries'), ['BR']);
         $url = route('candidates.show', [$this->candidate->slug]);
