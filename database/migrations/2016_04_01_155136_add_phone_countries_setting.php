@@ -15,7 +15,7 @@ class AddPhoneCountriesSetting extends Migration
             'key' => 'phone_countries',
             'type' => 'text',
             'value' => '',
-            'description' => 'Country codes where we ask users for their phone numbers. Comma separated, no spaces',
+            'description' => 'Country codes where we ask users for their phone numbers, other than the US which is included by default. Comma separated, no spaces',
         ]);
     }
 

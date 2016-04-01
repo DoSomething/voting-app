@@ -40,7 +40,7 @@ class SettingsController extends Controller
     public function update(Request $request, Setting $setting)
     {
         // If this is a text field, ensure it is not blank
-        if ($setting->type === 'text') {
+        if ($setting->type === 'text' && $setting->key !== 'phone_countries') {
             $this->validate($request, ['value' => 'required']);
         }
 
