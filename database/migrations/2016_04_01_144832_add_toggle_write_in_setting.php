@@ -13,9 +13,9 @@ class AddToggleWriteInSetting extends Migration
     {
         DB::table('settings')->insert([
             'key' => 'write_ins',
-            'type' => 'boolean',
-            'value' => '1',
-            'description' => 'True write ins are accepted',
+            'type' => 'markdown',
+            'value' => '',
+            'description' => 'The text to display to ask for write in votes',
         ]);
     }
 
@@ -26,6 +26,6 @@ class AddToggleWriteInSetting extends Migration
      */
     public function down()
     {
-        DB::table('settings')->delete(['key' => 'write_ins']);
+        DB::table('settings')->where(['key' => 'write_ins'])->delete();
     }
 }
