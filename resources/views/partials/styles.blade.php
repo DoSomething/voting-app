@@ -40,4 +40,8 @@
     @if(!setting('show_title'))
     .tile__meta { display: none !important; }
     @endif
+
+    @if(!setting('search_bar'))
+    .search-form { display: none !important; }
+    @endif
 </style>
