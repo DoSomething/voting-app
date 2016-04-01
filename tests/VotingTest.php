@@ -2,6 +2,7 @@
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
+use VotingApp\Models\Setting;
 
 class VotingTest extends TestCase
 {
@@ -208,6 +209,10 @@ class VotingTest extends TestCase
      */
     public function testInternationalValidationWithPhone()
     {
+        $setting = Setting::where('key', 'phone_countries')->first();
+        $setting->value = 'BR';
+        $setting->save();
+
         $url = route('candidates.show', [$this->candidate->slug]);
 
         $this->inCountry('BR')

@@ -32,16 +32,6 @@ function is_international_session()
 }
 
 /**
- * Return a list of countries that we localize for.
- *
- * @return array
- */
-function dosomething_global_countries()
-{
-    return ['MX', 'BR', 'US'];
-}
-
-/**
  * Return if the user's phone should be collected for
  * the current session's country.
  *
@@ -49,7 +39,9 @@ function dosomething_global_countries()
  */
 function should_collect_phone()
 {
-    return in_array(get_country_code(), dosomething_global_countries());
+    $phone_countries = str_getcsv('US,'.setting('phone_countries'));
+
+    return in_array(get_country_code(), $phone_countries);
 }
 
 /**
