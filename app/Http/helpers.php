@@ -49,7 +49,9 @@ function dosomething_global_countries()
  */
 function should_collect_phone()
 {
-    return in_array(get_country_code(), dosomething_global_countries());
+    $phone_countries = str_getcsv(setting('phone_countries'));
+
+    return in_array(get_country_code(), $phone_countries);
 }
 
 /**
