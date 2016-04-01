@@ -208,7 +208,7 @@ class VotingTest extends TestCase
      */
     public function testInternationalValidationWithPhone()
     {
-        $setting = Setting::where('key', 'phone_countries')->first()
+        $setting = Setting::where('key', 'phone_countries')->first();
         $setting->value = 'BR';
         $setting->save();
 
