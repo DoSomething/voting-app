@@ -2,6 +2,7 @@
 
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
+use VotingApp\Models\Setting;
 
 class VotingTest extends TestCase
 {
