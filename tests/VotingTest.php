@@ -208,7 +208,7 @@ class VotingTest extends TestCase
      */
     public function testInternationalValidationWithPhone()
     {
-        setting('phone_countries') = 'BR';
+        $this->setting('phone_countries') = 'BR';
         $url = route('candidates.show', [$this->candidate->slug]);
 
         $this->inCountry('BR')
