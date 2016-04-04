@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
 use VotingApp\Events\UserRegistered;
+use \Northstar;
 
 class Registrar implements RegistrarContract
 {
@@ -16,17 +17,9 @@ class Registrar implements RegistrarContract
      */
     protected $validation;
 
-    /**
-     * The Northstar API client.
-     *
-     * @var Northstar
-     */
-    protected $northstar;
-
-    public function __construct(Northstar $northstar)
+    public function __construct()
     {
         $this->validation = app('validator');
-        $this->northstar = $northstar;
     }
 
     /**
@@ -85,7 +78,8 @@ class Registrar implements RegistrarContract
             }
 
             $user->country_code = get_country_code();
-            $user->northstar_id = $this->northstar->register($user);
+
+            $northstar_user = Northstar::createUser($user);
 
             $user->save();
 

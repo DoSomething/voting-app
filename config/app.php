@@ -169,6 +169,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         DoSomething\StatHat\StatHatServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
+        DoSomething\Northstar\NorthstarServiceProvider::class,
 
     ],
 
@@ -224,6 +225,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'StatHat' => 'DoSomething\StatHat\Facade',
+        'Northstar' => 'DoSomething\Northstar\Facades\Northstar',
 
     ],
 
