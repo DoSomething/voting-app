@@ -24,7 +24,7 @@ class VotingTest extends TestCase
     public function testSubmitVote()
     {
         $mock = $this->mock(\DoSomething\Northstar\NorthstarClient::class)->shouldReceive('updateUser', 'createUser')->andReturn([
-            'id' => '123124124123'
+            'id' => '123124124123',
         ]);
 
         $this->inCountry('US')
@@ -70,7 +70,7 @@ class VotingTest extends TestCase
     public function testUSVoteWithoutPhone()
     {
         $mock = $this->mock(\DoSomething\Northstar\NorthstarClient::class)->shouldReceive('createUser', 'updateUser')->andReturn([
-            'id' => '123124124123'
+            'id' => '123124124123',
         ]);
 
         $url = route('candidates.show', [$this->candidate->slug]);
@@ -110,7 +110,7 @@ class VotingTest extends TestCase
     public function testUSVoteWithPhone()
     {
         $mock = $this->mock(\DoSomething\Northstar\NorthstarClient::class)->shouldReceive('createUser', 'updateUser')->andReturn([
-            'id' => '123124124123'
+            'id' => '123124124123',
         ]);
 
         $url = route('candidates.show', [$this->candidate->slug]);
@@ -248,7 +248,7 @@ class VotingTest extends TestCase
     public function testInternationalVoteWithEmail()
     {
         $mock = $this->mock(\DoSomething\Northstar\NorthstarClient::class)->shouldReceive('createUser', 'updateUser')->andReturn([
-            'id' => '123124124123'
+            'id' => '123124124123',
         ]);
 
         $url = route('candidates.show', [$this->candidate->slug]);
