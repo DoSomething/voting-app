@@ -25,7 +25,7 @@ return [
 
     'northstar' => [
         'url' => env('NORTHSTAR_URL'),
-        'api_key' => env('NORTHSTAR_API_KEY')
+        'api_key' => env('NORTHSTAR_API_KEY'),
     ],
 
     'message_broker' => [
