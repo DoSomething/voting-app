@@ -154,6 +154,7 @@ return [
          * Application Service Providers...
          */
         VotingApp\Providers\AppServiceProvider::class,
+        VotingApp\Providers\AuthServiceProvider::class,
         VotingApp\Providers\BusServiceProvider::class,
         VotingApp\Providers\ConfigServiceProvider::class,
         VotingApp\Providers\EventServiceProvider::class,

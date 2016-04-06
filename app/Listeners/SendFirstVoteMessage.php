@@ -49,8 +49,8 @@ class SendFirstVoteMessage
         ];
 
         // Send fields for SMS communication if provided.
-        if ($event->user->phone) {
-            $payload['mobile'] = $event->user->phone;
+        if ($event->user->mobile) {
+            $payload['mobile'] = $event->user->mobile;
             $payload['mobile_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,

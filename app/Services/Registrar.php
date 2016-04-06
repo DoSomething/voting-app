@@ -69,7 +69,7 @@ class Registrar implements RegistrarContract
             $user = new User($data);
 
             $validator = $this->validation->make($user->toArray(), [
-                'phone' => 'unique:users',
+                'mobile' => 'unique:users',
                 'email' => 'unique:users',
             ]);
 
@@ -80,6 +80,7 @@ class Registrar implements RegistrarContract
             $user->country_code = get_country_code();
 
             $northstar_user = Northstar::createUser($user);
+            $user->northstar_id = $northstar_user->id;
 
             $user->save();
 

@@ -3,25 +3,12 @@
 namespace VotingApp\Http\Controllers;
 
 use VotingApp\Models\User;
-use VotingApp\Services\MessageBroker;
-use VotingApp\Services\Registrar;
 
 class UsersController extends Controller
 {
-    /**
-     * The registration service.
-     *
-     * @var Registrar
-     */
-    protected $registrar;
-
-    public function __construct(User $user, Registrar $registrar, MessageBroker $broker)
+    public function __construct()
     {
-        $this->user = $user;
-        $this->registrar = $registrar;
-        $this->broker = $broker;
-
-        $this->middleware('admin', ['except' => 'store']);
+        $this->middleware('admin');
     }
 
     /**
@@ -31,8 +18,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->user->paginate(25);
-        $count = $this->user->count();
+        $users = User::paginate(25);
+        $count = $users->count();
 
         return view('users.index', compact('users', 'count'));
     }

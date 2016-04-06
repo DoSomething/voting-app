@@ -38,12 +38,9 @@ class CreateAdminUser extends Command
     public function fire()
     {
         $user = User::create([
-            'first_name' => $this->argument('name'),
-            'email' => $this->argument('email'),
-            'password' => $this->argument('password'),
+            'northstar_id' => $this->argument('id'),
         ]);
 
-        // @TODO: This requires database to be seeded for admin role to exist :(
         $user->admin = true;
         $user->save();
 
@@ -58,9 +55,7 @@ class CreateAdminUser extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The administrator\'s first name.'],
-            ['email', InputArgument::REQUIRED, 'The administrator\'s email address.'],
-            ['password', InputArgument::REQUIRED, 'The administrator\'s password.'],
+            ['id', InputArgument::REQUIRED, 'The administrator\'s Northstar ID.'],
         ];
     }
 
