@@ -27,7 +27,7 @@ class VotingTest extends TestCase
         $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
-            'id' => '1287216786'
+            'id' => '1287216786',
         ]));
 
         $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
@@ -80,7 +80,7 @@ class VotingTest extends TestCase
         $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
-            'id' => '1287216786'
+            'id' => '1287216786',
         ]));
 
         $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
@@ -127,7 +127,7 @@ class VotingTest extends TestCase
         $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
-            'id' => '1287216786'
+            'id' => '1287216786',
         ]));
 
         $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
@@ -273,7 +273,7 @@ class VotingTest extends TestCase
         $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
-            'id' => '1287216786'
+            'id' => '1287216786',
         ]));
 
         $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
