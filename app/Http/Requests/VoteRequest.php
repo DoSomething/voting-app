@@ -63,7 +63,7 @@ class VoteRequest extends Request
     public function messages()
     {
         return [
-            'phone.phone' => 'That doesn\'t look like a valid phone number.',
+            'mobile.phone' => 'That doesn\'t look like a valid phone number.',
         ];
     }
 

@@ -41,7 +41,7 @@ class User extends Model implements AuthenticatableContract
      *
      * @var string
      */
-    public function setPhoneAttribute($mobile)
+    public function setMobileAttribute($mobile)
     {
         // Skip mutator if attribute is null.
         if (empty($mobile)) {
