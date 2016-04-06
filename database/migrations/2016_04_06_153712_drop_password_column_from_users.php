@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class DropPasswordColumnFromUsers extends Migration
@@ -14,7 +13,7 @@ class DropPasswordColumnFromUsers extends Migration
     {
         Schema::table('users', function ($table) {
             $table->dropColumn('password');
-        });    
+        });
     }
 
     /**
@@ -26,6 +25,6 @@ class DropPasswordColumnFromUsers extends Migration
     {
         Schema::table('users', function ($table) {
             $table->string('password', 60);
-        });    
+        });
     }
 }

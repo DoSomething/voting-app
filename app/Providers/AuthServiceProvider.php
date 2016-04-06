@@ -30,6 +30,6 @@ class AuthServiceProvider extends ServiceProvider
             return new \DoSomething\Northstar\NorthstarUserProvider(
                 $app['northstar'], $app['hash'], config('auth.model')
             );
-        });    
+        });
     }
 }

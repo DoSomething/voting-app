@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateUserPhoneColumnToMobile extends Migration
@@ -14,7 +13,7 @@ class UpdateUserPhoneColumnToMobile extends Migration
     {
         Schema::table('users', function ($table) {
             $table->renameColumn('phone', 'mobile');
-        });    
+        });
     }
 
     /**
@@ -26,6 +25,6 @@ class UpdateUserPhoneColumnToMobile extends Migration
     {
         Schema::table('users', function ($table) {
             $table->renameColumn('mobile', 'phone');
-        });      
+        });
     }
 }
