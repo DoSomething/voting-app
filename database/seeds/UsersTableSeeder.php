@@ -14,7 +14,6 @@ class UsersTableSeeder extends Seeder
         $dave = User::create([
             'first_name' => 'Dave',
             'email' => 'dfurnes@dosomething.org',
-            'password' => 'tops3cret',
         ]);
         $dave->admin = true;
         $dave->save();
@@ -22,7 +21,6 @@ class UsersTableSeeder extends Seeder
         $andrea = User::create([
             'first_name' => 'Andrea',
             'email' => 'agaither@dosomething.org',
-            'password' => 'tops3cret',
         ]);
         $andrea->admin = true;
         $andrea->save();
@@ -39,7 +37,7 @@ class UsersTableSeeder extends Seeder
         foreach (range(1, 250) as $index) {
             User::create([
                 'first_name' => $faker->firstName,
-                'phone' => $faker->unique()->phoneNumber,
+                'mobile' => $faker->unique()->phoneNumber,
                 'birthdate' => $faker->date($format = 'd-m-Y', $max = 'now'),
                 'country_code' => 'US',
             ]);

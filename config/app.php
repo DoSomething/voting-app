@@ -154,6 +154,7 @@ return [
          * Application Service Providers...
          */
         VotingApp\Providers\AppServiceProvider::class,
+        VotingApp\Providers\AuthServiceProvider::class,
         VotingApp\Providers\BusServiceProvider::class,
         VotingApp\Providers\ConfigServiceProvider::class,
         VotingApp\Providers\EventServiceProvider::class,
@@ -169,6 +170,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         DoSomething\StatHat\StatHatServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
+        DoSomething\Northstar\NorthstarServiceProvider::class,
 
     ],
 
@@ -224,6 +226,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'StatHat' => 'DoSomething\StatHat\Facade',
+        'Northstar' => 'DoSomething\Northstar\Facades\Northstar',
 
     ],
 

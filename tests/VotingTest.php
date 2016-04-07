@@ -3,6 +3,7 @@
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Setting;
+use DoSomething\Northstar\Resources\NorthstarUser;
 
 class VotingTest extends TestCase
 {
@@ -23,6 +24,17 @@ class VotingTest extends TestCase
      */
     public function testSubmitVote()
     {
+        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+
+        $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+        ]));
+
+        $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+            'interests' => ['cats'],
+        ]));
+
         $this->inCountry('US')
             ->visit(route('candidates.show', [$this->candidate->slug]))
             ->type('Puppet', 'first_name')
@@ -65,6 +77,17 @@ class VotingTest extends TestCase
      */
     public function testUSVoteWithoutPhone()
     {
+        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+
+        $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+        ]));
+
+        $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+            'interests' => ['cats'],
+        ]));
+
         $url = route('candidates.show', [$this->candidate->slug]);
 
         $this->inCountry('US')
@@ -101,6 +124,17 @@ class VotingTest extends TestCase
      */
     public function testUSVoteWithPhone()
     {
+        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+
+        $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+        ]));
+
+        $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+            'interests' => ['cats'],
+        ]));
+
         $url = route('candidates.show', [$this->candidate->slug]);
 
         $this->inCountry('GB')
@@ -110,17 +144,18 @@ class VotingTest extends TestCase
             ->type('Puppet', 'first_name')
             ->type('1/2/1992', 'birthdate')
             ->type('puppet.sloth@example.com', 'email')
-            ->type('(650) 253-0000', 'phone')
+            ->type('(650) 253-0000', 'mobile')
             ->press('Count My Vote');
 
         // Check the user was created in the database
         $user = User::where('email', 'puppet.sloth@example.com')->first();
         $this->assertNotEmpty($user);
+
         $this->seeInDatabase('users', [
-            'id' => $user->id,
             'first_name' => 'Puppet',
-            'phone' => '6502530000',
+            'mobile' => '6502530000',
             'birthdate' => '1992-01-02',
+            'northstar_id' => '1287216786',
         ]);
 
         $this->see('Thanks, we got that vote!');
@@ -222,7 +257,7 @@ class VotingTest extends TestCase
         $this->see('Mobile Number');
         $this->dontSee('Cell Number');
 
-        $this->type('not a phone number', 'phone')
+        $this->type('not a phone number', 'mobile')
             ->press('Count My Vote');
 
         $this->see('That doesn\'t look like a valid phone number.');
@@ -235,6 +270,17 @@ class VotingTest extends TestCase
      */
     public function testInternationalVoteWithEmail()
     {
+        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+
+        $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+        ]));
+
+        $northstarMock->shouldReceive('updateUser')->andReturn(new NorthstarUser([
+            'id' => '1287216786',
+            'interests' => ['cats'],
+        ]));
+
         $url = route('candidates.show', [$this->candidate->slug]);
 
         $this->inCountry('ES')
