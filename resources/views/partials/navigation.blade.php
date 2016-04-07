@@ -5,6 +5,19 @@
              alt="{{ setting('site_title') }}">
     </a>
 
+    @if(setting('sponsor_logo'))
+        <figure class="figure -left -center">
+            <div class="wrapper">
+                <div class="figure__body">
+                    <b>POWERED BY</b>
+                </div>
+                <div class="figure__media">
+                    <img src="{{ asset(setting('sponsor_logo')) }}">
+                </div>
+            </div>
+        </figure>
+    @endif
+
     @if(session('message'))
         <div id="message"
              class="messages {{ session('message_type', '') }}">{{ session('message') }}</div>
