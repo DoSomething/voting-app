@@ -9,7 +9,7 @@ use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Http\Requests\VoteRequest;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Vote;
-use VotingApp\Services\Northstar;
+use Northstar;
 
 class VotesController extends Controller
 {
@@ -27,18 +27,10 @@ class VotesController extends Controller
      */
     protected $registrar;
 
-    /**
-     * The Northstar API client.
-     *
-     * @var Northstar
-     */
-    protected $northstar;
-
-    public function __construct(Guard $auth, Registrar $registrar, Northstar $northstar)
+    public function __construct(Guard $auth, Registrar $registrar)
     {
         $this->auth = $auth;
         $this->registrar = $registrar;
-        $this->northstar = $northstar;
 
         $this->middleware('voting.enabled');
     }
@@ -80,7 +72,7 @@ class VotesController extends Controller
             event(new UserCastFirstVote($vote));
         }
 
-        $this->northstar->storeInterest($user, $vote->candidate);
+        $northstarUser = Northstar::updateUser($user, $vote->candidate);
 
         $candidate = Candidate::find($request->get('candidate_id'));
         $url = route('candidates.show', [$candidate->slug, '#message']);

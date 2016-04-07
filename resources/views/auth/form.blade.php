@@ -10,6 +10,6 @@
 {!! Form::text('email', null, ['placeholder' => 'you@example.com']) !!}
 
 @if(should_collect_phone())
-    {!! Form::label('phone', trans('forms.phone') . ' (optional)') !!}
-    {!! Form::text('phone', null, ['placeholder' => trans('forms.phone_placeholder')]) !!}
+    {!! Form::label('mobile', trans('forms.phone') . ' (optional)') !!}
+    {!! Form::text('mobile', null, ['placeholder' => trans('forms.phone_placeholder')]) !!}
 @endif

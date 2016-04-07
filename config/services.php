@@ -24,10 +24,8 @@ return [
     ],
 
     'northstar' => [
-        'url' => env('NORTHSTAR_URL', 'https://northstar.dosomething.org'),
-        'key' => env('NORTHSTAR_API_KEY'),
-        'app_id' => env('NORTHSTAR_APP_ID'),
-        'id_field' => env('NORTHSTAR_ID_FIELD'),
+        'url' => env('NORTHSTAR_URL'),
+        'api_key' => env('NORTHSTAR_API_KEY'),
     ],
 
     'message_broker' => [
