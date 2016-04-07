@@ -79,9 +79,12 @@ class Registrar implements RegistrarContract
 
             $user->country_code = get_country_code();
 
-            $northstar_user = Northstar::createUser($user);
-            $user->northstar_id = $northstar_user->id;
+            // Create user in Northstar
+            $payload = $user->toArray();
+            $payload['source'] = "voting_app";
+            $northstar_user = Northstar::createUser($payload);
 
+            $user->northstar_id = $northstar_user->id;
             $user->save();
 
             event(new UserRegistered($user));
