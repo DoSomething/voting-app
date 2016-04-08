@@ -35,7 +35,7 @@ return [
             'GB' => env('MAILCHIMP_LIST_GB'),
             'BR' => env('MAILCHIMP_LIST_BR'),
             'MX' => env('MAILCHIMP_LIST_MX'),
-            'global' => env('MAILCHIMP_LIST_GLOBAL'),
+            'XG' => env('MAILCHIMP_LIST_GLOBAL'),
         ],
 
         // Mobile Commons/MGage Opt-In Paths
@@ -43,7 +43,7 @@ return [
             'US' => env('MOBILE_OPT_IN_PATH_US'),
             'BR' => env('MOBILE_OPT_IN_PATH_BR'),
             'MX' => env('MOBILE_OPT_IN_PATH_MX'),
-            'global' => env('MOBILE_OPT_IN_PATH_GLOBAL'),
+            'XG' => env('MOBILE_OPT_IN_PATH_GLOBAL'),
         ],
 
         'config' => [
