@@ -12,7 +12,9 @@
                     <b>POWERED BY</b>
                 </div>
                 <div class="figure__media">
-                    <img src="{{ asset(setting('sponsor_logo')) }}">
+                    <img src="{{ asset(setting('sponsor_logo_svg')) }}"
+                         onerror="this.onerror=null; this.src='{{ asset(setting('sponsor_logo_png')) }}'"
+                         alt="Sponsor Logo">
                 </div>
             </div>
         </figure>

@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSponsorLogoSetting extends Migration
+class AddSettingSponsorLogoPng extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +13,10 @@ class AddSponsorLogoSetting extends Migration
     public function up()
     {
         DB::table('settings')->insert([
-            'key' => 'sponsor_logo_svg',
+            'key' => 'sponsor_logo_png',
             'type' => 'file',
             'value' => '',
-            'description' => 'Sponsor logo',
+            'description' => 'Sponsor logo in png format',
         ]);
     }
 
@@ -26,6 +27,6 @@ class AddSponsorLogoSetting extends Migration
      */
     public function down()
     {
-        DB::table('settings')->where(['key' => 'sponsor_logo_svg'])->delete();
+        DB::table('settings')->where(['key' => 'sponsor_logo_png'])->delete();
     }
 }
