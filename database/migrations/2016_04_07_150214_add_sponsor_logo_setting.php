@@ -15,7 +15,7 @@ class AddSponsorLogoSetting extends Migration
             'key' => 'sponsor_logo_svg',
             'type' => 'file',
             'value' => '',
-            'description' => 'Sponsor logo',
+            'description' => 'Sponsor logo in svg format',
         ]);
     }
 
