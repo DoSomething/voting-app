@@ -57,4 +57,16 @@ class SettingsController extends Controller
 
         return redirect()->route('settings.index')->withFlashMessage('Setting updated.');
     }
+
+    public function destroy(Setting $setting)
+    {
+        // If this setting is a file, clear the value
+        if ($setting->type === 'file') {
+            $setting->value = '';
+        }
+
+        $setting->save();
+
+        return redirect()->route('settings.index')->withFlashMessage('Setting cleared.');
+    }
 }

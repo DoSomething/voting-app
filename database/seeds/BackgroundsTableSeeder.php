@@ -20,5 +20,9 @@ class BackgroundsTableSeeder extends Seeder
         $three = new Background();
         $three->saveImage(base_path('database/seeds/images/tabby3.jpg'));
         $three->save();
+
+        $four = new Background();
+        $four->saveImage(base_path('database/seeds/images/tongue-cat.png'));
+        $four->save();
     }
 }

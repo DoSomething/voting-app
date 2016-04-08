@@ -16,7 +16,7 @@
       @content;
     }
   } @else {
-    @warn "Breakpoint `#{$breakpoint}` is not defined. Check $breakpoints variable.";
+    @warn "Breakpoint `#{$name}` is not defined. Check $breakpoints variable.";
   }
 }
 
