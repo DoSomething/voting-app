@@ -27,7 +27,7 @@ class SendFirstVoteMessage
      */
     public function handle(UserCastFirstVote $event)
     {
-        $country_code_or_global = ! empty($event->user->country_code) ? $event->user->country_code : 'global';
+        $country_code_or_global = ! empty($event->user->country_code) ? $event->user->country_code : 'XG';
 
         $payload = [
             'first_name' => $event->user->first_name,
