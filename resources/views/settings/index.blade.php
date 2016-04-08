@@ -49,6 +49,14 @@
                     </td>
                     <td>{!! Form::submit('Save', ['class' => 'button -secondary']) !!}</td>
                     {!! Form::close() !!}
+                    <td>
+                        @if ($setting->type == 'file' && $setting->value)
+                            <div class="form-actions">
+                                <a href="{{ route('settings.destroy', [$setting]) }}" data-confirm="Are you sure you want to permanently delete this logo image?" data-method="DELETE"><span>(remove)</span></a>
+                            </div>
+
+                        @endif
+                    </td>
                 </tr>
 
             @empty

@@ -32,7 +32,7 @@ resource('candidates', 'CandidatesController');
 resource('categories', 'CategoriesController');
 resource('backgrounds', 'BackgroundsController');
 resource('pages', 'PagesController');
-resource('settings', 'SettingsController', ['only' => ['index', 'edit', 'update']]);
+resource('settings', 'SettingsController', ['only' => ['index', 'update', 'destroy']]);
 resource('users', 'UsersController', ['only' => ['index', 'create', 'store', 'show']]);
 resource('votes', 'VotesController', ['only' => ['store']]);
 resource('winners', 'WinnersController');
