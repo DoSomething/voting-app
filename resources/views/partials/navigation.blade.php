@@ -5,7 +5,7 @@
              alt="{{ setting('site_title') }}">
     </a>
 
-    @if(setting('sponsor_logo'))
+    @if(setting('sponsor_logo_svg') && setting('sponsor_logo_png'))
         <figure class="figure -left -center">
             <div class="wrapper">
                 <div class="figure__body">
