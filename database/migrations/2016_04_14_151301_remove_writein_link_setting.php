@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class RemoveWriteinLinkSetting extends Migration
@@ -27,5 +26,6 @@ class RemoveWriteinLinkSetting extends Migration
             'type' => 'text',
             'value' => '',
             'description' => 'Link provided for write-in candidates.',
-        ]);    }
+        ]);
+    }
 }
