@@ -106,7 +106,12 @@
 
   img {
     margin: 0 auto;
-    max-width: 50px;
+  }
+
+  &.-short {
+    > img {
+      max-height: 50px;
+    }
   }
 }
 
