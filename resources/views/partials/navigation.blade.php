@@ -11,7 +11,7 @@
                 <div class="figure__body">
                     <b>POWERED BY</b>
                 </div>
-                <div class="figure__media">
+                <div class="figure__media -short">
                     <img src="{{ asset(setting('sponsor_logo_svg')) }}"
                          onerror="this.onerror=null; this.src='{{ asset(setting('sponsor_logo_png')) }}'"
                          alt="Sponsor Logo">
