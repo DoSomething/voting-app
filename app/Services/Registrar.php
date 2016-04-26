@@ -2,6 +2,8 @@
 
 namespace VotingApp\Services;
 
+use DoSomething\Northstar\Exceptions\APIException;
+use DoSomething\Northstar\Exceptions\ValidationException as APIValidationException;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
@@ -82,9 +84,16 @@ class Registrar implements RegistrarContract
             // Create user in Northstar
             $payload = $user->toArray();
             $payload['source'] = 'voting_app';
-            $northstar_user = Northstar::createUser($payload);
 
-            $user->northstar_id = $northstar_user->id;
+            try {
+                $northstar_user = Northstar::createUser($payload);
+                $user->northstar_id = $northstar_user->id;
+            } catch (APIValidationException $e) {
+                $user->northstar_id = 'CONFLICT';
+            } catch (APIException $e) {
+                $user->northstar_id = 'ERROR';
+            }
+
             $user->save();
 
             event(new UserRegistered($user));
