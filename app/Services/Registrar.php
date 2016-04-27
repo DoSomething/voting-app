@@ -92,6 +92,7 @@ class Registrar implements RegistrarContract
             } catch (APIValidationException $e) {
                 $user->northstar_id = 'CONFLICT';
             } catch (APIException $e) {
+                logger('northstar exception', ['error' => $e->getMessage()]);
                 $user->northstar_id = 'ERROR';
             } catch (ConnectException $e) {
                 $user->northstar_id = 'ERROR_CONNECTION';
