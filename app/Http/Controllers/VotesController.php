@@ -72,7 +72,11 @@ class VotesController extends Controller
             event(new UserCastFirstVote($vote));
         }
 
-        $northstarUser = Northstar::updateUser($user, $vote->candidate);
+            Northstar::updateUser($user->northstar_id, [
+                'interests' => [
+                    $vote->candidate->name,
+                ],
+            ]);
 
         $candidate = Candidate::find($request->get('candidate_id'));
         $url = route('candidates.show', [$candidate->slug, '#message']);
