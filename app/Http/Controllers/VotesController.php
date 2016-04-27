@@ -73,7 +73,7 @@ class VotesController extends Controller
         }
 
         // If we have a valid Northstar ID, let's try to update their profile with their vote.
-        if ($user->northstar_id !== 'CONFLICT' && $user->northstar_id !== 'ERROR_CONNECTION') {
+        if (array_has(['CONFLICT', 'ERROR', 'ERROR_CONNECTION'], $user->northstar_id)) {
             Northstar::updateUser($user->northstar_id, [
                 'interests' => [
                     $vote->candidate->name,
