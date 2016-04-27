@@ -4,6 +4,7 @@ namespace VotingApp\Services;
 
 use DoSomething\Northstar\Exceptions\APIException;
 use DoSomething\Northstar\Exceptions\ValidationException as APIValidationException;
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
@@ -92,6 +93,8 @@ class Registrar implements RegistrarContract
                 $user->northstar_id = 'CONFLICT';
             } catch (APIException $e) {
                 $user->northstar_id = 'ERROR';
+            } catch (ConnectException $e) {
+                $user->northstar_id = 'ERROR_CONNECTION';
             }
 
             $user->save();
