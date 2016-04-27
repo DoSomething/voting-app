@@ -72,11 +72,14 @@ class VotesController extends Controller
             event(new UserCastFirstVote($vote));
         }
 
+        // If we have a valid Northstar ID, let's try to update their profile with their vote.
+        if ($user->northstar_id !== 'CONFLICT' && $user->northstar_id !== 'ERROR_CONNECTION') {
             Northstar::updateUser($user->northstar_id, [
                 'interests' => [
                     $vote->candidate->name,
                 ],
             ]);
+        }
 
         $candidate = Candidate::find($request->get('candidate_id'));
         $url = route('candidates.show', [$candidate->slug, '#message']);
