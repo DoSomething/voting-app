@@ -2,6 +2,8 @@
 
 namespace VotingApp\Services;
 
+use DoSomething\Northstar\Exceptions\APIException;
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
@@ -82,9 +84,21 @@ class Registrar implements RegistrarContract
             // Create user in Northstar
             $payload = $user->toArray();
             $payload['source'] = 'voting_app';
-            $northstar_user = Northstar::createUser($payload);
 
-            $user->northstar_id = $northstar_user->id;
+            try {
+                $northstar_user = Northstar::createUser($payload);
+                $user->northstar_id = $northstar_user->id;
+            } catch (ValidationException $e) {
+                // If this conflicts in Northstar, mark "CONFLICT" rather than
+                // bothering the user with the specific issue & preventing the vote.
+                $user->northstar_id = 'CONFLICT';
+            } catch (APIException $e) {
+                logger('northstar exception', ['error' => $e->getMessage()]);
+                $user->northstar_id = 'ERROR';
+            } catch (ConnectException $e) {
+                $user->northstar_id = 'ERROR_CONNECTION';
+            }
+
             $user->save();
 
             event(new UserRegistered($user));
