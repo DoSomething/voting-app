@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Setting;
@@ -51,6 +52,7 @@ class VotingTest extends TestCase
             'id' => $user->id,
             'first_name' => 'Puppet',
             'birthdate' => '1990-01-02',
+            'northstar_id' => '1287216786',
         ]);
 
         $this->seeInDatabase('votes', [
@@ -68,6 +70,36 @@ class VotingTest extends TestCase
             ->press('Count My Vote');
 
         $this->see('You already voted today!');
+    }
+
+    /**
+     * Verify that a user may submit their vote, even if their details
+     * end up making a conflict on Northstar (e.g. voting with a phone number
+     * that's already registered to a different email address).
+     * @test
+     */
+    public function testSubmitVoteWithNorthstarConflict()
+    {
+        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+
+        $northstarMock->shouldReceive('createUser')->andThrow($this->mock(ValidationException::class));
+
+        $northstarMock->shouldNotReceive('updateUser');
+
+        $this->inCountry('US')
+            ->visit(route('candidates.show', [$this->candidate->slug]))
+            ->type('Puppet', 'first_name')
+            ->type('1/2/1990', 'birthdate')
+            ->type('test-example-user@example.com', 'email')
+            ->press('Count My Vote');
+
+        $this->see('Thanks, we got that vote!');
+
+        $this->seeInDatabase('users', [
+            'first_name' => 'Puppet',
+            'birthdate' => '1990-01-02',
+            'northstar_id' => 'CONFLICT',
+        ]);
     }
 
     /**
