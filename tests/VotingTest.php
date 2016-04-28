@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Contracts\Validation\ValidationException;
+use VotingApp\Events\UserCastFirstVote;
+use VotingApp\Events\UserRegistered;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Setting;
@@ -36,6 +38,12 @@ class VotingTest extends TestCase
             'interests' => ['cats'],
         ]));
 
+        // Set expectation that events should be triggered for the registration & vote.
+        $this->expectsEvents([
+            UserRegistered::class,
+            UserCastFirstVote::class,
+        ]);
+
         $this->inCountry('US')
             ->visit(route('candidates.show', [$this->candidate->slug]))
             ->type('Puppet', 'first_name')
@@ -43,6 +51,7 @@ class VotingTest extends TestCase
             ->type('test-example-user@example.com', 'email')
             ->press('Count My Vote');
 
+        // We should see confirmation messaging on the following page.
         $this->see('Thanks, we got that vote!');
 
         // Check the user & vote were created in the database
