@@ -12,6 +12,20 @@ function get_country_code()
 }
 
 /**
+ * Does this country have a template specified in Message Broker? If so, return
+ * the code. If not, return the "global" placeholder code for a fallback template.
+ *
+ * @param string - country code
+ * @return string
+ */
+function transactional_country_code($country_code)
+{
+    $allowed = array_filter(config('services.message_broker.lists'));
+
+    return array_key_exists($country_code, $allowed) ? $country_code : 'XG';
+}
+
+/**
  * Return if the user is a domestic (US) session.
  *
  * @return bool
