@@ -27,8 +27,6 @@ class SendFirstVoteMessage
      */
     public function handle(UserCastFirstVote $event)
     {
-        $country_code_or_global = ! empty($event->user->country_code) ? $event->user->country_code : 'XG';
-
         $payload = [
             'first_name' => $event->user->first_name,
             'birthdate_timestamp' => strtotime($event->user->birthdate), // Message Broker expects UNIX timestamp
@@ -59,15 +57,15 @@ class SendFirstVoteMessage
 
             // Provide correct Mobile Opt In ID by country code
             $optInPaths = config('services.message_broker.opt_in_paths');
-            $globalPath = config('services.message_broker.opt_in_paths.global');
-            $payload['mobile_opt_in_path_id'] = array_get($optInPaths, $country_code_or_global, $globalPath);
+            $globalPath = config('services.message_broker.opt_in_paths.XG');
+            $payload['mobile_opt_in_path_id'] = array_get($optInPaths, $event->user->country_code, $globalPath);
         }
 
         // Send fields for email communications if provided:
         if ($event->user->email) {
             $payload['email'] = $event->user->email;
             $payload['subscribed'] = 1;
-            $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote').'-'.$country_code_or_global;
+            $payload['email_template'] = env('VOTE_TEMPLATE', 'mb-votingapp-vote').'-'.transactional_country_code($event->user->country_code);
             $payload['email_tags'] = [
                 env('APP_NAME_TAG', 'votingapp'),
                 $event->candidate->id,
@@ -76,8 +74,8 @@ class SendFirstVoteMessage
 
             // Provide correct MailChimp list ID by country code
             $mailchimpLists = config('services.message_broker.lists');
-            $globalList = config('services.message_broker.lists.global');
-            $payload['mailchimp_list_id'] = array_get($mailchimpLists, $country_code_or_global, $globalList);
+            $globalList = config('services.message_broker.lists.XG');
+            $payload['mailchimp_list_id'] = array_get($mailchimpLists, $event->user->country_code, $globalList);
         }
 
         $routingKey = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');
