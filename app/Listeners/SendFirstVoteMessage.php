@@ -55,10 +55,8 @@ class SendFirstVoteMessage
                 'GENDER_'.$event->candidate->gender,
             ];
 
-            // Provide correct Mobile Opt In ID by country code
-            $optInPaths = config('services.message_broker.opt_in_paths');
-            $globalPath = config('services.message_broker.opt_in_paths.XG');
-            $payload['mobile_opt_in_path_id'] = array_get($optInPaths, $event->user->country_code, $globalPath);
+            // Provide Mobile Opt In Path for the user's country code, or global opt-in path if not set.
+            $payload['mobile_opt_in_path_id'] = filtered_config('services.message_broker.opt_in_paths', $event->user->country_code, 'XG');
         }
 
         // Send fields for email communications if provided:
@@ -72,10 +70,8 @@ class SendFirstVoteMessage
                 'GENDER_'.$event->candidate->gender,
             ];
 
-            // Provide correct MailChimp list ID by country code
-            $mailchimpLists = config('services.message_broker.lists');
-            $globalList = config('services.message_broker.lists.XG');
-            $payload['mailchimp_list_id'] = array_get($mailchimpLists, $event->user->country_code, $globalList);
+            // Provide MailChimp list for the user's country code, or global list if not set.
+            $payload['mailchimp_list_id'] = filtered_config('services.message_broker.lists', $event->user->country_code, 'XG');
         }
 
         $routingKey = env('VOTE_ROUTING_KEY', 'votingapp.event.vote');

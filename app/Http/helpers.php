@@ -26,6 +26,22 @@ function transactional_country_code($country_code)
 }
 
 /**
+ * Try to get a value from the config array at the given path, with an optional
+ * fallback path if the desired path is falsy (e.g. empty string or null).
+ *
+ * @param $configPath - Dot notation path for the config array
+ * @param $key - Desired key
+ * @param $fallbackKey - Fallback key, if desired value is falsy
+ */
+function filtered_config($configPath, $key, $fallbackKey)
+{
+    $filteredConfig = array_filter(config($configPath));
+    $key = array_key_exists($key, $filteredConfig) ? $key : $fallbackKey;
+
+    return $filteredConfig[$key];
+}
+
+/**
  * Return if the user is a domestic (US) session.
  *
  * @return bool
