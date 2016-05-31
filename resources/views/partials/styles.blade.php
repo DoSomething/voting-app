@@ -33,7 +33,7 @@
     }
     @endif
 
-    @if(!setting('enable_voting') || !setting('vote_button'))
+    @if(!setting('vote_button'))
     .tile__action { display: none !important; }
     @endif
 
