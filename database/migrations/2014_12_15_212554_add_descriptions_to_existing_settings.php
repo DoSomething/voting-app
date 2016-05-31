@@ -27,7 +27,6 @@ class AddDescriptionsToExistingSettings extends Migration
             DB::table('settings')
                 ->where(['key' => 'site_title'])
                 ->update(['description' => 'The site title is the name of this particular campaign (ex: Celebs Gone Good) and is used throughout the site.']);
-
         });
     }
 
