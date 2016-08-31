@@ -171,6 +171,9 @@ return [
         DoSomething\StatHat\StatHatServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
         DoSomething\Northstar\NorthstarServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
+        Maknz\Slack\Laravel\ServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class,
 
     ],
 
@@ -189,6 +192,7 @@ return [
 
         'App' => 'Illuminate\Support\Facades\App',
         'Artisan' => 'Illuminate\Support\Facades\Artisan',
+        'AWS' => 'Aws\Laravel\AwsFacade',
         'Auth' => 'Illuminate\Support\Facades\Auth',
         'Blade' => 'Illuminate\Support\Facades\Blade',
         'Bus' => 'Illuminate\Support\Facades\Bus',
@@ -215,6 +219,7 @@ return [
         'Route' => 'Illuminate\Support\Facades\Route',
         'Schema' => 'Illuminate\Support\Facades\Schema',
         'Session' => 'Illuminate\Support\Facades\Session',
+        'Slack' => 'Maknz\Slack\Laravel\Facade',
         'Storage' => 'Illuminate\Support\Facades\Storage',
         'URL' => 'Illuminate\Support\Facades\URL',
         'Validator' => 'Illuminate\Support\Facades\Validator',
