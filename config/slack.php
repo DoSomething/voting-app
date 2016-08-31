@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'username' => 'GladiatorRobot',
+    'username' => 'VotingAppRobot',
 
     /*
     |-------------------------------------------------------------
