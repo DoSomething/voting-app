@@ -4,6 +4,7 @@
       content="@yield('meta_description', 'Vote for your favorite ' . setting('candidate_type') . ' who has done kickass things in the world this year.')"/>
 
 {{-- Twitter --}}
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@dosomething"/>
 <meta name="twitter:creator" content="@dosomething"/>
 <meta name="twitter:url" content="{{ URL::current() }}"/>
