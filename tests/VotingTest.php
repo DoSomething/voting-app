@@ -27,7 +27,7 @@ class VotingTest extends TestCase
      */
     public function testSubmitVote()
     {
-        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+        $northstarMock = $this->mock(\DoSomething\Gateway\Northstar::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
             'id' => '1287216786',
@@ -89,7 +89,7 @@ class VotingTest extends TestCase
      */
     public function testSubmitVoteWithNorthstarConflict()
     {
-        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+        $northstarMock = $this->mock(\DoSomething\Gateway\Northstar::class);
 
         $northstarMock->shouldReceive('createUser')->andThrow($this->mock(ValidationException::class));
 
@@ -118,7 +118,7 @@ class VotingTest extends TestCase
      */
     public function testUSVoteWithoutPhone()
     {
-        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+        $northstarMock = $this->mock(\DoSomething\Gateway\Northstar::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
             'id' => '1287216786',
@@ -165,7 +165,7 @@ class VotingTest extends TestCase
      */
     public function testUSVoteWithPhone()
     {
-        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+        $northstarMock = $this->mock(\DoSomething\Gateway\Northstar::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
             'id' => '1287216786',
@@ -311,7 +311,7 @@ class VotingTest extends TestCase
      */
     public function testInternationalVoteWithEmail()
     {
-        $northstarMock = $this->mock(\DoSomething\Northstar\NorthstarClient::class);
+        $northstarMock = $this->mock(\DoSomething\Gateway\Northstar::class);
 
         $northstarMock->shouldReceive('createUser')->andReturn(new NorthstarUser([
             'id' => '1287216786',
