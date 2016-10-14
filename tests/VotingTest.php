@@ -6,7 +6,7 @@ use VotingApp\Events\UserRegistered;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Setting;
-use DoSomething\Northstar\Resources\NorthstarUser;
+use DoSomething\Gateway\Resources\NorthstarUser;
 
 class VotingTest extends TestCase
 {
