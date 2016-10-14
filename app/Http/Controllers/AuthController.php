@@ -1,6 +1,7 @@
 <?php
 
 namespace VotingApp\Http\Controllers;
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
