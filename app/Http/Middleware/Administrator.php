@@ -16,7 +16,7 @@ class Administrator
      */
     public function handle($request, Closure $next)
     {
-        if (! Auth::user() || ! in_array(Auth::user()->getRole(), ['staff', 'admin'])) {
+        if (! Auth::user() || ! Auth::user()->hasAdmin()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
