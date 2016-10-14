@@ -170,7 +170,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         DoSomething\StatHat\StatHatServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
-        DoSomething\Northstar\NorthstarServiceProvider::class,
+        DoSomething\Gateway\Laravel\GatewayServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Maknz\Slack\Laravel\ServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
@@ -230,9 +230,7 @@ return [
         'Clockwork' => 'Clockwork\Support\Laravel\Facade',
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-        'StatHat' => 'DoSomething\StatHat\Facade',
-        'Northstar' => 'DoSomething\Northstar\Facades\Northstar',
-
+        'StatHat' => 'DoSomething\StatHat\StatHat',
     ],
 
 ];

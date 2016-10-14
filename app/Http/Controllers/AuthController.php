@@ -1,80 +1,47 @@
 <?php
 
 namespace VotingApp\Http\Controllers;
-
-use Illuminate\Auth\Guard;
-use Illuminate\Http\Request;
-use VotingApp\Services\Registrar;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class AuthController extends Controller
 {
     /**
-     * The Guard implementation.
+     * Where to redirect users after login.
      *
-     * @var \Illuminate\Contracts\Auth\Guard
+     * @var string
      */
-    protected $auth;
+    protected $redirectTo = '/candidates';
 
     /**
-     * The registrar implementation.
+     * Where to redirect users after logout.
      *
-     * @var \Illuminate\Contracts\Auth\Registrar
+     * @var string
      */
-    protected $registrar;
-
-    public function __construct(Guard $auth, Registrar $registrar)
-    {
-        $this->auth = $auth;
-        $this->registrar = $registrar;
-
-        $this->middleware('voting.enabled', ['only' => ['getLogin', 'postLogin']]);
-        $this->middleware('guest', ['except' => 'getLogout']);
-    }
+    protected $redirectAfterLogout = '/';
 
     /**
-     * Show the form for admin login.
-     * GET /admin.
+     * Handle a login request to the application.
      *
-     * @return \Illuminate\View\View
-     */
-    public function getAdmin()
-    {
-        return view('auth.admin');
-    }
-
-    /**
-     * Authentication for an admin user.
-     * POST /admin.
-     *
-     * @param Request $request
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postAdmin(Request $request)
+    public function getLogin(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if ($this->auth->attempt($credentials)) {
-            return redirect()->intended('/')->with('message', 'Welcome back!');
-        } else {
-            return redirect()->back()->withInput()->with('message', 'Invalid username or password!');
-        }
+        // @TODO: Grant override is a temporary fix!
+        return gateway('northstar')->usingGrant('authorization_code')->authorize($request, $response, $this->redirectTo);
     }
 
     /**
-     * Log the current user out of the site.
-     * GET /logout.
+     * Handle a logout request to the application.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @param ResponseInterface $response
+     * @return ResponseInterface
      */
-    public function getLogout()
+    public function getLogout(ResponseInterface $response)
     {
-        $this->auth->logout();
-
-        return redirect()->home()->with('message', 'You\'re now signed out.');
+        // @TODO: Grant override is a temporary fix!
+        return gateway('northstar')->usingGrant('authorization_code')->logout($response, $this->redirectAfterLogout);
     }
 }

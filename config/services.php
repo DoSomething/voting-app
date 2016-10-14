@@ -24,8 +24,21 @@ return [
     ],
 
     'northstar' => [
-        'url' => env('NORTHSTAR_URL'),
-        'api_key' => env('NORTHSTAR_API_KEY'),
+        'grant' => 'client_credentials', // Default OAuth grant to use: either 'password' or 'client_credentials'
+        'url' => env('NORTHSTAR_URL'), // the environment you want to connect to
+
+        // Then, configure client ID, client secret, and scopes per grant.
+        'client_credentials' => [
+            'client_id' => env('NORTHSTAR_CLIENT_ID'),
+            'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
+            'scope' => ['user', 'admin'],
+        ],
+        'authorization_code' => [
+            'client_id' => env('NORTHSTAR_AUTHORIZATION_ID'),
+            'client_secret' => env('NORTHSTAR_AUTHORIZATION_SECRET'),
+            'scope' => ['user', 'role:staff', 'role:admin', 'openid'],
+            'redirect_uri' => 'login',
+        ],
     ],
 
     'message_broker' => [

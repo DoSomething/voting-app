@@ -6,10 +6,12 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use VotingApp\LocalizedDate;
+use DoSomething\Gateway\Contracts\NorthstarUserContract;
+use DoSomething\Gateway\Laravel\HasNorthstarToken;
 
-class User extends Model implements AuthenticatableContract
+class User extends Model implements AuthenticatableContract, NorthstarUserContract
 {
-    use Authenticatable;
+    use Authenticatable, HasNorthstarToken;
 
     /**
      * The database table used by the model.
@@ -91,5 +93,14 @@ class User extends Model implements AuthenticatableContract
         $voted = Vote::where('user_id', $this->id)->withinLastDay()->exists();
 
         return ! $voted;
+    }
+
+    /**
+     * Check whether a user has administrative privledges.
+     * @return bool
+     */
+    public function hasAdmin()
+    {
+        return in_array($this->getRole(), ['staff', 'admin']);
     }
 }
