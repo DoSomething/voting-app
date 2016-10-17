@@ -22,6 +22,16 @@ class AuthController extends Controller
     protected $redirectAfterLogout = '/';
 
     /**
+     * Display the admin login page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAdmin()
+    {
+        return view('auth.admin');
+    }
+
+    /**
      * Handle a login request to the application.
      *
      * @param ServerRequestInterface $request
