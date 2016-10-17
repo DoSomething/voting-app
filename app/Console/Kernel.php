@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        '\VotingApp\Console\Commands\CreateAdminUser',
         '\VotingApp\Console\Commands\ResetApp',
     ];
 

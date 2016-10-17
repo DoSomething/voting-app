@@ -12,7 +12,7 @@ class ResetApp extends Command
      *
      * @var string
      */
-    protected $name = 'reset:app';
+    protected $name = 'votingapp:reset';
 
     /**
      * The console command description.
@@ -44,7 +44,7 @@ class ResetApp extends Command
 
         //remove non-admin users, password reminders, votes, and winners
         DB::table('votes')->delete();
-        DB::table('users')->where('admin', '=', 0)->delete();
+        DB::table('users')->delete();
         DB::table('password_reminders')->delete();
         DB::table('winners')->delete();
     }
