@@ -8,7 +8,6 @@ use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
 use VotingApp\Events\UserRegistered;
-use Northstar;
 
 class Registrar implements RegistrarContract
 {
@@ -86,7 +85,7 @@ class Registrar implements RegistrarContract
             $payload['source'] = 'voting_app';
 
             try {
-                $northstar_user = Northstar::createUser($payload);
+                $northstar_user = gateway('northstar')->createUser($payload);
                 $user->northstar_id = $northstar_user->id;
             } catch (ValidationException $e) {
                 // If this conflicts in Northstar, mark "CONFLICT" rather than

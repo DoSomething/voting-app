@@ -1,4 +1,4 @@
-@if(Auth::user() && Auth::user()->admin)
+@if(Auth::user() && Auth::user()->hasAdmin())
     <nav class="admin">
         <ul class="admin__primary">
             <li><a href="{{ route('candidates.index') }}">Candidates</a></li>

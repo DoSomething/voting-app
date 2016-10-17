@@ -35,11 +35,11 @@ class CandidatesController extends Controller
      */
     public function index(Request $request)
     {
-        $showAsGuest = Auth::check() && Auth::user()->admin && $request->get('guest');
+        $showAsGuest = Auth::check() && Auth::user()->hasAdmin() && $request->get('guest');
 
         // Show admin interface instead for administrators. Admin users can
         // use the `?guest=✓` query parameter to bypass the admin view.
-        if (Auth::check() && Auth::user()->admin && ! $showAsGuest) {
+        if (Auth::check() && Auth::user()->hasAdmin() && ! $showAsGuest) {
             return $this->adminIndex($request);
         }
 

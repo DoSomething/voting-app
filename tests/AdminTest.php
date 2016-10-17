@@ -22,7 +22,7 @@ class AdminTest extends TestCase
             'email' => 'sloth@dosomething.org',
             'password' => 'testing123',
         ]);
-        $this->adminUser->admin = true;
+        $this->adminUser->role = 'admin';
         $this->adminUser->save();
 
         $this->normalUser = User::create([
@@ -105,8 +105,6 @@ class AdminTest extends TestCase
     {
         $this->be($this->adminUser);
 
-        $this->visit('/logout');
-
-        $this->see('You\'re now signed out.');
+        $this->logout();
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 
+use DoSomething\Gateway\Northstar;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     protected $baseUrl = 'http://localhost';
@@ -68,5 +70,21 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->withServerVariables(['HTTP_X_FASTLY_COUNTRY_CODE' => $country_code]);
 
         return $this;
+    }
+
+    /**
+     * Log out of local session & mock SSO logout request.
+     */
+    public function logout()
+    {
+        $northstarMock = $this->mock(Northstar::class);
+
+        // @TODO: Remove this once we no longer need to override grant.
+        $northstarMock->shouldReceive('usingGrant')->andReturnSelf();
+
+        $northstarMock->shouldReceive('logout');
+
+        // And log out of the Laravel application (since we're mocking NS method).
+        $this->app->auth->logout();
     }
 }

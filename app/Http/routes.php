@@ -15,11 +15,9 @@
 get('/', ['as' => 'home', 'uses' => 'CandidatesController@index']);
 
 // User Authentication
-get('logout', 'AuthController@getLogout');
-
-// Admin Authentication
 get('admin', 'AuthController@getAdmin');
-post('admin', 'AuthController@postAdmin');
+get('login', 'AuthController@getLogin');
+get('logout', 'AuthController@getLogout');
 
 // Password Reset
 get('password/email', 'PasswordController@getEmail');
