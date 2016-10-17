@@ -84,6 +84,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         $northstarMock->shouldReceive('logout');
 
-        $this->visit('/logout');
+        // And log out of the Laravel application (since we're mocking NS method).
+        $this->app->auth->logout();
     }
 }
