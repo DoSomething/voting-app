@@ -23,7 +23,7 @@ class AdminTest extends TestCase
             'email' => 'sloth@dosomething.org',
             'password' => 'testing123',
         ]);
-        $this->adminUser->admin = true;
+        $this->adminUser->role = 'admin';
         $this->adminUser->save();
 
         $this->normalUser = User::create([
