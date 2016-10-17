@@ -1,6 +1,5 @@
 <?php
 
-use DoSomething\Gateway\Northstar;
 use VotingApp\Models\User;
 use VotingApp\Models\Page;
 
