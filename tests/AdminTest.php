@@ -1,5 +1,6 @@
 <?php
 
+use DoSomething\Gateway\Northstar;
 use VotingApp\Models\User;
 use VotingApp\Models\Page;
 
@@ -105,8 +106,6 @@ class AdminTest extends TestCase
     {
         $this->be($this->adminUser);
 
-        $this->visit('/logout');
-
-        $this->see('You\'re now signed out.');
+        $this->logout();
     }
 }

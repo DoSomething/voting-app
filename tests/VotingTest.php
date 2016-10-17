@@ -70,7 +70,7 @@ class VotingTest extends TestCase
         ]);
 
         // If the user tries to vote again, they should see an error
-        $this->visit('logout');
+        $this->logout();
 
         $this->visit(route('candidates.show', [$this->candidate->slug]))
             ->type('Puppet', 'first_name')
