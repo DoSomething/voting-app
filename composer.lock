@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d5a5aa87ad5db94ff748e3417de4f48",
+    "content-hash": "591a4786c01612e3e6c9c473651510f4",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.19.15",
+            "version": "3.19.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "83e9522a0a1abce0b1a0c2971428a5bd975a212d"
+                "reference": "5161b8956e0c0f8e4260edbfe36c1a78392e4934"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/83e9522a0a1abce0b1a0c2971428a5bd975a212d",
-                "reference": "83e9522a0a1abce0b1a0c2971428a5bd975a212d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5161b8956e0c0f8e4260edbfe36c1a78392e4934",
+                "reference": "5161b8956e0c0f8e4260edbfe36c1a78392e4934",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-10-13T18:56:16+00:00"
+            "time": "2016-10-17T20:08:45+00:00"
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -918,16 +918,16 @@
         },
         {
             "name": "dosomething/messagebroker-phplib",
-            "version": "dev-master",
+            "version": "0.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/messagebroker-phplib.git",
-                "reference": "2b89b8c33d8d7968bd78b3bdcffdfe8095f6f544"
+                "reference": "fdcc5b42d2424682a891f7d02030f4bba5221fb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/messagebroker-phplib/zipball/2b89b8c33d8d7968bd78b3bdcffdfe8095f6f544",
-                "reference": "2b89b8c33d8d7968bd78b3bdcffdfe8095f6f544",
+                "url": "https://api.github.com/repos/DoSomething/messagebroker-phplib/zipball/fdcc5b42d2424682a891f7d02030f4bba5221fb3",
+                "reference": "fdcc5b42d2424682a891f7d02030f4bba5221fb3",
                 "shasum": ""
             },
             "require": {
@@ -960,7 +960,7 @@
                 "message broker php library",
                 "rabbitmq"
             ],
-            "time": "2016-08-01T15:19:22+00:00"
+            "time": "2016-07-30T16:33:46+00:00"
         },
         {
             "name": "dosomething/stathat",
@@ -1946,20 +1946,20 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.28",
+            "version": "1.0.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044"
+                "reference": "75138bb14160f3ba963750aa95e08d1d394fb198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
-                "reference": "a9663643ff2d16d7f66ed1e0d3212c5491bc9044",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/75138bb14160f3ba963750aa95e08d1d394fb198",
+                "reference": "75138bb14160f3ba963750aa95e08d1d394fb198",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.5.9"
             },
             "conflict": {
                 "league/flysystem-sftp": "<1.0.6"
@@ -2025,7 +2025,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-10-07T12:20:37+00:00"
+            "time": "2016-10-18T16:20:02+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
@@ -5482,7 +5482,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dosomething/messagebroker-phplib": 20,
         "dosomething/gateway": 5
     },
     "prefer-stable": false,
