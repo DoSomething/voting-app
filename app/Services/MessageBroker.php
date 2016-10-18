@@ -2,7 +2,7 @@
 
 namespace VotingApp\Services;
 
-use MessageBroker as MessageBrokerConnection;
+use DoSomething\MessageBroker\MessageBroker as MessageBrokerConnection;
 
 class MessageBroker
 {
