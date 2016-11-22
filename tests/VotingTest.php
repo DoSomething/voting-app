@@ -107,7 +107,7 @@ class VotingTest extends TestCase
         $this->seeInDatabase('users', [
             'first_name' => 'Puppet',
             'birthdate' => '1990-01-02',
-            'northstar_id' => 'CONFLICT',
+            'northstar_id' => null,
         ]);
     }
 

@@ -88,14 +88,14 @@ class Registrar implements RegistrarContract
                 $northstar_user = gateway('northstar')->createUser($payload);
                 $user->northstar_id = $northstar_user->id;
             } catch (ValidationException $e) {
-                // If this conflicts in Northstar, mark "CONFLICT" rather than
+                // If this conflicts in Northstar, mark null rather than
                 // bothering the user with the specific issue & preventing the vote.
-                $user->northstar_id = 'CONFLICT';
+                $user->northstar_id = null;
             } catch (APIException $e) {
                 logger('northstar exception', ['error' => $e->getMessage()]);
-                $user->northstar_id = 'ERROR';
+                $user->northstar_id = null;
             } catch (ConnectException $e) {
-                $user->northstar_id = 'ERROR_CONNECTION';
+                $user->northstar_id = null;
             }
 
             $user->save();
