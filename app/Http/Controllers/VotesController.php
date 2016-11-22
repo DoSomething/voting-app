@@ -9,7 +9,7 @@ use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Http\Requests\VoteRequest;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Vote;
-use Northstar;
+use DoSomething\Gateway\Northstar;
 
 class VotesController extends Controller
 {
@@ -73,8 +73,8 @@ class VotesController extends Controller
         }
 
         // If we have a valid Northstar ID, let's try to update their profile with their vote.
-        if (array_has(['CONFLICT', 'ERROR', 'ERROR_CONNECTION'], $user->northstar_id)) {
-            Northstar::updateUser($user->northstar_id, [
+        if ($user->northstar_id !== null) {
+            gateway('northstar')->updateUser($user->northstar_id, [
                 'interests' => [
                     $vote->candidate->name,
                 ],
