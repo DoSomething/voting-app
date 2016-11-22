@@ -9,7 +9,6 @@ use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Http\Requests\VoteRequest;
 use VotingApp\Models\Candidate;
 use VotingApp\Models\Vote;
-use DoSomething\Gateway\Northstar;
 
 class VotesController extends Controller
 {
