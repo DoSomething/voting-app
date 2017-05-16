@@ -13,7 +13,7 @@
     "doctrine/dbal": "~2.5.2",
     "dosomething/messagebroker-phplib": "0.3.*",
     "dosomething/stathat": "^2.0.0",
-    "dosomething/gateway": "^1.0.0-rc14",
+    "dosomething/gateway": "^1.3",
     "erusev/parsedown-extra": "~0.7.0",
     "guzzlehttp/guzzle": "^6.2.1",
     "intervention/image": "~2.3.2",
