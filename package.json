@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "clean": "rm -rf public/assets",
     "start": "npm run clean && NODE_ENV=development webpack --watch",
     "build": "npm run clean && NODE_ENV=production webpack",
     "build:dev": "npm run clean && NODE_ENV=development webpack",
