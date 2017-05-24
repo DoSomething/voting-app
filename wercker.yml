@@ -43,7 +43,7 @@ build:
           name: build assets
           code: |-
             export NODE_ENV=production
-            npm build
+            npm run build
 
 deploy:
   steps:
