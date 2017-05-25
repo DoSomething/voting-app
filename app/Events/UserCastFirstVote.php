@@ -2,8 +2,8 @@
 
 namespace VotingApp\Events;
 
-use Illuminate\Queue\SerializesModels;
 use VotingApp\Models\Vote;
+use Illuminate\Queue\SerializesModels;
 
 class UserCastFirstVote extends Event
 {

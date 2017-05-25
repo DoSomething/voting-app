@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Contracts\Validation\ValidationException;
-use VotingApp\Events\UserCastFirstVote;
-use VotingApp\Events\UserRegistered;
-use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Setting;
+use VotingApp\Models\Candidate;
+use VotingApp\Events\UserRegistered;
+use VotingApp\Events\UserCastFirstVote;
 use DoSomething\Gateway\Resources\NorthstarUser;
+use Illuminate\Contracts\Validation\ValidationException;
 
 class VotingTest extends TestCase
 {

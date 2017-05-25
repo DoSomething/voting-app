@@ -2,8 +2,8 @@
 
 namespace VotingApp\Http\Controllers;
 
-use Illuminate\Http\Request;
 use VotingApp\Models\Page;
+use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {

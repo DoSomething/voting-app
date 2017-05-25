@@ -2,8 +2,8 @@
 
 namespace VotingApp\Listeners;
 
-use VotingApp\Events\UserCastFirstVote;
 use VotingApp\Services\MessageBroker;
+use VotingApp\Events\UserCastFirstVote;
 
 class SendFirstVoteMessage
 {

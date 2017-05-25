@@ -2,12 +2,12 @@
 
 namespace VotingApp\Models;
 
+use VotingApp\LocalizedDate;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use VotingApp\LocalizedDate;
-use DoSomething\Gateway\Contracts\NorthstarUserContract;
 use DoSomething\Gateway\Laravel\HasNorthstarToken;
+use DoSomething\Gateway\Contracts\NorthstarUserContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 class User extends Model implements AuthenticatableContract, NorthstarUserContract
 {

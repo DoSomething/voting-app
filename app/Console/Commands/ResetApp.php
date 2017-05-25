@@ -2,8 +2,8 @@
 
 namespace VotingApp\Console\Commands;
 
-use Illuminate\Console\Command;
 use DB;
+use Illuminate\Console\Command;
 
 class ResetApp extends Command
 {

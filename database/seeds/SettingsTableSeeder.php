@@ -1,9 +1,9 @@
 <?php
 
+use Faker\Provider\Uuid;
+use VotingApp\Models\Setting;
 use Illuminate\Database\Seeder;
 use Symfony\Component\HttpFoundation\File\File;
-use VotingApp\Models\Setting;
-use Faker\Provider\Uuid;
 
 class SettingsTableSeeder extends Seeder
 {

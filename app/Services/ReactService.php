@@ -2,9 +2,9 @@
 
 namespace VotingApp\Services;
 
+use Cache;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Cache;
 
 class ReactService
 {

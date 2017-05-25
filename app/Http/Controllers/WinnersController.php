@@ -2,8 +2,8 @@
 
 namespace VotingApp\Http\Controllers;
 
-use VotingApp\Models\Winner;
 use Illuminate\Http\Request;
+use VotingApp\Models\Winner;
 use VotingApp\Models\WinnerCategory;
 
 class WinnersController extends Controller

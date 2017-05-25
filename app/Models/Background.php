@@ -2,9 +2,9 @@
 
 namespace VotingApp\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cache;
 use Image;
+use Illuminate\Database\Eloquent\Model;
 
 class Background extends Model
 {

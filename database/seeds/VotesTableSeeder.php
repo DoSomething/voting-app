@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use VotingApp\Models\Vote;
 use VotingApp\Models\User;
+use VotingApp\Models\Vote;
+use Illuminate\Database\Seeder;
 use VotingApp\Models\Candidate;
 
 class VotesTableSeeder extends Seeder

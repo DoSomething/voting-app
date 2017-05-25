@@ -2,10 +2,10 @@
 
 namespace VotingApp\Models;
 
+use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Cache;
 
 class Setting extends Model
 {

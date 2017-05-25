@@ -2,8 +2,8 @@
 
 namespace VotingApp\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use VotingApp\LocalizedDate;
+use Illuminate\Support\ServiceProvider;
 
 class ValidationServiceProvider extends ServiceProvider
 {

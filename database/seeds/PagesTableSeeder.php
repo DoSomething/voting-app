@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use VotingApp\Models\Page;
+use Illuminate\Database\Seeder;
 
 class PagesTableSeeder extends Seeder
 {

@@ -2,9 +2,9 @@
 
 namespace VotingApp\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use VotingApp\Services\ReactService;
 use Blade;
+use VotingApp\Services\ReactService;
+use Illuminate\Support\ServiceProvider;
 
 class ReactServiceProvider extends ServiceProvider
 {

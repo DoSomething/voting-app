@@ -1,7 +1,7 @@
 <?php
 
-use VotingApp\Models\User;
 use VotingApp\Models\Page;
+use VotingApp\Models\User;
 
 class AdminTest extends TestCase
 {
