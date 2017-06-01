@@ -2,8 +2,8 @@
 
 namespace VotingApp\Events;
 
-use Illuminate\Queue\SerializesModels;
 use VotingApp\Models\User;
+use Illuminate\Queue\SerializesModels;
 
 class UserRegistered extends Event
 {

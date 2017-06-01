@@ -2,8 +2,8 @@
 
 namespace VotingApp\Repositories;
 
-use VotingApp\Models\Setting;
 use Parsedown;
+use VotingApp\Models\Setting;
 
 class SettingsRepository
 {

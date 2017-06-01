@@ -1,7 +1,7 @@
 <?php
 
-use VotingApp\Models\Candidate;
 use VotingApp\Models\Category;
+use VotingApp\Models\Candidate;
 
 class ContentTest extends TestCase
 {

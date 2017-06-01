@@ -2,10 +2,10 @@
 
 namespace VotingApp\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 use Image;
+use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\SluggableInterface;
 
 class Candidate extends Model implements SluggableInterface
 {

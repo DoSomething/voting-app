@@ -2,12 +2,12 @@
 
 namespace VotingApp\Services;
 
-use DoSomething\Northstar\Exceptions\APIException;
-use GuzzleHttp\Exception\ConnectException;
-use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
-use Illuminate\Contracts\Validation\ValidationException;
 use VotingApp\Models\User;
 use VotingApp\Events\UserRegistered;
+use GuzzleHttp\Exception\ConnectException;
+use DoSomething\Northstar\Exceptions\APIException;
+use Illuminate\Contracts\Validation\ValidationException;
+use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
 class Registrar implements RegistrarContract
 {

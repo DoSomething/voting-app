@@ -2,9 +2,9 @@
 
 namespace VotingApp\Http\Requests;
 
-use Illuminate\Contracts\Auth\Guard;
 use VotingApp\Models\Candidate;
 use VotingApp\Services\Registrar;
+use Illuminate\Contracts\Auth\Guard;
 
 class VoteRequest extends Request
 {

@@ -1,8 +1,8 @@
 <?php
 
-use VotingApp\Models\Candidate;
 use VotingApp\Models\User;
 use VotingApp\Models\Vote;
+use VotingApp\Models\Candidate;
 
 class TransactionalTest extends TestCase
 {

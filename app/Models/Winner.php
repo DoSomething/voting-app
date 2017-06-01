@@ -2,8 +2,8 @@
 
 namespace VotingApp\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Eloquent\Model;
 
 class Winner extends Model
 {

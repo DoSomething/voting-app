@@ -2,9 +2,9 @@
 
 namespace VotingApp\Http\Controllers;
 
-use VotingApp\Models\Background;
-use Illuminate\Http\Request;
 use Image;
+use Illuminate\Http\Request;
+use VotingApp\Models\Background;
 
 class BackgroundsController extends Controller
 {

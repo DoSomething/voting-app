@@ -2,10 +2,10 @@
 
 namespace VotingApp\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Illuminate\Database\Eloquent\Model;
 use Parsedown;
+use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\SluggableInterface;
 
 class Page extends Model implements SluggableInterface
 {

@@ -20,3 +20,6 @@ Thumbs.db
 # Test output
 tests/logs
 .php_cs.cache
+
+# Wercker
+.wercker

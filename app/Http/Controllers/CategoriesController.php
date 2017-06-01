@@ -3,8 +3,8 @@
 namespace VotingApp\Http\Controllers;
 
 use Illuminate\Http\Request;
-use VotingApp\Models\Category;
 use VotingApp\Models\Winner;
+use VotingApp\Models\Category;
 
 class CategoriesController extends Controller
 {

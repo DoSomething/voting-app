@@ -2,13 +2,13 @@
 
 namespace VotingApp\Http\Controllers;
 
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
-use Illuminate\Contracts\Validation\ValidationException;
-use VotingApp\Events\UserCastFirstVote;
-use VotingApp\Http\Requests\VoteRequest;
-use VotingApp\Models\Candidate;
 use VotingApp\Models\Vote;
+use VotingApp\Models\Candidate;
+use Illuminate\Contracts\Auth\Guard;
+use VotingApp\Events\UserCastFirstVote;
+use Illuminate\Contracts\Auth\Registrar;
+use VotingApp\Http\Requests\VoteRequest;
+use Illuminate\Contracts\Validation\ValidationException;
 
 class VotesController extends Controller
 {

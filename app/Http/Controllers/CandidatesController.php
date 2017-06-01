@@ -2,12 +2,12 @@
 
 namespace VotingApp\Http\Controllers;
 
-use VotingApp\Models\Candidate;
-use VotingApp\Models\Category;
-use VotingApp\Models\Winner;
-use VotingApp\Models\WinnerCategory;
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Http\Request;
+use VotingApp\Models\Winner;
+use VotingApp\Models\Category;
+use VotingApp\Models\Candidate;
+use VotingApp\Models\WinnerCategory;
 
 class CandidatesController extends Controller
 {

@@ -2,16 +2,16 @@
 
 namespace VotingApp\Providers;
 
+use VotingApp\Models\Page;
+use VotingApp\Models\User;
+use VotingApp\Models\Winner;
+use VotingApp\Models\Setting;
 use Illuminate\Routing\Router;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use VotingApp\Models\Background;
 use VotingApp\Models\Category;
 use VotingApp\Models\Candidate;
-use VotingApp\Models\User;
-use VotingApp\Models\Page;
-use VotingApp\Models\Setting;
-use VotingApp\Models\Winner;
+use VotingApp\Models\Background;
 use VotingApp\Models\WinnerCategory;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {

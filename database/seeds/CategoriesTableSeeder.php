@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use VotingApp\Models\Category;
+use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
 {

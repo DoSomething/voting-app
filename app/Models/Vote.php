@@ -2,9 +2,9 @@
 
 namespace VotingApp\Models;
 
+use Carbon\Carbon;
 use VotingApp\Events\UserCastVote;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class Vote extends Model
 {
