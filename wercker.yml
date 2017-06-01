@@ -13,7 +13,7 @@ build:
           code: sudo apt-get -y install libnotify-bin
       - script:
           name: Install python2
-          code: sudo apt-get -y install python python-simplejson 
+          code: sudo apt-get -y install python python-simplejson
       - script:
           name: update node
           code: |-
@@ -25,17 +25,16 @@ build:
           code: sudo service mysql start
       - leipert/composer-install@0.9.1
       - wercker/bundle-install@1.1.1
-      - script:
-          name: npm install
-          code: |-
-            mkdir -p $WERCKER_CACHE_DIR/wercker/npm
-            npm config set cache $WERCKER_CACHE_DIR/wercker/npm
-            sudo npm install
+      - wercker/npm-install
       - npm-test
+      - script:
+          name: configure test environment
+          code: |-
+              cp .env.example .env
+              php artisan key:generate
       - script:
           name: phpunit
           code: |-
-              cp .env.example .env
               mysql -u homestead -psecret -e "CREATE DATABASE voting_testing;"
               vendor/bin/phpunit
               rm -rf public/images
