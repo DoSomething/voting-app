@@ -1,23 +1,28 @@
-const webpack = require('webpack');
-const configure = require('@dosomething/webpack-config');
-const path = require('path');
+var webpack = require('webpack');
+var configurator = require('@dosomething/webpack-config');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-// Load any environment variables from `.env`.
-require('dotenv').config();
-
-// Configure Webpack using `@dosomething/webpack-config`.
-module.exports = configure({
+var config = configurator({
   entry: {
-    app: './resources/assets/js/app.js',
-  },
-  output: {
-    // Override output path for Laravel's "public" directory.
-    path: path.join(__dirname, '/public/assets'),
-  },
-
-  module: {
-    loaders: [
-      { enforce: 'pre', test: /\.js$/, use: 'eslint-loader', exclude: /node_modules/ }
-    ],
+    'app': './resources/assets/js/app.js'
   },
 });
+
+config.plugins.push(
+        new CopyWebpackPlugin([
+            { from: 'resources/assets/fonts', to: 'fonts' },
+            { from: 'resources/assets/images', to: 'images' },
+            {
+              from: 'node_modules/html5shiv/dist/html5shiv.min.js',
+              to: 'vendor/html5shiv.min.js'
+            },
+            {
+              from: 'node_modules/respond.js/dest/respond.min.js',
+              to: 'vendor/respond.min.js'
+            },
+        ])
+)
+
+config.output.path = 'public/assets';
+
+module.exports = config;
