@@ -41,8 +41,7 @@ build:
       - script:
           name: build assets
           code: |-
-            export NODE_ENV=production
-            npm run build
+            gulp --production
 
 deploy:
   steps:
