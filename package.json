@@ -1,33 +1,20 @@
 {
   "private": true,
   "scripts": {
-    "clean": "rm -rf public/assets",
-    "start": "npm run clean && NODE_ENV=development webpack --watch",
-    "build": "npm run clean && NODE_ENV=production webpack",
-    "build:dev": "npm run clean && NODE_ENV=development webpack",
-    "lint": "eslint --ext .js resources/assets",
+    "watch": "gulp watch",
+    "build": "gulp --production",
+    "lint": "eslint resources/assets/js --config .eslintrc",
     "test": "npm run lint"
   },
-  "babel": {
-    "presets": [
-      "@dosomething/babel-config"
-    ]
-  },
   "devDependencies": {
-    "@dosomething/babel-config": "^1.0",
-    "@dosomething/eslint-config": "^2.0.0",
-    "@dosomething/webpack-config": "^2.0.0",
-    "babel-eslint": "^7.2.2",
-    "dotenv": "^4.0.0",
+    "babel-eslint": "^5.0.4",
+    "escope": "^3.6.0",
     "eslint": "^1.9.0",
     "eslint-config-airbnb": "^0.1.0",
-    "eslint-loader": "^1.7.1",
     "eslint-plugin-react": "^3.7.1",
-    "gulp-eslint": "^3.0.1",
-    "laravel-elixir": "3.4.2",
-    "modernizr": "^3.3.1",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.2"
+    "gulp": "^3.8.8",
+    "gulp-eslint": "^1.1.0",
+    "laravel-elixir": "3.4.2"
   },
   "dependencies": {
     "babel": "^5.8.29",
