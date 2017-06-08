@@ -18,7 +18,7 @@ build:
           name: update node
           code: |-
             export DEBIAN_FRONTEND=noninteractive
-            curl -sL https://deb.nodesource.com/setup_7.x | sudo bash -
+            curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -
             sudo apt-get install -y nodejs
       - script:
           name: start mysql
@@ -41,8 +41,7 @@ build:
       - script:
           name: build assets
           code: |-
-            export NODE_ENV=production
-            npm run build
+            gulp --production
 
 deploy:
   steps:

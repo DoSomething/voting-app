@@ -2,31 +2,15 @@
 Voting app for DoSomething.org campaigns, which launched with Celebs Gone Good in December 2014.
 
 ### Contributing
-
-Fork and clone this repository, add to your local [DS Homestead](https://github.com/DoSomething/ds-homestead), and run set-up:
-
-```sh
-# Install dependencies:
-$ composer install && npm install
-    
-# Copy the default environment variables & generate a key:
-$ cp .env.example .env
-$ php artisan key:generate
-
-# Run database migrations:
-$ php artisan migrate
-
-# And finally, build the frontend assets:
-$ npm start
-```
-
-You can seed the database with test data:
-
-    $ php artisan db:seed
-
-You may run unit tests locally using PHPUnit:
-
-    $ vendor/bin/phpunit
+=======
+## Getting Started
+1. Clone this repository & add to your local [DS Homestead](https://github.com/DoSomething/ds-homestead) environment.
+2. Copy `.env.example` and create your own `.env`
+3. From within your VM, run `composer install && npm install` to set up dependencies.
+4. Run `gulp` to compile front-end assets and watch for changes!
+5. Create a `voting` database in your VM.
+6. Run `php artisan migrate && php artisan db:seed` to get the database set up.
+7. You may run unit tests locally using PHPUnit: `$ vendor/bin/phpunit`
 
 
 We follow [Laravel's code style](http://laravel.com/docs/5.1/contributions#coding-style) and automatically
