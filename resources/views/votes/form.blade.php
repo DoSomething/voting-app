@@ -6,7 +6,7 @@
         <p class="heading -gamma">We'll post the results soon!</p>
     @else
         {{-- Winners being shown --}}
-        <p>{{ $winner->description or "WINNER_DESCRIPTION" }}</p>
+        <p>{{ $winner->description or "" }}</p>
     @endif
 
 {{-- If user is logged in... --}}

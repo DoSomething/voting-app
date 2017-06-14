@@ -6,7 +6,7 @@
 @section('meta_image', url($candidate->thumbnail))
 
 @section('content')
-    @if(setting('show_winners'))
+    @if(setting('show_winners') && isset($winner))
         @react('WinnerDetailView', ['item' => $winner])
     @else
         <div class="candidate">
